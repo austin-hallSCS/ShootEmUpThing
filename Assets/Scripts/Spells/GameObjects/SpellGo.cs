@@ -18,8 +18,6 @@ namespace WizardGame.SpellSystem
         private float inAirTime = 0.5f;
         private float scaleMult = 0.0f;
 
-        private Vector2 direction;
-        private float rotation;
         private float timeAlive;
         private bool inAir;
 
@@ -38,9 +36,9 @@ namespace WizardGame.SpellSystem
 
         private void Start()
         {
-            direction = WorldSenses.GetRandomDirection();
-            rotation = WorldSenses.VectorDirectionToCardinalRotation(direction);
-            RB.rotation = rotation;
+            // direction = WorldSenses.GetRandomDirection();
+            // rotation = WorldSenses.VectorDirectionToCardinalRotation(direction);
+            // RB.rotation = rotation;
             Launch();
 
             Animator.SetBool("inAir", inAir);
@@ -64,7 +62,7 @@ namespace WizardGame.SpellSystem
 
         public void Launch()
         {
-            RB.linearVelocity = spellStats.SpeedAmount.CurrentValue * direction;
+            RB.linearVelocity = spellStats.SpeedAmount.CurrentValue * transform.right;
         }
 
         public void AddDamageStat(float damageMult)

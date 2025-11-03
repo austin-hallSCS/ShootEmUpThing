@@ -27,7 +27,7 @@ namespace WizardGame.SpellSystem
         }
         protected virtual void FireProjectile()
         {
-            Instantiate(spellPrefab, (Vector3)transform.position, Quaternion.identity, transform);
+            projectileInst = Instantiate(spellPrefab, (Vector3)transform.position, Quaternion.identity, transform);
         }
         
         protected virtual void ResetProjectileIntervalTime()

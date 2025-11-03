@@ -11,6 +11,8 @@ namespace WizardGame.SpellSystem
 
         protected SpellStats spellStats;
 
+        protected GameObject projectileInst;
+
 
         public Camera Cam;
         // public LayerMask WhatIsEnemy;

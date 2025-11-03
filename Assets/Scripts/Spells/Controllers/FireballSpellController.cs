@@ -7,9 +7,9 @@ namespace WizardGame.SpellSystem
 {
     public class FireballSpellController : ProjectileSpellController
     {
-        [SerializeField] private List<GameObject> spawnPoints;
+        [SerializeField] private Transform spawnPoint;
 
-        private ShuffleBag<Vector2> directionPicker = new ShuffleBag<Vector2>(Utils.WorldSenses.cardinalDirections);
+        private ShuffleBag<Vector2> directionPicker = new ShuffleBag<Vector2>(WorldSenses.cardinalDirections);
 
         protected override void Awake()
         {
@@ -30,16 +30,28 @@ namespace WizardGame.SpellSystem
         {
             base.SpellActiveBehavior();
 
-            // Vector2 direction = WorldSenses.GetRandomDirection();
             // Quaternion rotation = WorldSenses.VectorDirectionToRotation(direction);
 
             // spellGameObject = Instantiate(spellData.SpellPrefab, (Vector2)transform.position + Vector2.up * 0.5f, rotation, transform);
             // spellGameObject.GetComponent<SpellGO>().Launch(direction, force);
         }
-        
+
+        protected override void SpellDeactivate()
+        {
+            base.SpellDeactivate();
+            directionPicker.Refill();
+        }
+
+        protected override void FireProjectile()
+        {
+            HandleDirection();
+            projectileInst = Instantiate(spellPrefab, spawnPoint.position, Quaternion.identity, transform);
+        }
+
         private void HandleDirection()
         {
             Vector2 nextDirection = directionPicker.GetNext();
+            transform.right = nextDirection;
         }
     }
 
