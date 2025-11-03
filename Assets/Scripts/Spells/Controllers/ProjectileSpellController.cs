@@ -15,6 +15,11 @@ namespace WizardGame.SpellSystem
             base.Update();
         }
 
+        protected override void FixedUpdate()
+        {
+            base.FixedUpdate();
+        }
+
         protected override void SpellActiveBehavior()
         {
             base.SpellActiveBehavior();
@@ -27,7 +32,7 @@ namespace WizardGame.SpellSystem
         }
         protected virtual void FireProjectile()
         {
-            projectileInst = Instantiate(spellPrefab, (Vector3)transform.position, Quaternion.identity, transform);
+            // projectileInst = Instantiate(spellPrefab, (Vector3)transform.position, Quaternion.identity, transform);
         }
         
         protected virtual void ResetProjectileIntervalTime()

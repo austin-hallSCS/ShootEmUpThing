@@ -62,7 +62,6 @@ namespace WizardGame.EnemySystem
 
         public void Kill()
         {
-            Debug.Log("Enemy killed");
             Destroy(gameObject);
         }
 

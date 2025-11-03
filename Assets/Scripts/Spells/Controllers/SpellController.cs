@@ -49,16 +49,16 @@ namespace WizardGame.SpellSystem
 
         protected virtual void Update()
         {
+            
+        }
+
+        protected virtual void FixedUpdate()
+        {
             CheckSpellActiveStatus();
             if (isActive)
             {
                 SpellActiveBehavior();
             }
-        }
-
-        protected virtual void FixedUpdate()
-        {
-
         }
 
         protected virtual void CheckSpellActiveStatus()

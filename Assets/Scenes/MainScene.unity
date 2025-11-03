@@ -278,8 +278,8 @@ MonoBehaviour:
     <BaseValue>k__BackingField: 1
   <ProjectileAmount>k__BackingField:
     <IsIgnored>k__BackingField: 0
-    <MaxValue>k__BackingField: 6
-    <BaseValue>k__BackingField: 3
+    <MaxValue>k__BackingField: 8
+    <BaseValue>k__BackingField: 2
   <ProjectileIntervalTime>k__BackingField:
     <IsIgnored>k__BackingField: 0
     <MaxValue>k__BackingField: 10
@@ -810,7 +810,7 @@ Transform:
   m_GameObject: {fileID: 1864068394}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.372, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5657,11 +5657,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2389931203111101875, guid: b75b5b7f753542d428e9468be5dcc307, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.39
+      value: -0.024
       objectReference: {fileID: 0}
     - target: {fileID: 2389931203111101875, guid: b75b5b7f753542d428e9468be5dcc307, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.4
+      value: 0.427
       objectReference: {fileID: 0}
     - target: {fileID: 4130450319245445341, guid: b75b5b7f753542d428e9468be5dcc307, type: 3}
       propertyPath: m_AnchorMax.x
@@ -5750,7 +5750,7 @@ PrefabInstance:
     - target: {fileID: 7335370521445634815, guid: b75b5b7f753542d428e9468be5dcc307, type: 3}
       propertyPath: m_Icon
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 7335370521445634815, guid: b75b5b7f753542d428e9468be5dcc307, type: 3}
       propertyPath: m_IsActive
       value: 1

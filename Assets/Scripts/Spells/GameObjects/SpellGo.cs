@@ -99,7 +99,6 @@ namespace WizardGame.SpellSystem
                 EnemyController enemy = other.GetComponent<EnemyController>();
                 if (enemy != null)
                 {
-                    Debug.Log(other);
                     enemy.Kill();
                 }
             }
