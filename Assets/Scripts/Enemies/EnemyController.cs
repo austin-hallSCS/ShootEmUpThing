@@ -1,17 +1,20 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using WizardGame.Interfaces;
 using WizardGame.PlayerSystem;
+using WizardGame.Stats;
 
 namespace WizardGame.EnemySystem
 {
-    public class EnemyController : MonoBehaviour
+    public class EnemyController : MonoBehaviour, IDamageable
     {
         // Object references
         private PlayerController detectedPlayer;
         private EnemySpawner spawner;
 
-        // Data variables
-        public int MaxHealth;
-        public float MovementSpeed;
+        protected EnemyStats enemyStats;
+
+
 
         //Status variables
         public int Health { get { return currentHealth; } }
@@ -30,18 +33,15 @@ namespace WizardGame.EnemySystem
 
         void Awake()
         {
+            // Get Component References
+            rb = GetComponent<Rigidbody2D>();
+            enemyStats = GetComponentInChildren<EnemyStats>();
             spawner = GetComponentInParent<EnemySpawner>();
         }
 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
-            // Get Component References
-            rb = GetComponent<Rigidbody2D>();
-
-            // Set variables
-            currentHealth = MaxHealth;
-            movementSpeed = MovementSpeed;
+            
 
         }
 
@@ -55,14 +55,24 @@ namespace WizardGame.EnemySystem
         {
             currentPosition = rb.position;
             target = spawner.PlayerRB.position;
-            position = Vector2.MoveTowards(currentPosition, target, movementSpeed * Time.deltaTime);
+            position = Vector2.MoveTowards(currentPosition, target, enemyStats.SpeedAmount.CurrentValue * Time.deltaTime);
             rb.MovePosition(position);
 
         }
 
-        public void Kill()
+        public void Damage(float amount)
         {
-            Destroy(gameObject);
+            enemyStats.Health.Decrease(amount);
+            CheckHealth();
+
+        }
+
+        public void CheckHealth()
+        {
+            if (enemyStats.Health.CurrentValue <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
 
         void OnTriggerStay2D(Collider2D other)
@@ -71,7 +81,7 @@ namespace WizardGame.EnemySystem
 
             if (detectedPlayer != null)
             {
-                detectedPlayer.ChangeHealth(-1);
+                detectedPlayer.Damage(enemyStats.DamageAmount.CurrentValue);
             }
         }
     }

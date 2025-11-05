@@ -16,7 +16,7 @@ namespace WizardGame.Stats
         [field: SerializeField] public Stat DurationTime { get; private set; }
         [field: SerializeField] public Stat PierceAmount { get; private set; }
 
-        protected void Awake()
+        public void Awake()
         {
             Rarity.Init();
             DamageAmount.Init();
@@ -28,11 +28,6 @@ namespace WizardGame.Stats
             ProjectileIntervalTime.Init();
             DurationTime.Init();
             PierceAmount.Init();
-        }
-
-        public virtual void LogicUpdate()
-        {
-            
         }
     }
 }

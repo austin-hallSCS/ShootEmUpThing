@@ -72,7 +72,7 @@ namespace WizardGame.SpellSystem
 
             // Get Area Amount current value
             float areaMultiplier = spellStats.AreaAmount.CurrentValue;
-            
+
             // Increase size
             transform.localScale = new Vector3(areaMultiplier, areaMultiplier, 1f);
         }
@@ -101,7 +101,7 @@ namespace WizardGame.SpellSystem
                 EnemyController enemy = other.GetComponent<EnemyController>();
                 if (enemy != null)
                 {
-                    enemy.Kill();
+                    enemy.Damage(spellStats.DamageAmount.CurrentValue);
                 }
             }
         }

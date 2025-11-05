@@ -12,7 +12,7 @@ namespace WizardGame.EnvironmentSystem
 
             if (controller != null)
             {
-                controller.ChangeHealth(DamageAmount);
+                controller.Damage(1f);
             }
         }
     }

@@ -17,7 +17,7 @@ namespace WizardGame.Collectibles
 
             if (player != null)
             {
-                player.ChangeHealth(HealAmount);
+                // player.ChangeHealth(HealAmount);
                 Destroy(gameObject);
             }
         }

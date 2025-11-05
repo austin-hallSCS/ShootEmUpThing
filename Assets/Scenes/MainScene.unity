@@ -119,6 +119,120 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &201260573
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 201260574}
+  - component: {fileID: 201260575}
+  m_Layer: 10
+  m_Name: PlayerStats
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &201260574
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201260573}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 428462019}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &201260575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201260573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a42f512ea832b641acffab2658018f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WizardGame.Stats.PlayerStats
+  <Health>k__BackingField:
+    <IsIgnored>k__BackingField: 0
+    <MaxValue>k__BackingField: 100
+    <MinValue>k__BackingField: 0
+    <BaseValue>k__BackingField: 100
+  <Level>k__BackingField:
+    <IsIgnored>k__BackingField: 0
+    <MaxValue>k__BackingField: 100
+    <MinValue>k__BackingField: 1
+    <BaseValue>k__BackingField: 1
+  <ExperienceAmount>k__BackingField:
+    <IsIgnored>k__BackingField: 0
+    <MaxValue>k__BackingField: 100
+    <MinValue>k__BackingField: 0
+    <BaseValue>k__BackingField: 0
+  <MovementSpeed>k__BackingField:
+    <IsIgnored>k__BackingField: 0
+    <MaxValue>k__BackingField: 20
+    <MinValue>k__BackingField: 0
+    <BaseValue>k__BackingField: 3
+  <HealthBonus>k__BackingField:
+    <IsIgnored>k__BackingField: 0
+    <MaxValue>k__BackingField: 100
+    <MinValue>k__BackingField: 0
+    <BaseValue>k__BackingField: 0
+  <DamageBonus>k__BackingField:
+    <IsIgnored>k__BackingField: 0
+    <MaxValue>k__BackingField: 100
+    <MinValue>k__BackingField: 0
+    <BaseValue>k__BackingField: 0
+  <AreaBonus>k__BackingField:
+    <IsIgnored>k__BackingField: 0
+    <MaxValue>k__BackingField: 100
+    <MinValue>k__BackingField: 0
+    <BaseValue>k__BackingField: 0
+  <SpeedBonus>k__BackingField:
+    <IsIgnored>k__BackingField: 0
+    <MaxValue>k__BackingField: 100
+    <MinValue>k__BackingField: 0
+    <BaseValue>k__BackingField: 0
+  <CoolDownTimeBonus>k__BackingField:
+    <IsIgnored>k__BackingField: 0
+    <MaxValue>k__BackingField: 100
+    <MinValue>k__BackingField: 0
+    <BaseValue>k__BackingField: 0
+  <KnockbackBonus>k__BackingField:
+    <IsIgnored>k__BackingField: 0
+    <MaxValue>k__BackingField: 100
+    <MinValue>k__BackingField: 0
+    <BaseValue>k__BackingField: 0
+  <ProjectileBonus>k__BackingField:
+    <IsIgnored>k__BackingField: 0
+    <MaxValue>k__BackingField: 100
+    <MinValue>k__BackingField: 0
+    <BaseValue>k__BackingField: 0
+  <ProjectileIntervalTimeBonus>k__BackingField:
+    <IsIgnored>k__BackingField: 0
+    <MaxValue>k__BackingField: 100
+    <MinValue>k__BackingField: 0
+    <BaseValue>k__BackingField: 0
+  <DurationTimeBonus>k__BackingField:
+    <IsIgnored>k__BackingField: 0
+    <MaxValue>k__BackingField: 100
+    <MinValue>k__BackingField: 0
+    <BaseValue>k__BackingField: 0
+  <PierceBonus>k__BackingField:
+    <IsIgnored>k__BackingField: 0
+    <MaxValue>k__BackingField: 100
+    <MinValue>k__BackingField: 0
+    <BaseValue>k__BackingField: 0
 --- !u!1 &251133072
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,6 +320,11 @@ Transform:
 --- !u!1 &428462013 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5329385011336400309, guid: b75b5b7f753542d428e9468be5dcc307, type: 3}
+  m_PrefabInstance: {fileID: 7235425721027168599}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &428462019 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6346624846328058312, guid: b75b5b7f753542d428e9468be5dcc307, type: 3}
   m_PrefabInstance: {fileID: 7235425721027168599}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &579136430
@@ -5765,6 +5884,9 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 6346624846328058312, guid: b75b5b7f753542d428e9468be5dcc307, type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 201260574}
     - targetCorrespondingSourceObject: {fileID: 2389931203111101875, guid: b75b5b7f753542d428e9468be5dcc307, type: 3}
       insertIndex: -1
       addedObject: {fileID: 579136431}

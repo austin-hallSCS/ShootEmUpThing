@@ -2,14 +2,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using WizardGame.SpellSystem;
+using WizardGame.Interfaces;
+using WizardGame.Stats;
 
 namespace WizardGame.PlayerSystem
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour, IDamageable
     {
         // Component references
         private HealthBarController healthbar;
         public FireballSpellController FireBall { get; private set; }
+        protected PlayerStats playerStats;
 
 
         // Input variables
@@ -61,6 +64,7 @@ namespace WizardGame.PlayerSystem
             rb = GetComponent<Rigidbody2D>();
             healthbar = GetComponentInChildren<HealthBarController>();
             FireBall = GetComponentInChildren<FireballSpellController>();
+            playerStats = GetComponentInChildren<PlayerStats>();
 
             // equippedSpells.Add(transform.Find("FireballSpellController").GetComponent<FireballSpellController>());
         }
@@ -96,6 +100,7 @@ namespace WizardGame.PlayerSystem
                 if (damageCooldown <= 0)
                 {
                     isInvincible = false;
+                    damageCooldown = 0.25f;
                 }
             }
         }
@@ -112,19 +117,25 @@ namespace WizardGame.PlayerSystem
             rb.transform.Rotate(0.0f, 180.0f, 0.0f);
         }
 
-        public void ChangeHealth(int amount)
+        public void Damage(float amount)
         {
-            if (amount < 0)
+            if (!isInvincible)
             {
-                if (isInvincible)
-                {
-                    return;
-                }
+                playerStats.Health.Decrease(amount);
+                healthbar.UpdateHealthBar(playerStats.Health.CurrentValue, playerStats.Health.MaxValue);
+                Debug.Log(playerStats.Health.CurrentValue);
                 isInvincible = true;
-                damageCooldown = DamageCoolDownTime;
+                CheckHealth();
             }
-            currentHealth = Mathf.Clamp(currentHealth + amount, 0, MaxHealth);
-            healthbar.UpdateHealthBar(currentHealth, MaxHealth);
+        }
+
+        public void CheckHealth()
+        {
+            if (playerStats.Health.CurrentValue <= 0)
+            {
+                // Destroy(gameObject);
+                Debug.Log("Player is dead!");
+            }
         }
     }
 }
