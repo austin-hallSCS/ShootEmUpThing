@@ -255,42 +255,52 @@ MonoBehaviour:
   <Rarity>k__BackingField:
     <IsIgnored>k__BackingField: 0
     <MaxValue>k__BackingField: 0
+    <MinValue>k__BackingField: 0
     <BaseValue>k__BackingField: 0
   <DamageAmount>k__BackingField:
     <IsIgnored>k__BackingField: 0
     <MaxValue>k__BackingField: 200
+    <MinValue>k__BackingField: 0
     <BaseValue>k__BackingField: 20
   <AreaAmount>k__BackingField:
     <IsIgnored>k__BackingField: 0
     <MaxValue>k__BackingField: 10
+    <MinValue>k__BackingField: 1
     <BaseValue>k__BackingField: 1
   <SpeedAmount>k__BackingField:
     <IsIgnored>k__BackingField: 0
     <MaxValue>k__BackingField: 10
+    <MinValue>k__BackingField: 1
     <BaseValue>k__BackingField: 2
   <CoolDownTime>k__BackingField:
     <IsIgnored>k__BackingField: 0
     <MaxValue>k__BackingField: 7
+    <MinValue>k__BackingField: 0.75
     <BaseValue>k__BackingField: 3
   <KnockbackAmount>k__BackingField:
     <IsIgnored>k__BackingField: 0
     <MaxValue>k__BackingField: 10
+    <MinValue>k__BackingField: 0
     <BaseValue>k__BackingField: 1
   <ProjectileAmount>k__BackingField:
     <IsIgnored>k__BackingField: 0
     <MaxValue>k__BackingField: 8
-    <BaseValue>k__BackingField: 2
+    <MinValue>k__BackingField: 1
+    <BaseValue>k__BackingField: 3
   <ProjectileIntervalTime>k__BackingField:
     <IsIgnored>k__BackingField: 0
     <MaxValue>k__BackingField: 10
+    <MinValue>k__BackingField: 0
     <BaseValue>k__BackingField: 0.25
   <DurationTime>k__BackingField:
     <IsIgnored>k__BackingField: 1
     <MaxValue>k__BackingField: 10
+    <MinValue>k__BackingField: 0
     <BaseValue>k__BackingField: 1
   <PierceAmount>k__BackingField:
     <IsIgnored>k__BackingField: 0
     <MaxValue>k__BackingField: 3
+    <MinValue>k__BackingField: 0
     <BaseValue>k__BackingField: 1
 --- !u!1 &729470876
 GameObject:
@@ -785,37 +795,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70360db9b6a31a645829d22b488a3ece, type: 3}
---- !u!1 &1864068394
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1864068395}
-  m_Layer: 12
-  m_Name: SpawnPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1864068395
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1864068394}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.372, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7235425721027168600}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2001903497
 GameObject:
   m_ObjectHideFlags: 0
@@ -5663,6 +5642,26 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.427
       objectReference: {fileID: 0}
+    - target: {fileID: 2389931203111101875, guid: b75b5b7f753542d428e9468be5dcc307, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389931203111101875, guid: b75b5b7f753542d428e9468be5dcc307, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389931203111101875, guid: b75b5b7f753542d428e9468be5dcc307, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389931203111101875, guid: b75b5b7f753542d428e9468be5dcc307, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389931203111101875, guid: b75b5b7f753542d428e9468be5dcc307, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4130450319245445341, guid: b75b5b7f753542d428e9468be5dcc307, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -5678,7 +5677,11 @@ PrefabInstance:
     - target: {fileID: 5260666493181096952, guid: b75b5b7f753542d428e9468be5dcc307, type: 3}
       propertyPath: spawnPoint
       value: 
-      objectReference: {fileID: 1864068395}
+      objectReference: {fileID: 0}
+    - target: {fileID: 5260666493181096952, guid: b75b5b7f753542d428e9468be5dcc307, type: 3}
+      propertyPath: spawnRadius
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5260666493181096952, guid: b75b5b7f753542d428e9468be5dcc307, type: 3}
       propertyPath: spellPrefab
       value: 
@@ -5750,7 +5753,7 @@ PrefabInstance:
     - target: {fileID: 7335370521445634815, guid: b75b5b7f753542d428e9468be5dcc307, type: 3}
       propertyPath: m_Icon
       value: 
-      objectReference: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
+      objectReference: {fileID: 0}
     - target: {fileID: 7335370521445634815, guid: b75b5b7f753542d428e9468be5dcc307, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -5765,9 +5768,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2389931203111101875, guid: b75b5b7f753542d428e9468be5dcc307, type: 3}
       insertIndex: -1
       addedObject: {fileID: 579136431}
-    - targetCorrespondingSourceObject: {fileID: 2389931203111101875, guid: b75b5b7f753542d428e9468be5dcc307, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1864068395}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b75b5b7f753542d428e9468be5dcc307, type: 3}
 --- !u!4 &7235425721027168600 stripped

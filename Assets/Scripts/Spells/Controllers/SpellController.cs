@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using WizardGame.Stats;
 
 namespace WizardGame.SpellSystem
@@ -7,19 +8,12 @@ namespace WizardGame.SpellSystem
     {
         [SerializeField] protected LayerMask whatIsEnemy;
         [SerializeField] protected GameObject spellPrefab;
-        // [SerializeField] protected SpellDataSO spellData;
+        [SerializeField] protected float spawnRadius;
 
         protected SpellStats spellStats;
-
-        protected GameObject projectileInst;
-
-
+        
         public Camera Cam;
-        // public LayerMask WhatIsEnemy;
-        // protected GameObject spellGameObject;
-
-        // Data variables
-        // public float force;
+ 
 
 
         // Status variables

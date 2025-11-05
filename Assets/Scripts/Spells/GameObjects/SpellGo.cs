@@ -7,7 +7,6 @@ namespace WizardGame.SpellSystem
 {
     public class SpellGO : MonoBehaviour
     {
-        [SerializeField] protected SpellDataSO spellData;
         protected SpellStats spellStats;
 
         // Component references
@@ -15,8 +14,7 @@ namespace WizardGame.SpellSystem
         public CircleCollider2D CircleCollider { get; private set; }
         public Animator Animator { get; private set; }
 
-        private float inAirTime = 0.5f;
-        private float scaleMult = 0.0f;
+        private float inAirTime = 0.75f;
 
         private float timeAlive;
         private bool inAir;
@@ -27,24 +25,28 @@ namespace WizardGame.SpellSystem
             RB = GetComponent<Rigidbody2D>();
             CircleCollider = GetComponent<CircleCollider2D>();
             Animator = GetComponent<Animator>();
-            spellStats = transform.parent.GetComponentInChildren<SpellStats>();
+        }
 
-            // Init variables
-            timeAlive = 0.0f;
+        public void Initialize(SpellStats stats)
+        {
+            spellStats = stats;
+
+            AddAreaStat();
+
+            timeAlive = 0f;
             inAir = true;
+            
+            Animator.SetBool("inAir", inAir);
+
+            Launch();
         }
 
         private void Start()
         {
-            // direction = WorldSenses.GetRandomDirection();
-            // rotation = WorldSenses.VectorDirectionToCardinalRotation(direction);
-            // RB.rotation = rotation;
-            Launch();
 
-            Animator.SetBool("inAir", inAir);
         }
-
-        void FixedUpdate()
+        
+        private void Update()
         {
             timeAlive += Time.deltaTime;
             if (timeAlive >= inAirTime)
@@ -53,40 +55,40 @@ namespace WizardGame.SpellSystem
             }
         }
 
-        // protected float GetRandomCardinalRotation()
-        // {
-        //     float[] degrees = { 0f, 45f, 90f, 135f, 180f, 225f, 270f, 315f };
-        //     int randIndex = Random.Range(0, degrees.Length);
-        //     return degrees[randIndex];
-        // }
+        void FixedUpdate()
+        {
+            
+        }
 
         public void Launch()
         {
             RB.linearVelocity = spellStats.SpeedAmount.CurrentValue * transform.right;
         }
 
-        public void AddDamageStat(float damageMult)
+        public void AddAreaStat()
         {
-            
-        }
+            // Break out of function if stats is null
+            if (spellStats == null) return;
 
-        public void AddAreaStat(float scaleMult)
-        {
-            transform.localScale += new Vector3(scaleMult, scaleMult, 0.0f);
+            // Get Area Amount current value
+            float areaMultiplier = spellStats.AreaAmount.CurrentValue;
+            
+            // Increase size
+            transform.localScale = new Vector3(areaMultiplier, areaMultiplier, 1f);
         }
 
         private void Explode()
         {
+            // Send boolean to Animator
+            inAir = false;
+            Animator.SetBool("inAir", inAir);
+
             // Stop movement
             RB.linearVelocity = Vector3.zero;
             
             // Set CircleCollider size and position to same as explosion
             CircleCollider.radius = transform.localScale.x / 4;
             CircleCollider.offset = Vector2.zero;
-
-            // Send boolean to Animator
-            inAir = false;
-            Animator.SetBool("inAir", inAir);
 
         }
 

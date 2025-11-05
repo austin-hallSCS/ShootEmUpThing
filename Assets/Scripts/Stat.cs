@@ -8,6 +8,7 @@ namespace WizardGame.Stats
     {
         [field: SerializeField] public bool IsIgnored { get; private set; }
         [field: SerializeField] public float MaxValue { get; private set; }
+        [field: SerializeField] public float MinValue { get; private set; }
         [field: SerializeField] public float BaseValue { get; private set; }
         
         public float CurrentValue
@@ -15,8 +16,8 @@ namespace WizardGame.Stats
             get => currentValue;
             private set
             {
-                // Makes sure currentValue never goes above maximumn
-                currentValue = Mathf.Clamp(value, 0f, MaxValue);
+                // Makes sure currentValue never goes above maximumn or below minimum
+                currentValue = Mathf.Clamp(value, MinValue, MaxValue);
             }
         }
 
