@@ -164,71 +164,85 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WizardGame.Stats.PlayerStats
   <Health>k__BackingField:
+    <StatType>k__BackingField: 0
     <IsIgnored>k__BackingField: 0
     <MaxValue>k__BackingField: 100
     <MinValue>k__BackingField: 0
     <BaseValue>k__BackingField: 100
   <Level>k__BackingField:
+    <StatType>k__BackingField: 0
     <IsIgnored>k__BackingField: 0
     <MaxValue>k__BackingField: 100
     <MinValue>k__BackingField: 1
     <BaseValue>k__BackingField: 1
   <ExperienceAmount>k__BackingField:
+    <StatType>k__BackingField: 0
     <IsIgnored>k__BackingField: 0
     <MaxValue>k__BackingField: 100
     <MinValue>k__BackingField: 0
     <BaseValue>k__BackingField: 0
   <MovementSpeed>k__BackingField:
+    <StatType>k__BackingField: 0
     <IsIgnored>k__BackingField: 0
     <MaxValue>k__BackingField: 20
     <MinValue>k__BackingField: 0
     <BaseValue>k__BackingField: 3
   <HealthBonus>k__BackingField:
+    <StatType>k__BackingField: 0
     <IsIgnored>k__BackingField: 0
     <MaxValue>k__BackingField: 100
     <MinValue>k__BackingField: 0
     <BaseValue>k__BackingField: 0
   <DamageBonus>k__BackingField:
+    <StatType>k__BackingField: 0
     <IsIgnored>k__BackingField: 0
     <MaxValue>k__BackingField: 100
     <MinValue>k__BackingField: 0
     <BaseValue>k__BackingField: 0
   <AreaBonus>k__BackingField:
+    <StatType>k__BackingField: 0
     <IsIgnored>k__BackingField: 0
     <MaxValue>k__BackingField: 100
     <MinValue>k__BackingField: 0
     <BaseValue>k__BackingField: 0
   <SpeedBonus>k__BackingField:
+    <StatType>k__BackingField: 0
     <IsIgnored>k__BackingField: 0
     <MaxValue>k__BackingField: 100
     <MinValue>k__BackingField: 0
     <BaseValue>k__BackingField: 0
   <CoolDownTimeBonus>k__BackingField:
+    <StatType>k__BackingField: 0
     <IsIgnored>k__BackingField: 0
     <MaxValue>k__BackingField: 100
     <MinValue>k__BackingField: 0
     <BaseValue>k__BackingField: 0
   <KnockbackBonus>k__BackingField:
+    <StatType>k__BackingField: 0
     <IsIgnored>k__BackingField: 0
     <MaxValue>k__BackingField: 100
     <MinValue>k__BackingField: 0
     <BaseValue>k__BackingField: 0
   <ProjectileBonus>k__BackingField:
+    <StatType>k__BackingField: 0
     <IsIgnored>k__BackingField: 0
     <MaxValue>k__BackingField: 100
     <MinValue>k__BackingField: 0
     <BaseValue>k__BackingField: 0
   <ProjectileIntervalTimeBonus>k__BackingField:
+    <StatType>k__BackingField: 0
     <IsIgnored>k__BackingField: 0
     <MaxValue>k__BackingField: 100
     <MinValue>k__BackingField: 0
     <BaseValue>k__BackingField: 0
   <DurationTimeBonus>k__BackingField:
+    <StatType>k__BackingField: 0
     <IsIgnored>k__BackingField: 0
     <MaxValue>k__BackingField: 100
     <MinValue>k__BackingField: 0
     <BaseValue>k__BackingField: 0
   <PierceBonus>k__BackingField:
+    <StatType>k__BackingField: 0
     <IsIgnored>k__BackingField: 0
     <MaxValue>k__BackingField: 100
     <MinValue>k__BackingField: 0
@@ -327,105 +341,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6346624846328058312, guid: b75b5b7f753542d428e9468be5dcc307, type: 3}
   m_PrefabInstance: {fileID: 7235425721027168599}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &579136430
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 579136431}
-  - component: {fileID: 579136432}
-  m_Layer: 12
-  m_Name: FireBallSpellStats
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &579136431
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 579136430}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7235425721027168600}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &579136432
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 579136430}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9dc843bb98b1893459e4a8176b87fdec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WizardGame.Stats.SpellStats
-  <Rarity>k__BackingField:
-    <IsIgnored>k__BackingField: 0
-    <MaxValue>k__BackingField: 0
-    <MinValue>k__BackingField: 0
-    <BaseValue>k__BackingField: 0
-  <Level>k__BackingField:
-    <IsIgnored>k__BackingField: 0
-    <MaxValue>k__BackingField: 0
-    <MinValue>k__BackingField: 0
-    <BaseValue>k__BackingField: 0
-  <DamageAmount>k__BackingField:
-    <IsIgnored>k__BackingField: 0
-    <MaxValue>k__BackingField: 200
-    <MinValue>k__BackingField: 0
-    <BaseValue>k__BackingField: 20
-  <AreaAmount>k__BackingField:
-    <IsIgnored>k__BackingField: 0
-    <MaxValue>k__BackingField: 10
-    <MinValue>k__BackingField: 1
-    <BaseValue>k__BackingField: 1
-  <SpeedAmount>k__BackingField:
-    <IsIgnored>k__BackingField: 0
-    <MaxValue>k__BackingField: 10
-    <MinValue>k__BackingField: 1
-    <BaseValue>k__BackingField: 2
-  <CoolDownTime>k__BackingField:
-    <IsIgnored>k__BackingField: 0
-    <MaxValue>k__BackingField: 7
-    <MinValue>k__BackingField: 0.75
-    <BaseValue>k__BackingField: 3
-  <KnockbackAmount>k__BackingField:
-    <IsIgnored>k__BackingField: 0
-    <MaxValue>k__BackingField: 10
-    <MinValue>k__BackingField: 0
-    <BaseValue>k__BackingField: 1
-  <ProjectileAmount>k__BackingField:
-    <IsIgnored>k__BackingField: 0
-    <MaxValue>k__BackingField: 8
-    <MinValue>k__BackingField: 1
-    <BaseValue>k__BackingField: 3
-  <ProjectileIntervalTime>k__BackingField:
-    <IsIgnored>k__BackingField: 0
-    <MaxValue>k__BackingField: 10
-    <MinValue>k__BackingField: 0
-    <BaseValue>k__BackingField: 0.25
-  <DurationTime>k__BackingField:
-    <IsIgnored>k__BackingField: 1
-    <MaxValue>k__BackingField: 10
-    <MinValue>k__BackingField: 0
-    <BaseValue>k__BackingField: 1
-  <PierceAmount>k__BackingField:
-    <IsIgnored>k__BackingField: 0
-    <MaxValue>k__BackingField: 3
-    <MinValue>k__BackingField: 0
-    <BaseValue>k__BackingField: 1
 --- !u!1 &729470876
 GameObject:
   m_ObjectHideFlags: 0
@@ -5795,6 +5710,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5260666493181096952, guid: b75b5b7f753542d428e9468be5dcc307, type: 3}
+      propertyPath: SpellData
+      value: 
+      objectReference: {fileID: 11400000, guid: 6ea4af61b7c687d46926942e7d87bc7c, type: 2}
+    - target: {fileID: 5260666493181096952, guid: b75b5b7f753542d428e9468be5dcc307, type: 3}
       propertyPath: spellData
       value: 
       objectReference: {fileID: 11400000, guid: 3c5e2f813a892ca4da52ed71b70c1318, type: 2}
@@ -5892,16 +5811,8 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6346624846328058312, guid: b75b5b7f753542d428e9468be5dcc307, type: 3}
       insertIndex: 0
       addedObject: {fileID: 201260574}
-    - targetCorrespondingSourceObject: {fileID: 2389931203111101875, guid: b75b5b7f753542d428e9468be5dcc307, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 579136431}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b75b5b7f753542d428e9468be5dcc307, type: 3}
---- !u!4 &7235425721027168600 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2389931203111101875, guid: b75b5b7f753542d428e9468be5dcc307, type: 3}
-  m_PrefabInstance: {fileID: 7235425721027168599}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

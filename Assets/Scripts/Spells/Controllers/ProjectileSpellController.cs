@@ -22,7 +22,7 @@ namespace WizardGame.SpellSystem
         protected override void SpellActiveBehavior()
         {
             base.SpellActiveBehavior();
-            for (int i = 0; i < spellStats.ProjectileAmount.CurrentValue; i++)
+            for (int i = 0; i < runtimeStats.ProjectileAmount.CurrentValue; i++)
             {
                 FireProjectile();
             }
@@ -31,7 +31,7 @@ namespace WizardGame.SpellSystem
 
         protected virtual IEnumerator ProjectileChain()
         {
-            for (int i = 0; i < spellStats.ProjectileAmount.CurrentValue; i++)
+            for (int i = 0; i < runtimeStats.ProjectileAmount.CurrentValue; i++)
             {
                 Debug.Log($"Projectile {i}");
                 FireProjectile();
@@ -46,7 +46,7 @@ namespace WizardGame.SpellSystem
         
         protected virtual void ResetProjectileIntervalTime()
         {
-            currentProjectileIntervalTimeAt = spellStats.ProjectileIntervalTime.CurrentValue;
+            currentProjectileIntervalTimeAt = runtimeStats.ProjectileIntervalTime.CurrentValue;
         }
     }
 }

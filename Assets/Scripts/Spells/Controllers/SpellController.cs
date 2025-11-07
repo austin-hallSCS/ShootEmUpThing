@@ -1,7 +1,5 @@
 using UnityEngine;
-using System.Collections;
 using WizardGame.Stats;
-using Unity.VisualScripting;
 
 namespace WizardGame.SpellSystem
 {
@@ -10,9 +8,8 @@ namespace WizardGame.SpellSystem
         [SerializeField] protected LayerMask whatIsEnemy;
         [SerializeField] protected GameObject spellPrefab;
         [SerializeField] protected float spawnRadius;
-
-        [SerializeField] public SpellDataSO SpellData;
-        protected SpellStats spellStats;
+        [SerializeField] protected SpellDataSO spellData;
+        protected SpellStats runtimeStats;
         
         public Camera Cam;
  
@@ -35,7 +32,7 @@ namespace WizardGame.SpellSystem
         protected virtual void Awake()
         {
             enemyCheckSize = GetCameraSize();
-            spellStats = GetComponentInChildren<SpellStats>();
+            runtimeStats = SpellStats.CopyFrom(spellData);
         }
 
         protected virtual void Start()
@@ -59,8 +56,8 @@ namespace WizardGame.SpellSystem
 
         public virtual void LevelUp()
         {
-            spellStats.Level.Increase(1);
-            SpellData.ApplyLevelUp(spellStats, (int)spellStats.Level.CurrentValue);
+            runtimeStats.IncreaseLevel();
+            spellData.ApplyLevelUp(runtimeStats, runtimeStats.Level);
         }
 
         protected virtual void CheckSpellActiveStatus()
@@ -88,14 +85,9 @@ namespace WizardGame.SpellSystem
 
         protected virtual void SpellActiveBehavior() { }
 
-        protected virtual void ResetCoolDown() => currentCoolDownTimeAt = spellStats.CoolDownTime.CurrentValue;
+        protected virtual void ResetCoolDown() => currentCoolDownTimeAt = runtimeStats.CoolDownTime.CurrentValue;
 
-        protected virtual void ResetDuration() => currentDurationTimeAt = spellStats.DurationTime.CurrentValue;
-
-        public virtual void IncreaseLevel()
-        {
-            spellStats.Level.Increase(1);
-        }
+        protected virtual void ResetDuration() => currentDurationTimeAt = runtimeStats.DurationTime.CurrentValue;
 
         protected Vector2 GetCameraSize()
         {

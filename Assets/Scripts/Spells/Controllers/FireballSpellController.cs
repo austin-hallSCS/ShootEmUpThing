@@ -56,7 +56,7 @@ namespace WizardGame.SpellSystem
             // Instantiate projectile
             var projectile = Instantiate(spellPrefab, spawnPos, rotation);
             var spellGO = projectile.GetComponent<SpellGO>();
-            spellGO.Initialize(spellStats);
+            spellGO.Initialize(runtimeStats);
         }
     }
 

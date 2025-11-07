@@ -2,7 +2,7 @@ namespace WizardGame.Stats
 {
     public enum StatType
     {
-        Rarity,
+        NotModified,
         Level,
         Damage,
         Area,
@@ -10,6 +10,7 @@ namespace WizardGame.Stats
         Cooldown,
         Knockback,
         Amount,
-        Duration
+        Duration,
+        Pierce
     }
 }
