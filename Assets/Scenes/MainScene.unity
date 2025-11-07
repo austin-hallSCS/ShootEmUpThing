@@ -376,6 +376,11 @@ MonoBehaviour:
     <MaxValue>k__BackingField: 0
     <MinValue>k__BackingField: 0
     <BaseValue>k__BackingField: 0
+  <Level>k__BackingField:
+    <IsIgnored>k__BackingField: 0
+    <MaxValue>k__BackingField: 0
+    <MinValue>k__BackingField: 0
+    <BaseValue>k__BackingField: 0
   <DamageAmount>k__BackingField:
     <IsIgnored>k__BackingField: 0
     <MaxValue>k__BackingField: 200

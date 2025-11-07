@@ -22,23 +22,11 @@ namespace WizardGame.PlayerSystem
         public InputAction DashAction;
         public int NormInputX;
 
-        // Level up/Bonus variables
-        private float damgeBonus;
-        private float areaBonus;
-        private float speedBonus;
-        private float cooldownBonus;
-        private float knockbackBonus;
-        private float projectileAmountBonus;
-        private float durationBonus;
-        private float pierceBonus;
 
         // Player data variables
         public int MaxHealth;
         public float MovementSpeed;
         public float DamageCoolDownTime;
-
-        // Player status variables
-        public int Health { get { return currentHealth; } }
 
         // Movement variables
         public Rigidbody2D rb { get; private set; }
@@ -47,11 +35,7 @@ namespace WizardGame.PlayerSystem
         private Vector2 facingDirection;
         private int facingDirectionx;
 
-        // Private player data variables
-        private float movementSpeed;
-
         // Player status variables
-        private int currentHealth;
         private bool isInvincible;
         private float damageCooldown;
 
@@ -74,9 +58,7 @@ namespace WizardGame.PlayerSystem
         {
             MoveAction.Enable();
 
-            // Set player values
-            currentHealth = MaxHealth;
-            movementSpeed = MovementSpeed;
+            // Init player values
             isInvincible = false;
         }
 
@@ -88,10 +70,8 @@ namespace WizardGame.PlayerSystem
             NormInputX = Mathf.RoundToInt(facingDirection.x);
             facingDirectionx = Mathf.RoundToInt(facingDirection.x);
 
-            if (NormInputX != 0 && NormInputX != facingDirectionx)
-            {
-                Flip();
-            }
+            CheckIfShouldFlip();
+            
 
             // Damage cooldown
             if (isInvincible)
@@ -107,11 +87,19 @@ namespace WizardGame.PlayerSystem
 
         void FixedUpdate()
         {
-            position = (Vector2)rb.position + move * movementSpeed * Time.deltaTime;
+            position = (Vector2)rb.position + move * playerStats.MovementSpeed.CurrentValue * Time.deltaTime;
             rb.MovePosition(position);
         }
 
-        public void Flip()
+        private void CheckIfShouldFlip()
+        {
+            if (NormInputX != 0 && NormInputX != facingDirectionx)
+            {
+                Flip();
+            }
+        }
+
+        private void Flip()
         {
             facingDirection *= -1;
             rb.transform.Rotate(0.0f, 180.0f, 0.0f);
@@ -129,7 +117,7 @@ namespace WizardGame.PlayerSystem
             }
         }
 
-        public void CheckHealth()
+        private void CheckHealth()
         {
             if (playerStats.Health.CurrentValue <= 0)
             {

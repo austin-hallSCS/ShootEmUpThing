@@ -11,6 +11,7 @@ namespace WizardGame.SpellSystem
         [SerializeField] protected GameObject spellPrefab;
         [SerializeField] protected float spawnRadius;
 
+        [SerializeField] public SpellDataSO SpellData;
         protected SpellStats spellStats;
         
         public Camera Cam;
@@ -56,6 +57,12 @@ namespace WizardGame.SpellSystem
             }
         }
 
+        public virtual void LevelUp()
+        {
+            spellStats.Level.Increase(1);
+            SpellDataSO.ApplyLevelUp(spellStats, (int)spellStats.Level.CurrentValue);
+        }
+
         protected virtual void CheckSpellActiveStatus()
         {
             if (!isActive)
@@ -84,6 +91,11 @@ namespace WizardGame.SpellSystem
         protected virtual void ResetCoolDown() => currentCoolDownTimeAt = spellStats.CoolDownTime.CurrentValue;
 
         protected virtual void ResetDuration() => currentDurationTimeAt = spellStats.DurationTime.CurrentValue;
+
+        public virtual void IncreaseLevel()
+        {
+            spellStats.Level.Increase(1);
+        }
 
         protected Vector2 GetCameraSize()
         {

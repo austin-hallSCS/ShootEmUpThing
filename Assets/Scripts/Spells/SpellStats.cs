@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace WizardGame.Stats
@@ -6,6 +5,7 @@ namespace WizardGame.Stats
     public class SpellStats : MonoBehaviour
     {
         [field: SerializeField] public Stat Rarity { get; private set; }
+        [field: SerializeField] public Stat Level { get; private set; }
         [field: SerializeField] public Stat DamageAmount { get; private set; }
         [field: SerializeField] public Stat AreaAmount { get; private set; }
         [field: SerializeField] public Stat SpeedAmount { get; private set; }
@@ -19,6 +19,8 @@ namespace WizardGame.Stats
         public void Awake()
         {
             Rarity.Init();
+            Level.Init();
+            Level.SetMaxValue(10);
             DamageAmount.Init();
             AreaAmount.Init();
             SpeedAmount.Init();

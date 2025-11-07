@@ -24,9 +24,10 @@ namespace WizardGame.Stats
         private float currentValue;
 
         public void Init() => CurrentValue = BaseValue;
+        public void SetMaxValue(float value) => MaxValue = value;
         public void Increase(float amount) => CurrentValue += amount;
         public void PercentIncrease(float amount) => CurrentValue *= (1 + (amount / 100));
         public void Decrease(float amount) => CurrentValue -= amount;
-
+        public void PercentDecrease(float amount) => CurrentValue *= (100 - amount) / 100;
     }
 }
