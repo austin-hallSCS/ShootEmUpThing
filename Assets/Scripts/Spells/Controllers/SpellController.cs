@@ -60,7 +60,7 @@ namespace WizardGame.SpellSystem
         public virtual void LevelUp()
         {
             spellStats.Level.Increase(1);
-            SpellDataSO.ApplyLevelUp(spellStats, (int)spellStats.Level.CurrentValue);
+            SpellData.ApplyLevelUp(spellStats, (int)spellStats.Level.CurrentValue);
         }
 
         protected virtual void CheckSpellActiveStatus()
