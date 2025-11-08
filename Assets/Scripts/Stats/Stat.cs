@@ -36,6 +36,7 @@ namespace WizardGame.Stats
         public void Init() => CurrentValue = BaseValue;
 
         public void SetMaxValue(float value) => MaxValue = value;
+        public void SetStatType(StatType newType) => StatType = newType;
 
         // Increase
         public void Increase(float amount) => CurrentValue += amount;

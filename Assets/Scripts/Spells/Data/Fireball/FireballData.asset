@@ -14,6 +14,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WizardGame.SpellSystem.SpellDataSO
   <SpellName>k__BackingField: Fireball
   <SpellIcon>k__BackingField: {fileID: 0}
+  Rarity: 80
+  <ProjectileIntervalTime>k__BackingField: 0.02
+  <DamageAmount>k__BackingField:
+    <StatType>k__BackingField: 0
+    <IsIgnored>k__BackingField: 0
+    <MaxValue>k__BackingField: 120
+    <MinValue>k__BackingField: 1
+    <BaseValue>k__BackingField: 20
+  <AreaAmount>k__BackingField:
+    <StatType>k__BackingField: 1
+    <IsIgnored>k__BackingField: 0
+    <MaxValue>k__BackingField: 1000
+    <MinValue>k__BackingField: 1
+    <BaseValue>k__BackingField: 1
+  <SpeedAmount>k__BackingField:
+    <StatType>k__BackingField: 2
+    <IsIgnored>k__BackingField: 0
+    <MaxValue>k__BackingField: 1.35
+    <MinValue>k__BackingField: 0
+    <BaseValue>k__BackingField: 0.75
+  <CoolDownTime>k__BackingField:
+    <StatType>k__BackingField: 3
+    <IsIgnored>k__BackingField: 0
+    <MaxValue>k__BackingField: 3
+    <MinValue>k__BackingField: 0
+    <BaseValue>k__BackingField: 3
+  <KnockbackAmount>k__BackingField:
+    <StatType>k__BackingField: 4
+    <IsIgnored>k__BackingField: 0
+    <MaxValue>k__BackingField: 1000
+    <MinValue>k__BackingField: 1
+    <BaseValue>k__BackingField: 1
+  <ProjectileAmount>k__BackingField:
+    <StatType>k__BackingField: 5
+    <IsIgnored>k__BackingField: 0
+    <MaxValue>k__BackingField: 8
+    <MinValue>k__BackingField: 1
+    <BaseValue>k__BackingField: 2
+  <DurationTime>k__BackingField:
+    <StatType>k__BackingField: 6
+    <IsIgnored>k__BackingField: 1
+    <MaxValue>k__BackingField: 10000
+    <MinValue>k__BackingField: 0
+    <BaseValue>k__BackingField: 0
+  <PierceAmount>k__BackingField:
+    <StatType>k__BackingField: 7
+    <IsIgnored>k__BackingField: 1
+    <MaxValue>k__BackingField: 0
+    <MinValue>k__BackingField: 0
+    <BaseValue>k__BackingField: 0
   levelData:
   - {fileID: 11400000, guid: a7ddbe375dcf00842b815934b3b3e4f0, type: 2}
   - {fileID: 11400000, guid: 29de838f7c3776e4c80677b35772541f, type: 2}

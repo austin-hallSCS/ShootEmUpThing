@@ -5716,7 +5716,7 @@ PrefabInstance:
     - target: {fileID: 5260666493181096952, guid: b75b5b7f753542d428e9468be5dcc307, type: 3}
       propertyPath: spellData
       value: 
-      objectReference: {fileID: 11400000, guid: 3c5e2f813a892ca4da52ed71b70c1318, type: 2}
+      objectReference: {fileID: 11400000, guid: 6ea4af61b7c687d46926942e7d87bc7c, type: 2}
     - target: {fileID: 5260666493181096952, guid: b75b5b7f753542d428e9468be5dcc307, type: 3}
       propertyPath: spawnPoint
       value: 

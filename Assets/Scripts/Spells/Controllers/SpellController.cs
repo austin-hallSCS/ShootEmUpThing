@@ -1,4 +1,6 @@
+using System.Threading;
 using UnityEngine;
+using UnityEngine.Rendering;
 using WizardGame.Stats;
 
 namespace WizardGame.SpellSystem
@@ -9,10 +11,15 @@ namespace WizardGame.SpellSystem
         [SerializeField] protected GameObject spellPrefab;
         [SerializeField] protected float spawnRadius;
         [SerializeField] protected SpellDataSO spellData;
-        protected SpellStats runtimeStats;
-        
         public Camera Cam;
- 
+
+        protected SpellStats runtimeStats;
+
+        // Timers - need to figure this out later
+        // protected Timer levelUpTimer = new Timer(5f);
+
+        // Temp level up timer for testing
+        protected float currentLevelUpTimerAt;
 
 
         // Status variables
@@ -31,8 +38,10 @@ namespace WizardGame.SpellSystem
 
         protected virtual void Awake()
         {
-            enemyCheckSize = GetCameraSize();
+            // enemyCheckSize = GetCameraSize();
+            Debug.Log($"SpellDataSO value: {spellData.ProjectileAmount.CurrentValue}");
             runtimeStats = SpellStats.CopyFrom(spellData);
+            Debug.Log($"runtimeStats value: {runtimeStats.ProjectileAmount.CurrentValue}");
         }
 
         protected virtual void Start()
@@ -42,7 +51,12 @@ namespace WizardGame.SpellSystem
 
         protected virtual void Update()
         {
-            
+            currentLevelUpTimerAt -= Time.deltaTime;
+            if (currentLevelUpTimerAt == 0)
+            {
+                LevelUp();
+                currentLevelUpTimerAt = 5.0f;
+            }
         }
 
         protected virtual void FixedUpdate()
@@ -89,32 +103,32 @@ namespace WizardGame.SpellSystem
 
         protected virtual void ResetDuration() => currentDurationTimeAt = runtimeStats.DurationTime.CurrentValue;
 
-        protected Vector2 GetCameraSize()
-        {
-            float aspect = Screen.width / Screen.height;
-            var orthoSize = Cam.orthographicSize;
+        // protected Vector2 GetCameraSize()
+        // {
+        //     float aspect = Screen.width / Screen.height;
+        //     var orthoSize = Cam.orthographicSize;
 
-            float width = 2.0f * orthoSize * aspect;
-            float height = 2.0f * orthoSize;
+        //     float width = 2.0f * orthoSize * aspect;
+        //     float height = 2.0f * orthoSize;
 
-            return new Vector2(width, height);
+        //     return new Vector2(width, height);
 
-        }
+        // }
 
-        protected Vector3 GetNearestEnemyPosition()
-        {
-            RaycastHit2D[] detectedEnemies = Physics2D.BoxCastAll(new Vector2(0, 0), enemyCheckSize, 0.0f, new Vector2(0, 0), 5f, whatIsEnemy);
+        // protected Vector3 GetNearestEnemyPosition()
+        // {
+        //     RaycastHit2D[] detectedEnemies = Physics2D.BoxCastAll(new Vector2(0, 0), enemyCheckSize, 0.0f, new Vector2(0, 0), 5f, whatIsEnemy);
 
-            if (detectedEnemies.Length != 0)
-            {
-                nearestEnemy = detectedEnemies[0].transform;
-            }
-            else
-            {
-                nearestEnemy = null;
-            }
+        //     if (detectedEnemies.Length != 0)
+        //     {
+        //         nearestEnemy = detectedEnemies[0].transform;
+        //     }
+        //     else
+        //     {
+        //         nearestEnemy = null;
+        //     }
 
-            return nearestEnemy.position;
-        }
+        //     return nearestEnemy.position;
+        // }
     }
 }

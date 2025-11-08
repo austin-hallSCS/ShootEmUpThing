@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: Fireball_Level6
   m_EditorClassIdentifier: Assembly-CSharp::WizardGame.SpellSystem.SpellLevelDataSO
   Level: 6
-  Modifiers: []
+  modifiers:
+  - <StatType>k__BackingField: 0
+    <FlatIncrease>k__BackingField: 10
+    <PercentIncrease>k__BackingField: 0

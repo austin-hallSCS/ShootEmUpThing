@@ -1,6 +1,4 @@
-using UnityEditor;
 using UnityEngine;
-using System.Collections;
 
 namespace WizardGame.SpellSystem
 {
@@ -29,24 +27,24 @@ namespace WizardGame.SpellSystem
             SpellDeactivate();
         }
 
-        protected virtual IEnumerator ProjectileChain()
-        {
-            for (int i = 0; i < runtimeStats.ProjectileAmount.CurrentValue; i++)
-            {
-                Debug.Log($"Projectile {i}");
-                FireProjectile();
-                yield return new WaitForFixedUpdate();
-            }
-        } 
+        // protected virtual IEnumerator ProjectileChain()
+        // {
+        //     for (int i = 0; i < runtimeStats.ProjectileAmount.CurrentValue; i++)
+        //     {
+        //         Debug.Log($"Projectile {i}");
+        //         FireProjectile();
+        //         yield return new WaitForFixedUpdate();
+        //     }
+        // } 
 
         protected virtual void FireProjectile()
         {
-            // projectileInst = Instantiate(spellPrefab, (Vector3)transform.position, Quaternion.identity, transform);
+            var projectileInst = Instantiate(spellPrefab, (Vector3)transform.position, Quaternion.identity, transform);
         }
         
         protected virtual void ResetProjectileIntervalTime()
         {
-            currentProjectileIntervalTimeAt = runtimeStats.ProjectileIntervalTime.CurrentValue;
+            currentProjectileIntervalTimeAt = runtimeStats.ProjectileIntervalTime;
         }
     }
 }

@@ -6,10 +6,8 @@ namespace WizardGame.Stats
 {
     public class SpellStats
     {
-        [field: SerializeField] SpellDataSO Data;
-
-        public Stat Rarity { get; private set; }
-        public Stat ProjectileIntervalTime { get; private set; }
+        public int Rarity { get; private set; }
+        public float ProjectileIntervalTime { get; private set; }
         public Stat DamageAmount { get; private set; }
         public Stat AreaAmount { get; private set; }
         public Stat SpeedAmount { get; private set; }
@@ -21,12 +19,19 @@ namespace WizardGame.Stats
 
         public int Level { get; private set; }
 
+        private SpellDataSO Data;
+
         public static SpellStats CopyFrom(SpellDataSO spellData)
         {
             return new SpellStats
             {
-                Rarity = new Stat(spellData.Rarity),
-                ProjectileIntervalTime = new Stat(spellData.ProjectileIntervalTime),
+                Data = spellData,
+
+                Level = 1,
+
+
+                Rarity = spellData.Rarity,
+                ProjectileIntervalTime = spellData.ProjectileIntervalTime,
 
                 DamageAmount = new Stat(spellData.DamageAmount),
                 AreaAmount = new Stat(spellData.AreaAmount),
@@ -35,14 +40,14 @@ namespace WizardGame.Stats
                 KnockbackAmount = new Stat(spellData.KnockbackAmount),
                 ProjectileAmount = new Stat(spellData.ProjectileAmount),
                 DurationTime = new Stat(spellData.DurationTime),
-                PierceAmount = new Stat(spellData.PierceAmount),
-                Level = 1
+                PierceAmount = new Stat(spellData.PierceAmount)
             };
         }
         
         public void IncreaseLevel()
         {
             Level++;
+            Debug.Log($"{Data.SpellName} is level {Level}");
         }
     }
 }
