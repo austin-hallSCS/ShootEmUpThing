@@ -39,7 +39,7 @@ namespace WizardGame.SpellSystem
         protected virtual void Awake()
         {
             // enemyCheckSize = GetCameraSize();
-            Debug.Log($"SpellDataSO value: {spellData.ProjectileAmount.CurrentValue}");
+            Debug.Log($"SpellDataSO value: {spellData.DamageAmount.CurrentValue}");
             runtimeStats = SpellStats.CopyFrom(spellData);
             Debug.Log($"runtimeStats value: {runtimeStats.ProjectileAmount.CurrentValue}");
         }
