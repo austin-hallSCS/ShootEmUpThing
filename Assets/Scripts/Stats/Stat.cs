@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace WizardGame.Stats
 {
-    [Serializable]
+    [System.Serializable]
     public class Stat
     {
         [field: SerializeField] public StatType StatType { get; private set; }

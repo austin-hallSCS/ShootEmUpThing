@@ -39,9 +39,17 @@ namespace WizardGame.SpellSystem
         protected virtual void Awake()
         {
             // enemyCheckSize = GetCameraSize();
+
+            if (spellData == null)
+            {
+                Debug.LogError($"Spell Data not assigned on: {gameObject.name}");
+
+            }
+
             Debug.Log($"SpellDataSO value: {spellData.DamageAmount.CurrentValue}");
             runtimeStats = SpellStats.CopyFrom(spellData);
             Debug.Log($"runtimeStats value: {runtimeStats.ProjectileAmount.CurrentValue}");
+            
         }
 
         protected virtual void Start()
