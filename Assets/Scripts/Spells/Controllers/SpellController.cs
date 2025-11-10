@@ -17,7 +17,7 @@ namespace WizardGame.SpellSystem
         // protected Timer levelUpTimer = new Timer(5f);
 
         // Temp level up timer for testing
-        protected float currentLevelUpTimerAt;
+        // protected float currentLevelUpTimerAt;
 
 
         // Status variables
@@ -55,17 +55,17 @@ namespace WizardGame.SpellSystem
         protected virtual void Start()
         {
             SpellDeactivate();
-            currentLevelUpTimerAt = 5.0f;
+            // currentLevelUpTimerAt = 5.0f;
         }
 
         protected virtual void Update()
         {
-            currentLevelUpTimerAt -= Time.deltaTime;
-            if (currentLevelUpTimerAt <= 0)
-            {
-                LevelUp();
-                currentLevelUpTimerAt = 5.0f;
-            }
+            // currentLevelUpTimerAt -= Time.deltaTime;
+            // if (currentLevelUpTimerAt <= 0)
+            // {
+            //     LevelUp();
+            //     currentLevelUpTimerAt = 5.0f;
+            // }
         }
 
         protected virtual void FixedUpdate()

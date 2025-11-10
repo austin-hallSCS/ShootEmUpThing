@@ -86,7 +86,7 @@ namespace WizardGame.PlayerSystem
 
         void FixedUpdate()
         {
-            position = (Vector2)rb.position + move * playerStats.MovementSpeed.CurrentValue * Time.deltaTime;
+            position = (Vector2)rb.position + move * playerStats.MovementSpeed * Time.deltaTime;
             rb.MovePosition(position);
         }
 

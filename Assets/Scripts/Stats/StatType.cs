@@ -9,6 +9,7 @@ namespace WizardGame.Stats
         Knockback,
         Amount,
         Duration,
-        Pierce
+        Pierce,
+        Health,
     }
 }
