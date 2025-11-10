@@ -164,89 +164,89 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WizardGame.Stats.PlayerStats
   <Health>k__BackingField:
-    <StatType>k__BackingField: 0
-    <IsIgnored>k__BackingField: 0
-    <MaxValue>k__BackingField: 100
-    <MinValue>k__BackingField: 0
-    <BaseValue>k__BackingField: 100
+    statType: 0
+    isIgnored: 0
+    maxValue: 0
+    minValue: 0
+    baseValue: 0
   <Level>k__BackingField:
-    <StatType>k__BackingField: 0
-    <IsIgnored>k__BackingField: 0
-    <MaxValue>k__BackingField: 100
-    <MinValue>k__BackingField: 1
-    <BaseValue>k__BackingField: 1
+    statType: 0
+    isIgnored: 0
+    maxValue: 0
+    minValue: 0
+    baseValue: 0
   <ExperienceAmount>k__BackingField:
-    <StatType>k__BackingField: 0
-    <IsIgnored>k__BackingField: 0
-    <MaxValue>k__BackingField: 100
-    <MinValue>k__BackingField: 0
-    <BaseValue>k__BackingField: 0
+    statType: 0
+    isIgnored: 0
+    maxValue: 0
+    minValue: 0
+    baseValue: 0
   <MovementSpeed>k__BackingField:
-    <StatType>k__BackingField: 0
-    <IsIgnored>k__BackingField: 0
-    <MaxValue>k__BackingField: 20
-    <MinValue>k__BackingField: 0
-    <BaseValue>k__BackingField: 3
+    statType: 2
+    isIgnored: 0
+    maxValue: 10
+    minValue: 1
+    baseValue: 3
   <HealthBonus>k__BackingField:
-    <StatType>k__BackingField: 0
-    <IsIgnored>k__BackingField: 0
-    <MaxValue>k__BackingField: 100
-    <MinValue>k__BackingField: 0
-    <BaseValue>k__BackingField: 0
+    statType: 0
+    isIgnored: 0
+    maxValue: 0
+    minValue: 0
+    baseValue: 0
   <DamageBonus>k__BackingField:
-    <StatType>k__BackingField: 0
-    <IsIgnored>k__BackingField: 0
-    <MaxValue>k__BackingField: 100
-    <MinValue>k__BackingField: 0
-    <BaseValue>k__BackingField: 0
+    statType: 0
+    isIgnored: 0
+    maxValue: 0
+    minValue: 0
+    baseValue: 0
   <AreaBonus>k__BackingField:
-    <StatType>k__BackingField: 0
-    <IsIgnored>k__BackingField: 0
-    <MaxValue>k__BackingField: 100
-    <MinValue>k__BackingField: 0
-    <BaseValue>k__BackingField: 0
+    statType: 0
+    isIgnored: 0
+    maxValue: 0
+    minValue: 0
+    baseValue: 0
   <SpeedBonus>k__BackingField:
-    <StatType>k__BackingField: 0
-    <IsIgnored>k__BackingField: 0
-    <MaxValue>k__BackingField: 100
-    <MinValue>k__BackingField: 0
-    <BaseValue>k__BackingField: 0
+    statType: 0
+    isIgnored: 0
+    maxValue: 0
+    minValue: 0
+    baseValue: 0
   <CoolDownTimeBonus>k__BackingField:
-    <StatType>k__BackingField: 0
-    <IsIgnored>k__BackingField: 0
-    <MaxValue>k__BackingField: 100
-    <MinValue>k__BackingField: 0
-    <BaseValue>k__BackingField: 0
+    statType: 0
+    isIgnored: 0
+    maxValue: 0
+    minValue: 0
+    baseValue: 0
   <KnockbackBonus>k__BackingField:
-    <StatType>k__BackingField: 0
-    <IsIgnored>k__BackingField: 0
-    <MaxValue>k__BackingField: 100
-    <MinValue>k__BackingField: 0
-    <BaseValue>k__BackingField: 0
+    statType: 0
+    isIgnored: 0
+    maxValue: 0
+    minValue: 0
+    baseValue: 0
   <ProjectileBonus>k__BackingField:
-    <StatType>k__BackingField: 0
-    <IsIgnored>k__BackingField: 0
-    <MaxValue>k__BackingField: 100
-    <MinValue>k__BackingField: 0
-    <BaseValue>k__BackingField: 0
+    statType: 0
+    isIgnored: 0
+    maxValue: 0
+    minValue: 0
+    baseValue: 0
   <ProjectileIntervalTimeBonus>k__BackingField:
-    <StatType>k__BackingField: 0
-    <IsIgnored>k__BackingField: 0
-    <MaxValue>k__BackingField: 100
-    <MinValue>k__BackingField: 0
-    <BaseValue>k__BackingField: 0
+    statType: 0
+    isIgnored: 0
+    maxValue: 0
+    minValue: 0
+    baseValue: 0
   <DurationTimeBonus>k__BackingField:
-    <StatType>k__BackingField: 0
-    <IsIgnored>k__BackingField: 0
-    <MaxValue>k__BackingField: 100
-    <MinValue>k__BackingField: 0
-    <BaseValue>k__BackingField: 0
+    statType: 0
+    isIgnored: 0
+    maxValue: 0
+    minValue: 0
+    baseValue: 0
   <PierceBonus>k__BackingField:
-    <StatType>k__BackingField: 0
-    <IsIgnored>k__BackingField: 0
-    <MaxValue>k__BackingField: 100
-    <MinValue>k__BackingField: 0
-    <BaseValue>k__BackingField: 0
+    statType: 0
+    isIgnored: 0
+    maxValue: 0
+    minValue: 0
+    baseValue: 0
 --- !u!1 &251133072
 GameObject:
   m_ObjectHideFlags: 0

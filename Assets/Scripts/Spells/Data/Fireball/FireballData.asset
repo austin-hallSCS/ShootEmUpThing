@@ -17,53 +17,53 @@ MonoBehaviour:
   Rarity: 80
   <ProjectileIntervalTime>k__BackingField: 0.02
   <DamageAmount>k__BackingField:
-    <StatType>k__BackingField: 0
-    <IsIgnored>k__BackingField: 0
-    <MaxValue>k__BackingField: 120
-    <MinValue>k__BackingField: 1
-    <BaseValue>k__BackingField: 20
+    statType: 0
+    isIgnored: 0
+    maxValue: 120
+    minValue: 0
+    baseValue: 20
   <AreaAmount>k__BackingField:
-    <StatType>k__BackingField: 1
-    <IsIgnored>k__BackingField: 0
-    <MaxValue>k__BackingField: 1000
-    <MinValue>k__BackingField: 1
-    <BaseValue>k__BackingField: 1
+    statType: 1
+    isIgnored: 0
+    maxValue: 3
+    minValue: 1
+    baseValue: 1
   <SpeedAmount>k__BackingField:
-    <StatType>k__BackingField: 2
-    <IsIgnored>k__BackingField: 0
-    <MaxValue>k__BackingField: 1.35
-    <MinValue>k__BackingField: 0
-    <BaseValue>k__BackingField: 0.75
+    statType: 2
+    isIgnored: 0
+    maxValue: 2
+    minValue: 0.1
+    baseValue: 0.75
   <CoolDownTime>k__BackingField:
-    <StatType>k__BackingField: 3
-    <IsIgnored>k__BackingField: 0
-    <MaxValue>k__BackingField: 3
-    <MinValue>k__BackingField: 0
-    <BaseValue>k__BackingField: 3
+    statType: 3
+    isIgnored: 0
+    maxValue: 5
+    minValue: 1
+    baseValue: 3
   <KnockbackAmount>k__BackingField:
-    <StatType>k__BackingField: 4
-    <IsIgnored>k__BackingField: 0
-    <MaxValue>k__BackingField: 1000
-    <MinValue>k__BackingField: 1
-    <BaseValue>k__BackingField: 1
+    statType: 4
+    isIgnored: 0
+    maxValue: 5
+    minValue: 1
+    baseValue: 1
   <ProjectileAmount>k__BackingField:
-    <StatType>k__BackingField: 5
-    <IsIgnored>k__BackingField: 0
-    <MaxValue>k__BackingField: 8
-    <MinValue>k__BackingField: 1
-    <BaseValue>k__BackingField: 2
+    statType: 5
+    isIgnored: 0
+    maxValue: 8
+    minValue: 1
+    baseValue: 2
   <DurationTime>k__BackingField:
-    <StatType>k__BackingField: 6
-    <IsIgnored>k__BackingField: 1
-    <MaxValue>k__BackingField: 10000
-    <MinValue>k__BackingField: 0
-    <BaseValue>k__BackingField: 0
+    statType: 6
+    isIgnored: 1
+    maxValue: 0
+    minValue: 0
+    baseValue: 0
   <PierceAmount>k__BackingField:
-    <StatType>k__BackingField: 7
-    <IsIgnored>k__BackingField: 1
-    <MaxValue>k__BackingField: 0
-    <MinValue>k__BackingField: 0
-    <BaseValue>k__BackingField: 0
+    statType: 7
+    isIgnored: 1
+    maxValue: 0
+    minValue: 0
+    baseValue: 0
   levelData:
   - {fileID: 11400000, guid: a7ddbe375dcf00842b815934b3b3e4f0, type: 2}
   - {fileID: 11400000, guid: 29de838f7c3776e4c80677b35772541f, type: 2}

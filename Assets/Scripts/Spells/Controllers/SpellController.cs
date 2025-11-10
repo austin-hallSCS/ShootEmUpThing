@@ -1,6 +1,4 @@
-using System.Threading;
 using UnityEngine;
-using UnityEngine.Rendering;
 using WizardGame.Stats;
 
 namespace WizardGame.SpellSystem
@@ -46,21 +44,24 @@ namespace WizardGame.SpellSystem
 
             }
 
-            Debug.Log($"SpellDataSO value: {spellData.DamageAmount.CurrentValue}");
+            Debug.Log($"SpellDataSO value: {spellData.DamageAmount.BaseValue}");
+            Debug.Log($"SpellDataSO CurrentValue: {spellData.DamageAmount.CurrentValue}");
             runtimeStats = SpellStats.CopyFrom(spellData);
-            Debug.Log($"runtimeStats value: {runtimeStats.ProjectileAmount.CurrentValue}");
+            Debug.Log($"runtimeStats value: {runtimeStats.DamageAmount.BaseValue}");
+            Debug.Log($"runtimeStats CurrentValue: {runtimeStats.DamageAmount.CurrentValue}");
             
         }
 
         protected virtual void Start()
         {
             SpellDeactivate();
+            currentLevelUpTimerAt = 5.0f;
         }
 
         protected virtual void Update()
         {
             currentLevelUpTimerAt -= Time.deltaTime;
-            if (currentLevelUpTimerAt == 0)
+            if (currentLevelUpTimerAt <= 0)
             {
                 LevelUp();
                 currentLevelUpTimerAt = 5.0f;

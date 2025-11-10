@@ -90,6 +90,8 @@ namespace WizardGame.SpellSystem
             CircleCollider.radius = transform.localScale.x / 4;
             CircleCollider.offset = Vector2.zero;
 
+            Debug.Log($"Damage Amount: {spellStats.DamageAmount.CurrentValue}");
+
         }
 
         void AnimationFinishTrigger() => Destroy(gameObject);
