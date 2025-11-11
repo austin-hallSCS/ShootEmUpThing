@@ -8,10 +8,12 @@ namespace WizardGame.PlayerSystem
 {
     public class PlayerController : MonoBehaviour, IDamageable
     {
+        [SerializeField] private PlayerDataSO playerData;
+
         // Component references
         private HealthBarController healthbar;
         public FireballSpellController FireBall { get; private set; }
-        protected PlayerStats playerStats;
+        protected PlayerStats playerRuntimeStats;
 
 
         // Input variables
@@ -43,11 +45,19 @@ namespace WizardGame.PlayerSystem
 
         private void Awake()
         {
+            if (playerData == null)
+            {
+                Debug.LogError($"Player Data not assigned on: {gameObject.name}");
+
+            }
+
+            playerRuntimeStats = PlayerStats.CopyFrom(playerData);
+
             // Get Component references
             rb = GetComponent<Rigidbody2D>();
             healthbar = GetComponentInChildren<HealthBarController>();
             FireBall = GetComponentInChildren<FireballSpellController>();
-            playerStats = GetComponentInChildren<PlayerStats>();
+            playerRuntimeStats = GetComponentInChildren<PlayerStats>();
 
             // equippedSpells.Add(transform.Find("FireballSpellController").GetComponent<FireballSpellController>());
         }
@@ -86,7 +96,7 @@ namespace WizardGame.PlayerSystem
 
         void FixedUpdate()
         {
-            position = (Vector2)rb.position + move * playerStats.MovementSpeed * Time.deltaTime;
+            position = (Vector2)rb.position + move * playerRuntimeStats.MovementSpeed.CurrentValue * Time.deltaTime;
             rb.MovePosition(position);
         }
 
@@ -108,9 +118,9 @@ namespace WizardGame.PlayerSystem
         {
             if (!isInvincible)
             {
-                playerStats.Health.Decrease(amount);
-                healthbar.UpdateHealthBar(playerStats.Health.CurrentValue, playerStats.Health.MaxValue);
-                Debug.Log(playerStats.Health.CurrentValue);
+                playerRuntimeStats.Health.Decrease(amount);
+                healthbar.UpdateHealthBar(playerRuntimeStats.Health.CurrentValue, playerRuntimeStats.Health.MaxValue);
+                Debug.Log(playerRuntimeStats.Health.CurrentValue);
                 isInvincible = true;
                 CheckHealth();
             }
@@ -118,7 +128,7 @@ namespace WizardGame.PlayerSystem
 
         private void CheckHealth()
         {
-            if (playerStats.Health.CurrentValue <= 0)
+            if (playerRuntimeStats.Health.CurrentValue <= 0)
             {
                 // Destroy(gameObject);
                 Debug.Log("Player is dead!");

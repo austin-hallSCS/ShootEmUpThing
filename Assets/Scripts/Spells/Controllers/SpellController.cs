@@ -108,7 +108,7 @@ namespace WizardGame.SpellSystem
 
         protected virtual void SpellActiveBehavior() { }
 
-        protected virtual void ResetCoolDown() => currentCoolDownTimeAt = runtimeStats.CoolDownTime.CurrentValue;
+        protected virtual void ResetCoolDown() => currentCoolDownTimeAt = runtimeStats.CooldownTime.CurrentValue;
 
         protected virtual void ResetDuration() => currentDurationTimeAt = runtimeStats.DurationTime.CurrentValue;
 

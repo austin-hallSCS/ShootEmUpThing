@@ -6,6 +6,7 @@ namespace WizardGame.Stats
     public class Stat
     {
         [SerializeField] private StatType statType;
+        [SerializeField] private bool increaseIsPositive = true;
         [SerializeField] private bool isIgnored;
         [SerializeField] private float maxValue;
         [SerializeField] private float minValue;
@@ -14,6 +15,7 @@ namespace WizardGame.Stats
         private float currentValue;
 
         public StatType StatType => statType;
+        public bool IncreaseIsPositive => increaseIsPositive;
         public bool IsIgnored => isIgnored;
         public float MaxValue => maxValue;
         public float MinValue => minValue;
@@ -26,6 +28,18 @@ namespace WizardGame.Stats
                 // Makes sure currentValue never goes above maximumn or below minimum
                 currentValue = Mathf.Clamp(value, minValue, maxValue);
             }
+        }
+
+        public Stat(StatType statType, bool increaseIsPositive, bool isIgnored, float maxValue, float minValue, float baseValue)
+        {
+            this.statType = statType;
+            this.increaseIsPositive = increaseIsPositive;
+            this.isIgnored = isIgnored;
+            this.maxValue = maxValue;
+            this.minValue = minValue;
+            this.baseValue = baseValue;
+
+            currentValue = this.baseValue;
         }
         
 
@@ -43,16 +57,28 @@ namespace WizardGame.Stats
         public void Init() => CurrentValue = baseValue;
 
         public void SetMaxValue(float value) => maxValue = value;
+        public void SetCurrentValue(float newValue) => currentValue = newValue;
         public void SetStatType(StatType newType) => statType = newType;
 
-        // Increase
-        public void Increase(float amount) => CurrentValue += amount;
-        public void PercentIncrease(float amount) => CurrentValue *= (1 + (amount / 100));
-        public void IncreaseToMax() => CurrentValue = maxValue;
+        public void ApplyModifier(StatModifier mod)
+        {
+            currentValue = GetModifiedValue(mod);
+        }
+
+        public float GetModifiedValue(StatModifier mod)
+        {
+            float delta = mod.ValueType == ValueType.Flat
+                ? mod.Value
+                : BaseValue * (mod.Value / 100f);
+
+            bool shouldIncrease =
+                (mod.ModType == ModifierType.Increase && IncreaseIsPositive) ||
+                (mod.ModType == ModifierType.Decrease && !IncreaseIsPositive);
+
+            return shouldIncrease ? BaseValue + delta : BaseValue - delta;
+        }
 
         // Decrease
         public void Decrease(float amount) => CurrentValue -= amount;
-        public void PercentDecrease(float amount) => CurrentValue *= (100 - amount) / 100;
-        public void DecreaseToMin() => CurrentValue = minValue;
     }
 }
