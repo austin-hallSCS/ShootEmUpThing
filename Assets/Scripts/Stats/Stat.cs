@@ -41,7 +41,6 @@ namespace WizardGame.Stats
 
             currentValue = this.baseValue;
         }
-        
 
         // Clone from another Stat
         public Stat(Stat other)
@@ -56,7 +55,7 @@ namespace WizardGame.Stats
 
         public void Init() => CurrentValue = baseValue;
 
-        public void SetMaxValue(float value) => maxValue = value;
+        public void SetMaxValue(float newValue) => maxValue = newValue;
         public void SetCurrentValue(float newValue) => currentValue = newValue;
         public void SetStatType(StatType newType) => statType = newType;
 
@@ -67,13 +66,15 @@ namespace WizardGame.Stats
 
         public float GetModifiedValue(StatModifier mod)
         {
+            // Edit value based on if it is Flat or Percentage mod
             float delta = mod.ValueType == ValueType.Flat
                 ? mod.Value
-                : BaseValue * (mod.Value / 100f);
+                : CurrentValue * (mod.Value / 100f);
 
+            // Negate value if Increase is not positive
             bool shouldIncrease =
-                (mod.ModType == ModifierType.Increase && IncreaseIsPositive) ||
-                (mod.ModType == ModifierType.Decrease && !IncreaseIsPositive);
+                (mod.ModType == ModifierType.Bonus && IncreaseIsPositive) ||
+                (mod.ModType == ModifierType.Penalty && !IncreaseIsPositive);
 
             return shouldIncrease ? BaseValue + delta : BaseValue - delta;
         }

@@ -45,45 +45,5 @@ namespace WizardGame.SpellSystem
             DurationTime?.SetStatType(StatType.Duration);
             PierceAmount?.SetStatType(StatType.Pierce);
         }
-
-        // Apply stat changes for the given level
-        public void ApplyLevelUp(SpellStats spellStats, int newLevel)
-        {
-            SpellLevelDataSO levelInfo = levelData.Find(l => l.Level == newLevel);
-            if (levelInfo == null)
-            {
-                Debug.LogWarning($"No level data for {SpellName} level {newLevel}");
-                return;
-            }
-
-            // Apply changes based on Stat Type
-            foreach (var mod in levelInfo.Modifiers)
-            {
-                switch (mod.StatType)
-                {
-                    case StatType.Damage:
-                        spellStats.DamageAmount.ApplyModifier(mod);
-                        break;
-                    case StatType.Area:
-                        spellStats.AreaAmount.ApplyModifier(mod);
-                        break;
-                    case StatType.Speed:
-                        spellStats.SpeedAmount.ApplyModifier(mod);
-                        break;
-                    case StatType.Cooldown:
-                        spellStats.CooldownTime.ApplyModifier(mod);
-                        break;
-                    case StatType.Knockback:
-                        spellStats.KnockbackAmount.ApplyModifier(mod);
-                        break;
-                    case StatType.Amount:
-                        spellStats.ProjectileAmount.ApplyModifier(mod);
-                        break;
-                    case StatType.Duration:
-                        spellStats.DurationTime.ApplyModifier(mod);
-                        break;
-                }
-            }
-        }
     }
 }

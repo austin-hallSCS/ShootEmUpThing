@@ -7,6 +7,8 @@ namespace WizardGame.Stats
     {
         public float ProjectileIntervalTime { get; private set; }
 
+        public int Level { get; private set; }
+
         public Stat Rarity { get; private set; }
         public Stat DamageAmount { get; private set; }
         public Stat AreaAmount { get; private set; }
@@ -16,8 +18,6 @@ namespace WizardGame.Stats
         public Stat ProjectileAmount { get; private set; }
         public Stat DurationTime { get; private set; }
         public Stat PierceAmount { get; private set; }
-
-        public int Level { get; private set; }
 
         private SpellDataSO data;
 
@@ -43,10 +43,45 @@ namespace WizardGame.Stats
             };
         }
         
-        public void IncreaseLevel()
+        public void ApplyLevelUp()
         {
             Level++;
-            Debug.Log($"{data.SpellName} is level {Level}");
+
+            SpellLevelDataSO levelInfo = data.LevelData.Find(l => l.Level == Level);
+            if (levelInfo == null)
+            {
+                Debug.LogWarning($"No level data for {SpellName} level {newLevel}");
+                return;
+            }
+
+            // Apply changes based on Stat Type
+            foreach (var mod in levelInfo.Modifiers)
+            {
+                switch (mod.StatType)
+                {
+                    case StatType.Damage:
+                        spellStats.DamageAmount.ApplyModifier(mod);
+                        break;
+                    case StatType.Area:
+                        spellStats.AreaAmount.ApplyModifier(mod);
+                        break;
+                    case StatType.Speed:
+                        spellStats.SpeedAmount.ApplyModifier(mod);
+                        break;
+                    case StatType.Cooldown:
+                        spellStats.CooldownTime.ApplyModifier(mod);
+                        break;
+                    case StatType.Knockback:
+                        spellStats.KnockbackAmount.ApplyModifier(mod);
+                        break;
+                    case StatType.Amount:
+                        spellStats.ProjectileAmount.ApplyModifier(mod);
+                        break;
+                    case StatType.Duration:
+                        spellStats.DurationTime.ApplyModifier(mod);
+                        break;
+                }
+            }
         }
     }
 }

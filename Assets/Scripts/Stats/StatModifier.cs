@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace WizardGame.Stats
 {
-    public enum ModifierType { Increase, Decrease }
+    public enum ModifierType { Bonus, Penalty }
     public enum ValueType { Flat, Percent }
 
     [System.Serializable]
@@ -29,7 +29,7 @@ namespace WizardGame.Stats
                 ? Value
                 : baseValue * (Value / 100f);
 
-            return ModType == ModifierType.Increase
+            return ModType == ModifierType.Bonus
                 ? baseValue + delta
                 : baseValue - delta;
         }
