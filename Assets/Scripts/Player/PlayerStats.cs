@@ -8,16 +8,7 @@ namespace WizardGame.Stats
 
         public Stat MovementSpeed { get; private set; }
         public Stat Health { get; private set; }
-        public Stat ExperienceAmount { get; private set; }
-
-
-        [Header("Ability Scores")]
-        public AbilityScore Strength { get; private set; }
-        public AbilityScore Dexterity { get; private set; }
-        public AbilityScore Constitution { get; private set; }
-        public AbilityScore Intelligence { get; private set; }
-        public AbilityScore Wisdom { get; private set; }
-        public AbilityScore Charisma { get; private set; }
+        public Stat Experience { get; private set; }
 
         private PlayerDataSO data;
 
@@ -29,10 +20,7 @@ namespace WizardGame.Stats
 
                 Level = 1,
 
-                Health = new Stat(StatType.Health, true, false, 100, 0, 100),
-
-                Strength = new AbilityScore()
-
+                Health = new Stat(playerData.Health),
 
 
             };

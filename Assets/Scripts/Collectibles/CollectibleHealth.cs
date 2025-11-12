@@ -1,5 +1,5 @@
 using UnityEngine;
-using WizardGame.PlayerSystem;
+using WizardGame.Player;
 
 namespace WizardGame.Collectibles
 {

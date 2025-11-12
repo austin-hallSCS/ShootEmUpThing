@@ -44,7 +44,7 @@ namespace WizardGame.Stats
                     modifiers.Add(new StatModifier(StatType.Knockback));
                     break;
                 case AbilityType.Dexterity:
-                    modifiers.Add(new StatModifier(StatType.Speed));
+                    modifiers.Add(new StatModifier(StatType.MovementSpeed));
                     modifiers.Add(new StatModifier(StatType.Amount));
                     break;
                 case AbilityType.Constitution:
@@ -57,7 +57,7 @@ namespace WizardGame.Stats
                     break;
                 case AbilityType.Wisdom:
                     modifiers.Add(new StatModifier(StatType.Pierce));
-                    modifiers.Add(new StatModifier(StatType.MagicResistance));
+                    modifiers.Add(new StatModifier(StatType.Speed));
                     break;
                 case AbilityType.Charisma:
                     modifiers.Add(new StatModifier(StatType.Duration));

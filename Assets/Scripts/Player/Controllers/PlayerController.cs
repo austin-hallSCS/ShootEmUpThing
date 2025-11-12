@@ -3,11 +3,14 @@ using UnityEngine.InputSystem;
 using WizardGame.SpellSystem;
 using WizardGame.Interfaces;
 using WizardGame.Stats;
+using WizardGame.UI;
+using Unity.VisualScripting;
 
-namespace WizardGame.PlayerSystem
+namespace WizardGame.Player
 {
     public class PlayerController : MonoBehaviour, IDamageable
     {
+        [SerializeField] private PlayerAbilityDataSO playerAbilityData;
         [SerializeField] private PlayerDataSO playerData;
 
         // Component references
@@ -45,10 +48,14 @@ namespace WizardGame.PlayerSystem
 
         private void Awake()
         {
+            if (playerAbilityData == null)
+            {
+                Debug.LogError($"Player Ability Data not assigned on: {gameObject.name}");
+
+            }
             if (playerData == null)
             {
-                Debug.LogError($"Player Data not assigned on: {gameObject.name}");
-
+                Debug.LogError($"Player Data not assigned on {gameObject.name}");
             }
 
             playerRuntimeStats = PlayerStats.CopyFrom(playerData);

@@ -1,9 +1,9 @@
 using UnityEngine;
 
-namespace WizardGame
+namespace WizardGame.Stats
 {
     [CreateAssetMenu(fileName = "PlayerAbilityDataSO", menuName = "Player/Ability Data")]
-    public class PlayerDataSO : ScriptableObject
+    public class PlayerAbilityDataSO : ScriptableObject
     {
         
     }

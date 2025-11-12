@@ -1,7 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using WizardGame.Interfaces;
-using WizardGame.PlayerSystem;
+using WizardGame.Player;
 using WizardGame.Stats;
 
 namespace WizardGame.EnemySystem

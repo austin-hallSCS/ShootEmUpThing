@@ -23,16 +23,17 @@ namespace WizardGame.Stats
             this.StatType = statType;
         }
 
-        public float ApplyTo(float baseValue)
-        {
-            float delta = ValueType == ValueType.Flat
-                ? Value
-                : baseValue * (Value / 100f);
+        // Keep this here for now, but try to keep any stat modification within the stat itself
+        // public float ApplyTo(float baseValue)
+        // {
+        //     float delta = ValueType == ValueType.Flat
+        //         ? Value
+        //         : baseValue * (Value / 100f);
 
-            return ModType == ModifierType.Bonus
-                ? baseValue + delta
-                : baseValue - delta;
-        }
+        //     return ModType == ModifierType.Bonus
+        //         ? baseValue + delta
+        //         : baseValue - delta;
+        // }
 
         public void Reset()
         {
