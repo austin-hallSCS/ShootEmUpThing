@@ -1,13 +1,15 @@
-using Unity.VisualScripting;
+using System;
 using UnityEngine;
 using WizardGame.Interfaces;
 using WizardGame.Player;
 using WizardGame.Stats;
 
-namespace WizardGame.EnemySystem
+namespace WizardGame.Enemy
 {
     public class EnemyController : MonoBehaviour, IDamageable
     {
+        [SerializeField] protected EnemyDataSO enemyData;
+
         // Object references
         private PlayerController detectedPlayer;
         private EnemySpawner spawner;
@@ -35,8 +37,15 @@ namespace WizardGame.EnemySystem
         {
             // Get Component References
             rb = GetComponent<Rigidbody2D>();
-            enemyStats = GetComponentInChildren<EnemyStats>();
+            // enemyStats = GetComponentInChildren<EnemyStats>();
             spawner = GetComponentInParent<EnemySpawner>();
+
+            // Init stats
+            if (enemyData == null)
+            {
+                Debug.LogError($"Enemy Data not assigned on: {gameObject.name}");
+            }
+            enemyStats = new EnemyStats(enemyData);
         }
 
         void Start()
@@ -53,23 +62,30 @@ namespace WizardGame.EnemySystem
 
         void FixedUpdate()
         {
+            var moveSpeed = enemyStats.GetStat(StatType.MovementSpeed).CurrentValue;
             currentPosition = rb.position;
             target = spawner.PlayerRB.position;
-            position = Vector2.MoveTowards(currentPosition, target, enemyStats.SpeedAmount.CurrentValue * Time.deltaTime);
+            position = Vector2.MoveTowards(currentPosition, target, moveSpeed * Time.deltaTime);
+
             rb.MovePosition(position);
 
         }
 
         public void Damage(float amount)
         {
-            enemyStats.Health.Decrease(amount);
+            var healthStat = enemyStats.GetStat(StatType.Health);
+            float damageResistanceAmount = enemyStats.GetStat(StatType.DamageResistance).CurrentValue;
+
+            float effectiveDamage = Mathf.Max(0, amount - damageResistanceAmount);
+            healthStat.Decrease(effectiveDamage);
             CheckHealth();
 
         }
 
         public void CheckHealth()
         {
-            if (enemyStats.Health.CurrentValue <= 0)
+            var healthAmount = enemyStats.GetStat(StatType.Health).CurrentValue;
+            if (healthAmount <= 0)
             {
                 Destroy(gameObject);
             }
@@ -81,7 +97,8 @@ namespace WizardGame.EnemySystem
 
             if (detectedPlayer != null)
             {
-                detectedPlayer.Damage(enemyStats.DamageAmount.CurrentValue);
+                var damageAmount = enemyStats.GetStat(StatType.Damage).CurrentValue;
+                detectedPlayer.Damage(damageAmount);
             }
         }
     }

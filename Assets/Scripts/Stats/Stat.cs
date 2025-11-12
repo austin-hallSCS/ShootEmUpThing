@@ -79,7 +79,7 @@ namespace WizardGame.Stats
             return shouldIncrease ? BaseValue + delta : BaseValue - delta;
         }
 
-        // Decrease
+        public void Increase(float amount) => CurrentValue += amount;
         public void Decrease(float amount) => CurrentValue -= amount;
     }
 }

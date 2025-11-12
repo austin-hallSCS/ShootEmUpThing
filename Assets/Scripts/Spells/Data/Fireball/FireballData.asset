@@ -14,52 +14,66 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WizardGame.SpellSystem.SpellDataSO
   <SpellName>k__BackingField: Fireball
   <SpellIcon>k__BackingField: {fileID: 0}
-  Rarity: 80
   <ProjectileIntervalTime>k__BackingField: 0.02
-  <DamageAmount>k__BackingField:
+  <Rarity>k__BackingField:
     statType: 0
+    increaseIsPositive: 0
+    isIgnored: 0
+    maxValue: 0
+    minValue: 0
+    baseValue: 0
+  <DamageAmount>k__BackingField:
+    statType: 1
+    increaseIsPositive: 1
     isIgnored: 0
     maxValue: 120
     minValue: 0
     baseValue: 20
   <AreaAmount>k__BackingField:
-    statType: 1
+    statType: 2
+    increaseIsPositive: 1
     isIgnored: 0
     maxValue: 3
     minValue: 1
     baseValue: 1
   <SpeedAmount>k__BackingField:
-    statType: 2
+    statType: 3
+    increaseIsPositive: 1
     isIgnored: 0
     maxValue: 2
     minValue: 0.1
     baseValue: 0.75
-  <CoolDownTime>k__BackingField:
-    statType: 3
+  <CooldownTime>k__BackingField:
+    statType: 4
+    increaseIsPositive: 0
     isIgnored: 0
     maxValue: 5
-    minValue: 1
+    minValue: 0.75
     baseValue: 3
   <KnockbackAmount>k__BackingField:
-    statType: 4
+    statType: 5
+    increaseIsPositive: 1
     isIgnored: 0
     maxValue: 5
     minValue: 1
     baseValue: 1
   <ProjectileAmount>k__BackingField:
-    statType: 5
+    statType: 6
+    increaseIsPositive: 1
     isIgnored: 0
     maxValue: 8
     minValue: 1
     baseValue: 2
   <DurationTime>k__BackingField:
-    statType: 6
+    statType: 7
+    increaseIsPositive: 0
     isIgnored: 1
     maxValue: 0
     minValue: 0
     baseValue: 0
   <PierceAmount>k__BackingField:
-    statType: 7
+    statType: 8
+    increaseIsPositive: 1
     isIgnored: 1
     maxValue: 0
     minValue: 0

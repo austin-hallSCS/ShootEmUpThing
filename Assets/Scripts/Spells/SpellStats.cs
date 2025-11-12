@@ -1,9 +1,10 @@
 using UnityEngine;
+using WizardGame.Core;
 using WizardGame.Spells;
 
 namespace WizardGame.Stats
 {
-    public class SpellStats
+    public class SpellStats : BaseStats
     {
         public float ProjectileIntervalTime { get; private set; }
 
@@ -19,68 +20,89 @@ namespace WizardGame.Stats
         public Stat DurationTime { get; private set; }
         public Stat PierceAmount { get; private set; }
 
-        private SpellDataSO data;
+        private SpellDataSO baseData;
 
-        public static SpellStats CopyFrom(SpellDataSO spellData)
+        public SpellStats(SpellDataSO baseData)
         {
-            return new SpellStats
+            this.baseData = baseData;
+            var allStats = new[]
             {
-                data = spellData,
-
-                Level = 1,
-
-                ProjectileIntervalTime = spellData.ProjectileIntervalTime,
-
-                Rarity = new Stat(spellData.Rarity),
-                DamageAmount = new Stat(spellData.DamageAmount),
-                AreaAmount = new Stat(spellData.AreaAmount),
-                SpeedAmount = new Stat(spellData.SpeedAmount),
-                CooldownTime = new Stat(spellData.CoolDownTime),
-                KnockbackAmount = new Stat(spellData.KnockbackAmount),
-                ProjectileAmount = new Stat(spellData.ProjectileAmount),
-                DurationTime = new Stat(spellData.DurationTime),
-                PierceAmount = new Stat(spellData.PierceAmount)
+                baseData.DamageAmount,
+                baseData.AreaAmount,
+                baseData.SpeedAmount,
+                baseData.CooldownTime,
+                baseData.KnockbackAmount,
+                baseData.ProjectileAmount,
+                baseData.DurationTime,
+                baseData.PierceAmount
             };
+
+            InitializeFromSO(allStats);
+            Level = 1;
         }
+
+        // public static SpellStats CopyFrom(SpellDataSO spellData)
+        // {
+        //     return new SpellStats
+        //     {
+        //         baseData = spellData,
+
+        //         Level = 1,
+
+        //         ProjectileIntervalTime = spellData.ProjectileIntervalTime,
+
+        //         Rarity = new Stat(spellData.Rarity),
+        //         DamageAmount = new Stat(spellData.DamageAmount),
+        //         AreaAmount = new Stat(spellData.AreaAmount),
+        //         SpeedAmount = new Stat(spellData.SpeedAmount),
+        //         CooldownTime = new Stat(spellData.CooldownTime),
+        //         KnockbackAmount = new Stat(spellData.KnockbackAmount),
+        //         ProjectileAmount = new Stat(spellData.ProjectileAmount),
+        //         DurationTime = new Stat(spellData.DurationTime),
+        //         PierceAmount = new Stat(spellData.PierceAmount)
+        //     };
+        // }
         
         public void ApplyLevelUp()
         {
             Level++;
 
-            SpellLevelDataSO levelInfo = data.GetLevelData(Level);
+            SpellLevelDataSO levelInfo = baseData.GetLevelData(Level);
             if (levelInfo == null)
             {
-                Debug.LogWarning($"No level data for {data.SpellName} level {Level}");
+                Debug.LogWarning($"No level data for {baseData.SpellName} level {Level}");
                 return;
             }
 
             // Apply changes based on Stat Type
             foreach (var mod in levelInfo.Modifiers)
             {
-                switch (mod.StatType)
-                {
-                    case StatType.Damage:
-                        DamageAmount.ApplyModifier(mod);
-                        break;
-                    case StatType.Area:
-                        AreaAmount.ApplyModifier(mod);
-                        break;
-                    case StatType.Speed:
-                        SpeedAmount.ApplyModifier(mod);
-                        break;
-                    case StatType.Cooldown:
-                        CooldownTime.ApplyModifier(mod);
-                        break;
-                    case StatType.Knockback:
-                        KnockbackAmount.ApplyModifier(mod);
-                        break;
-                    case StatType.Amount:
-                        ProjectileAmount.ApplyModifier(mod);
-                        break;
-                    case StatType.Duration:
-                        DurationTime.ApplyModifier(mod);
-                        break;
-                }
+                var stat = GetStat(mod.StatType);
+                stat.ApplyModifier(mod);
+                // switch (mod.StatType)
+                // {
+                //     case StatType.Damage:
+                //         DamageAmount.ApplyModifier(mod);
+                //         break;
+                //     case StatType.Area:
+                //         AreaAmount.ApplyModifier(mod);
+                //         break;
+                //     case StatType.Speed:
+                //         SpeedAmount.ApplyModifier(mod);
+                //         break;
+                //     case StatType.Cooldown:
+                //         CooldownTime.ApplyModifier(mod);
+                //         break;
+                //     case StatType.Knockback:
+                //         KnockbackAmount.ApplyModifier(mod);
+                //         break;
+                //     case StatType.Amount:
+                //         ProjectileAmount.ApplyModifier(mod);
+                //         break;
+                //     case StatType.Duration:
+                //         DurationTime.ApplyModifier(mod);
+                //         break;
+                // }
             }
         }
     }

@@ -33,8 +33,7 @@ Transform:
   m_LocalPosition: {x: 1.299, y: 1.557, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5585956478633129735}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7906581863358960946
@@ -49,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bbb7dc605e65a54db3e68590f62cf91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyData: {fileID: 11400000, guid: 00c43cd024434674092971039ccd7757, type: 2}
 --- !u!212 &8421152831364633470
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -202,67 +202,3 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!1 &7874286923019345568
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5585956478633129735}
-  - component: {fileID: 3276413513850614956}
-  m_Layer: 11
-  m_Name: GoblinEnemyStats
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5585956478633129735
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7874286923019345568}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2733986103875229337}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3276413513850614956
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7874286923019345568}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50e6da7a4b1c4e439a864320f5db6dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WizardGame.Stats.EnemyStats
-  <Health>k__BackingField:
-    <IsIgnored>k__BackingField: 0
-    <MaxValue>k__BackingField: 10
-    <MinValue>k__BackingField: 0
-    <BaseValue>k__BackingField: 30
-  <DamageAmount>k__BackingField:
-    <IsIgnored>k__BackingField: 0
-    <MaxValue>k__BackingField: 5
-    <MinValue>k__BackingField: 0
-    <BaseValue>k__BackingField: 1
-  <SpeedAmount>k__BackingField:
-    <IsIgnored>k__BackingField: 0
-    <MaxValue>k__BackingField: 5
-    <MinValue>k__BackingField: 0
-    <BaseValue>k__BackingField: 1
-  <ExperienceAmount>k__BackingField:
-    <IsIgnored>k__BackingField: 0
-    <MaxValue>k__BackingField: 5
-    <MinValue>k__BackingField: 0
-    <BaseValue>k__BackingField: 1

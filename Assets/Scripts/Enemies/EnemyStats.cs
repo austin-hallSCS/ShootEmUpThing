@@ -1,20 +1,30 @@
 using UnityEngine;
+using WizardGame.Core;
+using WizardGame.Enemy;
 
 namespace WizardGame.Stats
 {
-    public class EnemyStats : MonoBehaviour
+    public class EnemyStats : BaseStats
     {
         [field: SerializeField] public Stat Health { get; private set; }
-        [field: SerializeField] public Stat DamageAmount { get; private set; }
-        [field: SerializeField] public Stat SpeedAmount { get; private set; }
-        [field: SerializeField] public Stat ExperienceAmount { get; private set; }
+        [field: SerializeField] public Stat DamageResistance { get; private set; }
+        [field: SerializeField] public Stat MovementSpeed { get; private set; }
+        [field: SerializeField] public Stat AttackDamage { get; private set; }
+        [field: SerializeField] public Stat AttackCooldown { get; private set; }
+        [field: SerializeField] public int RewardExperience { get; private set; }
 
-        public void Awake()
+        public EnemyStats(EnemyDataSO baseData)
         {
-            Health.Init();
-            DamageAmount.Init();
-            SpeedAmount.Init();
-            ExperienceAmount.Init();
+            var allStats = new[]
+            {
+                baseData.Health,
+                baseData.DamageResistance,
+                baseData.MovementSpeed,
+                baseData.AttackDamage,
+                baseData.AttackCooldown
+            };
+
+            InitializeFromSO(allStats);
         }
     }
 }

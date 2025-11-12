@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace WizardGame.EnemySystem
+namespace WizardGame.Enemy
 {
     public class EnemySpawner : MonoBehaviour
     {

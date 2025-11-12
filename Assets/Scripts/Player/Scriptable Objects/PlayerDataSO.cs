@@ -4,7 +4,7 @@ using WizardGame.Stats;
 
 namespace WizardGame.Player
 {
-    [CreateAssetMenu(fileName = "PlayerDataSO", menuName = "Player/PlayerDataSO")]
+    [CreateAssetMenu(fileName = "PlayerDataSO", menuName = "Player/Player Data")]
     public class PlayerDataSO : ScriptableObject
     {
         [field: SerializeField] public Stat Health { get; private set; }

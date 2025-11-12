@@ -23,7 +23,7 @@ namespace WizardGame.Spells
         [field: SerializeField] public Stat DamageAmount { get; private set; }
         [field: SerializeField] public Stat AreaAmount { get; private set; }
         [field: SerializeField] public Stat SpeedAmount { get; private set; }
-        [field: SerializeField] public Stat CoolDownTime { get; private set; }
+        [field: SerializeField] public Stat CooldownTime { get; private set; }
         [field: SerializeField] public Stat KnockbackAmount { get; private set; }
         [field: SerializeField] public Stat ProjectileAmount { get; private set; }
         [field: SerializeField] public Stat DurationTime { get; private set; }
@@ -39,7 +39,7 @@ namespace WizardGame.Spells
             DamageAmount?.SetStatType(StatType.Damage);
             AreaAmount?.SetStatType(StatType.Area);
             SpeedAmount?.SetStatType(StatType.Speed);
-            CoolDownTime?.SetStatType(StatType.Cooldown);
+            CooldownTime?.SetStatType(StatType.Cooldown);
             KnockbackAmount?.SetStatType(StatType.Knockback);
             ProjectileAmount?.SetStatType(StatType.Amount);
             DurationTime?.SetStatType(StatType.Duration);
