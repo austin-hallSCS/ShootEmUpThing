@@ -1,7 +1,7 @@
 using UnityEngine;
 using WizardGame.Stats;
 
-namespace WizardGame.SpellSystem
+namespace WizardGame.Spells
 {
     public class SpellController : MonoBehaviour
     {
@@ -79,8 +79,7 @@ namespace WizardGame.SpellSystem
 
         public virtual void LevelUp()
         {
-            runtimeStats.IncreaseLevel();
-            spellData.ApplyLevelUp(runtimeStats, runtimeStats.Level);
+            runtimeStats.ApplyLevelUp();
         }
 
         protected virtual void CheckSpellActiveStatus()

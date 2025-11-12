@@ -3,7 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using WizardGame.Stats;
 
-namespace WizardGame.SpellSystem
+namespace WizardGame.Spells
 {
     [CreateAssetMenu(fileName = "SpellDataSO", menuName = "Spells/Spell Data")]
     public class SpellDataSO : ScriptableObject
@@ -44,6 +44,11 @@ namespace WizardGame.SpellSystem
             ProjectileAmount?.SetStatType(StatType.Amount);
             DurationTime?.SetStatType(StatType.Duration);
             PierceAmount?.SetStatType(StatType.Pierce);
+        }
+
+        public SpellLevelDataSO GetLevelData(int currentLevel)
+        {
+            return levelData.Find(l => l.Level == currentLevel);
         }
     }
 }

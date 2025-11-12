@@ -1,5 +1,5 @@
 using UnityEngine;
-using WizardGame.SpellSystem;
+using WizardGame.Spells;
 
 namespace WizardGame.Stats
 {
@@ -47,10 +47,10 @@ namespace WizardGame.Stats
         {
             Level++;
 
-            SpellLevelDataSO levelInfo = data.LevelData.Find(l => l.Level == Level);
+            SpellLevelDataSO levelInfo = data.GetLevelData(Level);
             if (levelInfo == null)
             {
-                Debug.LogWarning($"No level data for {SpellName} level {newLevel}");
+                Debug.LogWarning($"No level data for {data.SpellName} level {Level}");
                 return;
             }
 
@@ -60,25 +60,25 @@ namespace WizardGame.Stats
                 switch (mod.StatType)
                 {
                     case StatType.Damage:
-                        spellStats.DamageAmount.ApplyModifier(mod);
+                        DamageAmount.ApplyModifier(mod);
                         break;
                     case StatType.Area:
-                        spellStats.AreaAmount.ApplyModifier(mod);
+                        AreaAmount.ApplyModifier(mod);
                         break;
                     case StatType.Speed:
-                        spellStats.SpeedAmount.ApplyModifier(mod);
+                        SpeedAmount.ApplyModifier(mod);
                         break;
                     case StatType.Cooldown:
-                        spellStats.CooldownTime.ApplyModifier(mod);
+                        CooldownTime.ApplyModifier(mod);
                         break;
                     case StatType.Knockback:
-                        spellStats.KnockbackAmount.ApplyModifier(mod);
+                        KnockbackAmount.ApplyModifier(mod);
                         break;
                     case StatType.Amount:
-                        spellStats.ProjectileAmount.ApplyModifier(mod);
+                        ProjectileAmount.ApplyModifier(mod);
                         break;
                     case StatType.Duration:
-                        spellStats.DurationTime.ApplyModifier(mod);
+                        DurationTime.ApplyModifier(mod);
                         break;
                 }
             }

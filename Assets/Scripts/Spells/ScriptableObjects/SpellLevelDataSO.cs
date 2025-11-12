@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using WizardGame.Stats;
 
-namespace WizardGame.SpellSystem
+namespace WizardGame.Spells
 {
     [CreateAssetMenu(fileName = "SpellLevelDataSO", menuName = "Spells/SpellLevelDataSO")]
     public class SpellLevelDataSO : ScriptableObject

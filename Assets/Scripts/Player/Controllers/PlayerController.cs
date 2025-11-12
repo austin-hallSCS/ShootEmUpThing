@@ -1,22 +1,25 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using WizardGame.SpellSystem;
+using WizardGame.Spells;
 using WizardGame.Interfaces;
 using WizardGame.Stats;
 using WizardGame.UI;
-using Unity.VisualScripting;
 
 namespace WizardGame.Player
 {
     public class PlayerController : MonoBehaviour, IDamageable
     {
+        // Data Scriptable Objects
         [SerializeField] private PlayerAbilityDataSO playerAbilityData;
         [SerializeField] private PlayerDataSO playerData;
 
         // Component references
         private HealthBarController healthbar;
         public FireballSpellController FireBall { get; private set; }
+
+        // Stats and Abilities
         protected PlayerStats playerRuntimeStats;
+        protected PlayerAbilities playerRuntimeAbilities;
 
 
         // Input variables
@@ -25,12 +28,6 @@ namespace WizardGame.Player
         public InputAction AbilityAction;
         public InputAction DashAction;
         public int NormInputX;
-
-
-        // Player data variables
-        public int MaxHealth;
-        public float MovementSpeed;
-        public float DamageCoolDownTime;
 
         // Movement variables
         public Rigidbody2D rb { get; private set; }
@@ -59,12 +56,14 @@ namespace WizardGame.Player
             }
 
             playerRuntimeStats = PlayerStats.CopyFrom(playerData);
+            Debug.Log($"Player Runtime Stats: {playerRuntimeStats.MovementSpeed.CurrentValue}");
+            playerRuntimeAbilities = PlayerAbilities.CopyFrom(playerAbilityData);
+            Debug.Log($"Player Runtime Abilities: {playerRuntimeAbilities.Strength.CurrentValue}");
 
             // Get Component references
             rb = GetComponent<Rigidbody2D>();
             healthbar = GetComponentInChildren<HealthBarController>();
             FireBall = GetComponentInChildren<FireballSpellController>();
-            playerRuntimeStats = GetComponentInChildren<PlayerStats>();
 
             // equippedSpells.Add(transform.Find("FireballSpellController").GetComponent<FireballSpellController>());
         }
@@ -103,7 +102,7 @@ namespace WizardGame.Player
 
         void FixedUpdate()
         {
-            position = (Vector2)rb.position + move * playerRuntimeStats.MovementSpeed.CurrentValue * Time.deltaTime;
+            position = rb.position + move * playerRuntimeStats.MovementSpeed.CurrentValue * Time.deltaTime;
             rb.MovePosition(position);
         }
 

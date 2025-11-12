@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace WizardGame.SpellSystem
+namespace WizardGame.Spells
 {
     public class ProjectileSpellController : SpellController
     {

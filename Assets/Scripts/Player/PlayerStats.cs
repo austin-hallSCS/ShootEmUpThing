@@ -1,4 +1,5 @@
 using UnityEngine;
+using WizardGame.Player;
 
 namespace WizardGame.Stats
 {
@@ -20,9 +21,9 @@ namespace WizardGame.Stats
 
                 Level = 1,
 
+                MovementSpeed = new Stat(playerData.MovementSpeed),
                 Health = new Stat(playerData.Health),
-
-
+                Experience = new Stat(playerData.Experience)
             };
         }
     }

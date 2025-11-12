@@ -3,7 +3,7 @@ using WizardGame.EnemySystem;
 using WizardGame.Stats;
 using WizardGame.Utils;
 
-namespace WizardGame.SpellSystem
+namespace WizardGame.Spells
 {
     public class SpellGO : MonoBehaviour
     {

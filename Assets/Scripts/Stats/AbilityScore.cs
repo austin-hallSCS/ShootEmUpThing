@@ -9,7 +9,7 @@ namespace WizardGame.Stats
     [Serializable]
     public class AbilityScore
     {
-        [field: SerializeField] public int BaseValue { get; private set; }
+        public int BaseValue { get; private set; }
 
         public AbilityType AbilityType { get; private set; }
 
@@ -32,6 +32,13 @@ namespace WizardGame.Stats
 
         private List<StatModifier> modifiers = new List<StatModifier>();
         public IReadOnlyList<StatModifier> Modifiers => modifiers;
+
+        public AbilityScore(int baseValue, AbilityType abilityType)
+        {
+            BaseValue = baseValue;
+            AbilityType = abilityType;
+            Init();
+        }
 
         public void Init()
         {
@@ -64,7 +71,6 @@ namespace WizardGame.Stats
                     modifiers.Add(new StatModifier(StatType.Rarity));
                     break;
             }
-
             currentValue = BaseValue;
         }
 
@@ -83,11 +89,11 @@ namespace WizardGame.Stats
 
                 if (currentValue < 10)
                 {
-                    mod.SetModType(ModifierType.Decrease);
+                    mod.SetModType(ModifierType.Penalty);
                 }
                 else if (currentValue > 10)
                 {
-                    mod.SetModType(ModifierType.Increase);
+                    mod.SetModType(ModifierType.Bonus);
                 }
                 else
                 {
