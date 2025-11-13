@@ -19,63 +19,72 @@ MonoBehaviour:
     statType: 0
     increaseIsPositive: 0
     isIgnored: 0
-    maxValue: 0
-    minValue: 0
-    baseValue: 0
+    cap: 100
+    isCapChangeable: 0
+    minValue: 25
+    baseValue: 80
   <DamageAmount>k__BackingField:
     statType: 1
     increaseIsPositive: 1
     isIgnored: 0
-    maxValue: 120
-    minValue: 0
+    cap: 120
+    isCapChangeable: 0
+    minValue: 10
     baseValue: 20
   <AreaAmount>k__BackingField:
     statType: 2
     increaseIsPositive: 1
     isIgnored: 0
-    maxValue: 3
+    cap: 3
+    isCapChangeable: 0
     minValue: 1
     baseValue: 1
   <SpeedAmount>k__BackingField:
     statType: 3
     increaseIsPositive: 1
     isIgnored: 0
-    maxValue: 2
+    cap: 3
+    isCapChangeable: 0
     minValue: 0.1
     baseValue: 0.75
   <CooldownTime>k__BackingField:
     statType: 4
     increaseIsPositive: 0
     isIgnored: 0
-    maxValue: 5
+    cap: 5
+    isCapChangeable: 0
     minValue: 0.75
     baseValue: 3
   <KnockbackAmount>k__BackingField:
     statType: 5
     increaseIsPositive: 1
     isIgnored: 0
-    maxValue: 5
+    cap: 3
+    isCapChangeable: 0
     minValue: 1
     baseValue: 1
   <ProjectileAmount>k__BackingField:
     statType: 6
     increaseIsPositive: 1
     isIgnored: 0
-    maxValue: 8
+    cap: 8
+    isCapChangeable: 0
     minValue: 1
     baseValue: 2
   <DurationTime>k__BackingField:
     statType: 7
     increaseIsPositive: 0
     isIgnored: 1
-    maxValue: 0
+    cap: 0
+    isCapChangeable: 0
     minValue: 0
     baseValue: 0
   <PierceAmount>k__BackingField:
     statType: 8
     increaseIsPositive: 1
     isIgnored: 1
-    maxValue: 0
+    cap: 0
+    isCapChangeable: 0
     minValue: 0
     baseValue: 0
   levelData:

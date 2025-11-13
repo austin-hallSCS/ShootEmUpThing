@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using WizardGame.Enemy;
 using WizardGame.Stats;
@@ -90,9 +91,6 @@ namespace WizardGame.Spells
             // Set CircleCollider size and position to same as explosion
             CircleCollider.radius = transform.localScale.x / 4;
             CircleCollider.offset = Vector2.zero;
-
-            // Debug.Log($"Damage Amount: {spellStats.DamageAmount.CurrentValue}");
-
         }
 
         void AnimationFinishTrigger() => Destroy(gameObject);
@@ -106,6 +104,7 @@ namespace WizardGame.Spells
                 {
                     var damageAmount = spellStats.GetStat(StatType.Damage).CurrentValue;
                     enemy.Damage(damageAmount);
+                    Debug.Log($"Fireball damaged {other} for {damageAmount} damage");
                 }
             }
         }

@@ -10,7 +10,7 @@ namespace WizardGame.Spells
         [SerializeField] protected GameObject spellPrefab;
         [SerializeField] protected float spawnRadius;
         [SerializeField] protected SpellDataSO spellData;
-        public Camera Cam;
+        // public Camera Cam;
 
         protected SpellStats spellStats;
 
@@ -18,7 +18,7 @@ namespace WizardGame.Spells
         // protected Timer levelUpTimer = new Timer(5f);
 
         // Temp level up timer for testing
-        // protected float currentLevelUpTimerAt;
+        protected float currentLevelUpTimerAt;
 
 
         // Status variables
@@ -52,17 +52,18 @@ namespace WizardGame.Spells
         protected virtual void Start()
         {
             SpellDeactivate();
-            // currentLevelUpTimerAt = 5.0f;
+            currentLevelUpTimerAt = 5.0f;
         }
 
         protected virtual void Update()
         {
-            // currentLevelUpTimerAt -= Time.deltaTime;
-            // if (currentLevelUpTimerAt <= 0)
-            // {
-            //     LevelUp();
-            //     currentLevelUpTimerAt = 5.0f;
-            // }
+            currentLevelUpTimerAt -= Time.deltaTime;
+            if (currentLevelUpTimerAt <= 0)
+            {
+                currentLevelUpTimerAt = 5.0f;
+                LevelUp();
+                
+            }
         }
 
         protected virtual void FixedUpdate()
@@ -77,6 +78,7 @@ namespace WizardGame.Spells
         public virtual void LevelUp()
         {
             spellStats.ApplyLevelUp();
+            Debug.Log("Spell Leveled up!");
         }
 
         protected virtual void CheckSpellActiveStatus()

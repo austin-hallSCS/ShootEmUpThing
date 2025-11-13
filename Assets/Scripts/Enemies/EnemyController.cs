@@ -78,6 +78,7 @@ namespace WizardGame.Enemy
 
             float effectiveDamage = Mathf.Max(0, amount - damageResistanceAmount);
             healthStat.Decrease(effectiveDamage);
+            Debug.Log($"Enemy health: {healthStat.CurrentValue}");
             CheckHealth();
 
         }

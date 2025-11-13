@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEngine;
 using WizardGame.Stats;
 
 namespace WizardGame.Core
@@ -32,15 +30,14 @@ namespace WizardGame.Core
         }
 
         // Applies a StatModifier to the matching Stat
-        public void ApplyModifier(StatModifier mod)
+        public void ApplyModifierToStat(StatModifier mod)
         {
             if (mod == null) return;
 
             var stat = GetStat(mod.StatType);
             if (stat == null) return;
 
-            float newValue = mod.ApplyTo(stat.CurrentValue);
-            stat.Increase(newValue - stat.CurrentValue);
+            stat.ApplyModifier(mod);
         }
 
         // Gets all stats for iteration

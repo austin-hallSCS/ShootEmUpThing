@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace WizardGame.Stats
@@ -6,9 +7,23 @@ namespace WizardGame.Stats
     public class Stat
     {
         [SerializeField] private StatType statType;
+
+        [Tooltip("Does this value need to be rounded to the nearest whole number?")]
+        [SerializeField] private bool isRounded;
+
+        [Tooltip("Does upgrading this stat increase the value?")]
         [SerializeField] private bool increaseIsPositive = true;
+
+        [Tooltip("Does the object ignore this Stat?")]
         [SerializeField] private bool isIgnored;
-        [SerializeField] private float maxValue;
+
+        [Tooltip("The absolute maximum value this stat can ever reach.")]
+        [SerializeField] private float cap;
+
+        [Tooltip("Can the 'Cap' value be changed at runtime (e.g. for Max Health)?")]
+        [SerializeField] private bool isCapChangeable = true;
+
+        
         [SerializeField] private float minValue;
         [SerializeField] private float baseValue;
 
@@ -17,7 +32,7 @@ namespace WizardGame.Stats
         public StatType StatType => statType;
         public bool IncreaseIsPositive => increaseIsPositive;
         public bool IsIgnored => isIgnored;
-        public float MaxValue => maxValue;
+        public float Cap => cap;
         public float MinValue => minValue;
         public float BaseValue => baseValue;
         public float CurrentValue
@@ -26,16 +41,25 @@ namespace WizardGame.Stats
             private set
             {
                 // Makes sure currentValue never goes above maximumn or below minimum
-                currentValue = Mathf.Clamp(value, minValue, maxValue);
+                float newValue = Mathf.Clamp(value, minValue, cap);
+                if (isRounded)
+                {
+                    currentValue = Mathf.Round(newValue);
+                }
+                else
+                {
+                    currentValue = newValue;
+                }
             }
         }
 
-        public Stat(StatType statType, bool increaseIsPositive, bool isIgnored, float maxValue, float minValue, float baseValue)
+        public Stat(StatType statType, bool increaseIsPositive, bool isIgnored, float cap, bool isCapChangeable, float minValue, float baseValue)
         {
             this.statType = statType;
             this.increaseIsPositive = increaseIsPositive;
             this.isIgnored = isIgnored;
-            this.maxValue = maxValue;
+            this.cap = cap;
+            this.isCapChangeable = isCapChangeable;
             this.minValue = minValue;
             this.baseValue = baseValue;
 
@@ -47,7 +71,8 @@ namespace WizardGame.Stats
         {
             statType = other.StatType;
             isIgnored = other.IsIgnored;
-            maxValue = other.MaxValue;
+            cap = other.Cap;
+            isCapChangeable = other.isCapChangeable;
             minValue = other.MinValue;
             baseValue = other.BaseValue;
             currentValue = baseValue;
@@ -55,13 +80,24 @@ namespace WizardGame.Stats
 
         public void Init() => CurrentValue = baseValue;
 
-        public void SetMaxValue(float newValue) => maxValue = newValue;
-        public void SetCurrentValue(float newValue) => currentValue = newValue;
+        public void SetCap(float newValue)
+        {
+            if (isCapChangeable)
+            {
+                cap = newValue;
+            }
+            else
+            {
+                Debug.LogWarning($"Attemped to change the cap on a fixed-cap stat: {StatType}.");
+            }
+            
+        }
+        public void SetCurrentValue(float newValue) => CurrentValue = newValue;
         public void SetStatType(StatType newType) => statType = newType;
 
         public void ApplyModifier(StatModifier mod)
         {
-            currentValue = GetModifiedValue(mod);
+            CurrentValue = GetModifiedValue(mod);
         }
 
         public float GetModifiedValue(StatModifier mod)
@@ -76,7 +112,7 @@ namespace WizardGame.Stats
                 (mod.ModType == ModifierType.Bonus && IncreaseIsPositive) ||
                 (mod.ModType == ModifierType.Penalty && !IncreaseIsPositive);
 
-            return shouldIncrease ? BaseValue + delta : BaseValue - delta;
+            return shouldIncrease ? CurrentValue + delta : CurrentValue - delta;
         }
 
         public void Increase(float amount) => CurrentValue += amount;

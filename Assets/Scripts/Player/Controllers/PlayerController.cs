@@ -18,22 +18,18 @@ namespace WizardGame.Player
         public FireballSpellController FireBall { get; private set; }
 
         // Stats and Abilities
-        protected PlayerStats playerRuntimeStats;
-        protected PlayerAbilities playerRuntimeAbilities;
+        protected PlayerStats playerStats;
+        protected PlayerAbilities playerAbilities;
 
 
         // Input variables
         public InputAction MoveAction;
-        public InputAction AttackAction;
-        public InputAction AbilityAction;
-        public InputAction DashAction;
         public int NormInputX;
 
         // Movement variables
         public Rigidbody2D rb { get; private set; }
-        private Vector2 position;
         private Vector2 move;
-        private Vector2 facingDirection;
+        private int currentFacingDirection = 1;
         private int facingDirectionx;
 
         // Player status variables
@@ -45,30 +41,11 @@ namespace WizardGame.Player
 
         private void Awake()
         {
-            if (playerAbilityData == null)
-            {
-                Debug.LogError($"Player Ability Data not assigned on: {gameObject.name}");
-
-            }
-            if (playerData == null)
-            {
-                Debug.LogError($"Player Data not assigned on {gameObject.name}");
-            }
-
-            playerRuntimeStats = PlayerStats.CopyFrom(playerData);
-            Debug.Log($"Player Runtime Stats: {playerRuntimeStats.MovementSpeed.CurrentValue}");
-            playerRuntimeAbilities = PlayerAbilities.CopyFrom(playerAbilityData);
-            Debug.Log($"Player Runtime Abilities: {playerRuntimeAbilities.Strength.CurrentValue}");
-
-            // Get Component references
-            rb = GetComponent<Rigidbody2D>();
-            healthbar = GetComponentInChildren<HealthBarController>();
-            FireBall = GetComponentInChildren<FireballSpellController>();
-
-            // equippedSpells.Add(transform.Find("FireballSpellController").GetComponent<FireballSpellController>());
+            ValidateData();
+            InitStatsAndAbilities();
+            GetComponentReferences();
         }
 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
             MoveAction.Enable();
@@ -81,9 +58,6 @@ namespace WizardGame.Player
         void Update()
         {
             move = MoveAction.ReadValue<Vector2>();
-            facingDirection.Set(move.x, move.y);
-            NormInputX = Mathf.RoundToInt(facingDirection.x);
-            facingDirectionx = Mathf.RoundToInt(facingDirection.x);
 
             CheckIfShouldFlip();
             
@@ -95,20 +69,62 @@ namespace WizardGame.Player
                 if (damageCooldown <= 0)
                 {
                     isInvincible = false;
-                    damageCooldown = 0.25f;
                 }
             }
         }
 
         void FixedUpdate()
         {
-            position = rb.position + move * playerRuntimeStats.MovementSpeed.CurrentValue * Time.deltaTime;
+            Move();
+        }
+
+        // Checks that all required ScriptableObject data is assigned
+        private void ValidateData()
+        {
+            if (playerAbilityData == null)
+            {
+                Debug.LogError($"Player Ability Data not assigned on: {gameObject.name}");
+
+            }
+            if (playerData == null)
+            {
+                Debug.LogError($"Player Data not assigned on {gameObject.name}");
+            }
+        }
+
+        // Creates runtime instances of stats and abilities
+        private void InitStatsAndAbilities()
+        {
+            playerStats = new PlayerStats(playerData);
+            Debug.Log($"Player Runtime Stats: {playerStats.GetStat(StatType.MovementSpeed).CurrentValue}");
+
+            playerAbilities = PlayerAbilities.CopyFrom(playerAbilityData);
+            Debug.Log($"Player Runtime Abilities: {playerAbilities.Strength.CurrentValue}");
+        }
+
+        // Gets and stores references to the required components
+        private void GetComponentReferences()
+        {
+            rb = GetComponent<Rigidbody2D>();
+            healthbar = GetComponentInChildren<HealthBarController>();
+            FireBall = GetComponentInChildren<FireballSpellController>();
+        }
+        
+        private void Move()
+        {
+            var moveSpeed = playerStats.GetStat(StatType.MovementSpeed).CurrentValue;
+            Vector2 position = rb.position + move * moveSpeed * Time.fixedDeltaTime;
+
             rb.MovePosition(position);
         }
 
         private void CheckIfShouldFlip()
         {
-            if (NormInputX != 0 && NormInputX != facingDirectionx)
+            if (move.x > 0.1f && currentFacingDirection == -1)
+            {
+                Flip();
+            }
+            else if (move.x < -0.1f && currentFacingDirection == 1)
             {
                 Flip();
             }
@@ -116,7 +132,8 @@ namespace WizardGame.Player
 
         private void Flip()
         {
-            facingDirection *= -1;
+            currentFacingDirection *= -1;
+
             rb.transform.Rotate(0.0f, 180.0f, 0.0f);
         }
 
@@ -124,17 +141,23 @@ namespace WizardGame.Player
         {
             if (!isInvincible)
             {
-                playerRuntimeStats.Health.Decrease(amount);
-                healthbar.UpdateHealthBar(playerRuntimeStats.Health.CurrentValue, playerRuntimeStats.Health.MaxValue);
-                Debug.Log(playerRuntimeStats.Health.CurrentValue);
+                var healthStat = playerStats.GetStat(StatType.Health);
+
+                healthStat.Decrease(amount);
+                healthbar.UpdateHealthBar(healthStat.CurrentValue, healthStat.Cap);
+                Debug.Log($"Player Health: {healthStat.CurrentValue}");
+
                 isInvincible = true;
+                damageCooldown = 0.25f;
+
                 CheckHealth();
             }
         }
 
         private void CheckHealth()
         {
-            if (playerRuntimeStats.Health.CurrentValue <= 0)
+            var currentHealth = playerStats.GetStat(StatType.Health).CurrentValue;
+            if (currentHealth <= 0)
             {
                 // Destroy(gameObject);
                 Debug.Log("Player is dead!");

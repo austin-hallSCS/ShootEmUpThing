@@ -18,35 +18,40 @@ MonoBehaviour:
     statType: 9
     increaseIsPositive: 1
     isIgnored: 0
-    maxValue: 30
+    cap: 30
+    isCapChangeable: 0
     minValue: 0
     baseValue: 30
   <DamageResistance>k__BackingField:
     statType: 12
     increaseIsPositive: 1
     isIgnored: 0
-    maxValue: 5
+    cap: 5
+    isCapChangeable: 0
     minValue: 1
     baseValue: 1
   <MovementSpeed>k__BackingField:
     statType: 11
     increaseIsPositive: 1
     isIgnored: 0
-    maxValue: 2
+    cap: 2
+    isCapChangeable: 0
     minValue: 1
     baseValue: 1
   <AttackDamage>k__BackingField:
     statType: 1
     increaseIsPositive: 1
     isIgnored: 0
-    maxValue: 1
+    cap: 1
+    isCapChangeable: 0
     minValue: 1
     baseValue: 1
   <AttackCooldown>k__BackingField:
     statType: 4
     increaseIsPositive: 0
     isIgnored: 0
-    maxValue: 0.5
+    cap: 0.5
+    isCapChangeable: 0
     minValue: 0.5
     baseValue: 0.5
   <RewardExperience>k__BackingField: 1

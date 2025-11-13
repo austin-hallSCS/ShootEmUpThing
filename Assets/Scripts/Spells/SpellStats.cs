@@ -25,6 +25,7 @@ namespace WizardGame.Stats
         public SpellStats(SpellDataSO baseData)
         {
             this.baseData = baseData;
+
             var allStats = new[]
             {
                 baseData.DamageAmount,
@@ -40,28 +41,6 @@ namespace WizardGame.Stats
             InitializeFromSO(allStats);
             Level = 1;
         }
-
-        // public static SpellStats CopyFrom(SpellDataSO spellData)
-        // {
-        //     return new SpellStats
-        //     {
-        //         baseData = spellData,
-
-        //         Level = 1,
-
-        //         ProjectileIntervalTime = spellData.ProjectileIntervalTime,
-
-        //         Rarity = new Stat(spellData.Rarity),
-        //         DamageAmount = new Stat(spellData.DamageAmount),
-        //         AreaAmount = new Stat(spellData.AreaAmount),
-        //         SpeedAmount = new Stat(spellData.SpeedAmount),
-        //         CooldownTime = new Stat(spellData.CooldownTime),
-        //         KnockbackAmount = new Stat(spellData.KnockbackAmount),
-        //         ProjectileAmount = new Stat(spellData.ProjectileAmount),
-        //         DurationTime = new Stat(spellData.DurationTime),
-        //         PierceAmount = new Stat(spellData.PierceAmount)
-        //     };
-        // }
         
         public void ApplyLevelUp()
         {
@@ -78,32 +57,9 @@ namespace WizardGame.Stats
             foreach (var mod in levelInfo.Modifiers)
             {
                 var stat = GetStat(mod.StatType);
-                stat.ApplyModifier(mod);
-                // switch (mod.StatType)
-                // {
-                //     case StatType.Damage:
-                //         DamageAmount.ApplyModifier(mod);
-                //         break;
-                //     case StatType.Area:
-                //         AreaAmount.ApplyModifier(mod);
-                //         break;
-                //     case StatType.Speed:
-                //         SpeedAmount.ApplyModifier(mod);
-                //         break;
-                //     case StatType.Cooldown:
-                //         CooldownTime.ApplyModifier(mod);
-                //         break;
-                //     case StatType.Knockback:
-                //         KnockbackAmount.ApplyModifier(mod);
-                //         break;
-                //     case StatType.Amount:
-                //         ProjectileAmount.ApplyModifier(mod);
-                //         break;
-                //     case StatType.Duration:
-                //         DurationTime.ApplyModifier(mod);
-                //         break;
-                // }
+                stat?.ApplyModifier(mod);
             }
+            Debug.Log($"Spell level: {Level}");
         }
     }
 }
