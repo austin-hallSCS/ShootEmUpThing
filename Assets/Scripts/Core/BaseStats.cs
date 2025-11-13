@@ -3,6 +3,11 @@ using WizardGame.Stats;
 
 namespace WizardGame.Core
 {
+    /// <summary>
+    /// The foundational abstract class for all stat containers (e.g., PlayerStats, EnemyStats).
+    /// This class is responsible for managing a collection of runtime Stat objects,
+    /// initializing them from a data source, and applying modifiers to them.
+    /// </summary>
     public abstract class BaseStats
     {
         protected readonly Dictionary<StatType, Stat> runtimeStats = new();

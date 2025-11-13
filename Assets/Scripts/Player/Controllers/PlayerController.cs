@@ -41,9 +41,10 @@ namespace WizardGame.Player
 
         private void Awake()
         {
+            GetComponentReferences();
             ValidateData();
             InitStatsAndAbilities();
-            GetComponentReferences();
+            InitSpells();
         }
 
         void Start()
@@ -78,6 +79,14 @@ namespace WizardGame.Player
             Move();
         }
 
+        // Gets and stores references to the required components
+        private void GetComponentReferences()
+        {
+            rb = GetComponent<Rigidbody2D>();
+            healthbar = GetComponentInChildren<HealthBarController>();
+            FireBall = GetComponentInChildren<FireballSpellController>();
+        }
+
         // Checks that all required ScriptableObject data is assigned
         private void ValidateData()
         {
@@ -95,20 +104,25 @@ namespace WizardGame.Player
         // Creates runtime instances of stats and abilities
         private void InitStatsAndAbilities()
         {
-            playerStats = new PlayerStats(playerData);
-            Debug.Log($"Player Runtime Stats: {playerStats.GetStat(StatType.MovementSpeed).CurrentValue}");
-
-            playerAbilities = PlayerAbilities.CopyFrom(playerAbilityData);
-            Debug.Log($"Player Runtime Abilities: {playerAbilities.Strength.CurrentValue}");
+            playerAbilities = new PlayerAbilities(playerAbilityData);
+            playerStats = new PlayerStats(playerData, playerAbilities);
         }
 
-        // Gets and stores references to the required components
-        private void GetComponentReferences()
+        private void InitSpells()
         {
-            rb = GetComponent<Rigidbody2D>();
-            healthbar = GetComponentInChildren<HealthBarController>();
-            FireBall = GetComponentInChildren<FireballSpellController>();
+            if (FireBall != null)
+            {
+                FireBall.Initialize(playerAbilities);
+            }
+
+            // Need to re-implement this function when there are multiple spells
+            // foreach (SpellController spell in equippedSpells)
+            // {
+            //     spell.Initialize(playerAbilities);
+            // }
         }
+
+        
         
         private void Move()
         {

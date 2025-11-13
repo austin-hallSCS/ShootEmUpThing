@@ -13,6 +13,7 @@ namespace WizardGame.Spells
         // public Camera Cam;
 
         protected SpellStats spellStats;
+        protected PlayerAbilities ownerAbilities;
 
         // Timers - need to figure this out later
         // protected Timer levelUpTimer = new Timer(5f);
@@ -40,13 +41,18 @@ namespace WizardGame.Spells
             // enemyCheckSize = GetCameraSize();
 
             // Init stats
-            if (spellData == null)
-            {
-                Debug.LogError($"Spell Data not assigned on: {gameObject.name}");
-
-            }
-            spellStats = new SpellStats(spellData);
             
+            
+            
+        }
+
+        // Initializes the spell with a reference to the caster's abilities.
+        public virtual void Initialize(PlayerAbilities abilities)
+        {
+            ownerAbilities = abilities;
+
+            InitStats();
+
         }
 
         protected virtual void Start()
@@ -73,6 +79,15 @@ namespace WizardGame.Spells
             {
                 SpellActiveBehavior();
             }
+        }
+
+        public virtual void InitStats()
+        {
+            if (spellData == null)
+            {
+                Debug.LogError($"Spell Data not assigned on: {gameObject.name}");
+            }
+            spellStats = new SpellStats(spellData);
         }
 
         public virtual void LevelUp()

@@ -1,11 +1,12 @@
-using System.Data.Common;
-using Unity.VisualScripting;
-using UnityEngine;
+using System;
+using System.Collections.Generic;
 
 namespace WizardGame.Stats
 {
     public class PlayerAbilities
     {
+        public event Action OnAbilityModifiersUpdated;
+
         public AbilityScore Strength { get; private set; }
         public AbilityScore Dexterity { get; private set; }
         public AbilityScore Constitution { get; private set; }
@@ -13,21 +14,50 @@ namespace WizardGame.Stats
         public AbilityScore Wisdom { get; private set; }
         public AbilityScore Charisma { get; private set; }
 
-        private PlayerAbilityDataSO data;
+        protected readonly List<AbilityScore> allScores = new();
+        protected readonly List<StatModifier> allModifiers = new();
 
-        public static PlayerAbilities CopyFrom(PlayerAbilityDataSO playerAbilityData)
+        public IReadOnlyList<AbilityScore> AllScores => allScores;
+        public IReadOnlyList<StatModifier> AllModifiers => allModifiers;
+
+        public PlayerAbilities(PlayerAbilityDataSO baseData)
         {
-            return new PlayerAbilities
-            {
-                data = playerAbilityData,
+            Strength = new AbilityScore((int)baseData.StrengthStartValue, AbilityType.Strength);
+            allScores.Add(Strength);
 
-                Strength = new AbilityScore(playerAbilityData.StrengthStartValue, AbilityType.Strength),
-                Dexterity = new AbilityScore(playerAbilityData.DexterityStartValue, AbilityType.Dexterity),
-                Constitution = new AbilityScore(playerAbilityData.ConstitutionStartValue, AbilityType.Constitution),
-                Intelligence = new AbilityScore(playerAbilityData.IntelligenceStartValue, AbilityType.Intelligence),
-                Wisdom = new AbilityScore(playerAbilityData.WisdomStartValue, AbilityType.Wisdom),
-                Charisma = new AbilityScore(playerAbilityData.CharismaStartValue, AbilityType.Charisma)
-            };
+            Dexterity = new AbilityScore((int)baseData.DexterityStartValue, AbilityType.Dexterity);
+            allScores.Add(Dexterity);
+
+            Constitution = new AbilityScore((int)baseData.ConstitutionStartValue, AbilityType.Constitution);
+            allScores.Add(Constitution);
+
+            Intelligence = new AbilityScore((int)baseData.IntelligenceStartValue, AbilityType.Intelligence);
+            allScores.Add(Intelligence);
+
+            Wisdom = new AbilityScore((int)baseData.WisdomStartValue, AbilityType.Wisdom);
+            allScores.Add(Wisdom);
+
+            Charisma = new AbilityScore((int)baseData.CharismaStartValue, AbilityType.Charisma);
+            allScores.Add(Charisma);
+
+            // Subscribe to OnScoreChanged event for all scores, and add their modifiers to the list
+            foreach (var score in AllScores)
+            {
+                score.OnScoreChanged += HandleScoreChanged;
+                allModifiers.AddRange(score.Modifiers);
+            }
+        }
+
+        private void HandleScoreChanged()
+        {
+            // Reset allModifiers list and repopulate with new modifiers
+            allModifiers.Clear();
+            foreach (var score in AllScores)
+            {
+                allModifiers.AddRange(score.Modifiers);
+            }
+
+            OnAbilityModifiersUpdated?.Invoke();
         }
     }
 }

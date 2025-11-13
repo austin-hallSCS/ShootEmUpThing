@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d1e1b9f6ebe4534b98d55b971a3497b, type: 3}
   m_Name: EvocationAbilityDataSO
   m_EditorClassIdentifier: Assembly-CSharp::WizardGame.Stats.PlayerAbilityDataSO
+  <SchoolName>k__BackingField: Evocation
   <StrengthStartValue>k__BackingField: 15
-  <DexterityStartValue>k__BackingField: 12
-  <ConstitutionStartValue>k__BackingField: 13
+  <DexterityStartValue>k__BackingField: 13
+  <ConstitutionStartValue>k__BackingField: 8
   <IntelligenceStartValue>k__BackingField: 14
-  <WisdomStartValue>k__BackingField: 10
-  <CharismaStartValue>k__BackingField: 8
+  <WisdomStartValue>k__BackingField: 12
+  <CharismaStartValue>k__BackingField: 10

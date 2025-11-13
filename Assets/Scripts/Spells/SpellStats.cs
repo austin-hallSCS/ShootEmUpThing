@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using WizardGame.Core;
 using WizardGame.Spells;
@@ -53,13 +54,19 @@ namespace WizardGame.Stats
                 return;
             }
 
+            ApplyModifiersToStats(levelInfo?.Modifiers);
+            
+            Debug.Log($"Spell level: {Level}");
+        }
+
+        public void ApplyModifiersToStats(IReadOnlyList<StatModifier> mods)
+        {
             // Apply changes based on Stat Type
-            foreach (var mod in levelInfo.Modifiers)
+            foreach (var mod in mods)
             {
                 var stat = GetStat(mod.StatType);
                 stat?.ApplyModifier(mod);
             }
-            Debug.Log($"Spell level: {Level}");
         }
     }
 }

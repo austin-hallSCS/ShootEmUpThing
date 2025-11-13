@@ -5,7 +5,7 @@ using WizardGame.Player;
 
 namespace WizardGame.Stats
 {
-    public class PlayerStats : BaseStats
+    public class PlayerStats : PlayerModifiableStats
     {
         public int Level { get; private set; }
 
@@ -14,12 +14,8 @@ namespace WizardGame.Stats
         public Stat Health { get; private set; }
         public Stat Experience { get; private set; }
 
-        private PlayerDataSO baseData;
-
-        public PlayerStats(PlayerDataSO baseData)
+        public PlayerStats(PlayerDataSO baseData, PlayerAbilities abilities) : base(abilities)
         {
-            this.baseData = baseData;
-
             var allStats = new[]
             {
                 baseData.MovementSpeed,
@@ -28,21 +24,20 @@ namespace WizardGame.Stats
                 baseData.Experience
             };
             InitializeFromSO(allStats);
+
             Level = 1;
+
+            ApplyAbilityModifiers();
         }
 
-        // public static PlayerStats CopyFrom(PlayerDataSO playerData)
-        // {
-        //     return new PlayerStats
-        //     {
-        //         baseData = playerData,
+        public override void ApplyAbilityModifiers()
+        {
+            if(ownerAbilities == null) return;
 
-        //         Level = 1,
-
-        //         MovementSpeed = new Stat(playerData.MovementSpeed),
-        //         Health = new Stat(playerData.Health),
-        //         Experience = new Stat(playerData.Experience)
-        //     };
-        // }
+            foreach (var mod in ownerAbilities.Strength.Modifiers)
+            {
+                
+            }
+        }
     }
 }

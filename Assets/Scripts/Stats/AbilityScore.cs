@@ -9,6 +9,8 @@ namespace WizardGame.Stats
     [Serializable]
     public class AbilityScore
     {
+        public event Action OnScoreChanged;
+
         public int BaseValue { get; private set; }
 
         public AbilityType AbilityType { get; private set; }
@@ -24,6 +26,8 @@ namespace WizardGame.Stats
                 {
                     currentValue = clamped;
                     CheckStatModifiers(); // Recalculate modifiers whenever score changes
+
+                    OnScoreChanged?.Invoke();
                 }
             }
         }
@@ -71,7 +75,7 @@ namespace WizardGame.Stats
                     modifiers.Add(new StatModifier(StatType.Rarity));
                     break;
             }
-            currentValue = BaseValue;
+            CurrentValue = BaseValue;
         }
 
         private void CheckStatModifiers()
