@@ -5,7 +5,7 @@ using WizardGame.Spells;
 
 namespace WizardGame.Stats
 {
-    public class SpellStats : BaseStats
+    public class SpellStats : PlayerModifiableStats
     {
         public float ProjectileIntervalTime { get; private set; }
 
@@ -23,7 +23,9 @@ namespace WizardGame.Stats
 
         private SpellDataSO baseData;
 
-        public SpellStats(SpellDataSO baseData)
+        private readonly List<StatModifier> allLevelUpModifiers = new();
+
+        public SpellStats(SpellDataSO baseData, PlayerAbilities abilities) : base(abilities)
         {
             this.baseData = baseData;
 
@@ -40,7 +42,10 @@ namespace WizardGame.Stats
             };
 
             InitializeFromSO(allStats);
+
             Level = 1;
+
+            ApplyAbilityModifiers();
         }
         
         public void ApplyLevelUp()
@@ -54,19 +59,22 @@ namespace WizardGame.Stats
                 return;
             }
 
-            ApplyModifiersToStats(levelInfo?.Modifiers);
+            allLevelUpModifiers.AddRange(levelInfo.Modifiers);
+
+            ApplyAbilityModifiers();
             
             Debug.Log($"Spell level: {Level}");
         }
 
-        public void ApplyModifiersToStats(IReadOnlyList<StatModifier> mods)
+        public override void ApplyAbilityModifiers()
         {
-            // Apply changes based on Stat Type
-            foreach (var mod in mods)
-            {
-                var stat = GetStat(mod.StatType);
-                stat?.ApplyModifier(mod);
-            }
+            foreach(var stat in runtimeStats.Values) stat.Init();
+
+            // Level-up modifiers
+            foreach(var mod in allLevelUpModifiers) ApplyModifierToStat(mod);
+
+            // Player ability modifiers
+            foreach (var mod in ownerAbilities.AllModifiers) ApplyModifierToStat(mod);
         }
     }
 }

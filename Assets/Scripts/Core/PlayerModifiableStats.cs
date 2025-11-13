@@ -26,17 +26,8 @@ namespace WizardGame.Core
         {
             if (ownerAbilities == null) return;
 
-            // Rest all stats to their base value
-            foreach(var stat in runtimeStats.Values)
-            {
-                stat.Init();
-            }
-
-            // Apply all modifiers from abilities
-            foreach (var mod in ownerAbilities.AllModifiers)
-            {
-                ApplyModifierToStat(mod);
-            }
+            foreach(var stat in runtimeStats.Values) stat.Init();
+            foreach (var mod in ownerAbilities.AllModifiers)ApplyModifierToStat(mod);
         }
     }
 }
