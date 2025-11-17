@@ -1,0 +1,9 @@
+using Unity.Engine;
+
+namespace WizardGame.Levels
+{
+    public class GameStageDataSO : ScriptableObject
+    {
+        
+    }
+}

@@ -8,8 +8,13 @@ namespace WizardGame.Managers
     {
         public static GameManager Instance  {get; private set; }
 
-        public XPManager XPManager { get; private set; }
+        [SerializeField] public GameStageDataSO currentStageData { get; private set; }
 
+        public XPManager XPManager { get; private set; }
+        public SpawnManager SpawnManager { get; private set; }
+
+
+        // Creates a new instance if there is not one already, makes sure there is not two instances
         public void Awake()
         {
             if (Instance == null)
@@ -25,6 +30,7 @@ namespace WizardGame.Managers
             }
 
             XPManager = new XPManager();
+            SpawnManager = new SpawnManager(this, currentStageData);
         }
         
     }

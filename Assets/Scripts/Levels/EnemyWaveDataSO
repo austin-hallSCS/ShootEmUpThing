@@ -1,0 +1,13 @@
+using Unity.Engine;
+
+namespace WizardGame.Levels
+{
+    [CreateAssetMenu(fileName = "EnemyWaveDataSO", menuName = "Levels/Enemy Wave Data")]
+    public class EnemyWaveDataSO : ScriptableObject
+    {
+        public int Wave;
+
+        [SerializeField] public GameObject[] EnemyPrefabs { get; private set; }
+        
+    }
+}
