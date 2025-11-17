@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using WizardGame.Core;
 using WizardGame.Spells;
@@ -9,7 +10,14 @@ namespace WizardGame.Stats
     {
         public float ProjectileIntervalTime { get; private set; }
 
-        public int Level { get; private set; }
+        public int Level
+        {
+            get => level;
+            private set
+            {
+                level = Mathf.Clamp(value, 1, 10);
+            }
+        }
 
         public Stat Rarity { get; private set; }
         public Stat DamageAmount { get; private set; }
@@ -20,6 +28,8 @@ namespace WizardGame.Stats
         public Stat ProjectileAmount { get; private set; }
         public Stat DurationTime { get; private set; }
         public Stat PierceAmount { get; private set; }
+
+        private int level;
 
         private SpellDataSO baseData;
 
@@ -50,6 +60,8 @@ namespace WizardGame.Stats
         
         public void ApplyLevelUp()
         {
+            if (Level == 10) return;
+
             Level++;
 
             SpellLevelDataSO levelInfo = baseData.GetLevelData(Level);
@@ -63,7 +75,11 @@ namespace WizardGame.Stats
 
             ApplyAbilityModifiers();
             
-            Debug.Log($"Spell level: {Level}");
+            // Debug.Log($"Spell level: {Level}");
+            // foreach (var stat in runtimeStats.Values)
+            // {
+            //     Debug.Log($"{stat.StatType}: {stat.CurrentValue}");
+            // }
         }
 
         public override void ApplyAbilityModifiers()

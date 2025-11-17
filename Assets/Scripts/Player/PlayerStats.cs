@@ -6,12 +6,9 @@ namespace WizardGame.Stats
 {
     public class PlayerStats : PlayerModifiableStats
     {
-        public int Level { get; private set; }
-
         public Stat MovementSpeed { get; private set; }
         public Stat DamageResistance { get; private set; }
         public Stat Health { get; private set; }
-        public Stat Experience { get; private set; }
 
         public PlayerStats(PlayerDataSO baseData, PlayerAbilities abilities) : base(abilities)
         {
@@ -23,20 +20,6 @@ namespace WizardGame.Stats
                 baseData.Experience
             };
             InitializeFromSO(allStats);
-
-            Level = 1;
-
-            ApplyAbilityModifiers();
-        }
-
-        public override void ApplyAbilityModifiers()
-        {
-            if(ownerAbilities == null) return;
-
-            foreach (var mod in ownerAbilities.Strength.Modifiers)
-            {
-                
-            }
         }
     }
 }

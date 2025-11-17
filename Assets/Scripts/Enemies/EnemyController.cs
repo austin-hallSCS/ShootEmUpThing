@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using WizardGame.Collectibles;
 using WizardGame.Interfaces;
 using WizardGame.Player;
 using WizardGame.Stats;
@@ -9,6 +10,7 @@ namespace WizardGame.Enemy
     public class EnemyController : MonoBehaviour, IDamageable
     {
         [SerializeField] protected EnemyDataSO enemyData;
+        [SerializeField] protected GameObject experiencePrefab;
 
         // Object references
         private PlayerController detectedPlayer;
@@ -88,8 +90,21 @@ namespace WizardGame.Enemy
             var healthAmount = enemyStats.GetStat(StatType.Health).CurrentValue;
             if (healthAmount <= 0)
             {
-                Destroy(gameObject);
+                OnDeath();
             }
+        }
+
+        public void OnDeath()
+        {
+            Debug.Log("Goblin OnDeath");
+
+            var prefab = Instantiate(experiencePrefab, transform.position, Quaternion.identity);
+            CollectibleExperienceOrb xpOrb = prefab.GetComponent<CollectibleExperienceOrb>();
+            int rewardExperience = enemyStats.RewardExperience;
+
+            xpOrb.SetXPAmount(rewardExperience);
+
+            Destroy(gameObject);
         }
 
         void OnTriggerStay2D(Collider2D other)

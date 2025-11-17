@@ -3,23 +3,11 @@ using WizardGame.Player;
 
 namespace WizardGame.Collectibles
 {
-    public class CollectibleHealth : MonoBehaviour
+    public class CollectibleHealth : Collectible
     {
-        // Object references
-        private PlayerController player;
-
         // Data
         public int HealAmount;
 
-        void OnTriggerEnter2D(Collider2D other)
-        {
-            player = other.GetComponent<PlayerController>();
-
-            if (player != null)
-            {
-                // player.ChangeHealth(HealAmount);
-                Destroy(gameObject);
-            }
-        }
+        
     }
 }

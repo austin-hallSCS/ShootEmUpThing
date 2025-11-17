@@ -4,6 +4,7 @@ using WizardGame.Spells;
 using WizardGame.Interfaces;
 using WizardGame.Stats;
 using WizardGame.UI;
+using WizardGame.Managers;
 
 namespace WizardGame.Player
 {
@@ -30,7 +31,7 @@ namespace WizardGame.Player
         public Rigidbody2D rb { get; private set; }
         private Vector2 move;
         private int currentFacingDirection = 1;
-        private int facingDirectionx;
+
 
         // Player status variables
         private bool isInvincible;
@@ -43,6 +44,7 @@ namespace WizardGame.Player
         {
             GetComponentReferences();
             ValidateData();
+            SubscribeToEvents();
             InitStatsAndAbilities();
             InitSpells();
         }
@@ -63,7 +65,7 @@ namespace WizardGame.Player
             CheckIfShouldFlip();
             
 
-            // Damage cooldown
+            // Damage cooldown - planning on removing this in favor of an "attack cooldown"
             if (isInvincible)
             {
                 damageCooldown -= Time.deltaTime;
@@ -99,6 +101,11 @@ namespace WizardGame.Player
             {
                 Debug.LogError($"Player Data not assigned on {gameObject.name}");
             }
+        }
+
+        private void SubscribeToEvents()
+        {
+            GameManager.Instance.XPManager.OnPlayerLevelUp += HandlePlayerLevelUp;
         }
 
         // Creates runtime instances of stats and abilities
@@ -161,6 +168,7 @@ namespace WizardGame.Player
                 healthbar.UpdateHealthBar(healthStat.CurrentValue, healthStat.Cap);
                 Debug.Log($"Player Health: {healthStat.CurrentValue}");
 
+                // TODO: Remove this, implement attack cooldowns
                 isInvincible = true;
                 damageCooldown = 0.25f;
 
@@ -173,10 +181,21 @@ namespace WizardGame.Player
             var currentHealth = playerStats.GetStat(StatType.Health).CurrentValue;
             if (currentHealth <= 0)
             {
+                //TODO: Implement player death
                 // Destroy(gameObject);
                 Debug.Log("Player is dead!");
             }
         }
+
+#region Event Handlers
+        
+        private void HandlePlayerLevelUp()
+        {
+            Debug.Log("Player level up!");
+            // TODO: Handle level up
+        }
+
+#endregion
     }
 }
 

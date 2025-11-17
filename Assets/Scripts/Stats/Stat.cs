@@ -8,7 +8,7 @@ namespace WizardGame.Stats
     {
         [SerializeField] private StatType statType;
 
-        [Tooltip("Does this value need to be rounded to the nearest whole number?")]
+        [Tooltip("Does this value need to be rounded down to the nearest whole number?")]
         [SerializeField] private bool isRounded;
 
         [Tooltip("Does upgrading this stat increase the value?")]
@@ -44,7 +44,7 @@ namespace WizardGame.Stats
                 float newValue = Mathf.Clamp(value, minValue, cap);
                 if (isRounded)
                 {
-                    currentValue = Mathf.Round(newValue);
+                    currentValue = Mathf.Floor(newValue);
                 }
                 else
                 {
@@ -53,9 +53,10 @@ namespace WizardGame.Stats
             }
         }
 
-        public Stat(StatType statType, bool increaseIsPositive, bool isIgnored, float cap, bool isCapChangeable, float minValue, float baseValue)
+        public Stat(StatType statType, bool isRounded, bool increaseIsPositive, bool isIgnored, float cap, bool isCapChangeable, float minValue, float baseValue)
         {
             this.statType = statType;
+            this.isRounded = isRounded;
             this.increaseIsPositive = increaseIsPositive;
             this.isIgnored = isIgnored;
             this.cap = cap;
@@ -63,19 +64,20 @@ namespace WizardGame.Stats
             this.minValue = minValue;
             this.baseValue = baseValue;
 
-            currentValue = this.baseValue;
+            CurrentValue = this.baseValue;
         }
 
         // Clone from another Stat
         public Stat(Stat other)
         {
             statType = other.StatType;
+            isRounded = other.isRounded;
             isIgnored = other.IsIgnored;
             cap = other.Cap;
             isCapChangeable = other.isCapChangeable;
             minValue = other.MinValue;
             baseValue = other.BaseValue;
-            currentValue = baseValue;
+            CurrentValue = baseValue;
         }
 
         public void Init() => CurrentValue = baseValue;

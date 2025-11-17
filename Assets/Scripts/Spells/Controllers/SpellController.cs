@@ -19,7 +19,7 @@ namespace WizardGame.Spells
         // protected Timer levelUpTimer = new Timer(5f);
 
         // Temp level up timer for testing
-        protected float currentLevelUpTimerAt;
+        // protected float currentLevelUpTimerAt;
 
 
         // Status variables
@@ -38,12 +38,7 @@ namespace WizardGame.Spells
 
         protected virtual void Awake()
         {
-            // enemyCheckSize = GetCameraSize();
-
-            // Init stats
-            
-            
-            
+            // InitStats();
         }
 
         // Initializes the spell with a reference to the caster's abilities.
@@ -58,18 +53,18 @@ namespace WizardGame.Spells
         protected virtual void Start()
         {
             SpellDeactivate();
-            currentLevelUpTimerAt = 5.0f;
+            // currentLevelUpTimerAt = 5.0f;
         }
 
         protected virtual void Update()
         {
-            currentLevelUpTimerAt -= Time.deltaTime;
-            if (currentLevelUpTimerAt <= 0)
-            {
-                currentLevelUpTimerAt = 5.0f;
-                LevelUp();
+            // currentLevelUpTimerAt -= Time.deltaTime;
+            // if (currentLevelUpTimerAt <= 0)
+            // {
+            //     currentLevelUpTimerAt = 5.0f;
+            //     LevelUp();
                 
-            }
+            // }
         }
 
         protected virtual void FixedUpdate()
@@ -87,7 +82,7 @@ namespace WizardGame.Spells
             {
                 Debug.LogError($"Spell Data not assigned on: {gameObject.name}");
             }
-            spellStats = new SpellStats(spellData);
+            spellStats = new SpellStats(spellData, ownerAbilities);
         }
 
         public virtual void LevelUp()
