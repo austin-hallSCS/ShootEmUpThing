@@ -1,5 +1,6 @@
 using UnityEngine;
 using WizardGame.Player;
+using WizardGame.Stages;
 
 namespace WizardGame.Managers
 {
