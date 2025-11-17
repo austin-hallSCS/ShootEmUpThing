@@ -1,5 +1,5 @@
-using Unity.Engine;
-using WizardGame.Levels;
+using UnityEngine;
+using WizardGame.Stages;
 
 namespace WizardGame.Managers
 {

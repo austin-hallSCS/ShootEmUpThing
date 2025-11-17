@@ -1,9 +1,0 @@
-using Unity.Engine;
-
-namespace WizardGame.Stages
-{
-    public class GameStageDataSO : ScriptableObject
-    {
-        
-    }
-}
