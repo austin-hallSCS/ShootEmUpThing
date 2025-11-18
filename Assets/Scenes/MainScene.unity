@@ -163,6 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8266d7d651dd69d47926fee74514dc9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WizardGame.GameManager
+  <currentStageData>k__BackingField: {fileID: 11400000, guid: 26849d4916502c4479789ec12c263c66, type: 2}
 --- !u!1 &251133072
 GameObject:
   m_ObjectHideFlags: 0
