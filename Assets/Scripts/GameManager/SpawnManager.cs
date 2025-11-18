@@ -1,4 +1,5 @@
 using System.Collections;
+using Mono.Cecil;
 using UnityEngine;
 using WizardGame.Stages;
 
@@ -18,7 +19,9 @@ namespace WizardGame.Managers
             this.coroutineRunner = runner;
             this.stageData = stageData;
 
-            GameManager.Instance.NextWaveBegin += OnNextWaveBegin;
+            runner.NextWaveBegin += OnNextWaveBegin;
+
+            StartSpawning();
         }
 
         public void StartSpawning()
@@ -26,14 +29,14 @@ namespace WizardGame.Managers
             // Avoids duplicate spawnRoutines
             if (spawnRoutine != null) return;
 
-            spawnRoutine = GameManager.Instance.StartCoroutine(SpawnLoop());
+            spawnRoutine = coroutineRunner.StartCoroutine(SpawnLoop());
         }
 
         public void PauseSpawning()
         {
             if (spawnRoutine != null)
             {
-                coroutineRunner.StopCoroutine(SpawnLoop());
+                coroutineRunner.StopCoroutine(spawnRoutine);
                 spawnRoutine = null;
             }
         }
@@ -42,7 +45,11 @@ namespace WizardGame.Managers
         {
             PauseSpawning();
 
-            currentWave++;
+            var currentWaveData = stageData.Waves[GameManager.Instance.CurrentWave];
+            if (currentWaveData.BossPrefab != null)
+            {
+                SpawnBoss(currentWaveData.BossPrefab);
+            }
 
             StartSpawning();
         }
@@ -51,22 +58,31 @@ namespace WizardGame.Managers
         {
             while (true)
             {
-                SpawnEnemy();
+                var waveData = stageData.Waves[GameManager.Instance.CurrentWave];
+                
+                // TODO: Add EnemyMax/EnemyMin check before spawning
+
+                SpawnEnemy(waveData.EnemyPrefabs);
 
                 yield return new WaitForSeconds(stageData.Waves[currentWave].SpawnInterval);
             }
         }
 
-        private void SpawnEnemy()
+        private void SpawnEnemy(GameObject[] enemyPrefabs)
         {
             // TODO: Add enemy spawning logic
         }
 
+        private void SpawnBoss(GameObject bossPrefab)
+        {
+            // TODO: Add boss spawning logic
+        }
+
         public void TearDown()
         {
-            GameManager.Instance.NextWaveBegin -= OnNextWaveBegin;
+            coroutineRunner.NextWaveBegin -= OnNextWaveBegin;
 
-            if (spawnRoutine != null) coroutineRunner.StopCoroutine(SpawnLoop());
+            PauseSpawning();
 
             Debug.Log("SpawnManager TearDown");
         }

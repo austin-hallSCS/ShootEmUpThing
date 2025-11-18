@@ -18,15 +18,26 @@ namespace WizardGame.Managers
         public XPManager XPManager { get; private set; }
         public SpawnManager SpawnManager { get; private set; }
 
+        // Waves
         public event Action NextWaveBegin;
+        public int CurrentWave { get; private set; }
 
+        // Time
+        public float CurrentStageTime;
 
         
         public void Awake()
         {
             CreateInstance();
             InitManagers();
-            
+
+            CurrentWave = 0;
+        }
+
+        public void Update()
+        {
+            CurrentStageTime += Time.deltaTime;
+            CheckForNextWave();
         }
 
         // Creates a new instance if there is not one already, makes sure there is not two instances
@@ -49,6 +60,23 @@ namespace WizardGame.Managers
         {
             XPManager = new XPManager();
             SpawnManager = new SpawnManager(this, currentStageData);
+        }
+
+        private void CheckForNextWave()
+        {
+            if (CurrentWave + 1 < currentStageData.Waves.Count)
+            {                
+                if (CurrentStageTime >= currentStageData.Waves[CurrentWave + 1].StartTime)
+                {
+                    StartNextWave();
+                }
+            }
+        }
+
+        private void StartNextWave()
+        {
+            CurrentWave++;
+            NextWaveBegin?.Invoke();
         }
 
         private void OnDestroy()
