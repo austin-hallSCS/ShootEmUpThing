@@ -1,52 +1,96 @@
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
-using WizardGame.SpellSystem;
+using WizardGame.Core;
+using WizardGame.Spells;
 
 namespace WizardGame.Stats
 {
-    public class SpellStats
+    public class SpellStats : PlayerModifiableStats
     {
-        public int Rarity { get; private set; }
         public float ProjectileIntervalTime { get; private set; }
+
+        public int Level
+        {
+            get => level;
+            private set
+            {
+                level = Mathf.Clamp(value, 1, 10);
+            }
+        }
+
+        public Stat Rarity { get; private set; }
         public Stat DamageAmount { get; private set; }
         public Stat AreaAmount { get; private set; }
         public Stat SpeedAmount { get; private set; }
-        public Stat CoolDownTime { get; private set; }
+        public Stat CooldownTime { get; private set; }
         public Stat KnockbackAmount { get; private set; }
         public Stat ProjectileAmount { get; private set; }
         public Stat DurationTime { get; private set; }
         public Stat PierceAmount { get; private set; }
 
-        public int Level { get; private set; }
+        private int level;
 
-        private SpellDataSO Data;
+        private SpellDataSO baseData;
 
-        public static SpellStats CopyFrom(SpellDataSO spellData)
+        private readonly List<StatModifier> allLevelUpModifiers = new();
+
+        public SpellStats(SpellDataSO baseData, PlayerAbilities abilities) : base(abilities)
         {
-            return new SpellStats
+            this.baseData = baseData;
+
+            var allStats = new[]
             {
-                Data = spellData,
-
-                Level = 1,
-
-
-                Rarity = spellData.Rarity,
-                ProjectileIntervalTime = spellData.ProjectileIntervalTime,
-
-                DamageAmount = new Stat(spellData.DamageAmount),
-                AreaAmount = new Stat(spellData.AreaAmount),
-                SpeedAmount = new Stat(spellData.SpeedAmount),
-                CoolDownTime = new Stat(spellData.CoolDownTime),
-                KnockbackAmount = new Stat(spellData.KnockbackAmount),
-                ProjectileAmount = new Stat(spellData.ProjectileAmount),
-                DurationTime = new Stat(spellData.DurationTime),
-                PierceAmount = new Stat(spellData.PierceAmount)
+                baseData.DamageAmount,
+                baseData.AreaAmount,
+                baseData.SpeedAmount,
+                baseData.CooldownTime,
+                baseData.KnockbackAmount,
+                baseData.ProjectileAmount,
+                baseData.DurationTime,
+                baseData.PierceAmount
             };
+
+            InitializeFromSO(allStats);
+
+            Level = 1;
+
+            ApplyAbilityModifiers();
         }
         
-        public void IncreaseLevel()
+        public void ApplyLevelUp()
         {
+            if (Level == 10) return;
+
             Level++;
-            Debug.Log($"{Data.SpellName} is level {Level}");
+
+            SpellLevelDataSO levelInfo = baseData.GetLevelData(Level);
+            if (levelInfo == null)
+            {
+                Debug.LogWarning($"No level data for {baseData.SpellName} level {Level}");
+                return;
+            }
+
+            allLevelUpModifiers.AddRange(levelInfo.Modifiers);
+
+            ApplyAbilityModifiers();
+            
+            // Debug.Log($"Spell level: {Level}");
+            // foreach (var stat in runtimeStats.Values)
+            // {
+            //     Debug.Log($"{stat.StatType}: {stat.CurrentValue}");
+            // }
+        }
+
+        public override void ApplyAbilityModifiers()
+        {
+            foreach(var stat in runtimeStats.Values) stat.Init();
+
+            // Level-up modifiers
+            foreach(var mod in allLevelUpModifiers) ApplyModifierToStat(mod);
+
+            // Player ability modifiers
+            foreach (var mod in ownerAbilities.AllModifiers) ApplyModifierToStat(mod);
         }
     }
 }

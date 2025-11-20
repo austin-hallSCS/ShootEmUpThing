@@ -2,6 +2,8 @@ namespace WizardGame.Stats
 {
     public enum StatType
     {
+        // Spells
+        Rarity,
         Damage,
         Area,
         Speed,
@@ -9,6 +11,12 @@ namespace WizardGame.Stats
         Knockback,
         Amount,
         Duration,
-        Pierce
+        Pierce,
+
+        // Player
+        Health,
+        Experience,
+        MovementSpeed,
+        DamageResistance
     }
 }

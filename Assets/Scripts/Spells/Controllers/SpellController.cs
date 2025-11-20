@@ -1,7 +1,8 @@
+using System;
 using UnityEngine;
 using WizardGame.Stats;
 
-namespace WizardGame.SpellSystem
+namespace WizardGame.Spells
 {
     public class SpellController : MonoBehaviour
     {
@@ -9,15 +10,16 @@ namespace WizardGame.SpellSystem
         [SerializeField] protected GameObject spellPrefab;
         [SerializeField] protected float spawnRadius;
         [SerializeField] protected SpellDataSO spellData;
-        public Camera Cam;
+        // public Camera Cam;
 
-        protected SpellStats runtimeStats;
+        protected SpellStats spellStats;
+        protected PlayerAbilities ownerAbilities;
 
         // Timers - need to figure this out later
         // protected Timer levelUpTimer = new Timer(5f);
 
         // Temp level up timer for testing
-        protected float currentLevelUpTimerAt;
+        // protected float currentLevelUpTimerAt;
 
 
         // Status variables
@@ -36,36 +38,33 @@ namespace WizardGame.SpellSystem
 
         protected virtual void Awake()
         {
-            // enemyCheckSize = GetCameraSize();
+            // InitStats();
+        }
 
-            if (spellData == null)
-            {
-                Debug.LogError($"Spell Data not assigned on: {gameObject.name}");
+        // Initializes the spell with a reference to the caster's abilities.
+        public virtual void Initialize(PlayerAbilities abilities)
+        {
+            ownerAbilities = abilities;
 
-            }
+            InitStats();
 
-            Debug.Log($"SpellDataSO value: {spellData.DamageAmount.BaseValue}");
-            Debug.Log($"SpellDataSO CurrentValue: {spellData.DamageAmount.CurrentValue}");
-            runtimeStats = SpellStats.CopyFrom(spellData);
-            Debug.Log($"runtimeStats value: {runtimeStats.DamageAmount.BaseValue}");
-            Debug.Log($"runtimeStats CurrentValue: {runtimeStats.DamageAmount.CurrentValue}");
-            
         }
 
         protected virtual void Start()
         {
             SpellDeactivate();
-            currentLevelUpTimerAt = 5.0f;
+            // currentLevelUpTimerAt = 5.0f;
         }
 
         protected virtual void Update()
         {
-            currentLevelUpTimerAt -= Time.deltaTime;
-            if (currentLevelUpTimerAt <= 0)
-            {
-                LevelUp();
-                currentLevelUpTimerAt = 5.0f;
-            }
+            // currentLevelUpTimerAt -= Time.deltaTime;
+            // if (currentLevelUpTimerAt <= 0)
+            // {
+            //     currentLevelUpTimerAt = 5.0f;
+            //     LevelUp();
+                
+            // }
         }
 
         protected virtual void FixedUpdate()
@@ -77,10 +76,19 @@ namespace WizardGame.SpellSystem
             }
         }
 
+        public virtual void InitStats()
+        {
+            if (spellData == null)
+            {
+                Debug.LogError($"Spell Data not assigned on: {gameObject.name}");
+            }
+            spellStats = new SpellStats(spellData, ownerAbilities);
+        }
+
         public virtual void LevelUp()
         {
-            runtimeStats.IncreaseLevel();
-            spellData.ApplyLevelUp(runtimeStats, runtimeStats.Level);
+            spellStats.ApplyLevelUp();
+            Debug.Log("Spell Leveled up!");
         }
 
         protected virtual void CheckSpellActiveStatus()
@@ -108,9 +116,10 @@ namespace WizardGame.SpellSystem
 
         protected virtual void SpellActiveBehavior() { }
 
-        protected virtual void ResetCoolDown() => currentCoolDownTimeAt = runtimeStats.CoolDownTime.CurrentValue;
+        // FixMe: NullReferenceException
+        protected virtual void ResetCoolDown() => currentCoolDownTimeAt = spellStats.GetStat(StatType.Cooldown).CurrentValue;
 
-        protected virtual void ResetDuration() => currentDurationTimeAt = runtimeStats.DurationTime.CurrentValue;
+        protected virtual void ResetDuration() => currentDurationTimeAt = spellStats.GetStat(StatType.Duration).CurrentValue;
 
         // protected Vector2 GetCameraSize()
         // {

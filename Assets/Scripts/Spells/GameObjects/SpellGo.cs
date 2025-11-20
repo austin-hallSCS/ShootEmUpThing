@@ -1,9 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
-using WizardGame.EnemySystem;
+using WizardGame.Enemy;
 using WizardGame.Stats;
 using WizardGame.Utils;
 
-namespace WizardGame.SpellSystem
+namespace WizardGame.Spells
 {
     public class SpellGO : MonoBehaviour
     {
@@ -62,7 +63,8 @@ namespace WizardGame.SpellSystem
 
         public void Launch()
         {
-            RB.linearVelocity = spellStats.SpeedAmount.CurrentValue * transform.right;
+            var speedAmount = spellStats.GetStat(StatType.Speed).CurrentValue;
+            RB.linearVelocity = speedAmount * transform.right;
         }
 
         public void AddAreaStat()
@@ -71,7 +73,7 @@ namespace WizardGame.SpellSystem
             if (spellStats == null) return;
 
             // Get Area Amount current value
-            float areaMultiplier = spellStats.AreaAmount.CurrentValue;
+            float areaMultiplier = spellStats.GetStat(StatType.Area).CurrentValue;
 
             // Increase size
             transform.localScale = new Vector3(areaMultiplier, areaMultiplier, 1f);
@@ -89,9 +91,6 @@ namespace WizardGame.SpellSystem
             // Set CircleCollider size and position to same as explosion
             CircleCollider.radius = transform.localScale.x / 4;
             CircleCollider.offset = Vector2.zero;
-
-            Debug.Log($"Damage Amount: {spellStats.DamageAmount.CurrentValue}");
-
         }
 
         void AnimationFinishTrigger() => Destroy(gameObject);
@@ -103,7 +102,8 @@ namespace WizardGame.SpellSystem
                 EnemyController enemy = other.GetComponent<EnemyController>();
                 if (enemy != null)
                 {
-                    enemy.Damage(spellStats.DamageAmount.CurrentValue);
+                    var damageAmount = spellStats.GetStat(StatType.Damage).CurrentValue;
+                    enemy.Damage(damageAmount);
                 }
             }
         }

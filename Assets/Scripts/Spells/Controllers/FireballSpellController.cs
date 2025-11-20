@@ -1,7 +1,7 @@
 using UnityEngine;
 using WizardGame.Utils;
 
-namespace WizardGame.SpellSystem
+namespace WizardGame.Spells
 {
     public class FireballSpellController : ProjectileSpellController
     {
@@ -39,7 +39,7 @@ namespace WizardGame.SpellSystem
 
         protected override void FireProjectile()
         {
-            base.FireProjectile();
+            // base.FireProjectile();
 
             // Get a random cardinal direction
             nextDirection = directionPicker.GetNext();
@@ -56,7 +56,7 @@ namespace WizardGame.SpellSystem
             // Instantiate projectile
             var projectile = Instantiate(spellPrefab, spawnPos, rotation);
             var spellGO = projectile.GetComponent<SpellGO>();
-            spellGO.Initialize(runtimeStats);
+            spellGO.Initialize(spellStats);
         }
     }
 

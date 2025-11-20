@@ -14,54 +14,86 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WizardGame.SpellSystem.SpellDataSO
   <SpellName>k__BackingField: Fireball
   <SpellIcon>k__BackingField: {fileID: 0}
-  Rarity: 80
   <ProjectileIntervalTime>k__BackingField: 0.02
-  <DamageAmount>k__BackingField:
+  <Rarity>k__BackingField:
     statType: 0
+    isRounded: 0
+    increaseIsPositive: 0
     isIgnored: 0
-    maxValue: 120
-    minValue: 0
+    cap: 100
+    isCapChangeable: 0
+    minValue: 25
+    baseValue: 80
+  <DamageAmount>k__BackingField:
+    statType: 1
+    isRounded: 0
+    increaseIsPositive: 1
+    isIgnored: 0
+    cap: 120
+    isCapChangeable: 0
+    minValue: 10
     baseValue: 20
   <AreaAmount>k__BackingField:
-    statType: 1
+    statType: 2
+    isRounded: 0
+    increaseIsPositive: 1
     isIgnored: 0
-    maxValue: 3
+    cap: 3
+    isCapChangeable: 0
     minValue: 1
     baseValue: 1
   <SpeedAmount>k__BackingField:
-    statType: 2
+    statType: 3
+    isRounded: 0
+    increaseIsPositive: 1
     isIgnored: 0
-    maxValue: 2
+    cap: 3
+    isCapChangeable: 0
     minValue: 0.1
     baseValue: 0.75
-  <CoolDownTime>k__BackingField:
-    statType: 3
+  <CooldownTime>k__BackingField:
+    statType: 4
+    isRounded: 0
+    increaseIsPositive: 0
     isIgnored: 0
-    maxValue: 5
-    minValue: 1
+    cap: 5
+    isCapChangeable: 0
+    minValue: 0.75
     baseValue: 3
   <KnockbackAmount>k__BackingField:
-    statType: 4
+    statType: 5
+    isRounded: 0
+    increaseIsPositive: 1
     isIgnored: 0
-    maxValue: 5
+    cap: 3
+    isCapChangeable: 0
     minValue: 1
     baseValue: 1
   <ProjectileAmount>k__BackingField:
-    statType: 5
+    statType: 6
+    isRounded: 1
+    increaseIsPositive: 1
     isIgnored: 0
-    maxValue: 8
+    cap: 8
+    isCapChangeable: 0
     minValue: 1
     baseValue: 2
   <DurationTime>k__BackingField:
-    statType: 6
+    statType: 7
+    isRounded: 0
+    increaseIsPositive: 0
     isIgnored: 1
-    maxValue: 0
+    cap: 0
+    isCapChangeable: 0
     minValue: 0
     baseValue: 0
   <PierceAmount>k__BackingField:
-    statType: 7
+    statType: 8
+    isRounded: 0
+    increaseIsPositive: 1
     isIgnored: 1
-    maxValue: 0
+    cap: 0
+    isCapChangeable: 0
     minValue: 0
     baseValue: 0
   levelData:

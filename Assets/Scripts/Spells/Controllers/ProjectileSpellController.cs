@@ -1,6 +1,7 @@
 using UnityEngine;
+using WizardGame.Stats;
 
-namespace WizardGame.SpellSystem
+namespace WizardGame.Spells
 {
     public class ProjectileSpellController : SpellController
     {
@@ -20,10 +21,15 @@ namespace WizardGame.SpellSystem
         protected override void SpellActiveBehavior()
         {
             base.SpellActiveBehavior();
-            for (int i = 0; i < runtimeStats.ProjectileAmount.CurrentValue; i++)
+
+            // FixMe: NullReferenceException
+            var projectileAmount = spellStats.GetStat(StatType.Amount).CurrentValue;
+
+            for (int i = 0; i < projectileAmount; i++)
             {
                 FireProjectile();
             }
+
             SpellDeactivate();
         }
 
@@ -39,12 +45,12 @@ namespace WizardGame.SpellSystem
 
         protected virtual void FireProjectile()
         {
-            var projectileInst = Instantiate(spellPrefab, (Vector3)transform.position, Quaternion.identity, transform);
+            // var projectileInst = Instantiate(spellPrefab, (Vector3)transform.position, Quaternion.identity, transform);
         }
         
         protected virtual void ResetProjectileIntervalTime()
         {
-            currentProjectileIntervalTimeAt = runtimeStats.ProjectileIntervalTime;
+            currentProjectileIntervalTimeAt = spellStats.ProjectileIntervalTime;
         }
     }
 }

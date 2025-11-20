@@ -1,87 +1,126 @@
-using Unity.VisualScripting;
 using UnityEngine;
+using WizardGame.Collectibles;
 using WizardGame.Interfaces;
-using WizardGame.PlayerSystem;
+using WizardGame.Managers;
+using WizardGame.Player;
 using WizardGame.Stats;
 
-namespace WizardGame.EnemySystem
+namespace WizardGame.Enemy
 {
     public class EnemyController : MonoBehaviour, IDamageable
     {
+        [SerializeField] protected EnemyDataSO enemyData;
+        [SerializeField] protected GameObject experiencePrefab;
+
         // Object references
-        private PlayerController detectedPlayer;
-        private EnemySpawner spawner;
+        private GameManager gameManager;
+        private Rigidbody2D playerRB;
 
         protected EnemyStats enemyStats;
 
-
-
-        //Status variables
-        public int Health { get { return currentHealth; } }
-
         // Movement variables
-        private Rigidbody2D rb;
-        private Vector2 target;
-        private Vector2 position;
-
-        // Private data variables
-        private float movementSpeed;
-
-        // Private status variables
-        private int currentHealth;
-        private Vector2 currentPosition;
+        public Rigidbody2D rb { get; private set; }
 
         void Awake()
-        {
-            // Get Component References
-            rb = GetComponent<Rigidbody2D>();
-            enemyStats = GetComponentInChildren<EnemyStats>();
-            spawner = GetComponentInParent<EnemySpawner>();
+        {            
+            GetComponentReferences();
+            InitStats();
         }
 
-        void Start()
+        void OnEnable()
         {
-            
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
+            DependencyLookups();
         }
 
         void FixedUpdate()
         {
-            currentPosition = rb.position;
-            target = spawner.PlayerRB.position;
-            position = Vector2.MoveTowards(currentPosition, target, enemyStats.SpeedAmount.CurrentValue * Time.deltaTime);
-            rb.MovePosition(position);
+            Move();
+        }
 
+        private void GetComponentReferences()
+        {
+            rb = GetComponent<Rigidbody2D>();
+        }
+
+        private void InitStats()
+        {
+            if (enemyData == null)
+            {
+                Debug.LogError($"Enemy Data not assigned on: {gameObject.name}");
+            }
+            enemyStats = new EnemyStats(enemyData);
+        }
+
+        private void DependencyLookups()
+        {
+            gameManager = GameManager.Instance;
+            if (gameManager == null || gameManager.PlayerController == null)
+            {
+                Debug.LogError("PlayerController not registered with GameManager");
+                return;
+            }
+
+            playerRB = gameManager.PlayerController.RB;
+            if (playerRB == null)
+            {
+                Debug.LogError("Player RigidBody2D is null!");
+            }
+        }
+
+        private void Move()
+        {
+            if (playerRB != null)
+            {
+                var moveSpeed = enemyStats.GetStat(StatType.MovementSpeed).CurrentValue;
+                Vector2 currentPosition = rb.position;
+                Vector2 target = playerRB.position;
+                Vector2 position = Vector2.MoveTowards(currentPosition, target, moveSpeed * Time.deltaTime);
+
+                rb.MovePosition(position);
+            }
         }
 
         public void Damage(float amount)
         {
-            enemyStats.Health.Decrease(amount);
+            var healthStat = enemyStats.GetStat(StatType.Health);
+            float damageResistanceAmount = enemyStats.GetStat(StatType.DamageResistance).CurrentValue;
+
+            float effectiveDamage = Mathf.Max(0, amount - damageResistanceAmount);
+            healthStat.Decrease(effectiveDamage);
             CheckHealth();
 
         }
 
         public void CheckHealth()
         {
-            if (enemyStats.Health.CurrentValue <= 0)
+            var healthAmount = enemyStats.GetStat(StatType.Health).CurrentValue;
+            if (healthAmount <= 0)
             {
-                Destroy(gameObject);
+                OnDeath();
             }
+        }
+
+        public void OnDeath()
+        {
+            var prefab = Instantiate(experiencePrefab, transform.position, Quaternion.identity);
+            CollectibleExperienceOrb xpOrb = prefab.GetComponent<CollectibleExperienceOrb>();
+            int rewardExperience = enemyStats.RewardExperience;
+
+            xpOrb.SetXPAmount(rewardExperience);
+
+            EventManager.PublishEnemyDied(this);
+
+            Destroy(gameObject);
         }
 
         void OnTriggerStay2D(Collider2D other)
         {
-            detectedPlayer = other.gameObject.GetComponent<PlayerController>();
+            PlayerController detectedPlayer = other.gameObject.GetComponent<PlayerController>();
 
             if (detectedPlayer != null)
             {
-                detectedPlayer.Damage(enemyStats.DamageAmount.CurrentValue);
+                var damageAmount = enemyStats.GetStat(StatType.Damage).CurrentValue;
+                detectedPlayer.Damage(damageAmount);
             }
         }
     }

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WizardGame.SpellSystem.SpellLevelDataSO
   Level: 6
   modifiers:
-  - <StatType>k__BackingField: 0
-    <FlatIncrease>k__BackingField: 10
-    <PercentIncrease>k__BackingField: 0
+  - <StatType>k__BackingField: 1
+    <ModType>k__BackingField: 0
+    <ValueType>k__BackingField: 0
+    <Value>k__BackingField: 10

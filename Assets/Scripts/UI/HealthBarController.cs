@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace WizardGame.PlayerSystem
+namespace WizardGame.UI
 {
     public class HealthBarController : MonoBehaviour
     {
