@@ -163,7 +163,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8266d7d651dd69d47926fee74514dc9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WizardGame.GameManager
-  <currentStageData>k__BackingField: {fileID: 11400000, guid: 26849d4916502c4479789ec12c263c66, type: 2}
+  <CurrentStageData>k__BackingField: {fileID: 11400000, guid: 26849d4916502c4479789ec12c263c66, type: 2}
+  <PlayerController>k__BackingField: {fileID: 428462018}
+  CurrentStageTime: 0
 --- !u!1 &251133072
 GameObject:
   m_ObjectHideFlags: 0
@@ -253,6 +255,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5329385011336400309, guid: b75b5b7f753542d428e9468be5dcc307, type: 3}
   m_PrefabInstance: {fileID: 7235425721027168599}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &428462018 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3422856191798803131, guid: b75b5b7f753542d428e9468be5dcc307, type: 3}
+  m_PrefabInstance: {fileID: 7235425721027168599}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 428462013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e24ebb1834c12594382892615a4b1dde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &729470876
 GameObject:
   m_ObjectHideFlags: 0
@@ -356,54 +369,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 664f29d03de3cbb46890af493fde672c, type: 3}
---- !u!1 &903361604
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 903361606}
-  - component: {fileID: 903361605}
-  m_Layer: 0
-  m_Name: EnemySpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &903361605
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 903361604}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa81c01f32d13994c8fca3a293890f2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Player: {fileID: 428462013}
-  EnemyPrefabs:
-  - {fileID: 1244771692766243100, guid: ab508c292d7093146843d888bdea279c, type: 3}
-  SpawnDelayTime: 3
---- !u!4 &903361606
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 903361604}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.89545, y: 0.51056, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &935323407
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5892,7 +5857,6 @@ SceneRoots:
   - {fileID: 7235425721027168599}
   - {fileID: 729470878}
   - {fileID: 5116843200371698248}
-  - {fileID: 903361606}
   - {fileID: 2145674491}
   - {fileID: 1147296207}
   - {fileID: 1233451921}

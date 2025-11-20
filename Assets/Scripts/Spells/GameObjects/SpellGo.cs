@@ -104,7 +104,6 @@ namespace WizardGame.Spells
                 {
                     var damageAmount = spellStats.GetStat(StatType.Damage).CurrentValue;
                     enemy.Damage(damageAmount);
-                    Debug.Log($"Fireball damaged {other} for {damageAmount} damage");
                 }
             }
         }

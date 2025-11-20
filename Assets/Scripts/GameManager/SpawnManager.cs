@@ -1,27 +1,34 @@
 using System.Collections;
-using Mono.Cecil;
+using Unity.VisualScripting;
 using UnityEngine;
+using WizardGame.Enemy;
 using WizardGame.Stages;
 
 namespace WizardGame.Managers
 {
-    public class SpawnManager
+    public class SpawnManager : ManagerBase
     {
-        private GameManager coroutineRunner;
+        private GameManager gameManager;
         private StageDataSO stageData;
 
         private Coroutine spawnRoutine = null;
 
-        private int currentWave = 0;
+        private int currentEnemyCount;
 
-        public SpawnManager(GameManager runner, StageDataSO stageData)
+        public SpawnManager(GameManager manager, StageDataSO data)
         {
-            this.coroutineRunner = runner;
-            this.stageData = stageData;
+            gameManager = manager;
+            stageData = data;
 
-            runner.NextWaveBegin += OnNextWaveBegin;
+            SubscribeToEvents();            
 
             StartSpawning();
+        }
+
+        protected override void SubscribeToEvents()
+        {
+            EventManager.OnNextWaveBegin += HandleNextWaveBegin;
+            EventManager.OnEnemyDied += HandleEnemyDied;
         }
 
         public void StartSpawning()
@@ -29,23 +36,66 @@ namespace WizardGame.Managers
             // Avoids duplicate spawnRoutines
             if (spawnRoutine != null) return;
 
-            spawnRoutine = coroutineRunner.StartCoroutine(SpawnLoop());
+            spawnRoutine = gameManager.StartCoroutine(SpawnLoop());
         }
 
         public void PauseSpawning()
         {
             if (spawnRoutine != null)
             {
-                coroutineRunner.StopCoroutine(spawnRoutine);
+                gameManager.StopCoroutine(spawnRoutine);
                 spawnRoutine = null;
             }
         }
 
-        private void OnNextWaveBegin()
+        private IEnumerator SpawnLoop()
+        {
+            var currentWave = gameManager.CurrentWave;
+            var waveData = stageData.Waves[currentWave];
+
+            while (true)
+            {                
+                if (currentEnemyCount < waveData.EnemyMaximum)
+                {
+                    SpawnEnemy(waveData.EnemyPrefabs);
+                }
+
+                yield return new WaitForSeconds(waveData.SpawnInterval);
+            }
+        }
+
+        private void SpawnEnemy(GameObject[] enemyPrefabs)
+        {
+            if (enemyPrefabs == null || enemyPrefabs.Length == 0)
+            {
+                Debug.LogWarning("Enemy prefabs list is empty for the current wave. Cannot spawn.");
+                return;
+            }
+            int listCount = enemyPrefabs.Length;
+            int choice = Random.Range(0, listCount);
+            GameObject enemyPrefabToSpawn = enemyPrefabs[choice];
+            // TODO: Figure out spawn area for enemies
+            Vector3 spawnPositionPlaceHolder = new Vector3(10, 0, 0);
+
+            Object.Instantiate(enemyPrefabToSpawn, spawnPositionPlaceHolder, Quaternion.identity);
+            currentEnemyCount++;
+        }
+
+        private void SpawnBoss(GameObject bossPrefab)
+        {
+            if (bossPrefab == null)
+            {
+                Debug.LogWarning("Attempted to spawn boss in wave where Boss Prefab is null!");
+            }
+        }
+
+#region Event Handlers
+
+        private void HandleNextWaveBegin()
         {
             PauseSpawning();
 
-            var currentWaveData = stageData.Waves[GameManager.Instance.CurrentWave];
+            var currentWaveData = stageData.Waves[gameManager.CurrentWave];
             if (currentWaveData.BossPrefab != null)
             {
                 SpawnBoss(currentWaveData.BossPrefab);
@@ -54,33 +104,22 @@ namespace WizardGame.Managers
             StartSpawning();
         }
 
-        private IEnumerator SpawnLoop()
+        private void HandleEnemyDied(EnemyController enemy)
         {
-            while (true)
-            {
-                var waveData = stageData.Waves[GameManager.Instance.CurrentWave];
-                
-                // TODO: Add EnemyMax/EnemyMin check before spawning
-
-                SpawnEnemy(waveData.EnemyPrefabs);
-
-                yield return new WaitForSeconds(stageData.Waves[currentWave].SpawnInterval);
-            }
+            currentEnemyCount--;
         }
 
-        private void SpawnEnemy(GameObject[] enemyPrefabs)
+        #endregion
+
+        protected override void UnsubscribeFromEvents()
         {
-            // TODO: Add enemy spawning logic
+            EventManager.OnNextWaveBegin -= HandleNextWaveBegin;
+            EventManager.OnEnemyDied -= HandleEnemyDied;
         }
 
-        private void SpawnBoss(GameObject bossPrefab)
+        public override void TearDown()
         {
-            // TODO: Add boss spawning logic
-        }
-
-        public void TearDown()
-        {
-            coroutineRunner.NextWaveBegin -= OnNextWaveBegin;
+            UnsubscribeFromEvents();
 
             PauseSpawning();
 

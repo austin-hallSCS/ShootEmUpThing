@@ -25,6 +25,8 @@ namespace WizardGame.Stats
             };
 
             InitializeFromSO(allStats);
+
+            RewardExperience = baseData.RewardExperience;
         }
     }
 }

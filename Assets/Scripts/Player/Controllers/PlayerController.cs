@@ -28,7 +28,7 @@ namespace WizardGame.Player
         public int NormInputX;
 
         // Movement variables
-        public Rigidbody2D rb { get; private set; }
+        public Rigidbody2D RB { get; private set; }
         private Vector2 move;
         private int currentFacingDirection = 1;
 
@@ -40,13 +40,19 @@ namespace WizardGame.Player
         // Other variables
         // private List<SpellController> equippedSpells;
 
+#region Unity Callback Functions
+
         private void Awake()
         {
             GetComponentReferences();
             ValidateData();
-            SubscribeToEvents();
             InitStatsAndAbilities();
             InitSpells();
+        }
+
+        private void Onable()
+        {
+            SubscribeToEvents();
         }
 
         void Start()
@@ -81,10 +87,17 @@ namespace WizardGame.Player
             Move();
         }
 
+        void OnDisable()
+        {
+            UnsubscribeFromEvents();
+        }
+
+        #endregion
+
         // Gets and stores references to the required components
         private void GetComponentReferences()
         {
-            rb = GetComponent<Rigidbody2D>();
+            RB = GetComponent<Rigidbody2D>();
             healthbar = GetComponentInChildren<HealthBarController>();
             FireBall = GetComponentInChildren<FireballSpellController>();
         }
@@ -103,11 +116,6 @@ namespace WizardGame.Player
             }
         }
 
-        private void SubscribeToEvents()
-        {
-            GameManager.Instance.XPManager.OnPlayerLevelUp += HandlePlayerLevelUp;
-        }
-
         // Creates runtime instances of stats and abilities
         private void InitStatsAndAbilities()
         {
@@ -122,21 +130,30 @@ namespace WizardGame.Player
                 FireBall.Initialize(playerAbilities);
             }
 
-            // Need to re-implement this function when there are multiple spells
+            // TODO: Re-implement this function when there are multiple spells
             // foreach (SpellController spell in equippedSpells)
             // {
             //     spell.Initialize(playerAbilities);
             // }
         }
 
+        private void SubscribeToEvents()
+        {
+            EventManager.OnPlayerLevelUp += HandlePlayerLevelUp;
+        }
+
+        private void UnsubscribeFromEvents()
+        {
+            EventManager.OnPlayerLevelUp -= HandlePlayerLevelUp;
+        }
         
-        
+#region Runtime Methods
         private void Move()
         {
             var moveSpeed = playerStats.GetStat(StatType.MovementSpeed).CurrentValue;
-            Vector2 position = rb.position + move * moveSpeed * Time.fixedDeltaTime;
+            Vector2 position = RB.position + move * moveSpeed * Time.fixedDeltaTime;
 
-            rb.MovePosition(position);
+            RB.MovePosition(position);
         }
 
         private void CheckIfShouldFlip()
@@ -155,7 +172,7 @@ namespace WizardGame.Player
         {
             currentFacingDirection *= -1;
 
-            rb.transform.Rotate(0.0f, 180.0f, 0.0f);
+            RB.transform.Rotate(0.0f, 180.0f, 0.0f);
         }
 
         public void Damage(float amount)
@@ -187,9 +204,10 @@ namespace WizardGame.Player
             }
         }
 
+#endregion
 #region Event Handlers
         
-        private void HandlePlayerLevelUp()
+        private void HandlePlayerLevelUp(int newLevel)
         {
             Debug.Log("Player level up!");
             // TODO: Handle level up

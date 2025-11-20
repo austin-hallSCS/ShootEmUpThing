@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace WizardGame.Utils
 {
-    // Testing github
     public class ShuffleBag<T>
     {
         private readonly List<T> allItems;

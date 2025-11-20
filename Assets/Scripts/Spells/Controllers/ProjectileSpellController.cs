@@ -22,6 +22,7 @@ namespace WizardGame.Spells
         {
             base.SpellActiveBehavior();
 
+            // FixMe: NullReferenceException
             var projectileAmount = spellStats.GetStat(StatType.Amount).CurrentValue;
 
             for (int i = 0; i < projectileAmount; i++)

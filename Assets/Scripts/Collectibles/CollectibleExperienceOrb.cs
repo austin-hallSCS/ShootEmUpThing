@@ -11,13 +11,14 @@ namespace WizardGame.Collectibles
         public void SetXPAmount(int amount)
         {
             xpAmount = amount;
+            Debug.Log($"Experience set: {xpAmount}");
         }
 
         public override void OnCollected()
         {
             base.OnCollected();
             
-            GameManager.Instance.XPManager.AddExperience(xpAmount);
+            EventManager.PublishExperienceCollected(xpAmount);
         }
     }
 }

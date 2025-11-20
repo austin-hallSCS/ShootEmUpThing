@@ -116,6 +116,7 @@ namespace WizardGame.Spells
 
         protected virtual void SpellActiveBehavior() { }
 
+        // FixMe: NullReferenceException
         protected virtual void ResetCoolDown() => currentCoolDownTimeAt = spellStats.GetStat(StatType.Cooldown).CurrentValue;
 
         protected virtual void ResetDuration() => currentDurationTimeAt = spellStats.GetStat(StatType.Duration).CurrentValue;

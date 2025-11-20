@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace WizardGame.Managers
 {
-    public class XPManager
+    public class XPManager : ManagerBase
     {
         public event Action OnPlayerLevelUp;
 
@@ -16,12 +16,14 @@ namespace WizardGame.Managers
             CurrentPlayerLevel = 1;
             CurrentXP = 0;
             XPToNextLevel = 5;
+
+            SubscribeToEvents();
         }
 
         public void AddExperience(int amount)
         {
             CurrentXP += amount;
-            Debug.Log($"Experience: {CurrentXP}");
+            Debug.Log($"Experience added: {CurrentXP}");
             CheckForLevelUp();
         }
 
@@ -42,6 +44,21 @@ namespace WizardGame.Managers
 
                 AddExperience(overflow);
             }
+        }
+
+        protected override void SubscribeToEvents()
+        {
+            EventManager.OnExperienceCollected += AddExperience;
+        }
+
+        protected override void UnsubscribeFromEvents()
+        {
+            EventManager.OnExperienceCollected -= AddExperience;
+        }
+
+        public override void TearDown()
+        {
+            UnsubscribeFromEvents();
         }
     }
 }
