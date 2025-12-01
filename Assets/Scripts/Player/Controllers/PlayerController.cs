@@ -50,13 +50,14 @@ namespace WizardGame.Player
             InitSpells();
         }
 
-        private void Onable()
+        private void OnEnable()
         {
             SubscribeToEvents();
         }
 
         void Start()
         {
+            RegisterWithGameManager();
             MoveAction.Enable();
 
             // Init player values
@@ -135,6 +136,14 @@ namespace WizardGame.Player
             // {
             //     spell.Initialize(playerAbilities);
             // }
+        }
+
+        private void RegisterWithGameManager()
+        {
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.PlayerController = this;
+            }
         }
 
         private void SubscribeToEvents()

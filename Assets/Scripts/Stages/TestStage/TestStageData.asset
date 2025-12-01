@@ -19,5 +19,9 @@ MonoBehaviour:
     <BossPrefab>k__BackingField: {fileID: 0}
     <EnemyPrefabs>k__BackingField:
     - {fileID: 1244771692766243100, guid: ab508c292d7093146843d888bdea279c, type: 3}
+    - {fileID: 6255224902855350917, guid: 634e3399a2dc3bf4fb40ff642be9afe3, type: 3}
+    - {fileID: 1244771692766243100, guid: ab508c292d7093146843d888bdea279c, type: 3}
+    - {fileID: 1244771692766243100, guid: ab508c292d7093146843d888bdea279c, type: 3}
+    - {fileID: 1244771692766243100, guid: ab508c292d7093146843d888bdea279c, type: 3}
     <EnemyMinimum>k__BackingField: 5
     <EnemyMaximum>k__BackingField: 25

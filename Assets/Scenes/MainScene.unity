@@ -164,7 +164,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WizardGame.GameManager
   <CurrentStageData>k__BackingField: {fileID: 11400000, guid: 26849d4916502c4479789ec12c263c66, type: 2}
-  <PlayerController>k__BackingField: {fileID: 428462018}
   CurrentStageTime: 0
 --- !u!1 &251133072
 GameObject:
@@ -255,17 +254,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5329385011336400309, guid: b75b5b7f753542d428e9468be5dcc307, type: 3}
   m_PrefabInstance: {fileID: 7235425721027168599}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &428462018 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3422856191798803131, guid: b75b5b7f753542d428e9468be5dcc307, type: 3}
-  m_PrefabInstance: {fileID: 7235425721027168599}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 428462013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e24ebb1834c12594382892615a4b1dde, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &729470876
 GameObject:
   m_ObjectHideFlags: 0
@@ -920,7 +908,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 342581bd23641d14894446b0dae97952, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

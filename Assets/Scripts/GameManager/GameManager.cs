@@ -12,10 +12,11 @@ namespace WizardGame.Managers
     {
         // Inspector-Editable Properties
         [field: SerializeField] public StageDataSO CurrentStageData { get; private set; }
-        [field: SerializeField] public PlayerController PlayerController { get; private set;}
+
+        public PlayerController PlayerController { get; set; }
 
         // Instance
-        public static GameManager Instance  {get; private set; }
+        public static GameManager Instance { get; private set; }
 
         // Sub-Managers
         private XPManager xpManager;
@@ -32,13 +33,18 @@ namespace WizardGame.Managers
         // Time
         public float CurrentStageTime;
 
-        
+
         public void Awake()
         {
             CreateInstance();
             InitManagers();
 
             CurrentWave = 0;
+        }
+
+        public void Start()
+        {
+            spawnManager.StartSpawning();
         }
 
         public void Update()
@@ -75,7 +81,7 @@ namespace WizardGame.Managers
         private void CheckForNextWave()
         {
             if (CurrentWave + 1 < CurrentStageData.Waves.Count)
-            {                
+            {
                 if (CurrentStageTime >= CurrentStageData.Waves[CurrentWave + 1].StartTime)
                 {
                     StartNextWave();

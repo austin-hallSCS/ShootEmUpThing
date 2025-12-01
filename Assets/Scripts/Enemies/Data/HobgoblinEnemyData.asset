@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f54bc6ab02f874143b6867660244c209, type: 3}
+  m_Name: HobgoblinEnemyData
+  m_EditorClassIdentifier: Assembly-CSharp::WizardGame.Enemy.EnemyDataSO
+  <EnemyName>k__BackingField: Hobgoblin
+  <EnemySprite>k__BackingField: {fileID: -4564423299386321571, guid: cff7feb2df06dd2448d794a941c6641a, type: 3}
+  <Health>k__BackingField:
+    statType: 9
+    isRounded: 0
+    increaseIsPositive: 1
+    isIgnored: 0
+    cap: 30
+    isCapChangeable: 1
+    minValue: 0
+    baseValue: 30
+  <DamageResistance>k__BackingField:
+    statType: 12
+    isRounded: 0
+    increaseIsPositive: 1
+    isIgnored: 0
+    cap: 50
+    isCapChangeable: 0
+    minValue: 0
+    baseValue: 0
+  <MovementSpeed>k__BackingField:
+    statType: 11
+    isRounded: 0
+    increaseIsPositive: 1
+    isIgnored: 0
+    cap: 5
+    isCapChangeable: 0
+    minValue: 1
+    baseValue: 1
+  <AttackDamage>k__BackingField:
+    statType: 1
+    isRounded: 0
+    increaseIsPositive: 0
+    isIgnored: 0
+    cap: 300
+    isCapChangeable: 0
+    minValue: 5
+    baseValue: 25
+  <AttackCooldown>k__BackingField:
+    statType: 4
+    isRounded: 0
+    increaseIsPositive: 0
+    isIgnored: 0
+    cap: 3
+    isCapChangeable: 0
+    minValue: 1
+    baseValue: 3
+  <RewardExperience>k__BackingField: 5

@@ -21,8 +21,6 @@ namespace WizardGame.Managers
             stageData = data;
 
             SubscribeToEvents();            
-
-            StartSpawning();
         }
 
         protected override void SubscribeToEvents()
