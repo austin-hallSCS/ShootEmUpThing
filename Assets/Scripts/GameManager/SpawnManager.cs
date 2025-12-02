@@ -76,6 +76,7 @@ namespace WizardGame.Managers
 
             Object.Instantiate(enemyPrefabToSpawn, spawnPositionPlaceHolder, Quaternion.identity);
             currentEnemyCount++;
+            Debug.Log($"currentEnemyCount: {currentEnemyCount}");
         }
 
         private void SpawnBoss(GameObject bossPrefab)
@@ -84,6 +85,11 @@ namespace WizardGame.Managers
             {
                 Debug.LogWarning("Attempted to spawn boss in wave where Boss Prefab is null!");
             }
+        }
+
+        private void GetRandomSpawnPoint()
+        {
+
         }
 
         #region Event Handlers
@@ -104,6 +110,7 @@ namespace WizardGame.Managers
         private void HandleEnemyDied(EnemyController enemy)
         {
             currentEnemyCount--;
+            Debug.Log($"currentEnemyCount: {currentEnemyCount}");
         }
 
         #endregion
@@ -119,8 +126,6 @@ namespace WizardGame.Managers
             UnsubscribeFromEvents();
 
             PauseSpawning();
-
-            Debug.Log("SpawnManager TearDown");
         }
     }
 }

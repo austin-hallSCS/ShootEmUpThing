@@ -36,7 +36,7 @@ namespace WizardGame.Spells
 
             timeAlive = 0f;
             inAir = true;
-            
+
             Animator.SetBool("inAir", inAir);
 
             Launch();
@@ -46,7 +46,7 @@ namespace WizardGame.Spells
         {
 
         }
-        
+
         private void Update()
         {
             timeAlive += Time.deltaTime;
@@ -58,7 +58,7 @@ namespace WizardGame.Spells
 
         void FixedUpdate()
         {
-            
+
         }
 
         public void Launch()
@@ -87,7 +87,7 @@ namespace WizardGame.Spells
 
             // Stop movement
             RB.linearVelocity = Vector3.zero;
-            
+
             // Set CircleCollider size and position to same as explosion
             CircleCollider.radius = transform.localScale.x / 4;
             CircleCollider.offset = Vector2.zero;
@@ -97,6 +97,7 @@ namespace WizardGame.Spells
 
         void OnTriggerStay2D(Collider2D other)
         {
+            // FIXME: Damages enemies on every frame (because of OnTriggerStay)
             if (!inAir)
             {
                 EnemyController enemy = other.GetComponent<EnemyController>();

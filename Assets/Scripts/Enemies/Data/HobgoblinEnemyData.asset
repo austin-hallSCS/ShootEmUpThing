@@ -39,8 +39,8 @@ MonoBehaviour:
     isIgnored: 0
     cap: 5
     isCapChangeable: 0
-    minValue: 1
-    baseValue: 1
+    minValue: 0.5
+    baseValue: 0.5
   <AttackDamage>k__BackingField:
     statType: 1
     isRounded: 0

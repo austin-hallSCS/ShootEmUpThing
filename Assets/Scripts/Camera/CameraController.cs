@@ -1,7 +1,7 @@
 using UnityEngine;
 using WizardGame.Player;
 
-namespace WizardGame.Camera
+namespace WizardGame.Cam
 {
     public class CameraController : MonoBehaviour
     {
@@ -10,7 +10,7 @@ namespace WizardGame.Camera
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
-        
+
         }
 
         void LateUpdate()

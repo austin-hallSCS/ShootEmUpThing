@@ -11,6 +11,7 @@ namespace WizardGame.Managers
     public class GameManager : MonoBehaviour
     {
         // Inspector-Editable Properties
+        [field: SerializeField] public Camera MainCamera { get; private set; }
         [field: SerializeField] public StageDataSO CurrentStageData { get; private set; }
 
         public PlayerController PlayerController { get; set; }
@@ -22,9 +23,6 @@ namespace WizardGame.Managers
         private XPManager xpManager;
         private SpawnManager spawnManager;
         private List<ManagerBase> pocoManagers = new();
-
-        // Global Events
-        public event Action<EnemyController> OnEnemyDied;
 
         // Waves
         public event Action NextWaveBegin;
@@ -45,6 +43,7 @@ namespace WizardGame.Managers
         public void Start()
         {
             spawnManager.StartSpawning();
+            Debug.Log($"Camera: {MainCamera.ViewportToWorldPoint(new Vector3(1.1f, 0.5f))}");
         }
 
         public void Update()
