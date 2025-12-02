@@ -7,7 +7,7 @@ namespace WizardGame.Managers
     {
         public event Action OnPlayerLevelUp;
 
-        public int CurrentPlayerLevel{ get; private set; }
+        public int CurrentPlayerLevel { get; private set; }
         public int CurrentXP { get; private set; }
         public int XPToNextLevel { get; private set; }
 
@@ -31,11 +31,13 @@ namespace WizardGame.Managers
         {
             if (CurrentXP >= XPToNextLevel)
             {
-                OnPlayerLevelUp?.Invoke();
+                EventManager.PublishLevelUp(CurrentPlayerLevel + 1);
+                Debug.Log("LevelUp Published.");
 
                 int overflow = CurrentXP - XPToNextLevel;
 
                 CurrentPlayerLevel++;
+                Debug.Log($"CurrentPlayerLevel: {CurrentPlayerLevel}");
 
                 // FIXME: make this not a magic number
                 XPToNextLevel += 10;

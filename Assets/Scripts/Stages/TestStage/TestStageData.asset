@@ -24,4 +24,4 @@ MonoBehaviour:
     - {fileID: 1244771692766243100, guid: ab508c292d7093146843d888bdea279c, type: 3}
     - {fileID: 1244771692766243100, guid: ab508c292d7093146843d888bdea279c, type: 3}
     <EnemyMinimum>k__BackingField: 5
-    <EnemyMaximum>k__BackingField: 25
+    <EnemyMaximum>k__BackingField: 15

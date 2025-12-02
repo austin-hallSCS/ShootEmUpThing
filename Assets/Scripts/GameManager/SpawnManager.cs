@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using WizardGame.Enemy;
 using WizardGame.Stages;
@@ -20,7 +19,7 @@ namespace WizardGame.Managers
             gameManager = manager;
             stageData = data;
 
-            SubscribeToEvents();            
+            SubscribeToEvents();
         }
 
         protected override void SubscribeToEvents()
@@ -52,7 +51,7 @@ namespace WizardGame.Managers
             var waveData = stageData.Waves[currentWave];
 
             while (true)
-            {                
+            {
                 if (currentEnemyCount < waveData.EnemyMaximum)
                 {
                     SpawnEnemy(waveData.EnemyPrefabs);
@@ -87,7 +86,7 @@ namespace WizardGame.Managers
             }
         }
 
-#region Event Handlers
+        #region Event Handlers
 
         private void HandleNextWaveBegin()
         {
