@@ -21,8 +21,10 @@ namespace WizardGame.Enemy
         // Movement variables
         public Rigidbody2D rb { get; private set; }
 
+        private float killDistance = 20f;
+
         void Awake()
-        {            
+        {
             GetComponentReferences();
             InitStats();
         }
@@ -35,6 +37,7 @@ namespace WizardGame.Enemy
         void FixedUpdate()
         {
             Move();
+            CheckForKillDistance();
         }
 
         private void GetComponentReferences()
@@ -74,9 +77,25 @@ namespace WizardGame.Enemy
                 var moveSpeed = enemyStats.GetStat(StatType.MovementSpeed).CurrentValue;
                 Vector2 currentPosition = rb.position;
                 Vector2 target = playerRB.position;
+
                 Vector2 position = Vector2.MoveTowards(currentPosition, target, moveSpeed * Time.deltaTime);
 
                 rb.MovePosition(position);
+            }
+        }
+
+        private void CheckForKillDistance()
+        {
+            if (playerRB != null)
+            {
+                // Compare squares of distance values to avoid expensive square root operations used by Vector2.Distance
+                float sqrDistance = (playerRB.position - rb.position).sqrMagnitude;
+
+                if (sqrDistance >= (killDistance * killDistance))
+                {
+                    EventManager.PublishEnemyDespawn(gameObject);
+                    Debug.Log("PublishEnemyDespawn called.");
+                }
             }
         }
 
@@ -91,7 +110,7 @@ namespace WizardGame.Enemy
 
         }
 
-        public void CheckHealth()
+        private void CheckHealth()
         {
             var healthAmount = enemyStats.GetStat(StatType.Health).CurrentValue;
             if (healthAmount <= 0)
@@ -100,7 +119,7 @@ namespace WizardGame.Enemy
             }
         }
 
-        public void OnDeath()
+        private void OnDeath()
         {
             var prefab = Instantiate(experiencePrefab, transform.position, Quaternion.identity);
             CollectibleExperienceOrb xpOrb = prefab.GetComponent<CollectibleExperienceOrb>();

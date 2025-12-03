@@ -1,5 +1,6 @@
 using System;
 using UnityEditor;
+using UnityEngine;
 using WizardGame.Enemy;
 
 namespace WizardGame.Managers
@@ -21,6 +22,7 @@ namespace WizardGame.Managers
 
         // -- Combat/Enemy --
         public static event Action<EnemyController> OnEnemyDied;
+        public static event Action<GameObject> OnEnemyDespawn;
         public static event Action OnNextWaveBegin;
         #endregion
 
@@ -37,6 +39,7 @@ namespace WizardGame.Managers
 
         //-- Combat/Enemy --
         public static void PublishEnemyDied(EnemyController enemy) => OnEnemyDied?.Invoke(enemy);
+        public static void PublishEnemyDespawn(GameObject enemyPrefab) => OnEnemyDespawn?.Invoke(enemyPrefab);
 
         public static void PublishOnNextWaveBegin() => OnNextWaveBegin?.Invoke();
 

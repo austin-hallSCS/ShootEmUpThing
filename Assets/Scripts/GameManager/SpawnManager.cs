@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using WizardGame.Enemy;
 using WizardGame.Stages;
@@ -17,11 +16,14 @@ namespace WizardGame.Managers
         private Coroutine spawnRoutine = null;
 
         private int currentEnemyCount;
+        private List<GameObject> despawnedEnemies;
 
         public SpawnManager(GameManager manager, StageDataSO data)
         {
             gameManager = manager;
             stageData = data;
+
+            despawnedEnemies = new List<GameObject>();
 
             SubscribeToEvents();
         }
@@ -30,6 +32,7 @@ namespace WizardGame.Managers
         {
             EventManager.OnNextWaveBegin += HandleNextWaveBegin;
             EventManager.OnEnemyDied += HandleEnemyDied;
+            EventManager.OnEnemyDespawn += HandleEnemyDespawn;
         }
 
         public void StartSpawning()
@@ -52,6 +55,8 @@ namespace WizardGame.Managers
         private IEnumerator SpawnLoop()
         {
             var currentWave = gameManager.CurrentWave;
+            if (currentWave >= stageData.Waves.Count) yield break;
+
             var waveData = stageData.Waves[currentWave];
 
             while (true)
@@ -67,11 +72,33 @@ namespace WizardGame.Managers
 
         private void SpawnEnemy(List<GameObject> enemyPrefabs)
         {
-            GameObject enemyPrefabToSpawn = GetRandom.FromList<GameObject>(enemyPrefabs);
+            if (enemyPrefabs == null || enemyPrefabs.Count == 0)
+            {
+                Debug.LogWarning("Enemy prefabs list is empty. Cannot spawn.");
+                return;
+            }
+
+            GameObject enemyToSpawn;
 
             Vector2 nextSpawnPosition = GameManager.Instance.MainCamera.ViewportToWorldPoint(GetRandomSpawnPoint());
 
-            Object.Instantiate(enemyPrefabToSpawn, nextSpawnPosition, Quaternion.identity);
+            if (despawnedEnemies.Count > 0)
+            {
+                int lastIndex = despawnedEnemies.Count - 1;
+                enemyToSpawn = despawnedEnemies[lastIndex];
+
+                despawnedEnemies.RemoveAt(lastIndex);
+
+                enemyToSpawn.transform.position = nextSpawnPosition;
+                enemyToSpawn.SetActive(true);
+
+                // TODO: Make dictionary pool to handle waves that have different types of enemies
+            }
+            else
+            {
+                enemyToSpawn = GetRandom.FromList<GameObject>(enemyPrefabs);
+                Object.Instantiate(enemyToSpawn, nextSpawnPosition, Quaternion.identity);
+            }
 
             currentEnemyCount++;
             Debug.Log($"currentEnemyCount: {currentEnemyCount}");
@@ -82,7 +109,9 @@ namespace WizardGame.Managers
             if (bossPrefab == null)
             {
                 Debug.LogWarning("Attempted to spawn boss in wave where Boss Prefab is null!");
+                return;
             }
+            // TODO: Add boss spawning logic here.
         }
 
         private Vector2 GetRandomSpawnPoint()
@@ -164,19 +193,30 @@ namespace WizardGame.Managers
             Debug.Log($"currentEnemyCount: {currentEnemyCount}");
         }
 
+        private void HandleEnemyDespawn(GameObject enemy)
+        {
+            currentEnemyCount--;
+            enemy.SetActive(false);
+            despawnedEnemies.Add(enemy);
+        }
+
         #endregion
 
         protected override void UnsubscribeFromEvents()
         {
             EventManager.OnNextWaveBegin -= HandleNextWaveBegin;
             EventManager.OnEnemyDied -= HandleEnemyDied;
+            EventManager.OnEnemyDespawn -= HandleEnemyDespawn;
         }
 
         public override void TearDown()
         {
             UnsubscribeFromEvents();
-
             PauseSpawning();
+
+            // Destroy all pool objects to clear memory fully
+            foreach (var enemy in despawnedEnemies) if (enemy) Object.Destroy(enemy);
+            despawnedEnemies.Clear();
         }
     }
 }
