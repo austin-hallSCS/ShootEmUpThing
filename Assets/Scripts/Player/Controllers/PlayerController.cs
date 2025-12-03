@@ -24,7 +24,6 @@ namespace WizardGame.Player
 
 
         // Input variables
-        public InputAction MoveAction;
         public int NormInputX;
 
         // Movement variables
@@ -40,7 +39,7 @@ namespace WizardGame.Player
         // Other variables
         // private List<SpellController> equippedSpells;
 
-#region Unity Callback Functions
+        #region Unity Callback Functions
 
         private void Awake()
         {
@@ -58,7 +57,6 @@ namespace WizardGame.Player
         void Start()
         {
             RegisterWithGameManager();
-            MoveAction.Enable();
 
             // Init player values
             isInvincible = false;
@@ -67,10 +65,13 @@ namespace WizardGame.Player
         // Update is called once per frame
         void Update()
         {
-            move = MoveAction.ReadValue<Vector2>();
+            if (GameManager.Instance != null)
+            {
+                move = GameManager.Instance.MoveInput;
+            }
 
             CheckIfShouldFlip();
-            
+
 
             // Damage cooldown - planning on removing this in favor of an "attack cooldown"
             if (isInvincible)
@@ -155,8 +156,8 @@ namespace WizardGame.Player
         {
             EventManager.OnPlayerLevelUp -= HandlePlayerLevelUp;
         }
-        
-#region Runtime Methods
+
+        #region Runtime Methods
         private void Move()
         {
             var moveSpeed = playerStats.GetStat(StatType.MovementSpeed).CurrentValue;
@@ -213,16 +214,16 @@ namespace WizardGame.Player
             }
         }
 
-#endregion
-#region Event Handlers
-        
+        #endregion
+        #region Event Handlers
+
         private void HandlePlayerLevelUp(int newLevel)
         {
             Debug.Log("Player level up!");
             // TODO: Handle level up
         }
 
-#endregion
+        #endregion
     }
 }
 

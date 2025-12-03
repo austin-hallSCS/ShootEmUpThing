@@ -1,10 +1,14 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using WizardGame.Enemy;
 using WizardGame.Stages;
+using WizardGame.Utils;
 
 namespace WizardGame.Managers
 {
+    public enum ScreenSide { Top, Right, Bottom, Left }
     public class SpawnManager : ManagerBase
     {
         private GameManager gameManager;
@@ -61,20 +65,14 @@ namespace WizardGame.Managers
             }
         }
 
-        private void SpawnEnemy(GameObject[] enemyPrefabs)
+        private void SpawnEnemy(List<GameObject> enemyPrefabs)
         {
-            if (enemyPrefabs == null || enemyPrefabs.Length == 0)
-            {
-                Debug.LogWarning("Enemy prefabs list is empty for the current wave. Cannot spawn.");
-                return;
-            }
-            int listCount = enemyPrefabs.Length;
-            int choice = Random.Range(0, listCount);
-            GameObject enemyPrefabToSpawn = enemyPrefabs[choice];
-            // TODO: Figure out spawn area for enemies
-            Vector3 spawnPositionPlaceHolder = new Vector3(10, 0, 0);
+            GameObject enemyPrefabToSpawn = GetRandom.FromList<GameObject>(enemyPrefabs);
 
-            Object.Instantiate(enemyPrefabToSpawn, spawnPositionPlaceHolder, Quaternion.identity);
+            Vector2 nextSpawnPosition = GameManager.Instance.MainCamera.ViewportToWorldPoint(GetRandomSpawnPoint());
+
+            Object.Instantiate(enemyPrefabToSpawn, nextSpawnPosition, Quaternion.identity);
+
             currentEnemyCount++;
             Debug.Log($"currentEnemyCount: {currentEnemyCount}");
         }
@@ -87,9 +85,62 @@ namespace WizardGame.Managers
             }
         }
 
-        private void GetRandomSpawnPoint()
+        private Vector2 GetRandomSpawnPoint()
         {
+            float roll = Random.value;
+            Direction nextSide = GetDirectionWeighted();
 
+            switch (nextSide)
+            {
+                case Direction.Up:
+                    return new Vector2(roll, 1.1f);
+                case Direction.Right:
+                    return new Vector2(1.1f, roll);
+                case Direction.Down:
+                    return new Vector2(roll, -0.1f);
+                case Direction.Left:
+                    return new Vector2(-0.1f, roll);
+                default:
+                    Debug.LogWarning("GetRandomSpawnPoint did not choose a valid side.");
+                    return new Vector2(roll, 1.1f);
+            }
+        }
+
+        // Uses cumulative probability to determine a random direction, weighted by the direction the player is moving
+        // Don't worry about the math too much. It makes my head hurt but it works.s
+        private Direction GetDirectionWeighted()
+        {
+            float wUp = 1f;
+            float wRight = 1f;
+            float wDown = 1f;
+            float wLeft = 1f;
+            float bonusWeight = 2f;
+
+            float inputX = GameManager.Instance.MoveInput.x;
+            float inputY = GameManager.Instance.MoveInput.y;
+
+            // Add weight based on player input
+            if (inputX > 0) wRight += bonusWeight;
+            else if (inputX < 0) wLeft += bonusWeight;
+
+            if (inputY > 0) wUp += bonusWeight;
+            else if (inputY < 0) wDown += bonusWeight;
+
+            float totalWeight = wUp + wRight + wDown + wLeft;
+
+            float roll = Random.Range(0f, totalWeight);
+
+            // Apply subtraction method to determine direction
+            if (roll < wUp) return Direction.Up;
+            roll -= wUp;
+
+            if (roll < wRight) return Direction.Right;
+            roll -= wRight;
+
+            if (roll < wDown) return Direction.Down;
+            roll -= wDown;
+
+            return Direction.Left;
         }
 
         #region Event Handlers
