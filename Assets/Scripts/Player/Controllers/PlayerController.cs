@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 using WizardGame.Spells;
 using WizardGame.Interfaces;
 using WizardGame.Stats;
@@ -22,9 +21,6 @@ namespace WizardGame.Player
         protected PlayerStats playerStats;
         protected PlayerAbilities playerAbilities;
 
-
-        // Input variables
-        public int NormInputX;
 
         // Movement variables
         public Rigidbody2D RB { get; private set; }
