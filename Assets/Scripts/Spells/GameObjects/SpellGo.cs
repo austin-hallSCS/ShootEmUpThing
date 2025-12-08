@@ -11,6 +11,8 @@ namespace WizardGame.Spells
         public Rigidbody2D RB { get; private set; }
         public CircleCollider2D CircleCollider { get; private set; }
 
+        protected Transform target;
+
         protected virtual void Awake()
         {
             // Get components
@@ -21,6 +23,15 @@ namespace WizardGame.Spells
         public virtual void Initialize(SpellStats stats)
         {
             spellStats = stats;
+            AddAreaStat();
+        }
+
+        public virtual void Initialize(SpellStats stats, Transform targetTransform)
+        {
+            spellStats = stats;
+            AddAreaStat();
+
+            target = targetTransform;
         }
 
         protected virtual void Start()

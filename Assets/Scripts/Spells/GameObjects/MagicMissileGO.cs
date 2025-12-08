@@ -5,22 +5,28 @@ namespace WizardGame.Spells
 {
     public class MagicMissileGO : SpellGO
     {
-        private Transform target;
+        [field: SerializeField] private float curveHeightRange;
+
         private Vector3 startPoint;
         private Vector3 controlPoint;
 
+
         private float timeElapsed = 0f;
         private float flightDuration = 1.0f;
+        private float curveHeight;
+
         private bool isLaunched = false;
 
-        protected override void Start()
+        public override void Initialize(SpellStats stats, Transform targetTransform)
         {
+            base.Initialize(stats, targetTransform);
+            curveHeight = Random.Range(-curveHeightRange, curveHeightRange);
 
+            Launch();
         }
 
-        public void SetTarget(Transform targetTransform, float curveHeight)
+        public override void Launch()
         {
-            target = targetTransform;
             startPoint = transform.position;
             isLaunched = true;
 
@@ -50,22 +56,8 @@ namespace WizardGame.Spells
         {
             if (!isLaunched) return;
 
-            // Increment time
-            timeElapsed += Time.deltaTime;
-            float t = timeElapsed / flightDuration;
-
-            // Target might die while missile is flying
-            Vector3 endPoint;
-            if (target != null)
-            {
-                endPoint = target.position;
-            }
-            else
-            {
-                // Destroying for now, may change this to continue wherever the target was last
-                Destroy(gameObject);
-                return;
-            }
+            float t = IncrementTime();
+            Vector3 endPoint = GetEndPoint();
 
             if (t >= 1.0f)
             {
@@ -74,12 +66,7 @@ namespace WizardGame.Spells
                 return;
             }
 
-            //-- BEZIER FORMULA --
-            // Position = (1-t)^2 * Start + 2(1-t)t * Control + t^2 * End
-
-            Vector3 p1 = Vector3.Lerp(startPoint, controlPoint, t);
-            Vector3 p2 = Vector3.Lerp(controlPoint, endPoint, t);
-            Vector3 finalPosition = Vector3.Lerp(p1, p2, t);
+            Vector3 finalPosition = BezierCalculation(endPoint, t);
 
             // Rotation
             Vector3 direction = (finalPosition - transform.position).normalized;
@@ -87,6 +74,36 @@ namespace WizardGame.Spells
             transform.rotation = Quaternion.Euler(0, 0, angle);
 
             transform.position = finalPosition;
+        }
+
+        private float IncrementTime()
+        {
+            timeElapsed += Time.deltaTime;
+            return timeElapsed / flightDuration;
+        }
+
+        private Vector3 GetEndPoint()
+        {
+            // Target might die while missile is flying
+            if (target != null)
+            {
+                return target.position;
+            }
+            else
+            {
+                // Destroying for now, may change this to continue wherever the target was last
+                Destroy(gameObject);
+                return Vector3.up; // This is temp, figure out what to return later.
+            }
+        }
+        private Vector3 BezierCalculation(Vector3 endPoint, float currentTime)
+        {
+            //-- BEZIER FORMULA --
+            // Position = (1-t)^2 * Start + 2(1-t)t * Control + t^2 * End
+
+            Vector3 p1 = Vector3.Lerp(startPoint, controlPoint, currentTime);
+            Vector3 p2 = Vector3.Lerp(controlPoint, endPoint, currentTime);
+            return Vector3.Lerp(p1, p2, currentTime);
         }
     }
 }

@@ -22,7 +22,6 @@ namespace WizardGame.Spells
         public override void Initialize(SpellStats stats)
         {
             base.Initialize(stats);
-            AddAreaStat();
 
             timeAlive = 0f;
             inAir = true;

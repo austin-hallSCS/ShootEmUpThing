@@ -8,8 +8,6 @@ namespace WizardGame.Spells
 {
     public class MagicMissileSpellController : ProjectileSpellController
     {
-        private float curveHeightRange = 2.0f;
-
         protected override void SpellActiveBehavior()
         {
             StartCoroutine(FireBurst());
@@ -45,10 +43,7 @@ namespace WizardGame.Spells
             var projectile = Instantiate(spellPrefab, transform.position, quaternion.identity);
             var missileScript = projectile.GetComponent<MagicMissileGO>();
 
-            missileScript.Initialize(spellStats);
-
-            float randomArc = UnityEngine.Random.Range(-curveHeightRange, curveHeightRange);
-            missileScript.SetTarget(target, randomArc);
+            missileScript.Initialize(spellStats, target);
         }
     }
 }
