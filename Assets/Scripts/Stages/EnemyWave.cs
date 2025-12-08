@@ -1,5 +1,4 @@
-using Unity.VisualScripting;
-using UnityEditor.EditorTools;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace WizardGame.Stages
@@ -16,7 +15,7 @@ namespace WizardGame.Stages
 
         [field: Header("Enemy Prefabs")]
         [field: SerializeField] public GameObject BossPrefab { get; private set; }
-        [field: SerializeField] public GameObject[] EnemyPrefabs { get; private set; }
+        [field: SerializeField] public List<GameObject> EnemyPrefabs { get; private set; }
 
         [field: Header("Limits")]
         [field: SerializeField] public int EnemyMinimum { get; private set; }

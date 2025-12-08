@@ -46,8 +46,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a4c24f510a1f6454fa3195cdfd481656, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WizardGame.CollectibleExperienceOrb
-  ExperienceAmount: 0
+  m_EditorClassIdentifier: Assembly-CSharp::WizardGame.Collectibles.CollectibleExperienceOrb
 --- !u!212 &5529804537371651781
 SpriteRenderer:
   m_ObjectHideFlags: 0

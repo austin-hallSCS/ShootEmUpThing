@@ -1,36 +1,45 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using WizardGame.Enemy;
 using WizardGame.Player;
 using WizardGame.Stages;
 
 namespace WizardGame.Managers
 {
     public enum GameState { Playing, Paused, GameOver }
+    public enum Direction { Up, Down, Left, Right }
     public class GameManager : MonoBehaviour
     {
-        // Inspector-Editable Properties
+        //-- Inspector-Editable Properties --
+        [field: SerializeField] public Camera MainCamera { get; private set; }
         [field: SerializeField] public StageDataSO CurrentStageData { get; private set; }
 
         public PlayerController PlayerController { get; set; }
 
-        // Instance
+        //-- Instance --
         public static GameManager Instance { get; private set; }
 
-        // Sub-Managers
+        //-- Sub-Managers --
         private XPManager xpManager;
         private SpawnManager spawnManager;
+        private InputManager inputManager;
         private List<ManagerBase> pocoManagers = new();
 
-        // Global Events
-        public event Action<EnemyController> OnEnemyDied;
+        //-- Input --
+        public Vector2 MoveInput
+        {
+            get
+            {
+                if (inputManager == null) return Vector2.zero;
+                return inputManager.MoveInput;
+            }
+        }
 
-        // Waves
+        //-- Waves --
         public event Action NextWaveBegin;
         public int CurrentWave { get; private set; }
 
-        // Time
+        //-- Time --
         public float CurrentStageTime;
 
 
@@ -76,6 +85,9 @@ namespace WizardGame.Managers
 
             spawnManager = new SpawnManager(this, CurrentStageData);
             pocoManagers.Add(spawnManager);
+
+            inputManager = new InputManager();
+            pocoManagers.Add(inputManager);
         }
 
         private void CheckForNextWave()

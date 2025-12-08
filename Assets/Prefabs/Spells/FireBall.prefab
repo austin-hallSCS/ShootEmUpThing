@@ -99,7 +99,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3904229056372167081}
-  - component: {fileID: 5177412291742412150}
+  - component: {fileID: 2779467861455481715}
   - component: {fileID: 6481974548914127927}
   - component: {fileID: 1515648993782756348}
   - component: {fileID: -7063235558568124357}
@@ -126,7 +126,7 @@ Transform:
   - {fileID: 1182671193819041014}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5177412291742412150
+--- !u!114 &2779467861455481715
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -135,9 +135,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7869993318420548649}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f257534605afe24f812ba6d259e0458, type: 3}
+  m_Script: {fileID: 11500000, guid: cc29be46cf0293046a1b2f90815b4803, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WizardGame.FireballGO
+  m_EditorClassIdentifier: Assembly-CSharp::WizardGame.Spells.FireballGO
 --- !u!50 &6481974548914127927
 Rigidbody2D:
   serializedVersion: 5

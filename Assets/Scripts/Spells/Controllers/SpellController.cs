@@ -4,13 +4,12 @@ using WizardGame.Stats;
 
 namespace WizardGame.Spells
 {
-    public class SpellController : MonoBehaviour
+    public abstract class SpellController : MonoBehaviour
     {
         [SerializeField] protected LayerMask whatIsEnemy;
         [SerializeField] protected GameObject spellPrefab;
         [SerializeField] protected float spawnRadius;
         [SerializeField] protected SpellDataSO spellData;
-        // public Camera Cam;
 
         protected SpellStats spellStats;
         protected PlayerAbilities ownerAbilities;
@@ -30,16 +29,6 @@ namespace WizardGame.Spells
         protected float projectileAmount;
         protected bool isActive;
 
-        // Check transforms
-        protected Vector2 enemyCheckSize;
-
-        private Transform nearestEnemy;
-
-
-        protected virtual void Awake()
-        {
-            // InitStats();
-        }
 
         // Initializes the spell with a reference to the caster's abilities.
         public virtual void Initialize(PlayerAbilities abilities)
@@ -47,25 +36,17 @@ namespace WizardGame.Spells
             ownerAbilities = abilities;
 
             InitStats();
-
         }
+
+
+        protected virtual void Awake() { }
 
         protected virtual void Start()
         {
             SpellDeactivate();
-            // currentLevelUpTimerAt = 5.0f;
         }
 
-        protected virtual void Update()
-        {
-            // currentLevelUpTimerAt -= Time.deltaTime;
-            // if (currentLevelUpTimerAt <= 0)
-            // {
-            //     currentLevelUpTimerAt = 5.0f;
-            //     LevelUp();
-                
-            // }
-        }
+        protected virtual void Update() { }
 
         protected virtual void FixedUpdate()
         {
@@ -114,39 +95,10 @@ namespace WizardGame.Spells
             ResetCoolDown();
         }
 
-        protected virtual void SpellActiveBehavior() { }
+        protected abstract void SpellActiveBehavior();
 
-        // FixMe: NullReferenceException
         protected virtual void ResetCoolDown() => currentCoolDownTimeAt = spellStats.GetStat(StatType.Cooldown).CurrentValue;
 
         protected virtual void ResetDuration() => currentDurationTimeAt = spellStats.GetStat(StatType.Duration).CurrentValue;
-
-        // protected Vector2 GetCameraSize()
-        // {
-        //     float aspect = Screen.width / Screen.height;
-        //     var orthoSize = Cam.orthographicSize;
-
-        //     float width = 2.0f * orthoSize * aspect;
-        //     float height = 2.0f * orthoSize;
-
-        //     return new Vector2(width, height);
-
-        // }
-
-        // protected Vector3 GetNearestEnemyPosition()
-        // {
-        //     RaycastHit2D[] detectedEnemies = Physics2D.BoxCastAll(new Vector2(0, 0), enemyCheckSize, 0.0f, new Vector2(0, 0), 5f, whatIsEnemy);
-
-        //     if (detectedEnemies.Length != 0)
-        //     {
-        //         nearestEnemy = detectedEnemies[0].transform;
-        //     }
-        //     else
-        //     {
-        //         nearestEnemy = null;
-        //     }
-
-        //     return nearestEnemy.position;
-        // }
     }
 }
