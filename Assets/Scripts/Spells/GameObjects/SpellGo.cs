@@ -13,6 +13,8 @@ namespace WizardGame.Spells
 
         protected Transform target;
 
+        protected float areaMultiplier = 1.0f;
+
         protected virtual void Awake()
         {
             // Get components
@@ -23,47 +25,30 @@ namespace WizardGame.Spells
         public virtual void Initialize(SpellStats stats)
         {
             spellStats = stats;
-            AddAreaStat();
+            CalculateStats();
         }
 
         public virtual void Initialize(SpellStats stats, Transform targetTransform)
         {
             spellStats = stats;
-            AddAreaStat();
+            CalculateStats();
 
             target = targetTransform;
         }
 
-        protected virtual void Start()
+        protected virtual void Start() { }
+
+        protected virtual void Update() { }
+
+        protected virtual void FixedUpdate() { }
+
+        public virtual void Launch() { }
+
+        protected virtual void CalculateStats()
         {
-
-        }
-
-        protected virtual void Update()
-        {
-
-        }
-
-        protected virtual void FixedUpdate()
-        {
-
-        }
-
-        public virtual void Launch()
-        {
-
-        }
-
-        protected virtual void AddAreaStat()
-        {
-            // Break out of function if stats is null
             if (spellStats == null) return;
 
-            // Get Area Amount current value
-            float areaMultiplier = spellStats.GetStat(StatType.Area).CurrentValue;
-
-            // Increase size
-            transform.localScale = new Vector3(areaMultiplier, areaMultiplier, 1f);
+            areaMultiplier = spellStats.GetStat(StatType.Area).CurrentValue;
         }
 
         void AnimationFinishTrigger() => Destroy(gameObject);

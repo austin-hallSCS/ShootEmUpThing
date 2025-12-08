@@ -41,7 +41,7 @@ MonoBehaviour:
     cap: 3
     isCapChangeable: 0
     minValue: 1
-    baseValue: 1
+    baseValue: 3
   <SpeedAmount>k__BackingField:
     statType: 3
     isRounded: 0

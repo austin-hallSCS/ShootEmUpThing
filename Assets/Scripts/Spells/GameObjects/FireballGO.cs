@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using WizardGame.Enemy;
 using WizardGame.Stats;
@@ -12,6 +13,8 @@ namespace WizardGame.Spells
         private float inAirTime = 0.75f;
         private float timeAlive;
         private bool inAir;
+
+        private List<int> damagedEnemyIDs = new List<int>();
 
         protected override void Awake()
         {
@@ -28,11 +31,6 @@ namespace WizardGame.Spells
 
             Launch();
             Animator.SetBool("inAir", inAir);
-        }
-
-        protected override void Start()
-        {
-
         }
 
         protected override void Update()
@@ -52,28 +50,44 @@ namespace WizardGame.Spells
 
         private void Explode()
         {
-            // Send boolean to Animator
             inAir = false;
             Animator.SetBool("inAir", inAir);
-
-            // Stop movement
             RB.linearVelocity = Vector3.zero;
 
+            transform.localScale = new Vector3(areaMultiplier, areaMultiplier, 1f);
+
             // Set CircleCollider size and position to same as explosion
-            CircleCollider.radius = transform.localScale.x / 4;
+            CircleCollider.radius = 0.5f;
             CircleCollider.offset = Vector2.zero;
+        }
+
+        void OnTriggerEnter2D(Collider2D other)
+        {
+            EnemyController enemy = other.GetComponent<EnemyController>();
+            if (inAir && enemy != null)
+            {
+                Explode();
+            }
         }
 
         void OnTriggerStay2D(Collider2D other)
         {
-            // FIXME: Damages enemies on every frame (because of OnTriggerStay)
             if (!inAir)
             {
                 EnemyController enemy = other.GetComponent<EnemyController>();
                 if (enemy != null)
                 {
-                    var damageAmount = spellStats.GetStat(StatType.Damage).CurrentValue;
-                    enemy.Damage(damageAmount);
+                    int enemyID = enemy.GetInstanceID();
+                    if (damagedEnemyIDs.Contains(enemyID))
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        var damageAmount = spellStats.GetStat(StatType.Damage).CurrentValue;
+                        enemy.Damage(damageAmount);
+                        damagedEnemyIDs.Add(enemyID);
+                    }
                 }
             }
         }
