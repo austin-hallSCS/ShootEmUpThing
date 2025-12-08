@@ -1,4 +1,3 @@
-using UnityEngine;
 using WizardGame.Stats;
 
 namespace WizardGame.Spells
@@ -8,21 +7,8 @@ namespace WizardGame.Spells
         //Status variables
         protected float currentProjectileIntervalTimeAt;
 
-        protected override void Update()
-        {
-            base.Update();
-        }
-
-        protected override void FixedUpdate()
-        {
-            base.FixedUpdate();
-        }
-
         protected override void SpellActiveBehavior()
         {
-            base.SpellActiveBehavior();
-
-            // FixMe: NullReferenceException
             var projectileAmount = spellStats.GetStat(StatType.Amount).CurrentValue;
 
             for (int i = 0; i < projectileAmount; i++)
@@ -45,9 +31,9 @@ namespace WizardGame.Spells
 
         protected virtual void FireProjectile()
         {
-            // var projectileInst = Instantiate(spellPrefab, (Vector3)transform.position, Quaternion.identity, transform);
+
         }
-        
+
         protected virtual void ResetProjectileIntervalTime()
         {
             currentProjectileIntervalTimeAt = spellStats.ProjectileIntervalTime;

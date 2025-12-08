@@ -3,7 +3,7 @@ using WizardGame.Stats;
 
 namespace WizardGame.Spells
 {
-    public class SpellGO : MonoBehaviour
+    public abstract class SpellGO : MonoBehaviour
     {
         protected SpellStats spellStats;
 

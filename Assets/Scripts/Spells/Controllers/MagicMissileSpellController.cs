@@ -1,18 +1,11 @@
 using UnityEditor.Callbacks;
 using UnityEngine;
 
-namespace WizardGame
+namespace WizardGame.Spells
 {
-    public class MagicMissileSpellController : MonoBehaviour
+    public class MagicMissileSpellController : SpellController
     {
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
-        {
-
-        }
-
-        // Update is called once per frame
-        void Update()
+        protected override void SpellActiveBehavior()
         {
 
         }

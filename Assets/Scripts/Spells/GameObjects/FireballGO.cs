@@ -10,7 +10,6 @@ namespace WizardGame.Spells
         public Animator Animator { get; private set; }
 
         private float inAirTime = 0.75f;
-
         private float timeAlive;
         private bool inAir;
 
