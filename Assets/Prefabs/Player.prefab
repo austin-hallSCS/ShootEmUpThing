@@ -265,111 +265,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e24ebb1834c12594382892615a4b1dde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveAction:
-    m_Name: Move
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 1766b29c-c658-4d5e-b8f8-d9e015c68d14
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 2D Vector
-      m_Id: 657bba14-d55a-4e9a-8304-38ef30e4d8b6
-      m_Path: 2DVector
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Move
-      m_Flags: 4
-    - m_Name: up
-      m_Id: a0418b0e-9b39-4e97-9b82-7ea0df6197bf
-      m_Path: <Keyboard>/w
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Move
-      m_Flags: 8
-    - m_Name: down
-      m_Id: 40cea357-7fbf-41e6-8c35-a8f81956c621
-      m_Path: <Keyboard>/s
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Move
-      m_Flags: 8
-    - m_Name: left
-      m_Id: e20b172f-c5ff-4d43-885b-6a4b9a649274
-      m_Path: <Keyboard>/a
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Move
-      m_Flags: 8
-    - m_Name: right
-      m_Id: 889d080f-a4dc-40ab-bdf3-a3e08e2f39af
-      m_Path: <Keyboard>/d
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Move
-      m_Flags: 8
-    m_Flags: 0
-  AttackAction:
-    m_Name: Attack
-    m_Type: 1
-    m_ExpectedControlType: Button
-    m_Id: dedf4aa8-3b26-459d-9b9a-c193fb8574b3
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 73ee5f12-a889-464a-808b-44a268c4e392
-      m_Path: <Mouse>/leftButton
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Attack
-      m_Flags: 0
-    m_Flags: 0
-  AbilityAction:
-    m_Name: Ability
-    m_Type: 1
-    m_ExpectedControlType: Button
-    m_Id: 88be4611-6c47-4ba9-9d41-331a960d4694
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: e2355c7c-f0ef-42df-bbd6-4a7e85eb1cda
-      m_Path: <Mouse>/rightButton
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Ability
-      m_Flags: 0
-    m_Flags: 0
-  DashAction:
-    m_Name: Dash
-    m_Type: 1
-    m_ExpectedControlType: Button
-    m_Id: 72f5b5fa-6c7e-49a9-ba9b-56a28a0d151f
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 0079dd4f-acb8-4077-8d88-71ab5c72e70f
-      m_Path: <Keyboard>/space
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Dash
-      m_Flags: 0
-    m_Flags: 0
-  NormInputX: 0
-  MaxHealth: 5
-  MovementSpeed: 2
-  DamageCoolDownTime: 1
-  FireballCoolDownTime: 3
+  playerAbilityData: {fileID: 0}
+  playerData: {fileID: 0}
 --- !u!212 &7432109336035017636
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -784,60 +681,6 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
---- !u!1 &7335370521445634815
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2389931203111101875}
-  - component: {fileID: 5260666493181096952}
-  m_Layer: 12
-  m_Name: FireBallSpellController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2389931203111101875
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7335370521445634815}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.29, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6346624846328058312}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5260666493181096952
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7335370521445634815}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb25040d0357b3d43a89c504276fcd45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WizardGame.PlayerSystem.FireballSpellController
-  whatIsEnemy:
-    serializedVersion: 2
-    m_Bits: 2048
-  Cam: {fileID: 8344213653484821035}
-  WhatIsEnemy:
-    serializedVersion: 2
-    m_Bits: 0
-  SpellPrefab: {fileID: 7869993318420548649, guid: 23c51bed58404764c802a1f9e308c634, type: 3}
-  CoolDownTime: 3
-  force: 200
 --- !u!1 &9220666425574704492
 GameObject:
   m_ObjectHideFlags: 0
@@ -975,3 +818,65 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!1001 &2230204047975887773
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6346624846328058312}
+    m_Modifications:
+    - target: {fileID: 4600984504892560942, guid: 83b3e3a690817624a96f4094f40004e9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4600984504892560942, guid: 83b3e3a690817624a96f4094f40004e9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 4600984504892560942, guid: 83b3e3a690817624a96f4094f40004e9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4600984504892560942, guid: 83b3e3a690817624a96f4094f40004e9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4600984504892560942, guid: 83b3e3a690817624a96f4094f40004e9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4600984504892560942, guid: 83b3e3a690817624a96f4094f40004e9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4600984504892560942, guid: 83b3e3a690817624a96f4094f40004e9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4600984504892560942, guid: 83b3e3a690817624a96f4094f40004e9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4600984504892560942, guid: 83b3e3a690817624a96f4094f40004e9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4600984504892560942, guid: 83b3e3a690817624a96f4094f40004e9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8880885555233956194, guid: 83b3e3a690817624a96f4094f40004e9, type: 3}
+      propertyPath: m_Name
+      value: FireBallSpellController
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 83b3e3a690817624a96f4094f40004e9, type: 3}
+--- !u!4 &2389931203111101875 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4600984504892560942, guid: 83b3e3a690817624a96f4094f40004e9, type: 3}
+  m_PrefabInstance: {fileID: 2230204047975887773}
+  m_PrefabAsset: {fileID: 0}

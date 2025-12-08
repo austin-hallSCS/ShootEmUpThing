@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using UnityEngine;
 
 namespace WizardGame.Managers
@@ -7,13 +8,28 @@ namespace WizardGame.Managers
     /// </summary>
     public abstract class ManagerBase
     {
-        // Subscribes to global events as defined in the EventManager
-        protected abstract void SubscribeToEvents();
+        protected GameManager gameManager;
 
-        // Unsubscribes from global events. Called automatically during Teardown.
+        public ManagerBase(GameManager manager)
+        {
+            gameManager = manager;
+        }
+
+        // -- Contract Methods --
+        protected abstract void SubscribeToEvents();
         protected abstract void UnsubscribeFromEvents();
 
         // Cleans up subscriptions and resources before the manager is destroyed.
-        public abstract void TearDown();
+        public void TearDown()
+        {
+            UnsubscribeFromEvents();
+
+            // For child-specific cleanup.
+            OnTearDown();
+
+            Debug.Log($"{this.GetType().Name} TearDown complete");
+        }
+
+        protected virtual void OnTearDown() { }
     }
 }

@@ -8,25 +8,25 @@ namespace WizardGame.Managers
         private GameControls controls;
 
         public Vector2 MoveInput => controls.Gameplay.WASD.ReadValue<Vector2>();
-        public InputManager()
+        public InputManager(GameManager manager) : base(manager)
         {
             controls = new GameControls();
             controls.Enable();
 
-            controls.Gameplay.Pause.performed += _ => EventManager.PublishGamePaused();
+            SubscribeToEvents();
         }
 
         protected override void SubscribeToEvents()
         {
-
+            controls.Gameplay.Pause.performed += _ => EventManager.PublishGamePaused();
         }
 
         protected override void UnsubscribeFromEvents()
         {
-
+            controls.Gameplay.Pause.performed -= _ => EventManager.PublishGamePaused();
         }
 
-        public override void TearDown()
+        protected override void OnTearDown()
         {
             controls.Disable();
             controls.Dispose();

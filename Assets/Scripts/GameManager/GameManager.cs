@@ -13,8 +13,7 @@ namespace WizardGame.Managers
         //-- Inspector-Editable Properties --
         [field: SerializeField] public Camera MainCamera { get; private set; }
         [field: SerializeField] public StageDataSO CurrentStageData { get; private set; }
-
-        public PlayerController PlayerController { get; set; }
+        [field: SerializeField] public PlayerController PlayerController { get; set; }
 
         //-- Instance --
         public static GameManager Instance { get; private set; }
@@ -23,6 +22,7 @@ namespace WizardGame.Managers
         private XPManager xpManager;
         private SpawnManager spawnManager;
         private InputManager inputManager;
+        private InventoryManager inventoryManager;
         private List<ManagerBase> pocoManagers = new();
 
         //-- Input --
@@ -42,6 +42,9 @@ namespace WizardGame.Managers
         //-- Time --
         public float CurrentStageTime;
 
+        //-- Temp --
+        public GameObject defaultSpellPrefab;
+
 
         public void Awake()
         {
@@ -53,6 +56,15 @@ namespace WizardGame.Managers
 
         public void Start()
         {
+            if (PlayerController != null)
+            {
+                AddStartingSpell(defaultSpellPrefab);
+            }
+            else
+            {
+                Debug.LogWarning("PlayerController is null on GameManager!");
+            }
+
             spawnManager.StartSpawning();
         }
 
@@ -80,14 +92,23 @@ namespace WizardGame.Managers
 
         private void InitManagers()
         {
-            xpManager = new XPManager();
+            xpManager = new XPManager(this);
             pocoManagers.Add(xpManager);
 
             spawnManager = new SpawnManager(this, CurrentStageData);
             pocoManagers.Add(spawnManager);
 
-            inputManager = new InputManager();
+            inputManager = new InputManager(this);
             pocoManagers.Add(inputManager);
+
+            inventoryManager = new InventoryManager(this);
+            pocoManagers.Add(inventoryManager);
+        }
+
+        // Temp for testing.
+        public void AddStartingSpell(GameObject spellPrefab)
+        {
+            inventoryManager.AddSpell(spellPrefab);
         }
 
         private void CheckForNextWave()
