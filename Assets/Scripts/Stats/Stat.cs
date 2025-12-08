@@ -23,7 +23,7 @@ namespace WizardGame.Stats
         [Tooltip("Can the 'Cap' value be changed at runtime (e.g. for Max Health)?")]
         [SerializeField] private bool isCapChangeable = true;
 
-        
+
         [SerializeField] private float minValue;
         [SerializeField] private float baseValue;
 
@@ -92,13 +92,14 @@ namespace WizardGame.Stats
             {
                 Debug.LogWarning($"Attemped to change the cap on a fixed-cap stat: {StatType}.");
             }
-            
+
         }
         public void SetCurrentValue(float newValue) => CurrentValue = newValue;
         public void SetStatType(StatType newType) => statType = newType;
 
         public void ApplyModifier(StatModifier mod)
         {
+            if (isIgnored) return;
             CurrentValue = GetModifiedValue(mod);
         }
 
