@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using WizardGame.Enemy;
 using WizardGame.Stats;
 
 namespace WizardGame.Spells
@@ -52,7 +53,6 @@ namespace WizardGame.Spells
             flightDuration = distance / speed;
 
             //-- Control Point Calculation
-
             Vector3 endPoint = lastKnownTargetPos;
             Vector3 direction = (endPoint - startPoint).normalized;
 
@@ -116,7 +116,14 @@ namespace WizardGame.Spells
 
         private void OnImpact()
         {
-            //TODO: Add damage logic here
+            var damageAmount = spellStats.GetStat(StatType.Damage).CurrentValue;
+
+            if (target != null)
+            {
+                EnemyController enemy = target.gameObject.GetComponent<EnemyController>();
+                if (enemy != null) enemy.Damage(damageAmount);
+            }
+
             Destroy(gameObject);
         }
     }
