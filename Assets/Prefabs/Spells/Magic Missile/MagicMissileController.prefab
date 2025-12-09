@@ -44,9 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f51804ce3f94424a9f3bd3a3f3c326c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WizardGame.Spells.MagicMissileSpellController
+  spellPrefab: {fileID: 2180399285232045364, guid: 2a23af2e49226c34fb6416ceeef55453, type: 3}
+  spellData: {fileID: 11400000, guid: 1332b1606377c1d4d83e8d490c1b4737, type: 2}
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 2048
-  spellPrefab: {fileID: 2180399285232045364, guid: 2a23af2e49226c34fb6416ceeef55453, type: 3}
-  spawnRadius: 0
-  spellData: {fileID: 11400000, guid: 1332b1606377c1d4d83e8d490c1b4737, type: 2}
+  spawnRadius: 0.5

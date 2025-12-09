@@ -1,49 +1,48 @@
-using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
-using WizardGame.Enemy;
-using WizardGame.Stats;
+using WizardGame.Utils;
 
 namespace WizardGame.Spells
 {
     public class MagicMissileSpellController : ProjectileSpellController
     {
-        protected override void SpellActiveBehavior()
-        {
-            StartCoroutine(FireBurst());
-        }
-
-        private IEnumerator FireBurst()
-        {
-            var amount = spellStats.GetStat(StatType.Amount).CurrentValue;
-            var projectileInterval = spellStats.ProjectileIntervalTime;
-
-            for (int i = 0; i < amount; i++)
-            {
-                FireProjectile();
-                yield return new WaitForSeconds(projectileInterval);
-            }
-
-            SpellDeactivate();
-        }
-
         protected override void FireProjectile()
         {
-            Debug.Log("Magic Missle fired.");
-
-            var enemies = FindObjectsByType<EnemyController>(FindObjectsSortMode.None);
-
-            Transform target = null;
-            if (enemies.Length > 0)
-            {
-                target = enemies[UnityEngine.Random.Range(0, enemies.Length)].transform;
-            }
+            Transform target = GetNearestEnemy();
 
             // Instantiate projectile
             var projectile = Instantiate(spellPrefab, transform.position, quaternion.identity);
             var missileScript = projectile.GetComponent<MagicMissileGO>();
 
             missileScript.Initialize(spellStats, target);
+        }
+
+        private Transform GetNearestEnemy()
+        {
+            Vector2 center = transform.position;
+            float circleRadius = 50f;
+            Collider2D[] detectedEnemies = Physics2D.OverlapCircleAll(center, circleRadius, whatIsEnemy);
+
+            float closestDistance = Mathf.Infinity;
+            Transform nearestTarget = null;
+            if (detectedEnemies != null && detectedEnemies.Length > 0)
+            {
+
+                foreach (var enemy in detectedEnemies)
+                {
+                    Vector3 enemyPosition = enemy.transform.position;
+
+                    float distance = WorldSenses.GetSquareDistance(enemyPosition, center);
+
+                    if (distance < closestDistance)
+                    {
+                        closestDistance = distance;
+                        nearestTarget = enemy.transform;
+                    }
+                }
+            }
+
+            return nearestTarget;
         }
     }
 }

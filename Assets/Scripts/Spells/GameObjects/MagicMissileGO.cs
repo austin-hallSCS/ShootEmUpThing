@@ -1,109 +1,123 @@
+using System;
 using UnityEngine;
 using WizardGame.Stats;
 
 namespace WizardGame.Spells
 {
-    public class MagicMissileGO : SpellGO
+    public class MagicMissileGO : ProjectileGO
     {
+        [Header("Bezier Settings")]
         [field: SerializeField] private float curveHeightRange;
 
+        //-- State --
         private Vector3 startPoint;
         private Vector3 controlPoint;
+        private Vector3 lastKnownTargetPos;
+
+        private Transform target;
+
+
 
 
         private float timeElapsed = 0f;
         private float flightDuration = 1.0f;
+        private float t;
         private float curveHeight;
 
         private bool isLaunched = false;
 
-        public override void Initialize(SpellStats stats, Transform targetTransform)
+        public void Initialize(SpellStats stats, Transform targetTransform)
         {
-            base.Initialize(stats, targetTransform);
-            curveHeight = Random.Range(-curveHeightRange, curveHeightRange);
+            base.Initialize(stats);
 
-            Launch();
+            target = targetTransform;
+
+            if (target != null) lastKnownTargetPos = target.position;
+            else lastKnownTargetPos = transform.position + transform.forward * 5f;
+
+            SetupBezierCurve();
+            isLaunched = true;
         }
 
-        public override void Launch()
+        public void SetupBezierCurve()
         {
             startPoint = transform.position;
-            isLaunched = true;
-
             float speed = spellStats.GetStat(StatType.Speed).CurrentValue;
 
-            // Calculate flight time based on distance to target, default to 1 second if target is null.
-            float distance = target != null ? Vector3.Distance(startPoint, target.position) : 10f;
+            float distance = Vector3.Distance(startPoint, lastKnownTargetPos);
+
+            // Prevent divide by 0 errors
+            if (speed <= 0) speed = 10f;
+
             flightDuration = distance / speed;
 
-            // Calculate control point
-            Vector3 endPoint = target != null ? target.position : startPoint + (Vector3.up * 10);
+            //-- Control Point Calculation
 
-            // Get direction vector
+            Vector3 endPoint = lastKnownTargetPos;
             Vector3 direction = (endPoint - startPoint).normalized;
 
             // Get perpendicular vector (-y, x) for 2D
             Vector3 perpindicular = new Vector3(-direction.y, direction.x, 0);
 
-            // Midpoint
-            Vector3 midPoint = startPoint + (direction * (distance / 2f));
+            float randomHeight = UnityEngine.Random.Range(-curveHeightRange, curveHeightRange);
 
-            // Final control point
-            controlPoint = midPoint + (perpindicular * curveHeight);
+            Vector3 midPoint = startPoint + (direction * (distance / 2f));
+            controlPoint = midPoint + (perpindicular * randomHeight);
         }
 
-        protected override void Update()
+        protected void Update()
         {
             if (!isLaunched) return;
 
-            float t = IncrementTime();
-            Vector3 endPoint = GetEndPoint();
+            if (target != null)
+            {
+                lastKnownTargetPos = target.position;
+            }
+
+            timeElapsed += Time.deltaTime;
+            t = timeElapsed / flightDuration;
 
             if (t >= 1.0f)
             {
-                //TODO: Add damage logic
-                Destroy(gameObject);
+                transform.position = lastKnownTargetPos;
+                OnImpact();
                 return;
             }
 
-            Vector3 finalPosition = BezierCalculation(endPoint, t);
-
-            // Rotation
-            Vector3 direction = (finalPosition - transform.position).normalized;
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0, 0, angle);
-
-            transform.position = finalPosition;
+            Move();
         }
 
-        private float IncrementTime()
+        protected override void Move()
         {
-            timeElapsed += Time.deltaTime;
-            return timeElapsed / flightDuration;
+            Vector3 nextPosition = BezierCalculation(startPoint, controlPoint, lastKnownTargetPos, t);
+
+            Vector3 direction = (nextPosition - transform.position).normalized;
+            if (direction != Vector3.zero)
+            {
+                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.Euler(0, 0, angle);
+            }
+
+            transform.position = nextPosition;
         }
 
-        private Vector3 GetEndPoint()
-        {
-            // Target might die while missile is flying
-            if (target != null)
-            {
-                return target.position;
-            }
-            else
-            {
-                // Destroying for now, may change this to continue wherever the target was last
-                Destroy(gameObject);
-                return Vector3.up; // This is temp, figure out what to return later.
-            }
-        }
-        private Vector3 BezierCalculation(Vector3 endPoint, float currentTime)
+        private Vector3 BezierCalculation(Vector3 p0, Vector3 p1, Vector3 p2, float t)
         {
             //-- BEZIER FORMULA --
             // Position = (1-t)^2 * Start + 2(1-t)t * Control + t^2 * End
 
-            Vector3 p1 = Vector3.Lerp(startPoint, controlPoint, currentTime);
-            Vector3 p2 = Vector3.Lerp(controlPoint, endPoint, currentTime);
-            return Vector3.Lerp(p1, p2, currentTime);
+            float u = 1 - t;
+            float tt = t * t;
+            float uu = u * u;
+
+            Vector3 p = (uu * p0) + (2 * u * t * p1) + (tt * p2);
+            return p;
+        }
+
+        private void OnImpact()
+        {
+            //TODO: Add damage logic here
+            Destroy(gameObject);
         }
     }
 }

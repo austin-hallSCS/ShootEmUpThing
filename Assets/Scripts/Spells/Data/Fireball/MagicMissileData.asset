@@ -49,8 +49,8 @@ MonoBehaviour:
     isIgnored: 0
     cap: 10
     isCapChangeable: 0
-    minValue: 5
-    baseValue: 5
+    minValue: 3
+    baseValue: 3
   <CooldownTime>k__BackingField:
     statType: 4
     isRounded: 0

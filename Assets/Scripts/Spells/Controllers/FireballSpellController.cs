@@ -14,8 +14,6 @@ namespace WizardGame.Spells
 
         protected override void FireProjectile()
         {
-            // base.FireProjectile();
-
             // Get a random cardinal direction
             nextDirection = directionPicker.GetNext();
 

@@ -6,20 +6,19 @@ namespace WizardGame.Spells
 {
     public abstract class SpellController : MonoBehaviour
     {
-        [SerializeField] protected LayerMask whatIsEnemy;
+        //-- Inspector Properties --
+        [Header("Identity/Data")]
         [SerializeField] protected GameObject spellPrefab;
-        [SerializeField] protected float spawnRadius;
         [SerializeField] protected SpellDataSO spellData;
 
+        [Header("WorldSpace")]
+        [SerializeField] protected LayerMask whatIsEnemy;
+        [SerializeField] protected float spawnRadius;
+
+
+        //-- Stats and Abilities --
         protected SpellStats spellStats;
         protected PlayerAbilities ownerAbilities;
-
-        // Timers - need to figure this out later
-        // protected Timer levelUpTimer = new Timer(5f);
-
-        // Temp level up timer for testing
-        // protected float currentLevelUpTimerAt;
-
 
         // Status variables
         protected float currentCoolDownTimeAt;
@@ -38,15 +37,10 @@ namespace WizardGame.Spells
             InitStats();
         }
 
-
-        protected virtual void Awake() { }
-
         protected virtual void Start()
         {
             SpellDeactivate();
         }
-
-        protected virtual void Update() { }
 
         protected virtual void FixedUpdate()
         {
