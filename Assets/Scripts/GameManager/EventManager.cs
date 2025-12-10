@@ -9,7 +9,7 @@ namespace WizardGame.Managers
         #region Events
         //-- Game State --
         public static event Action OnGamePause;
-        // public static event Action OnGameResumed;
+        public static event Action OnGameResumed;
         // public static event Action OnGameOver;
 
         //-- Player/XP --
@@ -29,6 +29,7 @@ namespace WizardGame.Managers
 
         //-- Game State --
         public static void PublishGamePaused() => OnGamePause?.Invoke();
+        public static void PublishGameResumed() => OnGameResumed?.Invoke();
 
         //-- Player/XP
         public static void PublishLevelUp(int newLevel) => OnPlayerLevelUp?.Invoke(newLevel);

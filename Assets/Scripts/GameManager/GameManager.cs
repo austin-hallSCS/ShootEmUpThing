@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using NUnit.Framework;
 using UnityEngine;
 using WizardGame.Player;
 using WizardGame.Stages;
@@ -14,6 +15,7 @@ namespace WizardGame.Managers
         [field: SerializeField] public Camera MainCamera { get; private set; }
         [field: SerializeField] public StageDataSO CurrentStageData { get; private set; }
         [field: SerializeField] public PlayerController PlayerController { get; set; }
+        [SerializeField] private GameObject levelUpPanel;
 
         //-- Instance --
         public static GameManager Instance { get; private set; }
@@ -23,6 +25,7 @@ namespace WizardGame.Managers
         private SpawnManager spawnManager;
         private InputManager inputManager;
         private InventoryManager inventoryManager;
+        private UIManager uiManager;
         private List<ManagerBase> pocoManagers = new();
 
         //-- Input --
@@ -40,7 +43,12 @@ namespace WizardGame.Managers
         public int CurrentWave { get; private set; }
 
         //-- Time --
+        [HideInInspector]
         public float CurrentStageTime;
+
+        //-- GameState --
+        [HideInInspector]
+        public GameState currentGameState;
 
         //-- Temp --
         public GameObject defaultSpellPrefab;
@@ -50,8 +58,10 @@ namespace WizardGame.Managers
         {
             CreateInstance();
             InitManagers();
+            SubscribeToEvents();
 
             CurrentWave = 0;
+            currentGameState = GameState.Playing;
         }
 
         public void Start()
@@ -103,6 +113,40 @@ namespace WizardGame.Managers
 
             inventoryManager = new InventoryManager(this);
             pocoManagers.Add(inventoryManager);
+
+            uiManager = new UIManager(this, levelUpPanel);
+            pocoManagers.Add(uiManager);
+        }
+
+        private void SubscribeToEvents()
+        {
+            EventManager.OnPlayerLevelUp += _ => PauseGame();
+            EventManager.OnGameResumed += ResumeGame;
+        }
+
+        private void UnsubscribeFromEvents()
+        {
+            EventManager.OnPlayerLevelUp -= _ => PauseGame();
+            EventManager.OnGameResumed -= ResumeGame;
+        }
+
+        private void TearDown()
+        {
+            UnsubscribeFromEvents();
+        }
+
+        public UIManager GetUIManager() => uiManager;
+
+        private void PauseGame()
+        {
+            currentGameState = GameState.Paused;
+            Time.timeScale = 0f;
+        }
+
+        private void ResumeGame()
+        {
+            currentGameState = GameState.Playing;
+            Time.timeScale = 1f;
         }
 
         // Temp for testing.
@@ -139,6 +183,7 @@ namespace WizardGame.Managers
             {
                 manager?.TearDown();
             }
+            TearDown();
         }
     }
 }
