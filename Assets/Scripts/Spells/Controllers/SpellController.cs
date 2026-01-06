@@ -23,9 +23,7 @@ namespace WizardGame.Spells
         // Status variables
         protected float currentCoolDownTimeAt;
         protected float coolDownTime;
-        protected float duration;
         protected float currentDurationTimeAt;
-        protected float projectileAmount;
         protected bool isActive;
 
 

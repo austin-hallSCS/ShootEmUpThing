@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 6c35cd05b4f1ad047babd3bb940e6088
+guid: 624a0bad9877c674f93d3592344f6a40
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6705810157222835970
-    second: MagicMissile_0
+      213: 4827481158342945613
+    second: SwordBurst_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MagicMissile_0
+      name: SwordBurst_0
       rect:
         serializedVersion: 2
         x: 8
-        y: 13
+        y: 16
         width: 48
-        height: 38
+        height: 31
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 20739702fc2df0d50800000000000000
-      internalID: 6705810157222835970
+      spriteID: d4b2ce25988aef240800000000000000
+      internalID: 4827481158342945613
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      MagicMissile_0: 6705810157222835970
+      SwordBurst_0: 4827481158342945613
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

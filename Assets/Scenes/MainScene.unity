@@ -297,12 +297,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WizardGame.GameManager
   <MainCamera>k__BackingField: {fileID: 1650706157}
-  <CurrentStageData>k__BackingField: {fileID: 11400000, guid: 26849d4916502c4479789ec12c263c66, type: 2}
   <PlayerController>k__BackingField: {fileID: 428462024}
   levelUpPanel: {fileID: 871565054}
+  <AllSpellsDatabase>k__BackingField: {fileID: 11400000, guid: fed24457c17db9948bf9f36f9540fc5e, type: 2}
+  <CurrentStageData>k__BackingField: {fileID: 11400000, guid: 26849d4916502c4479789ec12c263c66, type: 2}
   CurrentStageTime: 0
-  currentGameState: 0
-  defaultSpellPrefab: {fileID: 4427974256223563336, guid: f3b51db1f3d9c704e995b6a6f782416e, type: 3}
+  CurrentGameState: 0
+  DefaultSpellPrefab: {fileID: 9047160999173516630, guid: 7b3629a433dabb241a273a90c41ea5aa, type: 3}
 --- !u!1 &251133072
 GameObject:
   m_ObjectHideFlags: 0

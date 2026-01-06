@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using NUnit.Framework;
 using UnityEngine;
 using WizardGame.Player;
+using WizardGame.Spells;
 using WizardGame.Stages;
 
 namespace WizardGame.Managers
@@ -12,10 +12,24 @@ namespace WizardGame.Managers
     public class GameManager : MonoBehaviour
     {
         //-- Inspector-Editable Properties --
+
+        [field: Header("--- Scene References ---")]
+        [field: Tooltip("The main camera used for world to screen calculations.")]
         [field: SerializeField] public Camera MainCamera { get; private set; }
-        [field: SerializeField] public StageDataSO CurrentStageData { get; private set; }
+
+        [field: Tooltip("Reference to the player script.")]
         [field: SerializeField] public PlayerController PlayerController { get; set; }
+
+        [field: Tooltip("The UI panel that appears when a player levels up.")]
         [SerializeField] private GameObject levelUpPanel;
+
+        [field: Space(10)]
+        [field: Header("--- Game Data ---")]
+        [field: Tooltip("The database containing all possible spells.")]
+        [field: SerializeField] public SpellDatabaseSO AllSpellsDatabase { get; private set; }
+
+        [field: Tooltip("Configuration for the current level (waves, enemies, etc.)")]
+        [field: SerializeField] public StageDataSO CurrentStageData { get; private set; }
 
         //-- Instance --
         public static GameManager Instance { get; private set; }
@@ -48,10 +62,10 @@ namespace WizardGame.Managers
 
         //-- GameState --
         [HideInInspector]
-        public GameState currentGameState;
+        public GameState CurrentGameState;
 
         //-- Temp --
-        public GameObject defaultSpellPrefab;
+        public GameObject DefaultSpellPrefab;
 
 
         public void Awake()
@@ -61,14 +75,14 @@ namespace WizardGame.Managers
             SubscribeToEvents();
 
             CurrentWave = 0;
-            currentGameState = GameState.Playing;
+            CurrentGameState = GameState.Playing;
         }
 
         public void Start()
         {
             if (PlayerController != null)
             {
-                AddStartingSpell(defaultSpellPrefab);
+                AddStartingSpell(DefaultSpellPrefab);
             }
             else
             {
@@ -139,13 +153,13 @@ namespace WizardGame.Managers
 
         private void PauseGame()
         {
-            currentGameState = GameState.Paused;
+            CurrentGameState = GameState.Paused;
             Time.timeScale = 0f;
         }
 
         private void ResumeGame()
         {
-            currentGameState = GameState.Playing;
+            CurrentGameState = GameState.Playing;
             Time.timeScale = 1f;
         }
 
