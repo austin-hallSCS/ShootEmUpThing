@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MagicMissileData
   m_EditorClassIdentifier: Assembly-CSharp::WizardGame.Spells.SpellDataSO
   <SpellName>k__BackingField: Magic Missile
-  <SpellIcon>k__BackingField: {fileID: 0}
+  <SpellIcon>k__BackingField: {fileID: 6705810157222835970, guid: 6c35cd05b4f1ad047babd3bb940e6088, type: 3}
   <ProjectileIntervalTime>k__BackingField: 0.25
   <Rarity>k__BackingField:
     statType: 0

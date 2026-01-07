@@ -128,6 +128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 173666106}
+  - component: {fileID: 173666110}
   - component: {fileID: 173666109}
   - component: {fileID: 173666108}
   - component: {fileID: 173666107}
@@ -252,6 +253,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 173666105}
   m_CullTransparentMesh: 1
+--- !u!114 &173666110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173666105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06b0309cce4089e41a36bb8c2b8d8a4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WizardGame.UI.LevelUpUIOption
+  titleText: {fileID: 524370647}
+  iconImage: {fileID: 0}
 --- !u!1 &184868467
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,7 +318,7 @@ MonoBehaviour:
   <CurrentStageData>k__BackingField: {fileID: 11400000, guid: 26849d4916502c4479789ec12c263c66, type: 2}
   CurrentStageTime: 0
   CurrentGameState: 0
-  DefaultSpellPrefab: {fileID: 9047160999173516630, guid: 7b3629a433dabb241a273a90c41ea5aa, type: 3}
+  DefaultSpellPrefab: {fileID: 4427974256223563336, guid: f3b51db1f3d9c704e995b6a6f782416e, type: 3}
 --- !u!1 &251133072
 GameObject:
   m_ObjectHideFlags: 0
@@ -397,6 +412,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 268686123}
+  - component: {fileID: 268686127}
   - component: {fileID: 268686126}
   - component: {fileID: 268686125}
   - component: {fileID: 268686124}
@@ -521,6 +537,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 268686122}
   m_CullTransparentMesh: 1
+--- !u!114 &268686127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 268686122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06b0309cce4089e41a36bb8c2b8d8a4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WizardGame.UI.LevelUpUIOption
+  titleText: {fileID: 2064139129}
+  iconImage: {fileID: 0}
 --- !u!1 &299961769
 GameObject:
   m_ObjectHideFlags: 0
@@ -814,6 +844,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 836012856}
+  - component: {fileID: 836012860}
   - component: {fileID: 836012859}
   - component: {fileID: 836012858}
   - component: {fileID: 836012857}
@@ -938,6 +969,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 836012855}
   m_CullTransparentMesh: 1
+--- !u!114 &836012860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 836012855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06b0309cce4089e41a36bb8c2b8d8a4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WizardGame.UI.LevelUpUIOption
+  titleText: {fileID: 1299732131}
+  iconImage: {fileID: 0}
 --- !u!1001 &856641242
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1086,6 +1131,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8788ac72486ef6941a10e2bbb1e0392b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WizardGame.LevelUpUIProxy
+  optionCards:
+  - {fileID: 173666110}
+  - {fileID: 268686127}
+  - {fileID: 836012860}
 --- !u!1001 &935323407
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5306,8 +5355,8 @@ Tilemap:
   - first: {x: 0, y: 3, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 14
-      m_TileSpriteIndex: 14
+      m_TileIndex: 3
+      m_TileSpriteIndex: 6
       m_TileMatrixIndex: 0
       m_TileColorIndex: 4
       m_TileObjectToInstantiateIndex: 65535
@@ -5721,7 +5770,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 6c72bafc441618b4690e1cd9eaad086d, type: 2}
   - m_RefCount: 29
     m_Data: {fileID: 11400000, guid: bd7e277932724dc4f899bb64a3e55d48, type: 2}
-  - m_RefCount: 22
+  - m_RefCount: 23
     m_Data: {fileID: 11400000, guid: 49fd626b78fc89a4bbc98d36ff713e9d, type: 2}
   - m_RefCount: 22
     m_Data: {fileID: 11400000, guid: 86456af2e85fd5649bad13e22dd46379, type: 2}
@@ -5743,7 +5792,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 3dc16b2d683177248abd4184b78081de, type: 2}
   - m_RefCount: 20
     m_Data: {fileID: 11400000, guid: 3d69735a9ebe754419139962a506281a, type: 2}
-  - m_RefCount: 22
+  - m_RefCount: 21
     m_Data: {fileID: 11400000, guid: 3af8ab802cfe6754abe4b36fecba4030, type: 2}
   - m_RefCount: 18
     m_Data: {fileID: 11400000, guid: 0423e4ea0ac32c5409083bbc571b90cb, type: 2}
@@ -5762,7 +5811,7 @@ Tilemap:
     m_Data: {fileID: 1290523556, guid: 05226bb7143e9cd4cb9dd41a21e1fef5, type: 3}
   - m_RefCount: 29
     m_Data: {fileID: -507562917, guid: 05226bb7143e9cd4cb9dd41a21e1fef5, type: 3}
-  - m_RefCount: 22
+  - m_RefCount: 23
     m_Data: {fileID: -983580743, guid: 05226bb7143e9cd4cb9dd41a21e1fef5, type: 3}
   - m_RefCount: 22
     m_Data: {fileID: 543181889924136100, guid: 05226bb7143e9cd4cb9dd41a21e1fef5, type: 3}
@@ -5778,7 +5827,7 @@ Tilemap:
     m_Data: {fileID: -944311481, guid: 05226bb7143e9cd4cb9dd41a21e1fef5, type: 3}
   - m_RefCount: 20
     m_Data: {fileID: 353414419, guid: 05226bb7143e9cd4cb9dd41a21e1fef5, type: 3}
-  - m_RefCount: 22
+  - m_RefCount: 21
     m_Data: {fileID: 1776782647, guid: 05226bb7143e9cd4cb9dd41a21e1fef5, type: 3}
   - m_RefCount: 18
     m_Data: {fileID: -438768101, guid: 05226bb7143e9cd4cb9dd41a21e1fef5, type: 3}

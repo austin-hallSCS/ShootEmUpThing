@@ -43,11 +43,11 @@ namespace WizardGame.Spells
 
         private void SpawnSwordFormation()
         {
-            int amount = Mathf.RoundToInt(spellStats.GetStat(StatType.Amount).CurrentValue);
+            int totalSwords = (int)spellStats.GetStat(StatType.Amount).CurrentValue;
 
-            float angleStep = 360f / amount;
+            float angleStep = 360f / totalSwords;
 
-            for (int i = 0; i < amount; i++)
+            for (int i = 0; i < totalSwords; i++)
             {
                 float targetAngle = i * angleStep;
                 ActivateSword(i, targetAngle);
@@ -67,6 +67,8 @@ namespace WizardGame.Spells
             {
                 currentSword = Instantiate(spellPrefab, transform.position, Quaternion.identity);
                 swordPool.Add(currentSword);
+
+                currentSword.transform.SetParent(transform);
             }
 
             if (currentSword.TryGetComponent(out SwordBurstGO gameObject))

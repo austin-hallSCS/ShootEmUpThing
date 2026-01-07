@@ -44,9 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb25040d0357b3d43a89c504276fcd45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WizardGame.PlayerSystem.FireballSpellController
+  spellPrefab: {fileID: 7869993318420548649, guid: 23c51bed58404764c802a1f9e308c634, type: 3}
+  <SpellData>k__BackingField: {fileID: 11400000, guid: 6ea4af61b7c687d46926942e7d87bc7c, type: 2}
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 2048
-  spellPrefab: {fileID: 7869993318420548649, guid: 23c51bed58404764c802a1f9e308c634, type: 3}
   spawnRadius: 0.5
-  spellData: {fileID: 11400000, guid: 6ea4af61b7c687d46926942e7d87bc7c, type: 2}

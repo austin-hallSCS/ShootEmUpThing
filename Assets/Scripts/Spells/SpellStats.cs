@@ -61,6 +61,7 @@ namespace WizardGame.Stats
 
         public void ApplyLevelUp()
         {
+            // Do nothing if at max level
             if (Level >= baseData.LevelData.Count) return;
 
             Level++;

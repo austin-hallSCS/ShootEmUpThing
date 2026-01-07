@@ -45,6 +45,11 @@ namespace WizardGame.Managers
             Debug.Log($"Added new spell: {spellControllerObject.name}");
         }
 
+        public bool HasSpell(SpellController spell)
+        {
+            return equippedSpells.Contains(spell);
+        }
+
         public List<SpellController> GetEquippedSpells()
         {
             return equippedSpells;

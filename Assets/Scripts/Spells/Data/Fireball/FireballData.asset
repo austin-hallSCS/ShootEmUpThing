@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FireballData
   m_EditorClassIdentifier: Assembly-CSharp::WizardGame.SpellSystem.SpellDataSO
   <SpellName>k__BackingField: Fireball
-  <SpellIcon>k__BackingField: {fileID: 0}
+  <SpellIcon>k__BackingField: {fileID: -663120914, guid: d9d9192d3befa4149a5dd478ef914c49, type: 3}
   <ProjectileIntervalTime>k__BackingField: 0.02
   <Rarity>k__BackingField:
     statType: 0

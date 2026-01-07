@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using UnityEngine;
 using WizardGame.Utils;
 
@@ -6,7 +7,9 @@ namespace WizardGame.Managers
 {
     public class UIManager : ManagerBase
     {
+        private List<GameObject> currentUpgradeChoices;
         private GameObject levelUpPanel;
+
         public UIManager(GameManager manager, GameObject panelUI) : base(manager)
         {
             levelUpPanel = panelUI;
@@ -26,16 +29,33 @@ namespace WizardGame.Managers
 
         protected void ShowLevelUpElement(bool show)
         {
-            if (levelUpPanel != null)
-                levelUpPanel.SetActive(show);
+            if (levelUpPanel == null) return;
+
+            if (show)
+            {
+                // Generate upgrade choices
+                currentUpgradeChoices = GetUpgradeOptions();
+
+                // Pass new choices to the proxy
+                if (levelUpPanel.TryGetComponent(out UI.LevelUpUIProxy proxy))
+                {
+                    proxy.UpdateUpgradeOptions(currentUpgradeChoices);
+                }
+            }
+
+            // Activate the level up panel
+            levelUpPanel.SetActive(show);
         }
 
         // Called by UIproxy script
         public void SelectUpgrade(int slotIndex)
         {
-            Debug.Log($"Player selected upgrade for slot {slotIndex}");
+            if (currentUpgradeChoices == null || slotIndex >= currentUpgradeChoices.Count) return;
 
-            // TODO: Tell InventoryManager or PlayerController to apply upgrade
+            GameObject selectedSpellPrefab = currentUpgradeChoices[slotIndex];
+            Debug.Log($"Player selected: {selectedSpellPrefab.name}");
+
+            // TODO: Pass selected prefab to whatever is going to call the ApplyLevelUp method.
 
             EventManager.PublishGameResumed();
         }

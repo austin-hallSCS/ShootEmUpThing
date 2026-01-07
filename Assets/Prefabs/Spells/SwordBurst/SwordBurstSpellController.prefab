@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 9047160999173516630}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.39684, y: 2.84667, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WizardGame.Spells.SwordBurstSpellController
   spellPrefab: {fileID: 2180399285232045364, guid: 4d36becbb67f867498b6d9ce37f5205a, type: 3}
-  spellData: {fileID: 11400000, guid: 5936b9eeb481e6d4e98db4c522a1b474, type: 2}
+  <SpellData>k__BackingField: {fileID: 11400000, guid: 5936b9eeb481e6d4e98db4c522a1b474, type: 2}
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 2048

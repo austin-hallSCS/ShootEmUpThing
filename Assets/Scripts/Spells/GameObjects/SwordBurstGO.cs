@@ -9,8 +9,6 @@ namespace WizardGame.Spells
         private Transform centerPoint;
         private float currentAngle;
         private float radius;
-        private float rotationSpeed;
-        private float damage;
 
         public void Initialize(SpellStats stats, Transform player, float startAngle)
         {
@@ -25,8 +23,6 @@ namespace WizardGame.Spells
             if (centerPoint == null) return;
 
             radius = spellStats.GetStat(StatType.Area).CurrentValue;
-            rotationSpeed = spellStats.GetStat(StatType.Speed).CurrentValue;
-            damage = spellStats.GetStat(StatType.Damage).CurrentValue;
 
             Orbit();
             RotateSelf();
@@ -34,6 +30,9 @@ namespace WizardGame.Spells
 
         private void Orbit()
         {
+            // Multiply speed stat value by 100 to make sure the sword spins fast enough
+            float rotationSpeed = spellStats.GetStat(StatType.Speed).CurrentValue * 100;
+
             currentAngle += rotationSpeed * Time.deltaTime;
             currentAngle %= 360;
 
@@ -41,20 +40,22 @@ namespace WizardGame.Spells
 
             // Calculate offset from player
             float x = Mathf.Cos(rad) * radius;
-            float z = Mathf.Sin(rad) * radius;
+            float y = Mathf.Sin(rad) * radius;
 
-            Vector3 finalPos = centerPoint.position + new Vector3(x, 0, z);
+            Vector3 finalPos = centerPoint.position + new Vector3(x, y, 0);
             transform.position = finalPos;
         }
 
         private void RotateSelf()
         {
-            transform.rotation = Quaternion.Euler(0, -currentAngle, 0);
+            transform.rotation = Quaternion.Euler(0, 0, currentAngle);
         }
 
         protected override void OnTriggerEnter2D(Collider2D other)
         {
             base.OnTriggerEnter2D(other);
+
+            float damage = spellStats.GetStat(StatType.Damage).CurrentValue;
 
             EnemyController enemy = other.GetComponent<EnemyController>();
 

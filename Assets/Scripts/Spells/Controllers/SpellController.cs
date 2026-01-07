@@ -9,7 +9,7 @@ namespace WizardGame.Spells
         //-- Inspector Properties --
         [Header("Identity/Data")]
         [SerializeField] protected GameObject spellPrefab;
-        [SerializeField] protected SpellDataSO spellData;
+        [field: SerializeField] public SpellDataSO SpellData { get; private set; }
 
         [Header("WorldSpace")]
         [SerializeField] protected LayerMask whatIsEnemy;
@@ -51,11 +51,11 @@ namespace WizardGame.Spells
 
         public virtual void InitStats()
         {
-            if (spellData == null)
+            if (SpellData == null)
             {
                 Debug.LogError($"Spell Data not assigned on: {gameObject.name}");
             }
-            spellStats = new SpellStats(spellData, ownerAbilities);
+            spellStats = new SpellStats(SpellData, ownerAbilities);
         }
 
         public virtual void LevelUp()
