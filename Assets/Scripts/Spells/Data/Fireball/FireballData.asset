@@ -41,7 +41,7 @@ MonoBehaviour:
     cap: 3
     isCapChangeable: 0
     minValue: 1
-    baseValue: 3
+    baseValue: 1
   <SpeedAmount>k__BackingField:
     statType: 3
     isRounded: 0
@@ -97,13 +97,33 @@ MonoBehaviour:
     minValue: 0
     baseValue: 0
   levelData:
-  - {fileID: 11400000, guid: a7ddbe375dcf00842b815934b3b3e4f0, type: 2}
-  - {fileID: 11400000, guid: 29de838f7c3776e4c80677b35772541f, type: 2}
-  - {fileID: 11400000, guid: 0ecda34ef88394b4d981019d7316c469, type: 2}
-  - {fileID: 11400000, guid: 4e5df469b48c01243a9e1e8c246cf041, type: 2}
-  - {fileID: 11400000, guid: 8240d68dd2a0d7c4e8d4190f4e07c2cc, type: 2}
-  - {fileID: 11400000, guid: 95e471f84fff532488b47fd068ef171e, type: 2}
-  - {fileID: 11400000, guid: ba4e4aab688e12943ac4ebd1fe66581f, type: 2}
-  - {fileID: 11400000, guid: bf15c010de229734c87dbf0abc023ede, type: 2}
-  - {fileID: 11400000, guid: 4fb517284ff4d1b4e89f05d0d26c4787, type: 2}
-  - {fileID: 11400000, guid: df1302d045db13d4ea32b0d9c48bda3a, type: 2}
+  - <Level>k__BackingField: 0
+    <Description>k__BackingField: Fires exploding projectiles in a random direction.
+    modifiers: []
+  - <Level>k__BackingField: 2
+    <Description>k__BackingField: 
+    modifiers: []
+  - <Level>k__BackingField: 3
+    <Description>k__BackingField: 
+    modifiers: []
+  - <Level>k__BackingField: 4
+    <Description>k__BackingField: 
+    modifiers: []
+  - <Level>k__BackingField: 5
+    <Description>k__BackingField: 
+    modifiers: []
+  - <Level>k__BackingField: 6
+    <Description>k__BackingField: 
+    modifiers: []
+  - <Level>k__BackingField: 7
+    <Description>k__BackingField: 
+    modifiers: []
+  - <Level>k__BackingField: 8
+    <Description>k__BackingField: 
+    modifiers: []
+  - <Level>k__BackingField: 9
+    <Description>k__BackingField: 
+    modifiers: []
+  - <Level>k__BackingField: 10
+    <Description>k__BackingField: 
+    modifiers: []

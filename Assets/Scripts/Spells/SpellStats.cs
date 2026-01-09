@@ -66,7 +66,7 @@ namespace WizardGame.Stats
 
             Level++;
 
-            SpellLevelDataSO levelInfo = baseData.GetLevelData(Level);
+            SpellLevelData levelInfo = baseData.GetLevelData(Level);
             if (levelInfo == null)
             {
                 Debug.LogWarning($"No level data for {baseData.SpellName} level {Level}");

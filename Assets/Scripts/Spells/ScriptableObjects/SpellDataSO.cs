@@ -29,9 +29,9 @@ namespace WizardGame.Spells
         [field: SerializeField] public Stat DurationTime { get; private set; }
         [field: SerializeField] public Stat PierceAmount { get; private set; }
 
-        [Header("Level-Up Data")]
-        [SerializeField] private List<SpellLevelDataSO> levelData = new();
-        public IReadOnlyList<SpellLevelDataSO> LevelData => levelData;
+        [Header("Level-Up Progression")]
+        [SerializeField] private List<SpellLevelData> levelData = new();
+        public IReadOnlyList<SpellLevelData> LevelData => levelData;
 
         private void OnValidate()
         {
@@ -46,7 +46,7 @@ namespace WizardGame.Spells
             PierceAmount?.SetStatType(StatType.Pierce);
         }
 
-        public SpellLevelDataSO GetLevelData(int currentLevel)
+        public SpellLevelData GetLevelData(int currentLevel)
         {
             return levelData.Find(l => l.Level == currentLevel);
         }

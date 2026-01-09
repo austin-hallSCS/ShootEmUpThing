@@ -20,6 +20,7 @@ namespace WizardGame.Spells
 
         protected override void Awake()
         {
+            base.Awake();
             Animator = GetComponent<Animator>();
             circleCollider = GetComponent<CircleCollider2D>();
         }

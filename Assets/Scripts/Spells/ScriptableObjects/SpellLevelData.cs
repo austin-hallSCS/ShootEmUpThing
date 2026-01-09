@@ -1,16 +1,18 @@
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using WizardGame.Stats;
 
 namespace WizardGame.Spells
 {
-    [CreateAssetMenu(fileName = "SpellLevelDataSO", menuName = "Spells/SpellLevelDataSO")]
-    public class SpellLevelDataSO : ScriptableObject
+    [System.Serializable]
+    public class SpellLevelData
     {
-        [Range(1, 10)]
-        public int Level = 1;
+        [Header("Level Settings")]
+        [field: Range(1, 10)]
+        [field: SerializeField] public int Level { get; private set; }
 
-        [field: Tooltip("Text that displays on level up screen")]
+        [TextArea(2, 3)]
         [field: SerializeField] public string Description { get; private set; }
 
         [Tooltip("All stat changes that apply when reaching this level.")]

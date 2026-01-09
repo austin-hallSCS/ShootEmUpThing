@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SpellDataBase
   m_EditorClassIdentifier: Assembly-CSharp::WizardGame.Spells.SpellDatabaseSO
   allSpellPrefabs:
-  - {fileID: 8880885555233956194, guid: 83b3e3a690817624a96f4094f40004e9, type: 3}
-  - {fileID: 4427974256223563336, guid: f3b51db1f3d9c704e995b6a6f782416e, type: 3}
-  - {fileID: 9047160999173516630, guid: 7b3629a433dabb241a273a90c41ea5aa, type: 3}
+  - {fileID: 3695651959869778523, guid: 83b3e3a690817624a96f4094f40004e9, type: 3}
+  - {fileID: 6108070654674076668, guid: f08c2a68621b1504f9bc51ee29efb055, type: 3}
+  - {fileID: 8294710643334671171, guid: 7b3629a433dabb241a273a90c41ea5aa, type: 3}
