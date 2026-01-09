@@ -10,6 +10,9 @@ namespace WizardGame.Spells
         [Range(1, 10)]
         public int Level = 1;
 
+        [field: Tooltip("Text that displays on level up screen")]
+        [field: SerializeField] public string Description { get; private set; }
+
         [Tooltip("All stat changes that apply when reaching this level.")]
         [SerializeField] private List<StatModifier> modifiers = new();
         public IReadOnlyList<StatModifier> Modifiers => modifiers;

@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: Fireball_Level1
   m_EditorClassIdentifier: Assembly-CSharp::WizardGame.SpellSystem.SpellLevelDataSO
   Level: 1
+  <Description>k__BackingField: Fires in a random direction. Explodes on impact and
+    deals heavy damage.
   modifiers: []

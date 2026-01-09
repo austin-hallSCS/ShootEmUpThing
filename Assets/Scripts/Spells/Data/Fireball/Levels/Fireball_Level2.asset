@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Fireball_Level2
   m_EditorClassIdentifier: Assembly-CSharp::WizardGame.SpellSystem.SpellLevelDataSO
   Level: 2
+  <Description>k__BackingField: Base damage up by 10.
   modifiers:
   - <StatType>k__BackingField: 1
     <ModType>k__BackingField: 0

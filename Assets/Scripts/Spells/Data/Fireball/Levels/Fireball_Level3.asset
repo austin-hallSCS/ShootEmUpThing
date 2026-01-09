@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Fireball_Level3
   m_EditorClassIdentifier: Assembly-CSharp::WizardGame.SpellSystem.SpellLevelDataSO
   Level: 3
+  <Description>k__BackingField: Base Damage up by 10. Base speed up by 20%
   modifiers:
   - <StatType>k__BackingField: 1
     <ModType>k__BackingField: 0
