@@ -101,8 +101,12 @@ MonoBehaviour:
     <Description>k__BackingField: Fires exploding projectiles in a random direction.
     modifiers: []
   - <Level>k__BackingField: 2
-    <Description>k__BackingField: 
-    modifiers: []
+    <Description>k__BackingField: Base Damage up by 10.
+    modifiers:
+    - <StatType>k__BackingField: 1
+      <ModType>k__BackingField: 0
+      <ValueType>k__BackingField: 0
+      <Value>k__BackingField: 10
   - <Level>k__BackingField: 3
     <Description>k__BackingField: 
     modifiers: []

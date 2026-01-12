@@ -19,7 +19,7 @@ namespace WizardGame.Spells
 
         // Modifiable base stats
         [field: Header("Modifiable Stats")]
-        [field: SerializeField] public Stat Rarity { get; private set; }
+        [field: SerializeField] public Stat RarityAmount { get; private set; }
         [field: SerializeField] public Stat DamageAmount { get; private set; }
         [field: SerializeField] public Stat AreaAmount { get; private set; }
         [field: SerializeField] public Stat SpeedAmount { get; private set; }
@@ -35,15 +35,22 @@ namespace WizardGame.Spells
 
         private void OnValidate()
         {
-            // Set StatTypes, so that we don't have to do it in the inspector.
-            DamageAmount?.SetStatType(StatType.Damage);
-            AreaAmount?.SetStatType(StatType.Area);
-            SpeedAmount?.SetStatType(StatType.Speed);
-            CooldownTime?.SetStatType(StatType.Cooldown);
-            KnockbackAmount?.SetStatType(StatType.Knockback);
-            ProjectileAmount?.SetStatType(StatType.Amount);
-            DurationTime?.SetStatType(StatType.Duration);
-            PierceAmount?.SetStatType(StatType.Pierce);
+            // Load default values and behavior for each StatType
+            RarityAmount?.LoadRules(StatType.Rarity);
+            DamageAmount?.LoadRules(StatType.Damage);
+            AreaAmount?.LoadRules(StatType.Area);
+            SpeedAmount?.LoadRules(StatType.Speed);
+            CooldownTime?.LoadRules(StatType.Cooldown);
+            KnockbackAmount?.LoadRules(StatType.Knockback);
+            ProjectileAmount?.LoadRules(StatType.Amount);
+            DurationTime?.LoadRules(StatType.Duration);
+            PierceAmount?.LoadRules(StatType.Pierce);
+
+            // Force a save in editor (so checkboxes update immediately)
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
+
         }
 
         public SpellLevelData GetLevelData(int currentLevel)

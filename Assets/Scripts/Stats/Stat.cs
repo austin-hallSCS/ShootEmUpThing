@@ -1,4 +1,5 @@
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 
 namespace WizardGame.Stats
@@ -81,6 +82,26 @@ namespace WizardGame.Stats
         }
 
         public void Init() => CurrentValue = baseValue;
+
+        // Load the rules for a StatType, so that they don't have to be set in the inspector every time
+        public void LoadRules(StatType type)
+        {
+            SetStatType(type);
+
+            // Fetch rules that match the StatType
+            var rules = StatRules.Get(type);
+
+            // Apply rules
+            this.isRounded = rules.IsRounded;
+            this.increaseIsPositive = rules.IncreaseIsPositive;
+            this.isCapChangeable = rules.IsCapChangeable;
+
+            // Overwrite minValue if it is less than DefaultMin (Minimum can go above, but never below the default)
+            if (this.minValue < rules.DefaultMin) this.minValue = rules.DefaultMin;
+
+            // Only overwrite cap if it is uninitialized
+            if (this.cap == 0) this.cap = rules.DefaultCap;
+        }
 
         public void SetCap(float newValue)
         {
