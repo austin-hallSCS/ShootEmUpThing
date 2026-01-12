@@ -126,11 +126,6 @@ namespace WizardGame.Stats
 
         public float GetModifiedValue(StatModifier mod)
         {
-            // Edit value based on if it is Flat or Percentage mod
-            float delta = mod.ValueType == ValueType.Flat
-                ? mod.Value
-                : CurrentValue * (mod.Value / 100f);
-
             // Negate value if Increase is not positive
             bool shouldIncrease =
                 (mod.ModType == ModifierType.Bonus && IncreaseIsPositive) ||

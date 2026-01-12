@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace WizardGame.Stats
 {
-    public enum AbilityType{ Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma }
+    public enum AbilityType { Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma }
 
     [Serializable]
     public class AbilityScore
@@ -51,8 +51,8 @@ namespace WizardGame.Stats
             switch (AbilityType)
             {
                 case AbilityType.Strength:
-                    modifiers.Add(new StatModifier(StatType.Damage));
-                    modifiers.Add(new StatModifier(StatType.Knockback));
+                    modifiers.Add(new MultModifier(StatType.Damage));
+                    modifiers.Add(new MultModifier(StatType.Knockback));
                     break;
                 case AbilityType.Dexterity:
                     modifiers.Add(new StatModifier(StatType.MovementSpeed));
