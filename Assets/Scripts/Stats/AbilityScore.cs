@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace WizardGame.Stats
 {
-    public enum AbilityType{ Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma }
+    public enum AbilityType { Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma }
 
     [Serializable]
     public class AbilityScore
@@ -51,28 +51,28 @@ namespace WizardGame.Stats
             switch (AbilityType)
             {
                 case AbilityType.Strength:
-                    modifiers.Add(new StatModifier(StatType.Damage));
-                    modifiers.Add(new StatModifier(StatType.Knockback));
+                    modifiers.Add(new MultModifier(StatType.Damage));
+                    modifiers.Add(new MultModifier(StatType.Knockback));
                     break;
                 case AbilityType.Dexterity:
-                    modifiers.Add(new StatModifier(StatType.MovementSpeed));
-                    modifiers.Add(new StatModifier(StatType.Amount));
+                    modifiers.Add(new MultModifier(StatType.MovementSpeed));
+                    modifiers.Add(new MultModifier(StatType.Amount));
                     break;
                 case AbilityType.Constitution:
-                    modifiers.Add(new StatModifier(StatType.Health));
-                    modifiers.Add(new StatModifier(StatType.DamageResistance));
+                    modifiers.Add(new MultModifier(StatType.Health));
+                    modifiers.Add(new MultModifier(StatType.DamageResistance));
                     break;
                 case AbilityType.Intelligence:
-                    modifiers.Add(new StatModifier(StatType.Area));
-                    modifiers.Add(new StatModifier(StatType.Cooldown));
+                    modifiers.Add(new MultModifier(StatType.Area));
+                    modifiers.Add(new MultModifier(StatType.Cooldown));
                     break;
                 case AbilityType.Wisdom:
-                    modifiers.Add(new StatModifier(StatType.Pierce));
-                    modifiers.Add(new StatModifier(StatType.Speed));
+                    modifiers.Add(new MultModifier(StatType.Pierce));
+                    modifiers.Add(new MultModifier(StatType.Speed));
                     break;
                 case AbilityType.Charisma:
-                    modifiers.Add(new StatModifier(StatType.Duration));
-                    modifiers.Add(new StatModifier(StatType.Rarity));
+                    modifiers.Add(new MultModifier(StatType.Duration));
+                    modifiers.Add(new MultModifier(StatType.Rarity));
                     break;
             }
             CurrentValue = BaseValue;
@@ -88,14 +88,15 @@ namespace WizardGame.Stats
                 // Reset before applying new logic
                 mod.Reset();
 
-                mod.SetValueType(ValueType.Percent);
+                // Set the new value
                 mod.SetValue(percentChange);
 
+                // Determine if Ability Score provides a bonus or a penalty
                 if (currentValue < 10)
                 {
                     mod.SetModType(ModifierType.Penalty);
                 }
-                else if (currentValue > 10)
+                else if (currentValue > 11)
                 {
                     mod.SetModType(ModifierType.Bonus);
                 }

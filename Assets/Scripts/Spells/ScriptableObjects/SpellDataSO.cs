@@ -11,6 +11,9 @@ namespace WizardGame.Spells
         // Identity
         [field: Header("Identity")]
         [field: SerializeField] public string SpellName { get; private set; }
+
+        [field: TextArea(2, 3)]
+        [field: SerializeField] public string Description { get; private set; }
         [field: SerializeField] public Sprite SpellIcon { get; private set; }
 
         // Non-modifiable stats
@@ -19,7 +22,7 @@ namespace WizardGame.Spells
 
         // Modifiable base stats
         [field: Header("Modifiable Stats")]
-        [field: SerializeField] public Stat Rarity { get; private set; }
+        [field: SerializeField] public Stat RarityAmount { get; private set; }
         [field: SerializeField] public Stat DamageAmount { get; private set; }
         [field: SerializeField] public Stat AreaAmount { get; private set; }
         [field: SerializeField] public Stat SpeedAmount { get; private set; }
@@ -29,24 +32,31 @@ namespace WizardGame.Spells
         [field: SerializeField] public Stat DurationTime { get; private set; }
         [field: SerializeField] public Stat PierceAmount { get; private set; }
 
-        [Header("Level-Up Data")]
-        [SerializeField] private List<SpellLevelDataSO> levelData = new();
-        public IReadOnlyList<SpellLevelDataSO> LevelData => levelData;
+        [Header("Level-Up Progression")]
+        [SerializeField] private List<SpellLevelData> levelData = new();
+        public IReadOnlyList<SpellLevelData> LevelData => levelData;
 
         private void OnValidate()
         {
-            // Set StatTypes, so that we don't have to do it in the inspector.
-            DamageAmount?.SetStatType(StatType.Damage);
-            AreaAmount?.SetStatType(StatType.Area);
-            SpeedAmount?.SetStatType(StatType.Speed);
-            CooldownTime?.SetStatType(StatType.Cooldown);
-            KnockbackAmount?.SetStatType(StatType.Knockback);
-            ProjectileAmount?.SetStatType(StatType.Amount);
-            DurationTime?.SetStatType(StatType.Duration);
-            PierceAmount?.SetStatType(StatType.Pierce);
+            // Load default values and behavior for each StatType
+            RarityAmount?.LoadRules(StatType.Rarity);
+            DamageAmount?.LoadRules(StatType.Damage);
+            AreaAmount?.LoadRules(StatType.Area);
+            SpeedAmount?.LoadRules(StatType.Speed);
+            CooldownTime?.LoadRules(StatType.Cooldown);
+            KnockbackAmount?.LoadRules(StatType.Knockback);
+            ProjectileAmount?.LoadRules(StatType.Amount);
+            DurationTime?.LoadRules(StatType.Duration);
+            PierceAmount?.LoadRules(StatType.Pierce);
+
+            // Force a save in editor (so checkboxes update immediately)
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
+
         }
 
-        public SpellLevelDataSO GetLevelData(int currentLevel)
+        public SpellLevelData GetLevelData(int currentLevel)
         {
             return levelData.Find(l => l.Level == currentLevel);
         }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using WizardGame.Input;
 
 namespace WizardGame.Managers
@@ -6,27 +7,40 @@ namespace WizardGame.Managers
     public class InputManager : ManagerBase
     {
         private GameControls controls;
+        private InputActionMap activeMap;
 
         public Vector2 MoveInput => controls.Gameplay.WASD.ReadValue<Vector2>();
-        public InputManager()
+        public InputManager(GameManager manager) : base(manager)
         {
             controls = new GameControls();
-            controls.Enable();
+            activeMap = controls.Gameplay;
+            activeMap.Enable();
 
-            controls.Gameplay.Pause.performed += _ => EventManager.PublishGamePaused();
+            SubscribeToEvents();
+        }
+
+        public void EnableNewActionMap(InputActionMap newMap)
+        {
+            activeMap.Disable();
+            newMap.Enable();
+            activeMap = newMap;
         }
 
         protected override void SubscribeToEvents()
         {
-
+            controls.Gameplay.Pause.performed += _ => EventManager.PublishGamePaused();
+            EventManager.OnPlayerLevelUp += _ => EnableNewActionMap(controls.UI);
+            EventManager.OnGameResumed += () => EnableNewActionMap(controls.Gameplay);
         }
 
         protected override void UnsubscribeFromEvents()
         {
-
+            controls.Gameplay.Pause.performed -= _ => EventManager.PublishGamePaused();
+            EventManager.OnPlayerLevelUp -= _ => EnableNewActionMap(controls.UI);
+            EventManager.OnGameResumed -= () => EnableNewActionMap(controls.Gameplay);
         }
 
-        public override void TearDown()
+        protected override void OnTearDown()
         {
             controls.Disable();
             controls.Dispose();

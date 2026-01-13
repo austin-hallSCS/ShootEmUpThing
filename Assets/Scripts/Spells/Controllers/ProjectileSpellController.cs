@@ -1,42 +1,41 @@
+using System.Collections;
+using UnityEngine;
 using WizardGame.Stats;
 
 namespace WizardGame.Spells
 {
-    public class ProjectileSpellController : SpellController
+    public abstract class ProjectileSpellController : SpellController
     {
         //Status variables
         protected float currentProjectileIntervalTimeAt;
 
         protected override void SpellActiveBehavior()
         {
-            var projectileAmount = spellStats.GetStat(StatType.Amount).CurrentValue;
+            // Override this method with nothing, as projectile spells have no continuous behavior
+        }
 
-            for (int i = 0; i < projectileAmount; i++)
+        protected override void SpellActivate()
+        {
+            base.SpellActivate();
+
+            StartCoroutine(FireBurst());
+        }
+
+        private IEnumerator FireBurst()
+        {
+            var amount = spellStats.GetStat(StatType.Amount).CurrentValue;
+            var projectileInterval = spellStats.ProjectileIntervalTime;
+
+            for (int i = 0; i < amount; i++)
             {
                 FireProjectile();
+
+                if (projectileInterval > 0) yield return new WaitForSeconds(projectileInterval);
             }
 
             SpellDeactivate();
         }
 
-        // protected virtual IEnumerator ProjectileChain()
-        // {
-        //     for (int i = 0; i < runtimeStats.ProjectileAmount.CurrentValue; i++)
-        //     {
-        //         Debug.Log($"Projectile {i}");
-        //         FireProjectile();
-        //         yield return new WaitForFixedUpdate();
-        //     }
-        // } 
-
-        protected virtual void FireProjectile()
-        {
-
-        }
-
-        protected virtual void ResetProjectileIntervalTime()
-        {
-            currentProjectileIntervalTimeAt = spellStats.ProjectileIntervalTime;
-        }
+        protected abstract void FireProjectile();
     }
 }

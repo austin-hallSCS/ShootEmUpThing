@@ -53,18 +53,20 @@ namespace WizardGame.Stats
 
             InitializeFromSO(allStats);
 
+            ProjectileIntervalTime = baseData.ProjectileIntervalTime;
             Level = 1;
 
             ApplyAbilityModifiers();
         }
-        
+
         public void ApplyLevelUp()
         {
-            if (Level == 10) return;
+            // Do nothing if at max level
+            if (Level >= baseData.LevelData.Count) return;
 
             Level++;
 
-            SpellLevelDataSO levelInfo = baseData.GetLevelData(Level);
+            SpellLevelData levelInfo = baseData.GetLevelData(Level);
             if (levelInfo == null)
             {
                 Debug.LogWarning($"No level data for {baseData.SpellName} level {Level}");
@@ -74,7 +76,7 @@ namespace WizardGame.Stats
             allLevelUpModifiers.AddRange(levelInfo.Modifiers);
 
             ApplyAbilityModifiers();
-            
+
             // Debug.Log($"Spell level: {Level}");
             // foreach (var stat in runtimeStats.Values)
             // {
@@ -84,13 +86,13 @@ namespace WizardGame.Stats
 
         public override void ApplyAbilityModifiers()
         {
-            foreach(var stat in runtimeStats.Values) stat.Init();
-
-            // Level-up modifiers
-            foreach(var mod in allLevelUpModifiers) ApplyModifierToStat(mod);
+            foreach (var stat in runtimeStats.Values) stat.Init();
 
             // Player ability modifiers
             foreach (var mod in ownerAbilities.AllModifiers) ApplyModifierToStat(mod);
+
+            // Level-up modifiers
+            foreach (var mod in allLevelUpModifiers) ApplyModifierToStat(mod);
         }
     }
 }

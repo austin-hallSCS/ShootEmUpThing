@@ -9,7 +9,7 @@ namespace WizardGame.Managers
         public int CurrentXP { get; private set; }
         public int XPToNextLevel { get; private set; }
 
-        public XPManager()
+        public XPManager(GameManager manager) : base(manager)
         {
             CurrentPlayerLevel = 1;
             CurrentXP = 0;
@@ -52,11 +52,6 @@ namespace WizardGame.Managers
         protected override void UnsubscribeFromEvents()
         {
             EventManager.OnExperienceCollected -= AddExperience;
-        }
-
-        public override void TearDown()
-        {
-            UnsubscribeFromEvents();
         }
     }
 }

@@ -7,53 +7,24 @@ namespace WizardGame.Spells
     {
         protected SpellStats spellStats;
 
-        // Component references
-        public Rigidbody2D RB { get; private set; }
-        public CircleCollider2D CircleCollider { get; private set; }
-
-        protected virtual void Awake()
-        {
-            // Get components
-            RB = GetComponent<Rigidbody2D>();
-            CircleCollider = GetComponent<CircleCollider2D>();
-        }
+        protected float areaMultiplier = 1.0f;
 
         public virtual void Initialize(SpellStats stats)
         {
             spellStats = stats;
+            CalculateStats();
         }
 
-        protected virtual void Start()
+        protected virtual void CalculateStats()
         {
-
-        }
-
-        protected virtual void Update()
-        {
-
-        }
-
-        protected virtual void FixedUpdate()
-        {
-
-        }
-
-        public virtual void Launch()
-        {
-
-        }
-
-        protected virtual void AddAreaStat()
-        {
-            // Break out of function if stats is null
             if (spellStats == null) return;
 
-            // Get Area Amount current value
-            float areaMultiplier = spellStats.GetStat(StatType.Area).CurrentValue;
-
-            // Increase size
-            transform.localScale = new Vector3(areaMultiplier, areaMultiplier, 1f);
+            areaMultiplier = spellStats.GetStat(StatType.Area).CurrentValue;
         }
+
+        protected virtual void OnTriggerEnter2D(Collider2D other) { }
+
+        public void DestroySelf() => Destroy(gameObject);
 
         void AnimationFinishTrigger() => Destroy(gameObject);
     }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using WizardGame.Player;
+using WizardGame.Spells;
 using WizardGame.Stages;
 
 namespace WizardGame.Managers
@@ -11,10 +12,24 @@ namespace WizardGame.Managers
     public class GameManager : MonoBehaviour
     {
         //-- Inspector-Editable Properties --
-        [field: SerializeField] public Camera MainCamera { get; private set; }
-        [field: SerializeField] public StageDataSO CurrentStageData { get; private set; }
 
-        public PlayerController PlayerController { get; set; }
+        [field: Header("--- Scene References ---")]
+        [field: Tooltip("The main camera used for world to screen calculations.")]
+        [field: SerializeField] public Camera MainCamera { get; private set; }
+
+        [field: Tooltip("Reference to the player script.")]
+        [field: SerializeField] public PlayerController PlayerController { get; set; }
+
+        [field: Tooltip("The UI panel that appears when a player levels up.")]
+        [SerializeField] private GameObject levelUpPanel;
+
+        [field: Space(10)]
+        [field: Header("--- Game Data ---")]
+        [field: Tooltip("The database containing all possible spells.")]
+        [field: SerializeField] public SpellDatabaseSO AllSpellsDatabase { get; private set; }
+
+        [field: Tooltip("Configuration for the current level (waves, enemies, etc.)")]
+        [field: SerializeField] public StageDataSO CurrentStageData { get; private set; }
 
         //-- Instance --
         public static GameManager Instance { get; private set; }
@@ -23,6 +38,8 @@ namespace WizardGame.Managers
         private XPManager xpManager;
         private SpawnManager spawnManager;
         private InputManager inputManager;
+        private InventoryManager inventoryManager;
+        private UIManager uiManager;
         private List<ManagerBase> pocoManagers = new();
 
         //-- Input --
@@ -40,19 +57,38 @@ namespace WizardGame.Managers
         public int CurrentWave { get; private set; }
 
         //-- Time --
+        [HideInInspector]
         public float CurrentStageTime;
+
+        //-- GameState --
+        [HideInInspector]
+        public GameState CurrentGameState;
+
+        //-- Temp --
+        public GameObject DefaultSpellPrefab;
 
 
         public void Awake()
         {
             CreateInstance();
             InitManagers();
+            SubscribeToEvents();
 
             CurrentWave = 0;
+            CurrentGameState = GameState.Playing;
         }
 
         public void Start()
         {
+            if (PlayerController != null)
+            {
+                AddStartingSpell(DefaultSpellPrefab);
+            }
+            else
+            {
+                Debug.LogWarning("PlayerController is null on GameManager!");
+            }
+
             spawnManager.StartSpawning();
         }
 
@@ -80,14 +116,57 @@ namespace WizardGame.Managers
 
         private void InitManagers()
         {
-            xpManager = new XPManager();
+            xpManager = new XPManager(this);
             pocoManagers.Add(xpManager);
 
             spawnManager = new SpawnManager(this, CurrentStageData);
             pocoManagers.Add(spawnManager);
 
-            inputManager = new InputManager();
+            inputManager = new InputManager(this);
             pocoManagers.Add(inputManager);
+
+            inventoryManager = new InventoryManager(this);
+            pocoManagers.Add(inventoryManager);
+
+            uiManager = new UIManager(this, levelUpPanel);
+            pocoManagers.Add(uiManager);
+        }
+
+        private void SubscribeToEvents()
+        {
+            EventManager.OnPlayerLevelUp += _ => PauseGame();
+            EventManager.OnGameResumed += ResumeGame;
+        }
+
+        private void UnsubscribeFromEvents()
+        {
+            EventManager.OnPlayerLevelUp -= _ => PauseGame();
+            EventManager.OnGameResumed -= ResumeGame;
+        }
+
+        private void TearDown()
+        {
+            UnsubscribeFromEvents();
+        }
+
+        public UIManager GetUIManager() => uiManager;
+
+        private void PauseGame()
+        {
+            CurrentGameState = GameState.Paused;
+            Time.timeScale = 0f;
+        }
+
+        private void ResumeGame()
+        {
+            CurrentGameState = GameState.Playing;
+            Time.timeScale = 1f;
+        }
+
+        // Temp for testing.
+        public void AddStartingSpell(GameObject spellPrefab)
+        {
+            inventoryManager.AddSpell(spellPrefab);
         }
 
         private void CheckForNextWave()
@@ -118,6 +197,7 @@ namespace WizardGame.Managers
             {
                 manager?.TearDown();
             }
+            TearDown();
         }
     }
 }

@@ -10,7 +10,6 @@ namespace WizardGame.Managers
     public enum ScreenSide { Top, Right, Bottom, Left }
     public class SpawnManager : ManagerBase
     {
-        private GameManager gameManager;
         private StageDataSO stageData;
 
         private Coroutine spawnRoutine = null;
@@ -18,9 +17,8 @@ namespace WizardGame.Managers
         private int currentEnemyCount;
         private List<GameObject> despawnedEnemies;
 
-        public SpawnManager(GameManager manager, StageDataSO data)
+        public SpawnManager(GameManager manager, StageDataSO data) : base(manager)
         {
-            gameManager = manager;
             stageData = data;
 
             despawnedEnemies = new List<GameObject>();
@@ -101,7 +99,7 @@ namespace WizardGame.Managers
             }
 
             currentEnemyCount++;
-            Debug.Log($"currentEnemyCount: {currentEnemyCount}");
+            // Debug.Log($"currentEnemyCount: {currentEnemyCount}");
         }
 
         private void SpawnBoss(GameObject bossPrefab)
@@ -190,7 +188,7 @@ namespace WizardGame.Managers
         private void HandleEnemyDied(EnemyController enemy)
         {
             currentEnemyCount--;
-            Debug.Log($"currentEnemyCount: {currentEnemyCount}");
+            // Debug.Log($"currentEnemyCount: {currentEnemyCount}");
         }
 
         private void HandleEnemyDespawn(GameObject enemy)
@@ -209,9 +207,8 @@ namespace WizardGame.Managers
             EventManager.OnEnemyDespawn -= HandleEnemyDespawn;
         }
 
-        public override void TearDown()
+        protected override void OnTearDown()
         {
-            UnsubscribeFromEvents();
             PauseSpawning();
 
             // Destroy all pool objects to clear memory fully

@@ -6,27 +6,24 @@ namespace WizardGame.Spells
 {
     public abstract class SpellController : MonoBehaviour
     {
-        [SerializeField] protected LayerMask whatIsEnemy;
+        //-- Inspector Properties --
+        [Header("Identity/Data")]
         [SerializeField] protected GameObject spellPrefab;
-        [SerializeField] protected float spawnRadius;
-        [SerializeField] protected SpellDataSO spellData;
+        [field: SerializeField] public SpellDataSO SpellData { get; private set; }
 
+        [Header("WorldSpace")]
+        [SerializeField] protected LayerMask whatIsEnemy;
+        [SerializeField] protected float spawnRadius;
+
+
+        //-- Stats and Abilities --
         protected SpellStats spellStats;
         protected PlayerAbilities ownerAbilities;
-
-        // Timers - need to figure this out later
-        // protected Timer levelUpTimer = new Timer(5f);
-
-        // Temp level up timer for testing
-        // protected float currentLevelUpTimerAt;
-
 
         // Status variables
         protected float currentCoolDownTimeAt;
         protected float coolDownTime;
-        protected float duration;
         protected float currentDurationTimeAt;
-        protected float projectileAmount;
         protected bool isActive;
 
 
@@ -38,15 +35,10 @@ namespace WizardGame.Spells
             InitStats();
         }
 
-
-        protected virtual void Awake() { }
-
         protected virtual void Start()
         {
             SpellDeactivate();
         }
-
-        protected virtual void Update() { }
 
         protected virtual void FixedUpdate()
         {
@@ -59,11 +51,11 @@ namespace WizardGame.Spells
 
         public virtual void InitStats()
         {
-            if (spellData == null)
+            if (SpellData == null)
             {
                 Debug.LogError($"Spell Data not assigned on: {gameObject.name}");
             }
-            spellStats = new SpellStats(spellData, ownerAbilities);
+            spellStats = new SpellStats(SpellData, ownerAbilities);
         }
 
         public virtual void LevelUp()

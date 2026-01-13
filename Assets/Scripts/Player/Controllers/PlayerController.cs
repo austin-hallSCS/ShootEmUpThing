@@ -15,11 +15,11 @@ namespace WizardGame.Player
 
         // Component references
         private HealthBarController healthbar;
-        public FireballSpellController FireBall { get; private set; }
+        // public FireballSpellController FireBall { get; private set; }
 
         // Stats and Abilities
         protected PlayerStats playerStats;
-        protected PlayerAbilities playerAbilities;
+        public PlayerAbilities PlayerAbilities { get; private set; }
 
 
         // Movement variables
@@ -42,7 +42,6 @@ namespace WizardGame.Player
             GetComponentReferences();
             ValidateData();
             InitStatsAndAbilities();
-            InitSpells();
         }
 
         private void OnEnable()
@@ -52,8 +51,6 @@ namespace WizardGame.Player
 
         void Start()
         {
-            RegisterWithGameManager();
-
             // Init player values
             isInvincible = false;
         }
@@ -97,7 +94,6 @@ namespace WizardGame.Player
         {
             RB = GetComponent<Rigidbody2D>();
             healthbar = GetComponentInChildren<HealthBarController>();
-            FireBall = GetComponentInChildren<FireballSpellController>();
         }
 
         // Checks that all required ScriptableObject data is assigned
@@ -117,30 +113,8 @@ namespace WizardGame.Player
         // Creates runtime instances of stats and abilities
         private void InitStatsAndAbilities()
         {
-            playerAbilities = new PlayerAbilities(playerAbilityData);
-            playerStats = new PlayerStats(playerData, playerAbilities);
-        }
-
-        private void InitSpells()
-        {
-            if (FireBall != null)
-            {
-                FireBall.Initialize(playerAbilities);
-            }
-
-            // TODO: Re-implement this function when there are multiple spells
-            // foreach (SpellController spell in equippedSpells)
-            // {
-            //     spell.Initialize(playerAbilities);
-            // }
-        }
-
-        private void RegisterWithGameManager()
-        {
-            if (GameManager.Instance != null)
-            {
-                GameManager.Instance.PlayerController = this;
-            }
+            PlayerAbilities = new PlayerAbilities(playerAbilityData);
+            playerStats = new PlayerStats(playerData, PlayerAbilities);
         }
 
         private void SubscribeToEvents()

@@ -1,4 +1,5 @@
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 
 namespace WizardGame.Stats
@@ -23,7 +24,7 @@ namespace WizardGame.Stats
         [Tooltip("Can the 'Cap' value be changed at runtime (e.g. for Max Health)?")]
         [SerializeField] private bool isCapChangeable = true;
 
-        
+
         [SerializeField] private float minValue;
         [SerializeField] private float baseValue;
 
@@ -82,6 +83,26 @@ namespace WizardGame.Stats
 
         public void Init() => CurrentValue = baseValue;
 
+        // Load the rules for a StatType, so that they don't have to be set in the inspector every time
+        public void LoadRules(StatType type)
+        {
+            SetStatType(type);
+
+            // Fetch rules that match the StatType
+            var rules = StatRules.Get(type);
+
+            // Apply rules
+            this.isRounded = rules.IsRounded;
+            this.increaseIsPositive = rules.IncreaseIsPositive;
+            this.isCapChangeable = rules.IsCapChangeable;
+
+            // Overwrite minValue if it is less than DefaultMin (Minimum can go above, but never below the default)
+            if (this.minValue < rules.DefaultMin) this.minValue = rules.DefaultMin;
+
+            // Only overwrite cap if it is uninitialized
+            if (this.cap == 0) this.cap = rules.DefaultCap;
+        }
+
         public void SetCap(float newValue)
         {
             if (isCapChangeable)
@@ -92,29 +113,28 @@ namespace WizardGame.Stats
             {
                 Debug.LogWarning($"Attemped to change the cap on a fixed-cap stat: {StatType}.");
             }
-            
+
         }
         public void SetCurrentValue(float newValue) => CurrentValue = newValue;
         public void SetStatType(StatType newType) => statType = newType;
 
         public void ApplyModifier(StatModifier mod)
         {
+            if (isIgnored) return;
             CurrentValue = GetModifiedValue(mod);
         }
 
+        // Get the new Value after applying a modifier
         public float GetModifiedValue(StatModifier mod)
         {
-            // Edit value based on if it is Flat or Percentage mod
-            float delta = mod.ValueType == ValueType.Flat
-                ? mod.Value
-                : CurrentValue * (mod.Value / 100f);
+            // Ask the modifier "How big is the change?"
+            float delta = mod.CalculateMagnitude(CurrentValue);
 
-            // Negate value if Increase is not positive
-            bool shouldIncrease =
-                (mod.ModType == ModifierType.Bonus && IncreaseIsPositive) ||
-                (mod.ModType == ModifierType.Penalty && !IncreaseIsPositive);
+            // Determine the direction of the change.
+            bool shouldAdd = (mod.ModType == ModifierType.Bonus) == IncreaseIsPositive;
 
-            return shouldIncrease ? CurrentValue + delta : CurrentValue - delta;
+            // Apply the change
+            return shouldAdd ? CurrentValue + delta : CurrentValue - delta;
         }
 
         public void Increase(float amount) => CurrentValue += amount;

@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38f568c455ceea74b9dce236bf2bb002, type: 3}
+  m_Name: MagicMissileData
+  m_EditorClassIdentifier: Assembly-CSharp::WizardGame.Spells.SpellDataSO
+  <SpellName>k__BackingField: Magic Missile
+  <Description>k__BackingField: 
+  <SpellIcon>k__BackingField: {fileID: 6705810157222835970, guid: 6c35cd05b4f1ad047babd3bb940e6088, type: 3}
+  <ProjectileIntervalTime>k__BackingField: 0.25
+  <RarityAmount>k__BackingField:
+    statType: 0
+    isRounded: 0
+    increaseIsPositive: 1
+    isIgnored: 0
+    cap: 90
+    isCapChangeable: 0
+    minValue: 1
+    baseValue: 0
+  <DamageAmount>k__BackingField:
+    statType: 1
+    isRounded: 0
+    increaseIsPositive: 1
+    isIgnored: 0
+    cap: 20
+    isCapChangeable: 0
+    minValue: 0
+    baseValue: 15
+  <AreaAmount>k__BackingField:
+    statType: 2
+    isRounded: 0
+    increaseIsPositive: 1
+    isIgnored: 0
+    cap: 3
+    isCapChangeable: 0
+    minValue: 1
+    baseValue: 2
+  <SpeedAmount>k__BackingField:
+    statType: 3
+    isRounded: 0
+    increaseIsPositive: 1
+    isIgnored: 0
+    cap: 10
+    isCapChangeable: 0
+    minValue: 3
+    baseValue: 3
+  <CooldownTime>k__BackingField:
+    statType: 4
+    isRounded: 0
+    increaseIsPositive: 0
+    isIgnored: 0
+    cap: 5
+    isCapChangeable: 0
+    minValue: 0.75
+    baseValue: 3
+  <KnockbackAmount>k__BackingField:
+    statType: 5
+    isRounded: 0
+    increaseIsPositive: 1
+    isIgnored: 0
+    cap: 3
+    isCapChangeable: 0
+    minValue: 3
+    baseValue: 3
+  <ProjectileAmount>k__BackingField:
+    statType: 6
+    isRounded: 1
+    increaseIsPositive: 1
+    isIgnored: 0
+    cap: 12
+    isCapChangeable: 0
+    minValue: 3
+    baseValue: 3
+  <DurationTime>k__BackingField:
+    statType: 7
+    isRounded: 0
+    increaseIsPositive: 1
+    isIgnored: 1
+    cap: 10
+    isCapChangeable: 0
+    minValue: 3
+    baseValue: 0
+  <PierceAmount>k__BackingField:
+    statType: 8
+    isRounded: 1
+    increaseIsPositive: 1
+    isIgnored: 1
+    cap: 10
+    isCapChangeable: 0
+    minValue: 0
+    baseValue: 0
+  levelData: []
+  references:
+    version: 2
+    RefIds: []

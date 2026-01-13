@@ -13,16 +13,18 @@ MonoBehaviour:
   m_Name: FireballData
   m_EditorClassIdentifier: Assembly-CSharp::WizardGame.SpellSystem.SpellDataSO
   <SpellName>k__BackingField: Fireball
-  <SpellIcon>k__BackingField: {fileID: 0}
+  <Description>k__BackingField: Fires exploding projectiles in a random direction.
+    Deals heavy damage.
+  <SpellIcon>k__BackingField: {fileID: -663120914, guid: d9d9192d3befa4149a5dd478ef914c49, type: 3}
   <ProjectileIntervalTime>k__BackingField: 0.02
-  <Rarity>k__BackingField:
+  <RarityAmount>k__BackingField:
     statType: 0
     isRounded: 0
-    increaseIsPositive: 0
+    increaseIsPositive: 1
     isIgnored: 0
-    cap: 100
+    cap: 90
     isCapChangeable: 0
-    minValue: 25
+    minValue: 1
     baseValue: 80
   <DamageAmount>k__BackingField:
     statType: 1
@@ -49,7 +51,7 @@ MonoBehaviour:
     isIgnored: 0
     cap: 3
     isCapChangeable: 0
-    minValue: 0.1
+    minValue: 0.5
     baseValue: 0.75
   <CooldownTime>k__BackingField:
     statType: 4
@@ -81,29 +83,26 @@ MonoBehaviour:
   <DurationTime>k__BackingField:
     statType: 7
     isRounded: 0
-    increaseIsPositive: 0
-    isIgnored: 1
-    cap: 0
-    isCapChangeable: 0
-    minValue: 0
-    baseValue: 0
-  <PierceAmount>k__BackingField:
-    statType: 8
-    isRounded: 0
     increaseIsPositive: 1
     isIgnored: 1
-    cap: 0
+    cap: 10
+    isCapChangeable: 0
+    minValue: 3
+    baseValue: 3
+  <PierceAmount>k__BackingField:
+    statType: 8
+    isRounded: 1
+    increaseIsPositive: 1
+    isIgnored: 1
+    cap: 10
     isCapChangeable: 0
     minValue: 0
     baseValue: 0
   levelData:
-  - {fileID: 11400000, guid: a7ddbe375dcf00842b815934b3b3e4f0, type: 2}
-  - {fileID: 11400000, guid: 29de838f7c3776e4c80677b35772541f, type: 2}
-  - {fileID: 11400000, guid: 0ecda34ef88394b4d981019d7316c469, type: 2}
-  - {fileID: 11400000, guid: 4e5df469b48c01243a9e1e8c246cf041, type: 2}
-  - {fileID: 11400000, guid: 8240d68dd2a0d7c4e8d4190f4e07c2cc, type: 2}
-  - {fileID: 11400000, guid: 95e471f84fff532488b47fd068ef171e, type: 2}
-  - {fileID: 11400000, guid: ba4e4aab688e12943ac4ebd1fe66581f, type: 2}
-  - {fileID: 11400000, guid: bf15c010de229734c87dbf0abc023ede, type: 2}
-  - {fileID: 11400000, guid: 4fb517284ff4d1b4e89f05d0d26c4787, type: 2}
-  - {fileID: 11400000, guid: df1302d045db13d4ea32b0d9c48bda3a, type: 2}
+  - <Level>k__BackingField: 0
+    Modifiers: []
+  - <Level>k__BackingField: 0
+    Modifiers: []
+  references:
+    version: 2
+    RefIds: []
