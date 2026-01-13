@@ -1,4 +1,4 @@
-using UnityEditor.EditorTools;
+using System;
 using UnityEngine;
 
 namespace WizardGame.Stats
@@ -8,7 +8,7 @@ namespace WizardGame.Stats
     /// </summary>
     public enum ModifierType { Bonus, Penalty }
 
-    [System.Serializable]
+    [Serializable]
     public abstract class StatModifier
     {
         [field: Tooltip("Which stat does this modifier apply to?")]
@@ -19,6 +19,9 @@ namespace WizardGame.Stats
 
         [field: Tooltip("How much does this modifier add or subtract? Percentages should still be entered as whole numbers (10% should be 10).")]
         [field: SerializeField] public float Value { get; private set; }
+
+        // REQUIRED: Empty constructor for Unity inspector
+        public StatModifier() { }
 
         public StatModifier(StatType type)
         {

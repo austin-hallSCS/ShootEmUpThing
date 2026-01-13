@@ -11,7 +11,7 @@ namespace WizardGame.Spells
     public class SpellLevelData
     {
         [Header("Level Settings")]
-        [field: Range(1, 10)]
+        [field: Range(2, 10)]
         [field: SerializeField] public int Level { get; private set; }
 
         [Tooltip("All stat changes that apply when reaching this level.")]
