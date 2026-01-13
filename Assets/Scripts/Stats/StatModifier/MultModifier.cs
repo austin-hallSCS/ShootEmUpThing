@@ -3,15 +3,17 @@ using UnityEngine;
 
 namespace WizardGame.Stats
 {
+    /// <summary>
+    /// Modifiers that add a percent of the Stat's current value. +10%, +5%, etc.
+    /// </summary>
     [Serializable]
     public class MultModifier : StatModifier
     {
-        public override float Calculate(float baseValue)
+        public MultModifier(StatType type) : base(type) { }
+
+        public override float CalculateMagnitude(float currentStatValue)
         {
-            var percentValue = Value / 100;
-            return ModType == ModifierType.Bonus
-                ? baseValue * (1 + percentValue)
-                : baseValue * (1 - percentValue);
+            return currentStatValue * (Mathf.Abs(Value) / 100f);
         }
     }
 }

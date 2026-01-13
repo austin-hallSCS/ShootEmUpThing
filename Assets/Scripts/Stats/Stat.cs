@@ -124,14 +124,17 @@ namespace WizardGame.Stats
             CurrentValue = GetModifiedValue(mod);
         }
 
+        // Get the new Value after applying a modifier
         public float GetModifiedValue(StatModifier mod)
         {
-            // Negate value if Increase is not positive
-            bool shouldIncrease =
-                (mod.ModType == ModifierType.Bonus && IncreaseIsPositive) ||
-                (mod.ModType == ModifierType.Penalty && !IncreaseIsPositive);
+            // Ask the modifier "How big is the change?"
+            float delta = mod.CalculateMagnitude(CurrentValue);
 
-            return shouldIncrease ? CurrentValue + delta : CurrentValue - delta;
+            // Determine the direction of the change.
+            bool shouldAdd = (mod.ModType == ModifierType.Bonus) == IncreaseIsPositive;
+
+            // Apply the change
+            return shouldAdd ? CurrentValue + delta : CurrentValue - delta;
         }
 
         public void Increase(float amount) => CurrentValue += amount;

@@ -11,6 +11,9 @@ namespace WizardGame.Spells
         // Identity
         [field: Header("Identity")]
         [field: SerializeField] public string SpellName { get; private set; }
+
+        [field: TextArea(2, 3)]
+        [field: SerializeField] public string Description { get; private set; }
         [field: SerializeField] public Sprite SpellIcon { get; private set; }
 
         // Non-modifiable stats

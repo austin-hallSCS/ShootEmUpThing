@@ -13,16 +13,17 @@ MonoBehaviour:
   m_Name: MagicMissileData
   m_EditorClassIdentifier: Assembly-CSharp::WizardGame.Spells.SpellDataSO
   <SpellName>k__BackingField: Magic Missile
+  <Description>k__BackingField: 
   <SpellIcon>k__BackingField: {fileID: 6705810157222835970, guid: 6c35cd05b4f1ad047babd3bb940e6088, type: 3}
   <ProjectileIntervalTime>k__BackingField: 0.25
-  <Rarity>k__BackingField:
+  <RarityAmount>k__BackingField:
     statType: 0
     isRounded: 0
-    increaseIsPositive: 0
+    increaseIsPositive: 1
     isIgnored: 0
-    cap: 0
+    cap: 90
     isCapChangeable: 0
-    minValue: 0
+    minValue: 1
     baseValue: 0
   <DamageAmount>k__BackingField:
     statType: 1
@@ -81,19 +82,22 @@ MonoBehaviour:
   <DurationTime>k__BackingField:
     statType: 7
     isRounded: 0
-    increaseIsPositive: 0
+    increaseIsPositive: 1
     isIgnored: 1
-    cap: 0
+    cap: 10
     isCapChangeable: 0
-    minValue: 0
+    minValue: 3
     baseValue: 0
   <PierceAmount>k__BackingField:
     statType: 8
-    isRounded: 0
+    isRounded: 1
     increaseIsPositive: 1
     isIgnored: 1
-    cap: 0
+    cap: 10
     isCapChangeable: 0
     minValue: 0
     baseValue: 0
   levelData: []
+  references:
+    version: 2
+    RefIds: []

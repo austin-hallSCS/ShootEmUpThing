@@ -13,17 +13,18 @@ MonoBehaviour:
   m_Name: SwordBurstData
   m_EditorClassIdentifier: Assembly-CSharp::WizardGame.Spells.SpellDataSO
   <SpellName>k__BackingField: Sword Burst
+  <Description>k__BackingField: 
   <SpellIcon>k__BackingField: {fileID: 4827481158342945613, guid: 624a0bad9877c674f93d3592344f6a40, type: 3}
   <ProjectileIntervalTime>k__BackingField: 0.25
-  <Rarity>k__BackingField:
+  <RarityAmount>k__BackingField:
     statType: 0
     isRounded: 0
     increaseIsPositive: 1
     isIgnored: 0
-    cap: 100
+    cap: 90
     isCapChangeable: 0
-    minValue: 0
-    baseValue: 80
+    minValue: 1
+    baseValue: 0
   <DamageAmount>k__BackingField:
     statType: 1
     isRounded: 0
@@ -71,7 +72,7 @@ MonoBehaviour:
     baseValue: 2
   <ProjectileAmount>k__BackingField:
     statType: 6
-    isRounded: 0
+    isRounded: 1
     increaseIsPositive: 1
     isIgnored: 0
     cap: 6
@@ -85,15 +86,18 @@ MonoBehaviour:
     isIgnored: 0
     cap: 10
     isCapChangeable: 0
-    minValue: 2
+    minValue: 3
     baseValue: 4
   <PierceAmount>k__BackingField:
     statType: 8
-    isRounded: 0
-    increaseIsPositive: 0
+    isRounded: 1
+    increaseIsPositive: 1
     isIgnored: 1
-    cap: 0
+    cap: 10
     isCapChangeable: 0
     minValue: 0
     baseValue: 0
   levelData: []
+  references:
+    version: 2
+    RefIds: []

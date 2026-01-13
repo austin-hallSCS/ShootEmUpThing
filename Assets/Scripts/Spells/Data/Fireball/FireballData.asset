@@ -13,16 +13,18 @@ MonoBehaviour:
   m_Name: FireballData
   m_EditorClassIdentifier: Assembly-CSharp::WizardGame.SpellSystem.SpellDataSO
   <SpellName>k__BackingField: Fireball
+  <Description>k__BackingField: Fires exploding projectiles in a random direction.
+    Deals heavy damage.
   <SpellIcon>k__BackingField: {fileID: -663120914, guid: d9d9192d3befa4149a5dd478ef914c49, type: 3}
   <ProjectileIntervalTime>k__BackingField: 0.02
-  <Rarity>k__BackingField:
+  <RarityAmount>k__BackingField:
     statType: 0
     isRounded: 0
-    increaseIsPositive: 0
+    increaseIsPositive: 1
     isIgnored: 0
-    cap: 100
+    cap: 90
     isCapChangeable: 0
-    minValue: 25
+    minValue: 1
     baseValue: 80
   <DamageAmount>k__BackingField:
     statType: 1
@@ -49,7 +51,7 @@ MonoBehaviour:
     isIgnored: 0
     cap: 3
     isCapChangeable: 0
-    minValue: 0.1
+    minValue: 0.5
     baseValue: 0.75
   <CooldownTime>k__BackingField:
     statType: 4
@@ -81,53 +83,26 @@ MonoBehaviour:
   <DurationTime>k__BackingField:
     statType: 7
     isRounded: 0
-    increaseIsPositive: 0
-    isIgnored: 1
-    cap: 0
-    isCapChangeable: 0
-    minValue: 0
-    baseValue: 0
-  <PierceAmount>k__BackingField:
-    statType: 8
-    isRounded: 0
     increaseIsPositive: 1
     isIgnored: 1
-    cap: 0
+    cap: 10
+    isCapChangeable: 0
+    minValue: 3
+    baseValue: 3
+  <PierceAmount>k__BackingField:
+    statType: 8
+    isRounded: 1
+    increaseIsPositive: 1
+    isIgnored: 1
+    cap: 10
     isCapChangeable: 0
     minValue: 0
     baseValue: 0
   levelData:
   - <Level>k__BackingField: 0
-    <Description>k__BackingField: Fires exploding projectiles in a random direction.
-    modifiers: []
-  - <Level>k__BackingField: 2
-    <Description>k__BackingField: Base Damage up by 10.
-    modifiers:
-    - <StatType>k__BackingField: 1
-      <ModType>k__BackingField: 0
-      <ValueType>k__BackingField: 0
-      <Value>k__BackingField: 10
-  - <Level>k__BackingField: 3
-    <Description>k__BackingField: 
-    modifiers: []
-  - <Level>k__BackingField: 4
-    <Description>k__BackingField: 
-    modifiers: []
-  - <Level>k__BackingField: 5
-    <Description>k__BackingField: 
-    modifiers: []
-  - <Level>k__BackingField: 6
-    <Description>k__BackingField: 
-    modifiers: []
-  - <Level>k__BackingField: 7
-    <Description>k__BackingField: 
-    modifiers: []
-  - <Level>k__BackingField: 8
-    <Description>k__BackingField: 
-    modifiers: []
-  - <Level>k__BackingField: 9
-    <Description>k__BackingField: 
-    modifiers: []
-  - <Level>k__BackingField: 10
-    <Description>k__BackingField: 
-    modifiers: []
+    Modifiers: []
+  - <Level>k__BackingField: 0
+    Modifiers: []
+  references:
+    version: 2
+    RefIds: []
