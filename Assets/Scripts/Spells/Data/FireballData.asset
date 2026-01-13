@@ -99,10 +99,39 @@ MonoBehaviour:
     minValue: 0
     baseValue: 0
   levelData:
-  - <Level>k__BackingField: 0
-    Modifiers: []
-  - <Level>k__BackingField: 0
-    Modifiers: []
+  - <Level>k__BackingField: 2
+    Modifiers:
+    - rid: 6637985106191188041
+  - <Level>k__BackingField: 3
+    Modifiers:
+    - rid: 6637985106191188041
+  - <Level>k__BackingField: 4
+    Modifiers:
+    - rid: 6637985106191188041
+  - <Level>k__BackingField: 5
+    Modifiers:
+    - rid: 6637985106191188041
+  - <Level>k__BackingField: 6
+    Modifiers:
+    - rid: 6637985106191188041
+  - <Level>k__BackingField: 7
+    Modifiers:
+    - rid: 6637985106191188041
+  - <Level>k__BackingField: 8
+    Modifiers:
+    - rid: 6637985106191188041
+  - <Level>k__BackingField: 9
+    Modifiers:
+    - rid: 6637985106191188041
+  - <Level>k__BackingField: 10
+    Modifiers:
+    - rid: 6637985106191188041
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 6637985106191188041
+      type: {class: AddModifier, ns: WizardGame.Stats, asm: Assembly-CSharp}
+      data:
+        <StatType>k__BackingField: 1
+        <ModType>k__BackingField: 0
+        <Value>k__BackingField: 10

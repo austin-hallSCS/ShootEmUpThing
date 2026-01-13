@@ -9,6 +9,9 @@ namespace WizardGame.Stats
     [Serializable]
     public class MultModifier : StatModifier
     {
+        // REQUIRED: Empty constructor for Unity inspector
+        public MultModifier() { }
+
         public MultModifier(StatType type) : base(type) { }
 
         public override float CalculateMagnitude(float currentStatValue)
