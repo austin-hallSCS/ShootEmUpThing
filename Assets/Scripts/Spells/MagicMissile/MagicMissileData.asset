@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: MagicMissileData
   m_EditorClassIdentifier: Assembly-CSharp::WizardGame.Spells.SpellDataSO
   <SpellName>k__BackingField: Magic Missile
-  <Description>k__BackingField: 
+  <Description>k__BackingField: '"You create three glowing darts of magical force.
+    Each dart hits the nearest enemy." '
   <SpellIcon>k__BackingField: {fileID: 6705810157222835970, guid: 6c35cd05b4f1ad047babd3bb940e6088, type: 3}
   <ProjectileIntervalTime>k__BackingField: 0.25
   <RarityAmount>k__BackingField:
@@ -24,21 +25,21 @@ MonoBehaviour:
     cap: 90
     isCapChangeable: 0
     minValue: 1
-    baseValue: 0
+    baseValue: 80
   <DamageAmount>k__BackingField:
     statType: 1
     isRounded: 0
     increaseIsPositive: 1
     isIgnored: 0
-    cap: 20
+    cap: 50
     isCapChangeable: 0
     minValue: 0
-    baseValue: 15
+    baseValue: 10
   <AreaAmount>k__BackingField:
     statType: 2
     isRounded: 0
     increaseIsPositive: 1
-    isIgnored: 0
+    isIgnored: 1
     cap: 3
     isCapChangeable: 0
     minValue: 1
@@ -68,8 +69,8 @@ MonoBehaviour:
     isIgnored: 0
     cap: 3
     isCapChangeable: 0
-    minValue: 3
-    baseValue: 3
+    minValue: 1
+    baseValue: 1
   <ProjectileAmount>k__BackingField:
     statType: 6
     isRounded: 1

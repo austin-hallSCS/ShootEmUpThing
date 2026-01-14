@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: FireballData
   m_EditorClassIdentifier: Assembly-CSharp::WizardGame.SpellSystem.SpellDataSO
   <SpellName>k__BackingField: Fireball
-  <Description>k__BackingField: Fires exploding projectiles in a random direction.
-    Deals heavy damage.
+  <Description>k__BackingField: '"A bright streak flashes from your pointing finger
+    to a point you choose within range then blossoms with a low roar into an explosion
+    of flame."'
   <SpellIcon>k__BackingField: {fileID: -663120914, guid: d9d9192d3befa4149a5dd478ef914c49, type: 3}
   <ProjectileIntervalTime>k__BackingField: 0.02
   <RarityAmount>k__BackingField:
@@ -105,27 +106,34 @@ MonoBehaviour:
   - <Level>k__BackingField: 3
     Modifiers:
     - rid: 6637985106191188041
+    - rid: 6637985128509341765
   - <Level>k__BackingField: 4
     Modifiers:
     - rid: 6637985106191188041
   - <Level>k__BackingField: 5
     Modifiers:
     - rid: 6637985106191188041
+    - rid: 6637985128509341766
   - <Level>k__BackingField: 6
     Modifiers:
     - rid: 6637985106191188041
   - <Level>k__BackingField: 7
     Modifiers:
     - rid: 6637985106191188041
+    - rid: 6637985128509341767
   - <Level>k__BackingField: 8
     Modifiers:
     - rid: 6637985106191188041
   - <Level>k__BackingField: 9
     Modifiers:
     - rid: 6637985106191188041
+    - rid: 6637985128509341768
+    - rid: 6637985128509341769
   - <Level>k__BackingField: 10
     Modifiers:
     - rid: 6637985106191188041
+    - rid: 6637985128509341770
+    - rid: 6637985128509341771
   references:
     version: 2
     RefIds:
@@ -135,3 +143,45 @@ MonoBehaviour:
         <StatType>k__BackingField: 1
         <ModType>k__BackingField: 0
         <Value>k__BackingField: 10
+    - rid: 6637985128509341765
+      type: {class: MultModifier, ns: WizardGame.Stats, asm: Assembly-CSharp}
+      data:
+        <StatType>k__BackingField: 3
+        <ModType>k__BackingField: 0
+        <Value>k__BackingField: 20
+    - rid: 6637985128509341766
+      type: {class: MultModifier, ns: WizardGame.Stats, asm: Assembly-CSharp}
+      data:
+        <StatType>k__BackingField: 3
+        <ModType>k__BackingField: 0
+        <Value>k__BackingField: 20
+    - rid: 6637985128509341767
+      type: {class: MultModifier, ns: WizardGame.Stats, asm: Assembly-CSharp}
+      data:
+        <StatType>k__BackingField: 3
+        <ModType>k__BackingField: 0
+        <Value>k__BackingField: 20
+    - rid: 6637985128509341768
+      type: {class: MultModifier, ns: WizardGame.Stats, asm: Assembly-CSharp}
+      data:
+        <StatType>k__BackingField: 3
+        <ModType>k__BackingField: 0
+        <Value>k__BackingField: 20
+    - rid: 6637985128509341769
+      type: {class: MultModifier, ns: WizardGame.Stats, asm: Assembly-CSharp}
+      data:
+        <StatType>k__BackingField: 2
+        <ModType>k__BackingField: 0
+        <Value>k__BackingField: 20
+    - rid: 6637985128509341770
+      type: {class: MultModifier, ns: WizardGame.Stats, asm: Assembly-CSharp}
+      data:
+        <StatType>k__BackingField: 3
+        <ModType>k__BackingField: 0
+        <Value>k__BackingField: 20
+    - rid: 6637985128509341771
+      type: {class: MultModifier, ns: WizardGame.Stats, asm: Assembly-CSharp}
+      data:
+        <StatType>k__BackingField: 2
+        <ModType>k__BackingField: 0
+        <Value>k__BackingField: 20
