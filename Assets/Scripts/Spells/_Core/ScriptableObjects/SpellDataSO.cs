@@ -56,32 +56,6 @@ namespace WizardGame.Spells
 
         }
 
-        [ContextMenu("DEBUG: Add Test Modifier")]
-        public void DebugAddModifier()
-        {
-            // Ensure we have a Level 1 data object to add to
-            if (LevelData.Count == 0)
-            {
-                levelData.Add(new SpellLevelData());
-            }
-
-            // Create a dummy modifier
-            var newMod = new AddModifier();
-            newMod.SetValue(10f);
-            newMod.SetStatType(StatType.Damage);
-            newMod.SetModType(ModifierType.Bonus);
-
-            // Add it to the first level's list
-            levelData[0].Modifiers.Add(newMod);
-
-            // Tell Unity the file changed so it saves
-#if UNITY_EDITOR
-            UnityEditor.EditorUtility.SetDirty(this);
-#endif
-
-            Debug.Log("Forced a modifier into the list!");
-        }
-
         public SpellLevelData GetLevelData(int currentLevel)
         {
             return levelData.Find(l => l.Level == currentLevel);

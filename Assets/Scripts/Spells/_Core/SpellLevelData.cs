@@ -15,8 +15,7 @@ namespace WizardGame.Spells
         [field: SerializeField] public int Level { get; private set; }
 
         [Tooltip("All stat changes that apply when reaching this level.")]
-        [SerializeReference] public List<StatModifier> Modifiers = new();
-        // [SerializeReference] private List<StatModifier> modifiers = new();
-        // public IReadOnlyList<StatModifier> Modifiers => modifiers;
+        [SerializeReference] private List<StatModifier> modifiers = new();
+        public IReadOnlyList<StatModifier> Modifiers => modifiers;
     }
 }

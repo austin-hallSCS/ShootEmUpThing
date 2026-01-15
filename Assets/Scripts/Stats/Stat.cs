@@ -7,14 +7,7 @@ namespace WizardGame.Stats
     [System.Serializable]
     public class Stat
     {
-        [SerializeField] private StatType statType;
-
-        [Tooltip("Does this value need to be rounded down to the nearest whole number?")]
-        [SerializeField] private bool isRounded;
-
-        [Tooltip("Does upgrading this stat increase the value?")]
-        [SerializeField] private bool increaseIsPositive = true;
-
+        // Unity inspector fields
         [Tooltip("Does the object ignore this Stat?")]
         [SerializeField] private bool isIgnored;
 
@@ -22,11 +15,14 @@ namespace WizardGame.Stats
         [SerializeField] private float cap;
 
         [Tooltip("Can the 'Cap' value be changed at runtime (e.g. for Max Health)?")]
-        [SerializeField] private bool isCapChangeable = true;
-
-
+        [SerializeField] private bool isCapChangeable;
         [SerializeField] private float minValue;
         [SerializeField] private float baseValue;
+
+        // Private fields
+        private StatType statType;
+        private bool isRounded;
+        private bool increaseIsPositive;
 
         private float currentValue;
 

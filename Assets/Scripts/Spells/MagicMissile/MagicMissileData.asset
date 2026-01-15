@@ -93,12 +93,107 @@ MonoBehaviour:
     statType: 8
     isRounded: 1
     increaseIsPositive: 1
-    isIgnored: 1
+    isIgnored: 0
     cap: 10
     isCapChangeable: 0
     minValue: 0
     baseValue: 0
-  levelData: []
+  levelData:
+  - <Level>k__BackingField: 2
+    modifiers:
+    - rid: 6637985149044916292
+  - <Level>k__BackingField: 3
+    modifiers:
+    - rid: 6637985149044916293
+  - <Level>k__BackingField: 4
+    modifiers:
+    - rid: 6637985149044916294
+  - <Level>k__BackingField: 5
+    modifiers:
+    - rid: 6637985149044916295
+  - <Level>k__BackingField: 6
+    modifiers:
+    - rid: 6637985149044916296
+  - <Level>k__BackingField: 7
+    modifiers:
+    - rid: 6637985149044916297
+  - <Level>k__BackingField: 8
+    modifiers:
+    - rid: 6637985149044916298
+  - <Level>k__BackingField: 9
+    modifiers:
+    - rid: 6637985149044916299
+    - rid: 6637985149044916300
+  - <Level>k__BackingField: 10
+    modifiers:
+    - rid: 6637985149044916301
+    - rid: 6637985149044916302
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 6637985149044916292
+      type: {class: AddModifier, ns: WizardGame.Stats, asm: Assembly-CSharp}
+      data:
+        <StatType>k__BackingField: 6
+        <ModType>k__BackingField: 0
+        <Value>k__BackingField: 1
+    - rid: 6637985149044916293
+      type: {class: AddModifier, ns: WizardGame.Stats, asm: Assembly-CSharp}
+      data:
+        <StatType>k__BackingField: 4
+        <ModType>k__BackingField: 0
+        <Value>k__BackingField: 0.2
+    - rid: 6637985149044916294
+      type: {class: AddModifier, ns: WizardGame.Stats, asm: Assembly-CSharp}
+      data:
+        <StatType>k__BackingField: 6
+        <ModType>k__BackingField: 0
+        <Value>k__BackingField: 1
+    - rid: 6637985149044916295
+      type: {class: AddModifier, ns: WizardGame.Stats, asm: Assembly-CSharp}
+      data:
+        <StatType>k__BackingField: 1
+        <ModType>k__BackingField: 0
+        <Value>k__BackingField: 10
+    - rid: 6637985149044916296
+      type: {class: AddModifier, ns: WizardGame.Stats, asm: Assembly-CSharp}
+      data:
+        <StatType>k__BackingField: 6
+        <ModType>k__BackingField: 0
+        <Value>k__BackingField: 1
+    - rid: 6637985149044916297
+      type: {class: AddModifier, ns: WizardGame.Stats, asm: Assembly-CSharp}
+      data:
+        <StatType>k__BackingField: 8
+        <ModType>k__BackingField: 0
+        <Value>k__BackingField: 1
+    - rid: 6637985149044916298
+      type: {class: AddModifier, ns: WizardGame.Stats, asm: Assembly-CSharp}
+      data:
+        <StatType>k__BackingField: 1
+        <ModType>k__BackingField: 0
+        <Value>k__BackingField: 10
+    - rid: 6637985149044916299
+      type: {class: AddModifier, ns: WizardGame.Stats, asm: Assembly-CSharp}
+      data:
+        <StatType>k__BackingField: 4
+        <ModType>k__BackingField: 0
+        <Value>k__BackingField: 0.2
+    - rid: 6637985149044916300
+      type: {class: AddModifier, ns: WizardGame.Stats, asm: Assembly-CSharp}
+      data:
+        <StatType>k__BackingField: 8
+        <ModType>k__BackingField: 0
+        <Value>k__BackingField: 1
+    - rid: 6637985149044916301
+      type: {class: AddModifier, ns: WizardGame.Stats, asm: Assembly-CSharp}
+      data:
+        <StatType>k__BackingField: 4
+        <ModType>k__BackingField: 0
+        <Value>k__BackingField: 0.2
+    - rid: 6637985149044916302
+      type: {class: AddModifier, ns: WizardGame.Stats, asm: Assembly-CSharp}
+      data:
+        <StatType>k__BackingField: 8
+        <ModType>k__BackingField: 0
+        <Value>k__BackingField: 1
