@@ -55,8 +55,7 @@ namespace WizardGame.Managers
             GameObject selectedSpellPrefab = currentUpgradeChoices[slotIndex];
             Debug.Log($"Player selected: {selectedSpellPrefab.name}");
 
-            // TODO: Pass selected prefab to whatever is going to call the ApplyLevelUp method.
-
+            EventManager.PublishLevelUpSelection(selectedSpellPrefab);
             EventManager.PublishGameResumed();
         }
 

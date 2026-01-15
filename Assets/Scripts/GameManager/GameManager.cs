@@ -166,7 +166,7 @@ namespace WizardGame.Managers
         // Temp for testing.
         public void AddStartingSpell(GameObject spellPrefab)
         {
-            inventoryManager.AddSpell(spellPrefab);
+            inventoryManager.ProcessLevelUp(spellPrefab);
         }
 
         private void CheckForNextWave()

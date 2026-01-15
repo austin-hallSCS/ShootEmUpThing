@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using WizardGame.Player;
 using WizardGame.Spells;
 
 namespace WizardGame.Managers
@@ -18,15 +17,38 @@ namespace WizardGame.Managers
 
         protected override void SubscribeToEvents()
         {
-
+            EventManager.OnLevelUpSelection += ProcessLevelUp;
         }
 
         protected override void UnsubscribeFromEvents()
         {
-
+            EventManager.OnLevelUpSelection -= ProcessLevelUp;
         }
 
-        public void AddSpell(GameObject spellControllerPrefab)
+        public void ProcessLevelUp(GameObject spellPrefab)
+        {
+            if (spellPrefab == null) return;
+
+            SpellController prefabController = spellPrefab.GetComponent<SpellController>();
+            if (prefabController == null)
+            {
+                Debug.LogError($"Prefab {spellPrefab.name} is missing a SpellController!");
+            }
+
+            SpellController exsistingSpell = GetSpellInstance(prefabController.SpellData.SpellName);
+            if (exsistingSpell != null)
+            {
+                Debug.Log($"Leveling up existing spell: {exsistingSpell.SpellData.SpellName}");
+                exsistingSpell.LevelUp();
+            }
+            else
+            {
+                Debug.Log($"Equipping new spell: {prefabController.SpellData.SpellName}");
+                InstantiateNewSpell(spellPrefab);
+            }
+        }
+
+        private void InstantiateNewSpell(GameObject prefab)
         {
             if (gameManager.PlayerController == null)
             {
@@ -35,7 +57,7 @@ namespace WizardGame.Managers
             }
 
             Transform playerTransform = gameManager.PlayerController.transform;
-            GameObject spellControllerObject = Object.Instantiate(spellControllerPrefab, playerTransform);
+            GameObject spellControllerObject = Object.Instantiate(prefab, playerTransform);
             SpellController controller = spellControllerObject.GetComponent<SpellController>();
 
             controller.Initialize(gameManager.PlayerController.PlayerAbilities);
@@ -45,14 +67,18 @@ namespace WizardGame.Managers
             Debug.Log($"Added new spell: {spellControllerObject.name}");
         }
 
-        public bool HasSpell(SpellController spell)
+        private SpellController GetSpellInstance(string spellName)
         {
-            return equippedSpells.Contains(spell);
+            foreach (var spell in equippedSpells)
+            {
+                if (spell.SpellData.SpellName == spellName)
+                {
+                    return spell;
+                }
+            }
+            return null;
         }
 
-        public List<SpellController> GetEquippedSpells()
-        {
-            return equippedSpells;
-        }
+        public List<SpellController> GetEquippedSpells() => equippedSpells;
     }
 }
