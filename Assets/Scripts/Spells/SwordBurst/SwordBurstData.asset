@@ -13,91 +13,188 @@ MonoBehaviour:
   m_Name: SwordBurstData
   m_EditorClassIdentifier: Assembly-CSharp::WizardGame.Spells.SpellDataSO
   <SpellName>k__BackingField: Sword Burst
-  <Description>k__BackingField: 
+  <Description>k__BackingField: '"You create a momentary circle of spectral blades
+    that sweep around you."'
   <SpellIcon>k__BackingField: {fileID: 4827481158342945613, guid: 624a0bad9877c674f93d3592344f6a40, type: 3}
   <ProjectileIntervalTime>k__BackingField: 0.25
   <RarityAmount>k__BackingField:
-    statType: 0
-    isRounded: 0
-    increaseIsPositive: 1
     isIgnored: 0
     cap: 90
     isCapChangeable: 0
     minValue: 1
-    baseValue: 0
+    baseValue: 80
   <DamageAmount>k__BackingField:
-    statType: 1
-    isRounded: 0
-    increaseIsPositive: 1
     isIgnored: 0
     cap: 30
     isCapChangeable: 0
     minValue: 0
     baseValue: 10
   <AreaAmount>k__BackingField:
-    statType: 2
-    isRounded: 0
-    increaseIsPositive: 1
     isIgnored: 0
     cap: 4
     isCapChangeable: 0
     minValue: 1
     baseValue: 1
   <SpeedAmount>k__BackingField:
-    statType: 3
-    isRounded: 0
-    increaseIsPositive: 1
     isIgnored: 0
     cap: 3
     isCapChangeable: 0
     minValue: 1
-    baseValue: 1.5
+    baseValue: 1
   <CooldownTime>k__BackingField:
-    statType: 4
-    isRounded: 0
-    increaseIsPositive: 0
     isIgnored: 0
     cap: 5
     isCapChangeable: 0
     minValue: 0.5
     baseValue: 3
   <KnockbackAmount>k__BackingField:
-    statType: 5
-    isRounded: 0
-    increaseIsPositive: 1
     isIgnored: 0
     cap: 5
     isCapChangeable: 0
     minValue: 1
-    baseValue: 2
+    baseValue: 1
   <ProjectileAmount>k__BackingField:
-    statType: 6
-    isRounded: 1
-    increaseIsPositive: 1
     isIgnored: 0
     cap: 6
     isCapChangeable: 0
     minValue: 1
     baseValue: 1
   <DurationTime>k__BackingField:
-    statType: 7
-    isRounded: 0
-    increaseIsPositive: 1
     isIgnored: 0
     cap: 10
     isCapChangeable: 0
     minValue: 3
-    baseValue: 4
+    baseValue: 3
   <PierceAmount>k__BackingField:
-    statType: 8
-    isRounded: 1
-    increaseIsPositive: 1
     isIgnored: 1
     cap: 10
     isCapChangeable: 0
     minValue: 0
     baseValue: 0
-  levelData: []
+  levelData:
+  - <Level>k__BackingField: 2
+    modifiers:
+    - rid: 6637985149044916306
+  - <Level>k__BackingField: 3
+    modifiers:
+    - rid: 6637985149044916307
+    - rid: 6637985149044916308
+  - <Level>k__BackingField: 4
+    modifiers:
+    - rid: 6637985149044916309
+    - rid: 6637985149044916310
+  - <Level>k__BackingField: 5
+    modifiers:
+    - rid: 6637985149044916311
+  - <Level>k__BackingField: 6
+    modifiers:
+    - rid: 6637985149044916312
+    - rid: 6637985149044916313
+  - <Level>k__BackingField: 7
+    modifiers:
+    - rid: 6637985149044916314
+    - rid: 6637985149044916315
+  - <Level>k__BackingField: 8
+    modifiers:
+    - rid: 6637985149044916316
+  - <Level>k__BackingField: 9
+    modifiers:
+    - rid: 6637985149044916317
+    - rid: 6637985149044916318
+  - <Level>k__BackingField: 10
+    modifiers:
+    - rid: 6637985149044916319
+    - rid: 6637985149044916320
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 6637985149044916306
+      type: {class: AddModifier, ns: WizardGame.Stats, asm: Assembly-CSharp}
+      data:
+        <StatType>k__BackingField: 6
+        <ModType>k__BackingField: 0
+        <Value>k__BackingField: 1
+    - rid: 6637985149044916307
+      type: {class: MultModifier, ns: WizardGame.Stats, asm: Assembly-CSharp}
+      data:
+        <StatType>k__BackingField: 2
+        <ModType>k__BackingField: 0
+        <Value>k__BackingField: 25
+    - rid: 6637985149044916308
+      type: {class: MultModifier, ns: WizardGame.Stats, asm: Assembly-CSharp}
+      data:
+        <StatType>k__BackingField: 3
+        <ModType>k__BackingField: 0
+        <Value>k__BackingField: 30
+    - rid: 6637985149044916309
+      type: {class: AddModifier, ns: WizardGame.Stats, asm: Assembly-CSharp}
+      data:
+        <StatType>k__BackingField: 7
+        <ModType>k__BackingField: 0
+        <Value>k__BackingField: 0.5
+    - rid: 6637985149044916310
+      type: {class: AddModifier, ns: WizardGame.Stats, asm: Assembly-CSharp}
+      data:
+        <StatType>k__BackingField: 1
+        <ModType>k__BackingField: 0
+        <Value>k__BackingField: 10
+    - rid: 6637985149044916311
+      type: {class: AddModifier, ns: WizardGame.Stats, asm: Assembly-CSharp}
+      data:
+        <StatType>k__BackingField: 6
+        <ModType>k__BackingField: 0
+        <Value>k__BackingField: 1
+    - rid: 6637985149044916312
+      type: {class: MultModifier, ns: WizardGame.Stats, asm: Assembly-CSharp}
+      data:
+        <StatType>k__BackingField: 2
+        <ModType>k__BackingField: 0
+        <Value>k__BackingField: 25
+    - rid: 6637985149044916313
+      type: {class: MultModifier, ns: WizardGame.Stats, asm: Assembly-CSharp}
+      data:
+        <StatType>k__BackingField: 3
+        <ModType>k__BackingField: 0
+        <Value>k__BackingField: 30
+    - rid: 6637985149044916314
+      type: {class: AddModifier, ns: WizardGame.Stats, asm: Assembly-CSharp}
+      data:
+        <StatType>k__BackingField: 7
+        <ModType>k__BackingField: 0
+        <Value>k__BackingField: 0.5
+    - rid: 6637985149044916315
+      type: {class: AddModifier, ns: WizardGame.Stats, asm: Assembly-CSharp}
+      data:
+        <StatType>k__BackingField: 1
+        <ModType>k__BackingField: 0
+        <Value>k__BackingField: 10
+    - rid: 6637985149044916316
+      type: {class: AddModifier, ns: WizardGame.Stats, asm: Assembly-CSharp}
+      data:
+        <StatType>k__BackingField: 6
+        <ModType>k__BackingField: 0
+        <Value>k__BackingField: 1
+    - rid: 6637985149044916317
+      type: {class: AddModifier, ns: WizardGame.Stats, asm: Assembly-CSharp}
+      data:
+        <StatType>k__BackingField: 6
+        <ModType>k__BackingField: 0
+        <Value>k__BackingField: 1
+    - rid: 6637985149044916318
+      type: {class: AddModifier, ns: WizardGame.Stats, asm: Assembly-CSharp}
+      data:
+        <StatType>k__BackingField: 4
+        <ModType>k__BackingField: 0
+        <Value>k__BackingField: 0.2
+    - rid: 6637985149044916319
+      type: {class: AddModifier, ns: WizardGame.Stats, asm: Assembly-CSharp}
+      data:
+        <StatType>k__BackingField: 6
+        <ModType>k__BackingField: 0
+        <Value>k__BackingField: 1
+    - rid: 6637985149044916320
+      type: {class: AddModifier, ns: WizardGame.Stats, asm: Assembly-CSharp}
+      data:
+        <StatType>k__BackingField: 4
+        <ModType>k__BackingField: 0
+        <Value>k__BackingField: 0.2

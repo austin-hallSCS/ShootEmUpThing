@@ -18,81 +18,54 @@ MonoBehaviour:
   <SpellIcon>k__BackingField: {fileID: 6705810157222835970, guid: 6c35cd05b4f1ad047babd3bb940e6088, type: 3}
   <ProjectileIntervalTime>k__BackingField: 0.25
   <RarityAmount>k__BackingField:
-    statType: 0
-    isRounded: 0
-    increaseIsPositive: 1
     isIgnored: 0
     cap: 90
     isCapChangeable: 0
     minValue: 1
     baseValue: 80
   <DamageAmount>k__BackingField:
-    statType: 1
-    isRounded: 0
-    increaseIsPositive: 1
     isIgnored: 0
     cap: 50
     isCapChangeable: 0
     minValue: 0
     baseValue: 10
   <AreaAmount>k__BackingField:
-    statType: 2
-    isRounded: 0
-    increaseIsPositive: 1
     isIgnored: 1
     cap: 3
     isCapChangeable: 0
     minValue: 1
     baseValue: 2
   <SpeedAmount>k__BackingField:
-    statType: 3
-    isRounded: 0
-    increaseIsPositive: 1
     isIgnored: 0
     cap: 10
     isCapChangeable: 0
     minValue: 3
     baseValue: 3
   <CooldownTime>k__BackingField:
-    statType: 4
-    isRounded: 0
-    increaseIsPositive: 0
     isIgnored: 0
     cap: 5
     isCapChangeable: 0
     minValue: 0.75
     baseValue: 3
   <KnockbackAmount>k__BackingField:
-    statType: 5
-    isRounded: 0
-    increaseIsPositive: 1
     isIgnored: 0
     cap: 3
     isCapChangeable: 0
     minValue: 1
     baseValue: 1
   <ProjectileAmount>k__BackingField:
-    statType: 6
-    isRounded: 1
-    increaseIsPositive: 1
     isIgnored: 0
     cap: 12
     isCapChangeable: 0
     minValue: 3
     baseValue: 3
   <DurationTime>k__BackingField:
-    statType: 7
-    isRounded: 0
-    increaseIsPositive: 1
     isIgnored: 1
     cap: 10
     isCapChangeable: 0
     minValue: 3
     baseValue: 0
   <PierceAmount>k__BackingField:
-    statType: 8
-    isRounded: 1
-    increaseIsPositive: 1
     isIgnored: 0
     cap: 10
     isCapChangeable: 0
