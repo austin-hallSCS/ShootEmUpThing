@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WizardGame.SpellSystem.SpellDataSO
   <SpellName>k__BackingField: Fireball
   <Description>k__BackingField: '"A bright streak flashes from your pointing finger
-    to a point you choose within range then blossoms with a low roar into an explosion
-    of flame."'
+    to a random direction then blossoms with a low roar into an explosion of flame."'
   <SpellIcon>k__BackingField: {fileID: -663120914, guid: d9d9192d3befa4149a5dd478ef914c49, type: 3}
   <ProjectileIntervalTime>k__BackingField: 0.02
   <RarityAmount>k__BackingField:
