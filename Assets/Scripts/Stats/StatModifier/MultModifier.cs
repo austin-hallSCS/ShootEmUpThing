@@ -18,5 +18,12 @@ namespace WizardGame.Stats
         {
             return currentStatValue * (Mathf.Abs(Value) / 100f);
         }
+
+        public override string GenerateDescription()
+        {
+            string description = $"+{Value}% {StatType}";
+
+            return description;
+        }
     }
 }

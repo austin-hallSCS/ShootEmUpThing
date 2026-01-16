@@ -20,6 +20,8 @@ namespace WizardGame.Stats
         [field: Tooltip("How much does this modifier add or subtract? Percentages should still be entered as whole numbers (10% should be 10).")]
         [field: SerializeField] public float Value { get; private set; }
 
+        public string Description { get; private set; }
+
         // REQUIRED: Empty constructor for Unity inspector
         public StatModifier() { }
 
@@ -35,6 +37,8 @@ namespace WizardGame.Stats
         // Modifiers use this to calculate the amount to change the stat, not the final stat calculation itself. Applying the modifier will be handled by the Stat itself.
         // A +10 modifier returns 10, a +10 percent modifier returns 10% of the Stat's current value.
         public abstract float CalculateMagnitude(float baseValue);
+
+        public abstract string GenerateDescription();
 
         public void Reset()
         {

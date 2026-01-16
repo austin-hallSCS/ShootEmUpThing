@@ -14,6 +14,13 @@ namespace WizardGame.Stats
 
         public AddModifier(StatType type) : base(type) { }
 
+        public override string GenerateDescription()
+        {
+            string description = $"+{Value} {StatType}";
+
+            return description;
+        }
+
         public override float CalculateMagnitude(float currentStatValue)
         {
             return Mathf.Abs(Value);

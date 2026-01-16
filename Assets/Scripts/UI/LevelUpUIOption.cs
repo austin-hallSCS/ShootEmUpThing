@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using WizardGame.Spells;
+using WizardGame.Stats;
+using Mono.Cecil;
 
 namespace WizardGame.UI
 {
@@ -17,10 +19,10 @@ namespace WizardGame.UI
         public void Configure(SpellDataSO data)
         {
             if (data == null) return;
+            SpellLevelData levelData = data.GetLevelData(2);
 
-            titleText.text = data.SpellName;
+            titleText.text = levelData.GetAllDescriptions();
 
-            // FIXME: Null reference exception (needs to be fixed in inspector)
             iconImage.sprite = data.SpellIcon;
         }
     }

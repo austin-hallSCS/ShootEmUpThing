@@ -28,7 +28,7 @@ MonoBehaviour:
     cap: 50
     isCapChangeable: 0
     minValue: 0
-    baseValue: 10
+    baseValue: 50
   <AreaAmount>k__BackingField:
     isIgnored: 1
     cap: 3
