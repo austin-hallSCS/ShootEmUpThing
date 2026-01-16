@@ -25,8 +25,17 @@ namespace WizardGame.UI
                     // Get the data
                     SpellDataSO data = spell.SpellData;
 
+                    // Get the modifier descriptions
+                    string description = GameManager.Instance.GetInventoryManager().GetLevelUpDescriptions(data.SpellName);
+
+                    // If InventoryManager doesn't find the spell instance, get the Spell's description
+                    if (description == data.SpellName)
+                    {
+                        description = data.Description;
+                    }
+
                     // Update the UI card
-                    optionCards[i].Configure(data);
+                    optionCards[i].Configure(data.SpellIcon, description);
 
                     // Ensure the button is visible
                     optionCards[i].gameObject.SetActive(true);

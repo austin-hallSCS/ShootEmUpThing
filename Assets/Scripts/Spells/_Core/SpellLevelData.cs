@@ -17,24 +17,5 @@ namespace WizardGame.Spells
         [Tooltip("All stat changes that apply when reaching this level.")]
         [SerializeReference] private List<StatModifier> modifiers = new();
         public IReadOnlyList<StatModifier> Modifiers => modifiers;
-
-        public string GetAllDescriptions()
-        {
-            var sb = new System.Text.StringBuilder();
-
-            sb.Append($"Level {Level}: ");
-
-            for (int i = 0; i < Modifiers.Count; i++)
-            {
-                sb.Append(Modifiers[i].GenerateDescription());
-
-                if (i != (Modifiers.Count - 1))
-                {
-                    sb.Append(", ");
-                }
-            }
-
-            return sb.ToString();
-        }
     }
 }

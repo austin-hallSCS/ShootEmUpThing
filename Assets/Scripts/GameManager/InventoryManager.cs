@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using WizardGame.Spells;
 
@@ -77,6 +78,35 @@ namespace WizardGame.Managers
                 }
             }
             return null;
+        }
+
+        // Generate a string for the Level up option UI elements
+        public string GetLevelUpDescriptions(string spellName)
+        {
+            // Get reference to the spell instance
+            SpellController spellInstance = GetSpellInstance(spellName);
+
+            if (spellInstance == null) return spellName;
+
+            // Get level data for the next level
+            int nextLevel = spellInstance.SpellStats.Level + 1;
+            SpellLevelData levelData = spellInstance.SpellData.GetLevelData(nextLevel);
+
+            var sb = new System.Text.StringBuilder();
+
+            sb.Append($"Level {nextLevel}: ");
+
+            for (int i = 0; i < levelData.Modifiers.Count; i++)
+            {
+                sb.Append(levelData.Modifiers[i].GenerateDescription());
+
+                if (i != (levelData.Modifiers.Count - 1))
+                {
+                    sb.Append(", ");
+                }
+            }
+
+            return sb.ToString();
         }
 
         public List<SpellController> GetEquippedSpells() => equippedSpells;

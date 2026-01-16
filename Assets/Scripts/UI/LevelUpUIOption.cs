@@ -16,14 +16,13 @@ namespace WizardGame.UI
         [SerializeField] private TextMeshProUGUI titleText;
         [SerializeField] private Image iconImage;
 
-        public void Configure(SpellDataSO data)
+        public void Configure(Sprite icon, string description)
         {
-            if (data == null) return;
-            SpellLevelData levelData = data.GetLevelData(2);
+            if (icon == null || description == null) return;
 
-            titleText.text = levelData.GetAllDescriptions();
+            titleText.text = description;
 
-            iconImage.sprite = data.SpellIcon;
+            iconImage.sprite = icon;
         }
     }
 }

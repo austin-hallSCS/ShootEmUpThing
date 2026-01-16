@@ -18,6 +18,7 @@ namespace WizardGame.Spells
 
         //-- Stats and Abilities --
         protected SpellStats spellStats;
+        public SpellStats SpellStats => spellStats;
         protected PlayerAbilities ownerAbilities;
 
         // Status variables

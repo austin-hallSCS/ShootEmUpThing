@@ -151,6 +151,8 @@ namespace WizardGame.Managers
 
         public UIManager GetUIManager() => uiManager;
 
+        public InventoryManager GetInventoryManager() => inventoryManager;
+
         private void PauseGame()
         {
             CurrentGameState = GameState.Paused;
