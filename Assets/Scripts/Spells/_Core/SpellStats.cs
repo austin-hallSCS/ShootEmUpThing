@@ -65,6 +65,7 @@ namespace WizardGame.Stats
             if (Level >= baseData.LevelData.Count) return;
 
             Level++;
+            Debug.Log($"Spell raised to level {Level}");
 
             SpellLevelData levelInfo = baseData.GetLevelData(Level);
             if (levelInfo == null)
@@ -73,15 +74,26 @@ namespace WizardGame.Stats
                 return;
             }
 
+            foreach (var modifier in levelInfo.Modifiers)
+            {
+                Debug.Log($"{modifier.StatType} +{modifier.Value}");
+            }
+
             allLevelUpModifiers.AddRange(levelInfo.Modifiers);
+
+            foreach (var modifier in allLevelUpModifiers)
+            {
+                Debug.Log($"From allLevelUpModifiers: {modifier.StatType} +{modifier.Value}");
+            }
+
 
             ApplyAbilityModifiers();
 
-            // Debug.Log($"Spell level: {Level}");
-            // foreach (var stat in runtimeStats.Values)
-            // {
-            //     Debug.Log($"{stat.StatType}: {stat.CurrentValue}");
-            // }
+            Debug.Log($"Spell level: {Level}");
+            foreach (var stat in runtimeStats.Values)
+            {
+                Debug.Log($"{stat.StatType}: {stat.CurrentValue}");
+            }
         }
 
         public override void ApplyAbilityModifiers()
@@ -89,7 +101,8 @@ namespace WizardGame.Stats
             foreach (var stat in runtimeStats.Values) stat.Init();
 
             // Player ability modifiers
-            foreach (var mod in ownerAbilities.AllModifiers) ApplyModifierToStat(mod);
+            // DEBUG: Removing ability modifiers in order to get clear picture of level up mods
+            // foreach (var mod in ownerAbilities.AllModifiers) ApplyModifierToStat(mod);
 
             // Level-up modifiers
             foreach (var mod in allLevelUpModifiers) ApplyModifierToStat(mod);

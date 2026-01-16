@@ -61,7 +61,7 @@ namespace WizardGame.Spells
         public virtual void LevelUp()
         {
             spellStats.ApplyLevelUp();
-            Debug.Log("Spell Leveled up!");
+            // Debug.Log("Spell Leveled up!");
         }
 
         protected virtual void CheckSpellActiveStatus()

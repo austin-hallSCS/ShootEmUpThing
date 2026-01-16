@@ -69,6 +69,7 @@ namespace WizardGame.Stats
         {
             statType = other.StatType;
             isRounded = other.isRounded;
+            increaseIsPositive = other.IncreaseIsPositive;
             isIgnored = other.IsIgnored;
             cap = other.Cap;
             isCapChangeable = other.isCapChangeable;
@@ -117,17 +118,22 @@ namespace WizardGame.Stats
         public void ApplyModifier(StatModifier mod)
         {
             if (isIgnored) return;
+
+            Debug.Log($"Apply modifier to stat: +{mod.Value} {statType}");
             CurrentValue = GetModifiedValue(mod);
+            Debug.Log($"Stat new value: {CurrentValue}");
         }
 
         // Get the new Value after applying a modifier
         public float GetModifiedValue(StatModifier mod)
         {
+            Debug.Log($"---- GetModifiedValue {mod.StatType} ----");
             // Ask the modifier "How big is the change?"
             float delta = mod.CalculateMagnitude(CurrentValue);
 
             // Determine the direction of the change.
             bool shouldAdd = (mod.ModType == ModifierType.Bonus) == IncreaseIsPositive;
+            Debug.Log($"ModType: {mod.ModType}, IncreaseIsPositive: {IncreaseIsPositive}");
 
             // Apply the change
             return shouldAdd ? CurrentValue + delta : CurrentValue - delta;

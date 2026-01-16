@@ -57,7 +57,7 @@ MonoBehaviour:
     isIgnored: 0
     cap: 12
     isCapChangeable: 0
-    minValue: 3
+    minValue: 1
     baseValue: 3
   <DurationTime>k__BackingField:
     isIgnored: 1

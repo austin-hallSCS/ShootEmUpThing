@@ -319,7 +319,7 @@ MonoBehaviour:
   <CurrentStageData>k__BackingField: {fileID: 11400000, guid: 26849d4916502c4479789ec12c263c66, type: 2}
   CurrentStageTime: 0
   CurrentGameState: 0
-  DefaultSpellPrefab: {fileID: 8294710643334671171, guid: 7b3629a433dabb241a273a90c41ea5aa, type: 3}
+  DefaultSpellPrefab: {fileID: 6108070654674076668, guid: f08c2a68621b1504f9bc51ee29efb055, type: 3}
 --- !u!1 &251133072
 GameObject:
   m_ObjectHideFlags: 0
