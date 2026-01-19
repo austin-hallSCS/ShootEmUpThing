@@ -4,6 +4,6 @@ namespace WizardGame.Interfaces
 {
     public interface IKnockbackable
     {
-        void Knockback(float amount, Rigidbody2D source);
+        void Knockback(float amount, Vector2 source);
     }
 }

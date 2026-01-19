@@ -115,15 +115,14 @@ namespace WizardGame.Enemy
 
         }
 
-        public void Knockback(float amount, Rigidbody2D source)
+        public void Knockback(float amount, Vector2 source)
         {
             if (source != null)
             {
                 stunned = true;
 
                 Vector2 currentPosition = rb.position;
-                Vector2 sourcePosition = source.position;
-                Vector2 pushDirection = (currentPosition - sourcePosition).normalized;
+                Vector2 pushDirection = (currentPosition - source).normalized;
 
                 rb.linearVelocity = Vector2.zero;
 

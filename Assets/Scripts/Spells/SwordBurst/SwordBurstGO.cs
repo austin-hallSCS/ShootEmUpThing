@@ -57,6 +57,7 @@ namespace WizardGame.Spells
 
             float damage = spellStats.GetStat(StatType.Damage).CurrentValue;
             float knockback = spellStats.GetStat(StatType.Knockback).CurrentValue;
+
             Debug.Log($"Knockback amount: {knockback}");
 
             EnemyController enemy = other.GetComponent<EnemyController>();
@@ -64,7 +65,7 @@ namespace WizardGame.Spells
             if (enemy != null)
             {
                 enemy.Damage(damage);
-                enemy.Knockback(knockback, RB);
+                enemy.Knockback(knockback, transform.parent.position);
             }
 
         }
