@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using WizardGame.Spells;
-using WizardGame.Utils;
 
 namespace WizardGame.Managers
 {
@@ -70,7 +69,7 @@ namespace WizardGame.Managers
             Debug.Log($"Added new spell: {spellControllerObject.name}");
         }
 
-        private SpellController GetSpellInstance(string spellName)
+        public SpellController GetSpellInstance(string spellName)
         {
             foreach (var spell in equippedSpells)
             {
@@ -80,52 +79,6 @@ namespace WizardGame.Managers
                 }
             }
             return null;
-        }
-
-        // Generate a string for the Level up option UI elements
-        public string GetLevelUpDescriptions(string spellName)
-        {
-            // Get reference to the spell instance
-            SpellController spellInstance = GetSpellInstance(spellName);
-
-            if (spellInstance == null) return spellName;
-
-            // Get level data for the next level
-            int nextLevel = spellInstance.SpellStats.Level + 1;
-            SpellLevelData levelData = spellInstance.SpellData.GetLevelData(nextLevel);
-
-            var sb = new System.Text.StringBuilder();
-
-            sb.Append($"Level {nextLevel}: ");
-
-            for (int i = 0; i < levelData.Modifiers.Count; i++)
-            {
-                sb.Append(levelData.Modifiers[i].GenerateDescription());
-
-                if (i != (levelData.Modifiers.Count - 1))
-                {
-                    sb.Append(", ");
-                }
-            }
-
-            return sb.ToString();
-        }
-
-        public List<GameObject> GetUpgradeOptions()
-        {
-            // TODO: Add weight to spells based on rarity
-
-            // Make new shuffle bag with all spells
-            ShuffleBag<GameObject> upgradeBag = new ShuffleBag<GameObject>(gameManager.AllSpellsDatabase.AllSpellPrefabs);
-            List<GameObject> choices = new List<GameObject>();
-
-            // Get 3 spells from the shuffle bag
-            for (var i = 0; i < 3; i++)
-            {
-                choices.Add(upgradeBag.GetNext());
-            }
-
-            return choices;
         }
 
         public List<SpellController> GetEquippedSpells() => equippedSpells;

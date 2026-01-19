@@ -15,6 +15,7 @@ namespace WizardGame.Managers
         //-- Player/XP --
         public static event Action<int> OnPlayerLevelUp;
         public static event Action<GameObject> OnLevelUpSelection;
+        public static event Action<string> OnSpellMaxLevel;
 
         // -- Collectible --
         public static event Action<int> OnExperienceCollected;
@@ -35,6 +36,7 @@ namespace WizardGame.Managers
         //-- Player/XP
         public static void PublishLevelUp(int newLevel) => OnPlayerLevelUp?.Invoke(newLevel);
         public static void PublishLevelUpSelection(GameObject prefab) => OnLevelUpSelection?.Invoke(prefab);
+        public static void PublishSpellMaxLevel(string spellName) => OnSpellMaxLevel?.Invoke(spellName);
 
         //-- Collectible --
         public static void PublishExperienceCollected(int amount) => OnExperienceCollected?.Invoke(amount);

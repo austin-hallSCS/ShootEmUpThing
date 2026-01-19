@@ -25,6 +25,7 @@ namespace WizardGame.Managers
 
         [field: Space(10)]
         [field: Header("--- Game Data ---")]
+
         [field: Tooltip("The database containing all possible spells.")]
         [field: SerializeField] public SpellDatabaseSO AllSpellsDatabase { get; private set; }
 
