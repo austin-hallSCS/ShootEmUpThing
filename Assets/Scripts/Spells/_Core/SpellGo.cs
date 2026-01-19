@@ -7,12 +7,19 @@ namespace WizardGame.Spells
     {
         protected SpellStats spellStats;
 
+        public Rigidbody2D RB { get; private set; }
+
         protected float areaMultiplier = 1.0f;
 
         public virtual void Initialize(SpellStats stats)
         {
             spellStats = stats;
             CalculateStats();
+        }
+
+        protected virtual void Awake()
+        {
+            RB = GetComponent<Rigidbody2D>();
         }
 
         protected virtual void CalculateStats()

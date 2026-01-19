@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using WizardGame.Collectibles;
 using WizardGame.Interfaces;
@@ -7,7 +8,7 @@ using WizardGame.Stats;
 
 namespace WizardGame.Enemy
 {
-    public class EnemyController : MonoBehaviour, IDamageable
+    public class EnemyController : MonoBehaviour, IDamageable, IKnockbackable
     {
         [SerializeField] protected EnemyDataSO enemyData;
         [SerializeField] protected GameObject experiencePrefab;
@@ -22,6 +23,8 @@ namespace WizardGame.Enemy
         public Rigidbody2D rb { get; private set; }
 
         private float killDistance = 20f;
+        private bool stunned;
+        private float stunDuration = 0.2f;
 
         void Awake()
         {
@@ -52,6 +55,8 @@ namespace WizardGame.Enemy
                 Debug.LogError($"Enemy Data not assigned on: {gameObject.name}");
             }
             enemyStats = new EnemyStats(enemyData);
+
+            stunned = false;
         }
 
         private void DependencyLookups()
@@ -72,7 +77,7 @@ namespace WizardGame.Enemy
 
         private void Move()
         {
-            if (playerRB != null)
+            if (playerRB != null && stunned == false)
             {
                 var moveSpeed = enemyStats.GetStat(StatType.MovementSpeed).CurrentValue;
                 Vector2 currentPosition = rb.position;
@@ -108,6 +113,34 @@ namespace WizardGame.Enemy
             healthStat.Decrease(effectiveDamage);
             CheckHealth();
 
+        }
+
+        public void Knockback(float amount, Rigidbody2D source)
+        {
+            if (source != null)
+            {
+                stunned = true;
+
+                Vector2 currentPosition = rb.position;
+                Vector2 sourcePosition = source.position;
+                Vector2 pushDirection = (currentPosition - sourcePosition).normalized;
+
+                rb.linearVelocity = Vector2.zero;
+
+                rb.AddForce(pushDirection * amount, ForceMode2D.Impulse);
+
+                Debug.Log("Enemy Knockback was called.");
+
+                StopAllCoroutines();
+                StartCoroutine(ResetStun());
+            }
+        }
+
+        private IEnumerator ResetStun()
+        {
+            yield return new WaitForSeconds(stunDuration);
+
+            stunned = false;
         }
 
         private void CheckHealth()

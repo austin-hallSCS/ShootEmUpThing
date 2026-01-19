@@ -9,11 +9,11 @@ namespace WizardGame.Spells
 
     public abstract class ProjectileGO : SpellGO
     {
-        public Rigidbody2D RB { get; private set; }
 
-        protected virtual void Awake()
+
+        protected override void Awake()
         {
-            RB = GetComponent<Rigidbody2D>();
+
         }
 
         protected virtual void FixedUpdate()
