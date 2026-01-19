@@ -37,7 +37,7 @@ namespace WizardGame.Managers
                 Debug.LogError($"Prefab {spellPrefab.name} is missing a SpellController!");
             }
 
-            SpellController exsistingSpell = GetSpellInstance(prefabController.SpellData.SpellName);
+            SpellController exsistingSpell = GetSpellInstance(prefabController.SpellData);
             if (exsistingSpell != null)
             {
                 Debug.Log($"Leveling up existing spell: {exsistingSpell.SpellData.SpellName}");
@@ -69,11 +69,11 @@ namespace WizardGame.Managers
             Debug.Log($"Added new spell: {spellControllerObject.name}");
         }
 
-        public SpellController GetSpellInstance(string spellName)
+        public SpellController GetSpellInstance(SpellDataSO dataToFind)
         {
             foreach (var spell in equippedSpells)
             {
-                if (spell.SpellData.SpellName == spellName)
+                if (spell.SpellData == dataToFind)
                 {
                     return spell;
                 }

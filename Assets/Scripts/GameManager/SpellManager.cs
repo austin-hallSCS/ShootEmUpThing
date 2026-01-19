@@ -43,16 +43,17 @@ namespace WizardGame
         }
 
         // Generate a string for the Level up option UI elements
-        public string GetLevelUpDescriptions(string spellName)
+        public string GetLevelUpDescriptions(SpellDataSO spellData)
         {
-            // Get reference to the spell instance
-            SpellController spellInstance = gameManager.GetManager<InventoryManager>().GetSpellInstance(spellName);
+            // Get reference to spell instance
+            SpellController spellInstance = gameManager.GetManager<InventoryManager>().GetSpellInstance(spellData);
 
-            if (spellInstance == null) return spellName;
+            // If spell is not equipped, return the Spell's name
+            if (spellInstance == null) return spellData.SpellName;
 
             // Get level data for the next level
             int nextLevel = spellInstance.SpellStats.Level + 1;
-            SpellLevelData levelData = spellInstance.SpellData.GetLevelData(nextLevel);
+            SpellLevelData levelData = spellData.GetLevelData(nextLevel);
 
             var sb = new System.Text.StringBuilder();
 
