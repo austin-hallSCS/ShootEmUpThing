@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Xml.Serialization;
 using UnityEngine;
 using WizardGame.Utils;
 
@@ -34,7 +33,7 @@ namespace WizardGame.Managers
             if (show)
             {
                 // Generate upgrade choices
-                currentUpgradeChoices = GetUpgradeOptions();
+                currentUpgradeChoices = gameManager.GetInventoryManager().GetUpgradeOptions();
 
                 // Pass new choices to the proxy
                 if (levelUpPanel.TryGetComponent(out UI.LevelUpUIProxy proxy))
@@ -57,23 +56,6 @@ namespace WizardGame.Managers
 
             EventManager.PublishLevelUpSelection(selectedSpellPrefab);
             EventManager.PublishGameResumed();
-        }
-
-        public List<GameObject> GetUpgradeOptions()
-        {
-            // TODO: Add weight to spells based on rarity
-
-            // Make new shuffle bag with all spells
-            ShuffleBag<GameObject> upgradeBag = new ShuffleBag<GameObject>(gameManager.AllSpellsDatabase.AllSpellPrefabs);
-            List<GameObject> choices = new List<GameObject>();
-
-            // Get 3 spells from the shuffle bag
-            for (var i = 0; i < 3; i++)
-            {
-                choices.Add(upgradeBag.GetNext());
-            }
-
-            return choices;
         }
     }
 }

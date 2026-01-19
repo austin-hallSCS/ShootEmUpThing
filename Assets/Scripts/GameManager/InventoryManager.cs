@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using WizardGame.Spells;
+using WizardGame.Utils;
 
 namespace WizardGame.Managers
 {
@@ -106,6 +107,23 @@ namespace WizardGame.Managers
             }
 
             return sb.ToString();
+        }
+
+        public List<GameObject> GetUpgradeOptions()
+        {
+            // TODO: Add weight to spells based on rarity
+
+            // Make new shuffle bag with all spells
+            ShuffleBag<GameObject> upgradeBag = new ShuffleBag<GameObject>(gameManager.AllSpellsDatabase.AllSpellPrefabs);
+            List<GameObject> choices = new List<GameObject>();
+
+            // Get 3 spells from the shuffle bag
+            for (var i = 0; i < 3; i++)
+            {
+                choices.Add(upgradeBag.GetNext());
+            }
+
+            return choices;
         }
 
         public List<SpellController> GetEquippedSpells() => equippedSpells;
