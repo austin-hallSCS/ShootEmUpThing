@@ -3,7 +3,6 @@ using UnityEngine.UI;
 using TMPro;
 using WizardGame.Spells;
 using WizardGame.Stats;
-using Mono.Cecil;
 
 namespace WizardGame.UI
 {

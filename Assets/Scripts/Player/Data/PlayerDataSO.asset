@@ -13,32 +13,24 @@ MonoBehaviour:
   m_Name: PlayerDataSO
   m_EditorClassIdentifier: Assembly-CSharp::WizardGame.Player.PlayerDataSO
   <Health>k__BackingField:
-    statType: 9
-    increaseIsPositive: 1
     isIgnored: 0
     cap: 100
     isCapChangeable: 1
     minValue: 0
     baseValue: 100
   <Experience>k__BackingField:
-    statType: 10
-    increaseIsPositive: 1
     isIgnored: 0
     cap: 100
     isCapChangeable: 1
     minValue: 0
     baseValue: 0
   <MovementSpeed>k__BackingField:
-    statType: 11
-    increaseIsPositive: 1
     isIgnored: 0
     cap: 5
     isCapChangeable: 0
     minValue: 1
-    baseValue: 2
+    baseValue: 1.5
   <DamageResistance>k__BackingField:
-    statType: 12
-    increaseIsPositive: 1
     isIgnored: 0
     cap: 75
     isCapChangeable: 0
