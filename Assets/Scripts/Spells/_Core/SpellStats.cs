@@ -54,7 +54,9 @@ namespace WizardGame.Stats
             InitializeFromSO(allStats);
 
             ProjectileIntervalTime = baseData.ProjectileIntervalTime;
-            Level = 1;
+            //DEBUG: Set spell to Level 9
+            Level = 9;
+            Debug.Log($"Spell level set to: {Level}");
 
             ApplyAbilityModifiers();
         }
@@ -62,7 +64,7 @@ namespace WizardGame.Stats
         public void ApplyLevelUp()
         {
             // Do nothing if at max level
-            if (Level >= baseData.LevelData.Count) return;
+            if (Level == baseData.LevelData.Count + 1) return;
 
             Level++;
             Debug.Log($"Spell raised to level {Level}");
@@ -74,26 +76,9 @@ namespace WizardGame.Stats
                 return;
             }
 
-            foreach (var modifier in levelInfo.Modifiers)
-            {
-                Debug.Log($"{modifier.StatType} +{modifier.Value}");
-            }
-
             allLevelUpModifiers.AddRange(levelInfo.Modifiers);
 
-            foreach (var modifier in allLevelUpModifiers)
-            {
-                Debug.Log($"From allLevelUpModifiers: {modifier.StatType} +{modifier.Value}");
-            }
-
-
             ApplyAbilityModifiers();
-
-            Debug.Log($"Spell level: {Level}");
-            foreach (var stat in runtimeStats.Values)
-            {
-                Debug.Log($"{stat.StatType}: {stat.CurrentValue}");
-            }
         }
 
         public override void ApplyAbilityModifiers()
@@ -101,8 +86,7 @@ namespace WizardGame.Stats
             foreach (var stat in runtimeStats.Values) stat.Init();
 
             // Player ability modifiers
-            // DEBUG: Removing ability modifiers in order to get clear picture of level up mods
-            // foreach (var mod in ownerAbilities.AllModifiers) ApplyModifierToStat(mod);
+            foreach (var mod in ownerAbilities.AllModifiers) ApplyModifierToStat(mod);
 
             // Level-up modifiers
             foreach (var mod in allLevelUpModifiers) ApplyModifierToStat(mod);

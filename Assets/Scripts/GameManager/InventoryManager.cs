@@ -40,6 +40,13 @@ namespace WizardGame.Managers
             {
                 Debug.Log($"Leveling up existing spell: {exsistingSpell.SpellData.SpellName}");
                 exsistingSpell.LevelUp();
+
+                Debug.Log($"Spell level after level up: {exsistingSpell.SpellStats.Level}");
+
+                if (exsistingSpell.SpellStats.Level >= 10)
+                {
+                    EventManager.PublishSpellMaxLevel(exsistingSpell.SpellData);
+                }
             }
             else
             {

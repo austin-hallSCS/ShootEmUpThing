@@ -21,9 +21,12 @@ namespace WizardGame
         }
         protected override void SubscribeToEvents()
         {
-
+            EventManager.OnSpellMaxLevel += RemoveSpellFromPool;
         }
-        protected override void UnsubscribeFromEvents() { }
+        protected override void UnsubscribeFromEvents()
+        {
+            EventManager.OnSpellMaxLevel -= RemoveSpellFromPool;
+        }
 
         public List<GameObject> GetUpgradeOptions()
         {
@@ -36,9 +39,18 @@ namespace WizardGame
             // Get 3 spells from the shuffle bag
             for (var i = 0; i < 3; i++)
             {
+                if (i > spellPool.Count)
+                {
+                    break;
+                }
                 choices.Add(upgradeBag.GetNext());
             }
 
+            foreach (var choice in choices)
+            {
+                var data = choice.GetComponent<SpellController>().SpellData;
+                Debug.Log($"Choice: {data.SpellName}");
+            }
             return choices;
         }
 
@@ -72,11 +84,19 @@ namespace WizardGame
             return sb.ToString();
         }
 
-        private void RemoveSpellFromPool(GameObject spell)
+        private void RemoveSpellFromPool(SpellDataSO dataToFind)
         {
-            if (!spellPool.Contains(spell)) return;
+            foreach (var spell in spellPool)
+            {
+                SpellController controller = spell.GetComponent<SpellController>();
 
-            spellPool.Remove(spell);
+                if (controller.SpellData == dataToFind)
+                {
+                    spellPool.Remove(spell);
+                    Debug.Log($"Spell Removed: {controller.SpellData.SpellName}");
+                    break;
+                }
+            }
         }
     }
 }

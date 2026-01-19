@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using WizardGame.Enemy;
+using WizardGame.Spells;
 
 namespace WizardGame.Managers
 {
@@ -15,7 +16,7 @@ namespace WizardGame.Managers
         //-- Player/XP --
         public static event Action<int> OnPlayerLevelUp;
         public static event Action<GameObject> OnLevelUpSelection;
-        public static event Action<string> OnSpellMaxLevel;
+        public static event Action<SpellDataSO> OnSpellMaxLevel;
 
         // -- Collectible --
         public static event Action<int> OnExperienceCollected;
@@ -36,7 +37,7 @@ namespace WizardGame.Managers
         //-- Player/XP
         public static void PublishLevelUp(int newLevel) => OnPlayerLevelUp?.Invoke(newLevel);
         public static void PublishLevelUpSelection(GameObject prefab) => OnLevelUpSelection?.Invoke(prefab);
-        public static void PublishSpellMaxLevel(string spellName) => OnSpellMaxLevel?.Invoke(spellName);
+        public static void PublishSpellMaxLevel(SpellDataSO spellData) => OnSpellMaxLevel?.Invoke(spellData);
 
         //-- Collectible --
         public static void PublishExperienceCollected(int amount) => OnExperienceCollected?.Invoke(amount);
