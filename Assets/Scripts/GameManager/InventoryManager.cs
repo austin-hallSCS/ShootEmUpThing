@@ -8,8 +8,6 @@ namespace WizardGame.Managers
     {
         private List<SpellController> equippedSpells;
 
-        public List<GameObject> SpellsAvailableForLevelUp;
-
         public InventoryManager(GameManager manager) : base(manager)
         {
             equippedSpells = new List<SpellController>();

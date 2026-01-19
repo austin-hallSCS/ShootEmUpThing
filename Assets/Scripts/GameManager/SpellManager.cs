@@ -48,8 +48,8 @@ namespace WizardGame
             // Get reference to spell instance
             SpellController spellInstance = gameManager.GetManager<InventoryManager>().GetSpellInstance(spellData);
 
-            // If spell is not equipped, return the Spell's name
-            if (spellInstance == null) return spellData.SpellName;
+            // If spell is not equipped, return the Spell's description
+            if (spellInstance == null) return spellData.Description;
 
             // Get level data for the next level
             int nextLevel = spellInstance.SpellStats.Level + 1;

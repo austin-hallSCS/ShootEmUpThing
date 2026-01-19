@@ -29,12 +29,6 @@ namespace WizardGame.UI
                     // TODO: Figure out how to move this to a poco manager, to keep this class cleaner
                     string description = GameManager.Instance.GetManager<SpellManager>().GetLevelUpDescriptions(data);
 
-                    // If InventoryManager doesn't find the spell instance, get the Spell's description
-                    if (description == data.SpellName)
-                    {
-                        description = data.Description;
-                    }
-
                     // Update the UI card
                     optionCards[i].Configure(data.SpellIcon, description);
 
