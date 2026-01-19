@@ -33,7 +33,7 @@ namespace WizardGame.Managers
             if (show)
             {
                 // Generate upgrade choices
-                currentUpgradeChoices = gameManager.GetInventoryManager().GetUpgradeOptions();
+                currentUpgradeChoices = gameManager.GetManager<SpellManager>().GetUpgradeOptions();
 
                 // Pass new choices to the proxy
                 if (levelUpPanel.TryGetComponent(out UI.LevelUpUIProxy proxy))

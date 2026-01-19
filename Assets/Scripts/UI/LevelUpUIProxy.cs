@@ -26,7 +26,8 @@ namespace WizardGame.UI
                     SpellDataSO data = spell.SpellData;
 
                     // Get the modifier descriptions
-                    string description = GameManager.Instance.GetInventoryManager().GetLevelUpDescriptions(data.SpellName);
+                    // TODO: Figure out how to move this to a poco manager, to keep this class cleaner
+                    string description = GameManager.Instance.GetManager<InventoryManager>().GetLevelUpDescriptions(data.SpellName);
 
                     // If InventoryManager doesn't find the spell instance, get the Spell's description
                     if (description == data.SpellName)
@@ -48,8 +49,8 @@ namespace WizardGame.UI
             }
         }
 
-        public void SelectOption1() => GameManager.Instance.GetUIManager().SelectUpgrade(0);
-        public void SelectOption2() => GameManager.Instance.GetUIManager().SelectUpgrade(1);
-        public void SelectOption3() => GameManager.Instance.GetUIManager().SelectUpgrade(2);
+        public void SelectOption1() => GameManager.Instance.GetManager<UIManager>().SelectUpgrade(0);
+        public void SelectOption2() => GameManager.Instance.GetManager<UIManager>().SelectUpgrade(1);
+        public void SelectOption3() => GameManager.Instance.GetManager<UIManager>().SelectUpgrade(2);
     }
 }

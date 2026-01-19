@@ -40,7 +40,8 @@ namespace WizardGame.Managers
         private InputManager inputManager;
         private InventoryManager inventoryManager;
         private UIManager uiManager;
-        private List<ManagerBase> pocoManagers = new();
+        private SpellManager spellManager;
+        private Dictionary<Type, ManagerBase> pocoManagers = new Dictionary<Type, ManagerBase>();
 
         //-- Input --
         public Vector2 MoveInput
@@ -117,19 +118,22 @@ namespace WizardGame.Managers
         private void InitManagers()
         {
             xpManager = new XPManager(this);
-            pocoManagers.Add(xpManager);
+            pocoManagers.Add(typeof(XPManager), xpManager);
 
             spawnManager = new SpawnManager(this, CurrentStageData);
-            pocoManagers.Add(spawnManager);
+            pocoManagers.Add(typeof(SpawnManager), spawnManager);
 
             inputManager = new InputManager(this);
-            pocoManagers.Add(inputManager);
+            pocoManagers.Add(typeof(InputManager), inputManager);
 
             inventoryManager = new InventoryManager(this);
-            pocoManagers.Add(inventoryManager);
+            pocoManagers.Add(typeof(InventoryManager), inventoryManager);
 
             uiManager = new UIManager(this, levelUpPanel);
-            pocoManagers.Add(uiManager);
+            pocoManagers.Add(typeof(UIManager), uiManager);
+
+            spellManager = new SpellManager(this);
+            pocoManagers.Add(typeof(SpellManager), spellManager);
         }
 
         private void SubscribeToEvents()
@@ -149,9 +153,20 @@ namespace WizardGame.Managers
             UnsubscribeFromEvents();
         }
 
-        public UIManager GetUIManager() => uiManager;
+        // Called by poco managers to get a reference to another poco manager.
+        // This is so each manager does not have to create a reference to all others, they just go through the GameManager.
+        public T GetManager<T>() where T : ManagerBase
+        {
+            if (pocoManagers.TryGetValue(typeof(T), out ManagerBase manager))
+            {
+                return (T)manager;
+            }
+            return null;
+        }
 
-        public InventoryManager GetInventoryManager() => inventoryManager;
+        // public UIManager GetUIManager() => uiManager;
+
+        // public InventoryManager GetInventoryManager() => inventoryManager;
 
         private void PauseGame()
         {
@@ -195,7 +210,7 @@ namespace WizardGame.Managers
 
         private void OnDestroy()
         {
-            foreach (ManagerBase manager in pocoManagers)
+            foreach (ManagerBase manager in pocoManagers.Values)
             {
                 manager?.TearDown();
             }
