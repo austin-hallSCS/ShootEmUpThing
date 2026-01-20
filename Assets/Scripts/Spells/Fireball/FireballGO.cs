@@ -93,7 +93,9 @@ namespace WizardGame.Spells
                     else
                     {
                         var damageAmount = spellStats.GetStat(StatType.Damage).CurrentValue;
+                        var knockbackAmount = spellStats.GetStat(StatType.Knockback).CurrentValue;
                         enemy.Damage(damageAmount);
+                        enemy.Knockback(knockbackAmount, RB.position);
                         damagedEnemyIDs.Add(enemyID);
                     }
                 }

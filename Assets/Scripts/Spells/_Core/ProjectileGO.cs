@@ -9,11 +9,9 @@ namespace WizardGame.Spells
 
     public abstract class ProjectileGO : SpellGO
     {
-
-
         protected override void Awake()
         {
-
+            base.Awake();
         }
 
         protected virtual void FixedUpdate()
