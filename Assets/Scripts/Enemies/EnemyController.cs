@@ -4,6 +4,7 @@ using WizardGame.Collectibles;
 using WizardGame.Interfaces;
 using WizardGame.Managers;
 using WizardGame.Player;
+using WizardGame.Spells;
 using WizardGame.Stats;
 
 namespace WizardGame.Enemy
@@ -104,6 +105,35 @@ namespace WizardGame.Enemy
             }
         }
 
+        // Intakes a spell's Effect Payload and applies all effects
+        public void ApplyEffect(SpellEffectPayload payload)
+        {
+            // Apply damage if present
+            if (payload.DamageAmount > 0)
+            {
+                Damage(payload.DamageAmount);
+            }
+
+            // TODO: Figure out knockback - need to pass source's position in
+            // if (payload.KnockbackAmount > 0)
+            // {
+            //     Knockback(payload.KnockbackAmount);
+            // }
+
+            // Apply status effects
+            switch (payload.StatusEffect)
+            {
+                case StatusEffectType.Burn:
+                    float burnDamage = payload.DamageAmount * .10f;
+                    StartCoroutine(ApplyBurn(payload.StatusDuration, burnDamage));
+                    break;
+                case StatusEffectType.Freeze:
+                    StartCoroutine(ApplyFreeze(payload.StatusDuration));
+                    break;
+                    // TODO: Handle other status effects
+            }
+        }
+
         public void Damage(float amount)
         {
             var healthStat = enemyStats.GetStat(StatType.Health);
@@ -133,6 +163,33 @@ namespace WizardGame.Enemy
                 StopAllCoroutines();
                 StartCoroutine(ResetStun());
             }
+        }
+
+        // --- Coroutines ---
+        private IEnumerator ApplyBurn(float duration, float damageAmount)
+        {
+            float elapsedTime = 0f;
+
+            while (elapsedTime < duration)
+            {
+                Damage(damageAmount);
+
+                // FIXME: Make this not a magic number
+                yield return new WaitForSeconds(0.25f);
+
+                elapsedTime += Time.deltaTime;
+            }
+        }
+
+        private IEnumerator ApplyFreeze(float duration)
+        {
+            float baseSpeed = enemyStats.GetStat(StatType.MovementSpeed).BaseValue;
+
+            enemyStats.GetStat(StatType.MovementSpeed).SetCurrentValue(0);
+
+            yield return new WaitForSeconds(duration);
+
+            enemyStats.GetStat(StatType.MovementSpeed).SetCurrentValue(baseSpeed);
         }
 
         private IEnumerator ResetStun()
