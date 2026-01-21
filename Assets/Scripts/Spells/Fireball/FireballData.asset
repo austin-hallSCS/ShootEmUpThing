@@ -16,6 +16,13 @@ MonoBehaviour:
   <Description>k__BackingField: '"A bright streak flashes from your pointing finger
     to a random direction then blossoms with a low roar into an explosion of flame."'
   <SpellIcon>k__BackingField: {fileID: -663120914, guid: d9d9192d3befa4149a5dd478ef914c49, type: 3}
+  <Payload>k__BackingField:
+    DamageAmount: 0
+    KnockbackAmount: 0
+    SourcePosition: {x: 0, y: 0}
+    StatusEffect: 1
+    StatusDuration: 1
+    StatusStrength: 0
   <ProjectileIntervalTime>k__BackingField: 0.02
   <RarityAmount>k__BackingField:
     isIgnored: 0

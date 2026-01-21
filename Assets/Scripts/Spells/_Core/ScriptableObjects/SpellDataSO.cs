@@ -16,6 +16,10 @@ namespace WizardGame.Spells
         [field: SerializeField] public string Description { get; private set; }
         [field: SerializeField] public Sprite SpellIcon { get; private set; }
 
+        [field: Header("Combat Effects")]
+        [field: Tooltip("Effects applied to enemies from this spell.")]
+        [field: SerializeField] public SpellEffectPayload Payload { get; private set; }
+
         // Non-modifiable stats
         [field: Header("Non-Modifiable Stats")]
         [field: SerializeField] public float ProjectileIntervalTime { get; private set; }

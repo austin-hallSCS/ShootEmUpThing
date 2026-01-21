@@ -10,9 +10,9 @@ namespace WizardGame.Spells
         private float currentAngle;
         private float radius;
 
-        public void Initialize(SpellStats stats, Transform player, float startAngle)
+        public void Initialize(SpellController parentController, Transform player, float startAngle)
         {
-            base.Initialize(stats);
+            base.Initialize(parentController);
 
             centerPoint = player;
             currentAngle = startAngle;
@@ -55,17 +55,12 @@ namespace WizardGame.Spells
         {
             base.OnTriggerEnter2D(other);
 
-            float damage = spellStats.GetStat(StatType.Damage).CurrentValue;
-            float knockback = spellStats.GetStat(StatType.Knockback).CurrentValue;
-
-            Debug.Log($"Knockback amount: {knockback}");
 
             EnemyController enemy = other.GetComponent<EnemyController>();
 
             if (enemy != null)
             {
-                enemy.Damage(damage);
-                enemy.Knockback(knockback, transform.parent.position);
+                SendPayload(enemy);
             }
 
         }

@@ -114,6 +114,12 @@ namespace WizardGame.Enemy
                 Damage(payload.DamageAmount);
             }
 
+            // Apply knockback if present
+            if (payload.KnockbackAmount > 0)
+            {
+                Knockback(payload.KnockbackAmount, payload.SourcePosition);
+            }
+
             // TODO: Figure out knockback - need to pass source's position in
             // if (payload.KnockbackAmount > 0)
             // {
@@ -121,6 +127,7 @@ namespace WizardGame.Enemy
             // }
 
             // Apply status effects
+            Debug.Log($"Applying status effect {payload.StatusEffect} to {transform.name}");
             switch (payload.StatusEffect)
             {
                 case StatusEffectType.Burn:
@@ -130,7 +137,9 @@ namespace WizardGame.Enemy
                 case StatusEffectType.Freeze:
                     StartCoroutine(ApplyFreeze(payload.StatusDuration));
                     break;
-                    // TODO: Handle other status effects
+                // TODO: Handle other status effects
+                default:
+                    break;
             }
         }
 
@@ -156,6 +165,7 @@ namespace WizardGame.Enemy
 
                 rb.linearVelocity = Vector2.zero;
 
+                Debug.Log($"Knockback amount: {amount}");
                 rb.AddForce(pushDirection * amount, ForceMode2D.Impulse);
 
                 Debug.Log("Enemy Knockback was called.");

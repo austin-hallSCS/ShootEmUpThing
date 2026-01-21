@@ -14,7 +14,7 @@ namespace WizardGame.Spells
             var projectile = Instantiate(spellPrefab, transform.position, quaternion.identity);
             var missileScript = projectile.GetComponent<MagicMissileGO>();
 
-            missileScript.Initialize(spellStats, target);
+            missileScript.Initialize(this, target);
         }
 
         private Transform GetNearestEnemy()

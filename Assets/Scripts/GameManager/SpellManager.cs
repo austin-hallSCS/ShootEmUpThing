@@ -65,12 +65,17 @@ namespace WizardGame
 
             // Get level data for the next level
             int nextLevel = spellInstance.SpellStats.Level + 1;
+            Debug.Log($"{spellData.SpellName} nextLevel: {nextLevel}");
             SpellLevelData levelData = spellData.GetLevelData(nextLevel);
 
             var sb = new System.Text.StringBuilder();
 
             sb.Append($"Level {nextLevel}: ");
 
+            if (spellData == null)
+            {
+                Debug.LogWarning("Spell Data is null!");
+            }
             for (int i = 0; i < levelData.Modifiers.Count; i++)
             {
                 sb.Append(levelData.Modifiers[i].GenerateDescription());

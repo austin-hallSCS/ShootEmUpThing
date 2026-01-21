@@ -25,9 +25,9 @@ namespace WizardGame.Spells
             circleCollider = GetComponent<CircleCollider2D>();
         }
 
-        public override void Initialize(SpellStats stats)
+        public override void Initialize(SpellController parentController)
         {
-            base.Initialize(stats);
+            base.Initialize(parentController);
 
             timeAlive = 0f;
             inAir = true;
@@ -92,10 +92,7 @@ namespace WizardGame.Spells
                     }
                     else
                     {
-                        var damageAmount = spellStats.GetStat(StatType.Damage).CurrentValue;
-                        var knockbackAmount = spellStats.GetStat(StatType.Knockback).CurrentValue;
-                        enemy.Damage(damageAmount);
-                        enemy.Knockback(knockbackAmount, RB.position);
+                        SendPayload(enemy);
                         damagedEnemyIDs.Add(enemyID);
                     }
                 }

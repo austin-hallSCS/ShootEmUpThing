@@ -36,7 +36,6 @@ namespace WizardGame.Collectibles
 
             if (other.GetComponent<PlayerMagnet>() != null)
             {
-                Debug.Log("Hit PlayerMaget.");
                 player = other.GetComponentInParent<PlayerController>();
                 isMagentized = true;
             }

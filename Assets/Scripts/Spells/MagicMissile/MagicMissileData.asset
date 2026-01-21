@@ -16,6 +16,13 @@ MonoBehaviour:
   <Description>k__BackingField: '"You create three glowing darts of magical force.
     Each dart hits the nearest enemy." '
   <SpellIcon>k__BackingField: {fileID: 6705810157222835970, guid: 6c35cd05b4f1ad047babd3bb940e6088, type: 3}
+  <Payload>k__BackingField:
+    DamageAmount: 0
+    KnockbackAmount: 0
+    SourcePosition: {x: 0, y: 0}
+    StatusEffect: 0
+    StatusDuration: 0
+    StatusStrength: 0
   <ProjectileIntervalTime>k__BackingField: 0.25
   <RarityAmount>k__BackingField:
     isIgnored: 0

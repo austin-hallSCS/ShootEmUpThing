@@ -54,9 +54,7 @@ namespace WizardGame.Stats
             InitializeFromSO(allStats);
 
             ProjectileIntervalTime = baseData.ProjectileIntervalTime;
-            //DEBUG: Set spell to Level 9
-            Level = 9;
-            Debug.Log($"Spell level set to: {Level}");
+            Level = 1;
 
             ApplyAbilityModifiers();
         }

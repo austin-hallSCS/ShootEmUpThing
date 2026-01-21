@@ -29,7 +29,7 @@ namespace WizardGame.Spells
             // Instantiate projectile
             var projectile = Instantiate(spellPrefab, spawnPos, rotation);
             var spellGO = projectile.GetComponent<SpellGO>();
-            spellGO.Initialize(spellStats);
+            spellGO.Initialize(this);
         }
     }
 

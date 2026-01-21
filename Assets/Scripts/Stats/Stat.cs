@@ -1,6 +1,7 @@
 using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace WizardGame.Stats
 {
@@ -119,9 +120,9 @@ namespace WizardGame.Stats
         {
             if (isIgnored) return;
 
-            Debug.Log($"Apply modifier to stat: +{mod.Value} {statType}");
+            Debug.Log($"Apply modifier to stat: {mod.GenerateDescription()}");
             CurrentValue = GetModifiedValue(mod);
-            Debug.Log($"Stat new value: {CurrentValue}");
+            Debug.Log($"{mod.ModType} new value: {CurrentValue}");
         }
 
         // Get the new Value after applying a modifier
@@ -133,7 +134,6 @@ namespace WizardGame.Stats
 
             // Determine the direction of the change.
             bool shouldAdd = (mod.ModType == ModifierType.Bonus) == IncreaseIsPositive;
-            Debug.Log($"ModType: {mod.ModType}, IncreaseIsPositive: {IncreaseIsPositive}");
 
             // Apply the change
             return shouldAdd ? CurrentValue + delta : CurrentValue - delta;

@@ -27,9 +27,9 @@ namespace WizardGame.Spells
 
         private bool isLaunched = false;
 
-        public void Initialize(SpellStats stats, Transform targetTransform)
+        public void Initialize(SpellController parentController, Transform targetTransform)
         {
-            base.Initialize(stats);
+            base.Initialize(parentController);
 
             target = targetTransform;
 
@@ -116,15 +116,13 @@ namespace WizardGame.Spells
 
         private void OnImpact()
         {
-            var damageAmount = spellStats.GetStat(StatType.Damage).CurrentValue;
-
             if (target != null)
             {
                 EnemyController enemy = target.gameObject.GetComponent<EnemyController>();
-                if (enemy != null) enemy.Damage(damageAmount);
+                if (enemy != null) SendPayload(enemy);
             }
 
-            Destroy(gameObject);
+            DestroySelf();
         }
     }
 }
