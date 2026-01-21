@@ -16,16 +16,21 @@ namespace WizardGame.Spells
         [field: SerializeField] public string Description { get; private set; }
         [field: SerializeField] public Sprite SpellIcon { get; private set; }
 
+        [field: Header("Spawn Logic")]
+        [field: Tooltip("How this spell spawns it's game objects")]
+        [field: SerializeField] public TargetingStyle Targeting { get; private set; }
+        [field: Tooltip("How far from the player to spawn")]
+        [field: SerializeField] public float SpawnDistanceOffset { get; private set; }
+        [field: Tooltip("Time in between game object spawns")]
+        [field: SerializeField] public float ProjectileIntervalTime { get; private set; }
+
         [field: Header("Combat Effects")]
         [field: Tooltip("Effects applied to enemies from this spell.")]
         [field: SerializeField] public SpellEffectPayload Payload { get; private set; }
 
-        // Non-modifiable stats
-        [field: Header("Non-Modifiable Stats")]
-        [field: SerializeField] public float ProjectileIntervalTime { get; private set; }
 
         // Modifiable base stats
-        [field: Header("Modifiable Stats")]
+        [field: Header("Base Stats")]
         [field: SerializeField] public Stat RarityAmount { get; private set; }
         [field: SerializeField] public Stat DamageAmount { get; private set; }
         [field: SerializeField] public Stat AreaAmount { get; private set; }

@@ -4,16 +4,8 @@ using WizardGame.Stats;
 
 namespace WizardGame.Spells
 {
-    public abstract class ProjectileSpellController : SpellController
+    public abstract class ProjectileSpellController : ObjectSpellController
     {
-        //Status variables
-        protected float currentProjectileIntervalTimeAt;
-
-        protected override void SpellActiveBehavior()
-        {
-            // Override this method with nothing, as projectile spells have no continuous behavior
-        }
-
         protected override void SpellActivate()
         {
             base.SpellActivate();

@@ -5,7 +5,7 @@ using WizardGame.Stats;
 
 namespace WizardGame.Spells
 {
-    public class SwordBurstSpellController : SpellController
+    public class SwordBurstSpellController : ObjectSpellController
     {
         private List<GameObject> swordPool;
 

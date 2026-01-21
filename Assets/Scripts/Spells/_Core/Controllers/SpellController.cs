@@ -1,9 +1,17 @@
 using System;
 using UnityEngine;
 using WizardGame.Stats;
+using WizardGame.Utils;
 
 namespace WizardGame.Spells
 {
+    public enum TargetingStyle
+    {
+        None,
+        NearestEnemy,
+        RandomCardinal,
+        RadialBurst
+    }
     public abstract class SpellController : MonoBehaviour
     {
         //-- Inspector Properties --
@@ -88,6 +96,34 @@ namespace WizardGame.Spells
         }
 
         protected abstract void SpellActiveBehavior();
+
+        protected Transform GetNearestEnemy()
+        {
+            Vector2 center = transform.position;
+            float circleRadius = 50f;
+            Collider2D[] detectedEnemies = Physics2D.OverlapCircleAll(center, circleRadius, whatIsEnemy);
+
+            float closestDistance = Mathf.Infinity;
+            Transform nearestTarget = null;
+            if (detectedEnemies != null && detectedEnemies.Length > 0)
+            {
+
+                foreach (var enemy in detectedEnemies)
+                {
+                    Vector3 enemyPosition = enemy.transform.position;
+
+                    float distance = WorldSenses.GetSquareDistance(enemyPosition, center);
+
+                    if (distance < closestDistance)
+                    {
+                        closestDistance = distance;
+                        nearestTarget = enemy.transform;
+                    }
+                }
+            }
+
+            return nearestTarget;
+        }
 
         protected virtual void ResetCoolDown() => currentCoolDownTimeAt = spellStats.GetStat(StatType.Cooldown).CurrentValue;
 
