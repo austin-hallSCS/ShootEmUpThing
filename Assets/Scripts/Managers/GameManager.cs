@@ -42,6 +42,7 @@ namespace WizardGame.Managers
         private InventoryManager inventoryManager;
         private UIManager uiManager;
         private SpellManager spellManager;
+        private PoolManager poolManager;
         private Dictionary<Type, ManagerBase> pocoManagers = new Dictionary<Type, ManagerBase>();
 
         //-- Input --
@@ -135,6 +136,9 @@ namespace WizardGame.Managers
 
             spellManager = new SpellManager(this);
             pocoManagers.Add(typeof(SpellManager), spellManager);
+
+            poolManager = new PoolManager(this);
+            pocoManagers.Add(typeof(PoolManager), poolManager);
         }
 
         private void SubscribeToEvents()

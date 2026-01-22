@@ -19,7 +19,11 @@ namespace WizardGame.Managers
             // Object.DontDestroyOnLoad(container);
         }
 
-        protected override void SubscribeToEvents() { }
+        protected override void SubscribeToEvents()
+        {
+            // FIXME: Figure out how to pass object back to SpellController/ how to subscribe to this event without raising an error.
+            // EventManager.OnObjectSpawn += Spawn;
+        }
 
         protected override void UnsubscribeFromEvents() { }
 
