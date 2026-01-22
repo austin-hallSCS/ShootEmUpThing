@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using WizardGame.Utils;
 using WizardGame.Stats;
@@ -64,7 +65,24 @@ namespace WizardGame.Spells
             }
             return results;
         }
+
+        private IEnumerator FireBurst()
+        {
+            var amount = spellStats.GetStat(StatType.Amount).CurrentValue;
+            var projectileInterval = spellStats.ProjectileIntervalTime;
+
+            for (int i = 0; i < amount; i++)
+            {
+                SpawnObject();
+
+                if (projectileInterval > 0) yield return new WaitForSeconds(projectileInterval);
+            }
+        }
+
+        // TODO: Add spawn functionality after poolmanager is created.
+        private void SpawnObject() { }
     }
+
 
     // Helper struct to keep positions/rotations together
     public struct TransformData
