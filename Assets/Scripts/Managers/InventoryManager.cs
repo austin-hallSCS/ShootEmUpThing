@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using WizardGame.Spells;
+using WizardGame.Services;
 
 namespace WizardGame.Managers
 {
@@ -17,12 +18,12 @@ namespace WizardGame.Managers
 
         protected override void SubscribeToEvents()
         {
-            EventManager.OnLevelUpSelection += ProcessLevelUp;
+            EventBus.OnLevelUpSelection += ProcessLevelUp;
         }
 
         protected override void UnsubscribeFromEvents()
         {
-            EventManager.OnLevelUpSelection -= ProcessLevelUp;
+            EventBus.OnLevelUpSelection -= ProcessLevelUp;
         }
 
         public void ProcessLevelUp(GameObject spellPrefab)
@@ -45,7 +46,7 @@ namespace WizardGame.Managers
 
                 if (exsistingSpell.SpellStats.Level >= 10)
                 {
-                    EventManager.PublishSpellMaxLevel(exsistingSpell.SpellData);
+                    EventBus.PublishSpellMaxLevel(exsistingSpell.SpellData);
                 }
             }
             else

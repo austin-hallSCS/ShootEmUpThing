@@ -4,6 +4,7 @@ using UnityEngine;
 using WizardGame.Managers;
 using WizardGame.Spells;
 using WizardGame.Utils;
+using WizardGame.Services;
 
 namespace WizardGame
 {
@@ -21,11 +22,11 @@ namespace WizardGame
         }
         protected override void SubscribeToEvents()
         {
-            EventManager.OnSpellMaxLevel += RemoveSpellFromPool;
+            EventBus.OnSpellMaxLevel += RemoveSpellFromPool;
         }
         protected override void UnsubscribeFromEvents()
         {
-            EventManager.OnSpellMaxLevel -= RemoveSpellFromPool;
+            EventBus.OnSpellMaxLevel -= RemoveSpellFromPool;
         }
 
         public List<GameObject> GetUpgradeOptions()

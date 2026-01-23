@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using WizardGame.Services;
 
 namespace WizardGame.Managers
 {
@@ -29,7 +30,7 @@ namespace WizardGame.Managers
         {
             if (CurrentXP >= XPToNextLevel)
             {
-                EventManager.PublishLevelUp(CurrentPlayerLevel + 1);
+                EventBus.PublishLevelUp(CurrentPlayerLevel + 1);
 
                 int overflow = CurrentXP - XPToNextLevel;
 
@@ -46,12 +47,12 @@ namespace WizardGame.Managers
 
         protected override void SubscribeToEvents()
         {
-            EventManager.OnExperienceCollected += AddExperience;
+            EventBus.OnExperienceCollected += AddExperience;
         }
 
         protected override void UnsubscribeFromEvents()
         {
-            EventManager.OnExperienceCollected -= AddExperience;
+            EventBus.OnExperienceCollected -= AddExperience;
         }
     }
 }

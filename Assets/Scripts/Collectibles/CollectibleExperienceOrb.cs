@@ -1,5 +1,5 @@
 using UnityEngine;
-using WizardGame.Managers;
+using WizardGame.Services;
 
 namespace WizardGame.Collectibles
 {
@@ -17,7 +17,7 @@ namespace WizardGame.Collectibles
         {
             base.OnCollected();
 
-            EventManager.PublishExperienceCollected(xpAmount);
+            EventBus.PublishExperienceCollected(xpAmount);
         }
     }
 }

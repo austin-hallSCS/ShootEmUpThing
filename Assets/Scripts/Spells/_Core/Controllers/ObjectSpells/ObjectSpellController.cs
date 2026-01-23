@@ -45,7 +45,7 @@ namespace WizardGame.Spells
                     break;
 
                 case TargetingStyle.RandomCardinal:
-                    ShuffleBag<Vector2> directionPicker = new ShuffleBag<Vector2>(WorldSenses.cardinalDirections);
+                    ShuffleBag<Vector2> directionPicker = new ShuffleBag<Vector2>(VectorUtils.eightDirections);
                     Vector2 nextDirection = directionPicker.GetNext();
 
                     results.Add(new TransformData(playerPos, Quaternion.LookRotation(Vector3.forward, nextDirection)));

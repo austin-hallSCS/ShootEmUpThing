@@ -5,7 +5,7 @@ namespace WizardGame.Spells
 {
     public class FireballSpellController : ProjectileSpellController
     {
-        private ShuffleBag<Vector2> directionPicker = new ShuffleBag<Vector2>(WorldSenses.cardinalDirections);
+        private ShuffleBag<Vector2> directionPicker = new ShuffleBag<Vector2>(VectorUtils.eightDirections);
 
         // Workspace
         private Vector2 nextDirection;

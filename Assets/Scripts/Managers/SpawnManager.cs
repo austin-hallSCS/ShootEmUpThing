@@ -4,6 +4,7 @@ using UnityEngine;
 using WizardGame.Enemy;
 using WizardGame.Stages;
 using WizardGame.Utils;
+using WizardGame.Services;
 
 namespace WizardGame.Managers
 {
@@ -28,9 +29,9 @@ namespace WizardGame.Managers
 
         protected override void SubscribeToEvents()
         {
-            EventManager.OnNextWaveBegin += HandleNextWaveBegin;
-            EventManager.OnEnemyDied += HandleEnemyDied;
-            EventManager.OnEnemyDespawn += HandleEnemyDespawn;
+            EventBus.OnNextWaveBegin += HandleNextWaveBegin;
+            EventBus.OnEnemyDied += HandleEnemyDied;
+            EventBus.OnEnemyDespawn += HandleEnemyDespawn;
         }
 
         public void StartSpawning()
@@ -94,7 +95,7 @@ namespace WizardGame.Managers
             }
             else
             {
-                enemyToSpawn = GetRandom.FromList<GameObject>(enemyPrefabs);
+                enemyToSpawn = enemyPrefabs.GetRandomItem();
                 Object.Instantiate(enemyToSpawn, nextSpawnPosition, Quaternion.identity);
             }
 
@@ -202,9 +203,9 @@ namespace WizardGame.Managers
 
         protected override void UnsubscribeFromEvents()
         {
-            EventManager.OnNextWaveBegin -= HandleNextWaveBegin;
-            EventManager.OnEnemyDied -= HandleEnemyDied;
-            EventManager.OnEnemyDespawn -= HandleEnemyDespawn;
+            EventBus.OnNextWaveBegin -= HandleNextWaveBegin;
+            EventBus.OnEnemyDied -= HandleEnemyDied;
+            EventBus.OnEnemyDespawn -= HandleEnemyDespawn;
         }
 
         protected override void OnTearDown()

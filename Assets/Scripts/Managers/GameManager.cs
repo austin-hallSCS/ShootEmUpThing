@@ -4,6 +4,7 @@ using UnityEngine;
 using WizardGame.Player;
 using WizardGame.Spells;
 using WizardGame.Stages;
+using WizardGame.Services;
 
 namespace WizardGame.Managers
 {
@@ -42,7 +43,6 @@ namespace WizardGame.Managers
         private InventoryManager inventoryManager;
         private UIManager uiManager;
         private SpellManager spellManager;
-        private PoolManager poolManager;
         private Dictionary<Type, ManagerBase> pocoManagers = new Dictionary<Type, ManagerBase>();
 
         //-- Input --
@@ -136,21 +136,18 @@ namespace WizardGame.Managers
 
             spellManager = new SpellManager(this);
             pocoManagers.Add(typeof(SpellManager), spellManager);
-
-            poolManager = new PoolManager(this);
-            pocoManagers.Add(typeof(PoolManager), poolManager);
         }
 
         private void SubscribeToEvents()
         {
-            EventManager.OnPlayerLevelUp += _ => PauseGame();
-            EventManager.OnGameResumed += ResumeGame;
+            EventBus.OnPlayerLevelUp += _ => PauseGame();
+            EventBus.OnGameResumed += ResumeGame;
         }
 
         private void UnsubscribeFromEvents()
         {
-            EventManager.OnPlayerLevelUp -= _ => PauseGame();
-            EventManager.OnGameResumed -= ResumeGame;
+            EventBus.OnPlayerLevelUp -= _ => PauseGame();
+            EventBus.OnGameResumed -= ResumeGame;
         }
 
         private void TearDown()

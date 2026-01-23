@@ -4,6 +4,7 @@ using WizardGame.Interfaces;
 using WizardGame.Stats;
 using WizardGame.UI;
 using WizardGame.Managers;
+using WizardGame.Services;
 
 namespace WizardGame.Player
 {
@@ -119,12 +120,12 @@ namespace WizardGame.Player
 
         private void SubscribeToEvents()
         {
-            EventManager.OnPlayerLevelUp += HandlePlayerLevelUp;
+            EventBus.OnPlayerLevelUp += HandlePlayerLevelUp;
         }
 
         private void UnsubscribeFromEvents()
         {
-            EventManager.OnPlayerLevelUp -= HandlePlayerLevelUp;
+            EventBus.OnPlayerLevelUp -= HandlePlayerLevelUp;
         }
 
         #region Runtime Methods

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using WizardGame.Utils;
+using WizardGame.Services;
 
 namespace WizardGame.Managers
 {
@@ -16,14 +17,14 @@ namespace WizardGame.Managers
         }
         protected override void SubscribeToEvents()
         {
-            EventManager.OnPlayerLevelUp += _ => ShowLevelUpElement(true);
-            EventManager.OnGameResumed += () => ShowLevelUpElement(false);
+            EventBus.OnPlayerLevelUp += _ => ShowLevelUpElement(true);
+            EventBus.OnGameResumed += () => ShowLevelUpElement(false);
         }
 
         protected override void UnsubscribeFromEvents()
         {
-            EventManager.OnPlayerLevelUp -= _ => ShowLevelUpElement(true);
-            EventManager.OnGameResumed -= () => ShowLevelUpElement(false);
+            EventBus.OnPlayerLevelUp -= _ => ShowLevelUpElement(true);
+            EventBus.OnGameResumed -= () => ShowLevelUpElement(false);
         }
 
         protected void ShowLevelUpElement(bool show)
@@ -54,8 +55,8 @@ namespace WizardGame.Managers
             GameObject selectedSpellPrefab = currentUpgradeChoices[slotIndex];
             Debug.Log($"Player selected: {selectedSpellPrefab.name}");
 
-            EventManager.PublishLevelUpSelection(selectedSpellPrefab);
-            EventManager.PublishGameResumed();
+            EventBus.PublishLevelUpSelection(selectedSpellPrefab);
+            EventBus.PublishGameResumed();
         }
     }
 }

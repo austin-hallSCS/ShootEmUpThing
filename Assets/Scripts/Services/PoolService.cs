@@ -1,34 +1,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace WizardGame.Managers
+namespace WizardGame.Services
 {
-    public class PoolManager : ManagerBase
+    public static class PoolManager
     {
-        private Dictionary<GameObject, Queue<GameObject>> poolDictionary = new Dictionary<GameObject, Queue<GameObject>>();
+        private static Dictionary<GameObject, Queue<GameObject>> poolDictionary = new Dictionary<GameObject, Queue<GameObject>>();
 
         // Parent object to keep hierarchy clean
-        private Transform poolContainer;
+        private static Transform poolContainer;
 
-        public PoolManager(GameManager manager) : base(manager)
+        private static void InitContainer()
         {
-            GameObject container = new GameObject("--- POOL CONTAINER ---");
-            poolContainer = container.transform;
-
-            // May implement this later - keep container alive across scenes
-            // Object.DontDestroyOnLoad(container);
+            if (poolContainer == null)
+            {
+                GameObject containerGO = new GameObject("--- POOL Service ---");
+                poolContainer = containerGO.transform;
+                Object.DontDestroyOnLoad(containerGO);
+            }
         }
 
-        protected override void SubscribeToEvents()
+        public static GameObject Spawn(GameObject prefab, Vector3 position, Quaternion rotation)
         {
-            // FIXME: Figure out how to pass object back to SpellController/ how to subscribe to this event without raising an error.
-            // EventManager.OnObjectSpawn += Spawn;
-        }
+            InitContainer();
 
-        protected override void UnsubscribeFromEvents() { }
-
-        public GameObject Spawn(GameObject prefab, Vector3 position, Quaternion rotation)
-        {
             if (prefab == null)
             {
                 Debug.LogError("PoolManager: Trying to spawn null prefab!");
@@ -67,7 +62,7 @@ namespace WizardGame.Managers
             return instance;
         }
 
-        public void Despawn(GameObject instance, GameObject originalPrefab)
+        public static void Despawn(GameObject instance, GameObject originalPrefab)
         {
             if (instance == null) return;
 

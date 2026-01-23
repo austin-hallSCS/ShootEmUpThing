@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using WizardGame.Input;
+using WizardGame.Services;
 
 namespace WizardGame.Managers
 {
@@ -28,16 +29,16 @@ namespace WizardGame.Managers
 
         protected override void SubscribeToEvents()
         {
-            controls.Gameplay.Pause.performed += _ => EventManager.PublishGamePaused();
-            EventManager.OnPlayerLevelUp += _ => EnableNewActionMap(controls.UI);
-            EventManager.OnGameResumed += () => EnableNewActionMap(controls.Gameplay);
+            controls.Gameplay.Pause.performed += _ => EventBus.PublishGamePaused();
+            EventBus.OnPlayerLevelUp += _ => EnableNewActionMap(controls.UI);
+            EventBus.OnGameResumed += () => EnableNewActionMap(controls.Gameplay);
         }
 
         protected override void UnsubscribeFromEvents()
         {
-            controls.Gameplay.Pause.performed -= _ => EventManager.PublishGamePaused();
-            EventManager.OnPlayerLevelUp -= _ => EnableNewActionMap(controls.UI);
-            EventManager.OnGameResumed -= () => EnableNewActionMap(controls.Gameplay);
+            controls.Gameplay.Pause.performed -= _ => EventBus.PublishGamePaused();
+            EventBus.OnPlayerLevelUp -= _ => EnableNewActionMap(controls.UI);
+            EventBus.OnGameResumed -= () => EnableNewActionMap(controls.Gameplay);
         }
 
         protected override void OnTearDown()

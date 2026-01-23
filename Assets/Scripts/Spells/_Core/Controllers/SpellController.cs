@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using WizardGame.Stats;
 using WizardGame.Utils;
@@ -112,7 +111,7 @@ namespace WizardGame.Spells
                 {
                     Vector3 enemyPosition = enemy.transform.position;
 
-                    float distance = WorldSenses.GetSquareDistance(enemyPosition, center);
+                    float distance = enemy.transform.GetSquareDistance(transform);
 
                     if (distance < closestDistance)
                     {

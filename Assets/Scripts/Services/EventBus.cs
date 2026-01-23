@@ -3,12 +3,12 @@ using UnityEngine;
 using WizardGame.Enemy;
 using WizardGame.Spells;
 
-namespace WizardGame.Managers
+namespace WizardGame.Services
 {
     /// <summary>
     /// Holds all Event Methods that interact between managers and Monobehavior scripts.
     /// </summary>
-    public static class EventManager
+    public static class EventBus
     {
         #region Events
         //-- Game State --

@@ -6,6 +6,7 @@ using WizardGame.Managers;
 using WizardGame.Player;
 using WizardGame.Spells;
 using WizardGame.Stats;
+using WizardGame.Services;
 
 namespace WizardGame.Enemy
 {
@@ -99,7 +100,7 @@ namespace WizardGame.Enemy
 
                 if (sqrDistance >= (killDistance * killDistance))
                 {
-                    EventManager.PublishEnemyDespawn(gameObject);
+                    EventBus.PublishEnemyDespawn(gameObject);
                     Debug.Log("PublishEnemyDespawn called.");
                 }
             }
@@ -226,7 +227,7 @@ namespace WizardGame.Enemy
 
             xpOrb.SetXPAmount(rewardExperience);
 
-            EventManager.PublishEnemyDied(this);
+            EventBus.PublishEnemyDied(this);
 
             Destroy(gameObject);
         }
