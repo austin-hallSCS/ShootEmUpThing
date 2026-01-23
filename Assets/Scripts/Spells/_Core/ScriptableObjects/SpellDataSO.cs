@@ -15,6 +15,7 @@ namespace WizardGame.Spells
         [field: TextArea(2, 3)]
         [field: SerializeField] public string Description { get; private set; }
         [field: SerializeField] public Sprite SpellIcon { get; private set; }
+        [field: SerializeField] public GameObject SpellPrefab { get; private set; }
 
         [field: Header("Spawn Logic")]
         [field: Tooltip("How this spell spawns it's game objects")]
