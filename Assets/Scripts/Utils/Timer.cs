@@ -9,7 +9,6 @@ namespace WizardGame.Utils
 
         private float startTime;
         private float duration;
-        private float targetTime;
 
         private bool isActive;
 
@@ -21,7 +20,6 @@ namespace WizardGame.Utils
         public void StartTimer()
         {
             startTime = Time.time;
-            targetTime = startTime + duration;
             isActive = true;
         }
 
@@ -34,7 +32,7 @@ namespace WizardGame.Utils
         {
             if (!isActive) return;
 
-            if (Time.time >= targetTime)
+            if (Time.time >= startTime + duration)
             {
                 OnTimerDone?.Invoke();
                 StopTimer();
