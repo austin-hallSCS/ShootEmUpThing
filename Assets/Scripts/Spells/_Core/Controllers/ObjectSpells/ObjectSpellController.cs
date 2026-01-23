@@ -19,13 +19,15 @@ namespace WizardGame.Spells
 
             List<TransformData> spawnPoints = GetSpawnData(SpellData.Targeting);
 
-            foreach (var point in spawnPoints)
-            {
-                GameObject gameObject = Instantiate(spellPrefab, point.Position, point.Rotation);
+            StartCoroutine(FireBurst(spawnPoints));
 
-                var script = gameObject.GetComponent<SpellGO>();
-                script.Initialize(this);
-            }
+            // foreach (var point in spawnPoints)
+            // {
+            //     GameObject gameObject = Instantiate(spellPrefab, point.Position, point.Rotation);
+
+            //     var script = gameObject.GetComponent<SpellGO>();
+            //     script.Initialize(this);
+            // }
         }
 
         private List<TransformData> GetSpawnData(TargetingStyle style)
@@ -66,7 +68,7 @@ namespace WizardGame.Spells
             return results;
         }
 
-        private IEnumerator FireBurst()
+        private IEnumerator FireBurst(List<TransformData> spawnPoints)
         {
             var amount = spellStats.GetStat(StatType.Amount).CurrentValue;
             var projectileInterval = spellStats.ProjectileIntervalTime;
