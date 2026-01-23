@@ -20,7 +20,7 @@ namespace WizardGame.Utils
 
         public void StartTimer()
         {
-            startTime = Time.deltaTime;
+            startTime = Time.time;
             targetTime = startTime + duration;
             isActive = true;
         }
