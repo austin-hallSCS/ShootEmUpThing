@@ -28,6 +28,7 @@ namespace WizardGame.Utils
             isActive = false;
         }
 
+        // Be sure to call this in Monobehavior's Update()
         public void Tick()
         {
             if (!isActive) return;
