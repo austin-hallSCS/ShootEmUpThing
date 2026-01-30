@@ -25,9 +25,9 @@ namespace WizardGame.Spells
             circleCollider = GetComponent<CircleCollider2D>();
         }
 
-        public override void Initialize(SpellController parentController)
+        public override void Initialize(SpellDataSO data, SpellStats stats)
         {
-            base.Initialize(parentController);
+            base.Initialize(data, stats);
 
             timeAlive = 0f;
             inAir = true;

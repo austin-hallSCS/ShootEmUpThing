@@ -10,9 +10,9 @@ namespace WizardGame.Spells
         private float currentAngle;
         private float radius;
 
-        public void Initialize(SpellController parentController, Transform player, float startAngle)
+        public void Initialize(SpellDataSO data, SpellStats stats, Transform player, float startAngle)
         {
-            base.Initialize(parentController);
+            base.Initialize(data, stats);
 
             centerPoint = player;
             currentAngle = startAngle;

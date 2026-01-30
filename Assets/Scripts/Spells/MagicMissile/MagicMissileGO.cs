@@ -27,9 +27,9 @@ namespace WizardGame.Spells
 
         private bool isLaunched = false;
 
-        public void Initialize(SpellController parentController, Transform targetTransform)
+        public void Initialize(SpellDataSO data, SpellStats stats, Transform targetTransform)
         {
-            base.Initialize(parentController);
+            base.Initialize(data, stats);
 
             target = targetTransform;
 
