@@ -13,10 +13,10 @@ namespace WizardGame.Spells
 
         protected float areaMultiplier = 1.0f;
 
-        public virtual void Initialize(SpellController parentController)
+        public virtual void Initialize(SpellDataSO data, SpellStats stats)
         {
-            spellData = parentController.SpellData;
-            spellStats = parentController.SpellStats;
+            spellData = data;
+            spellStats = stats;
             CalculateStats();
         }
 

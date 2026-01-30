@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace WizardGame.Services
 {
-    public static class PoolManager
+    public static class PoolService
     {
         private static Dictionary<GameObject, Queue<GameObject>> poolDictionary = new Dictionary<GameObject, Queue<GameObject>>();
 

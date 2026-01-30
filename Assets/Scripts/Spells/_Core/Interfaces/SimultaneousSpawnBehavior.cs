@@ -3,11 +3,8 @@ using WizardGame.Spells;
 
 namespace WizardGame
 {
-    public class SimultaneousSpawnBehavior : ISpawnBehavior
+    public class SimultaneousSpawnBehavior
     {
-        public void Spawn()
-        {
 
-        }
     }
 }
