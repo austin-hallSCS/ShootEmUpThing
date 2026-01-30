@@ -18,6 +18,10 @@ namespace WizardGame.Spells
         [SerializeField] protected GameObject spellPrefab;
         [field: SerializeField] public SpellDataSO SpellData { get; private set; }
 
+        [Header("Behaviors")]
+        [SerializeField] private ISpawnBehavior spawnBehavior;
+        [SerializeField] private IActiveBehavior activeBehavior;
+
         [Header("WorldSpace")]
         [SerializeField] protected LayerMask whatIsEnemy;
         [SerializeField] protected float spawnRadius;
