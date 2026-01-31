@@ -73,7 +73,7 @@ namespace WizardGame.Spells
 
             if (currentSword.TryGetComponent(out SwordBurstGO gameObject))
             {
-                gameObject.Initialize(this, transform, startingAngle);
+                // gameObject.Initialize(this, transform, startingAngle);
             }
         }
     }

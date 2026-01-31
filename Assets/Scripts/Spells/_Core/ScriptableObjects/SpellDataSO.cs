@@ -17,15 +17,22 @@ namespace WizardGame.Spells
         [field: SerializeField] public Sprite SpellIcon { get; private set; }
         [field: SerializeField] public GameObject SpellPrefab { get; private set; }
 
+
         [field: Header("Spawn Logic")]
+        [field: SerializeField] public SpawnBehaviorSO SpawnLogic { get; private set; }
+
         [field: Tooltip("How this spell spawns it's game objects")]
         [field: SerializeField] public TargetingStyle Targeting { get; private set; }
+
         [field: Tooltip("How far from the player to spawn")]
         [field: SerializeField] public float SpawnDistanceOffset { get; private set; }
+
         [field: Tooltip("Time in between game object spawns")]
         [field: SerializeField] public float ProjectileIntervalTime { get; private set; }
 
+
         [field: Header("Combat Effects")]
+        [field: SerializeField] public ActiveBehaviorSO ActiveLogic { get; private set; }
         [field: Tooltip("Effects applied to enemies from this spell.")]
         [field: SerializeField] public SpellEffectPayload Payload { get; private set; }
 
