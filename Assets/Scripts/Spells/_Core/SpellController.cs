@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using WizardGame.Stats;
 using WizardGame.Utils;
@@ -16,21 +17,26 @@ namespace WizardGame.Spells
         //-- Inspector Properties --
         [Header("Identity/Data")]
         [SerializeField] protected GameObject spellPrefab;
-        [field: SerializeField] public SpellDataSO SpellData { get; private set; }
-
-        [Header("Behaviors")]
-        [SerializeField] private ISpawnBehavior spawnBehavior;
-        [SerializeField] private IActiveBehavior activeBehavior;
-
-        [Header("WorldSpace")]
-        [SerializeField] protected LayerMask whatIsEnemy;
-        [SerializeField] protected float spawnRadius;
-
 
         //-- Stats and Abilities --
+        public SpellDataSO SpellData { get; private set; }
+
+        // FIXME: Change spellStats to a field rather than 2 properties
         protected SpellStats spellStats;
         public SpellStats SpellStats => spellStats;
         protected PlayerAbilities ownerAbilities;
+
+        //-- Behavior --
+        private ActiveBehaviorSO activeBehavior;
+
+        //-- Spawning --
+        private ISpawnBehavior spawnBehavior;
+
+        //-- Context --
+        private SpellCastContext activeContext;
+
+        //-- Worldspace --
+        private LayerMask whatIsEnemy;
 
         // Status variables
         protected float currentCoolDownTimeAt;
@@ -38,14 +44,33 @@ namespace WizardGame.Spells
         protected float currentDurationTimeAt;
         protected bool isActive;
 
+        #region Initialization
 
         // Initializes the spell with a reference to the caster's abilities.
-        public virtual void Initialize(PlayerAbilities abilities)
+        public virtual void Initialize(SpellDataSO data, PlayerAbilities abilities)
         {
+            SpellData = data;
             ownerAbilities = abilities;
+            activeBehavior = SpellData.ActiveBehavior;
+
+            // FIXME: Create static helper to hold references to Layers in order to save on memory
+            whatIsEnemy = LayerMask.GetMask("Enemies");
 
             InitStats();
         }
+
+        public virtual void InitStats()
+        {
+            if (SpellData == null)
+            {
+                Debug.LogError($"Spell Data not assigned on: {gameObject.name}");
+            }
+            spellStats = new SpellStats(SpellData, ownerAbilities);
+        }
+
+        #endregion
+
+        #region Unity Callback Functions
 
         protected virtual void Start()
         {
@@ -61,14 +86,7 @@ namespace WizardGame.Spells
             }
         }
 
-        public virtual void InitStats()
-        {
-            if (SpellData == null)
-            {
-                Debug.LogError($"Spell Data not assigned on: {gameObject.name}");
-            }
-            spellStats = new SpellStats(SpellData, ownerAbilities);
-        }
+        #endregion
 
         public virtual void LevelUp()
         {
@@ -82,14 +100,17 @@ namespace WizardGame.Spells
                 currentCoolDownTimeAt -= Time.deltaTime;
                 if (currentCoolDownTimeAt <= 0)
                 {
-                    SpellActivate();
+                    CastSpell();
                 }
             }
         }
 
-        protected virtual void SpellActivate()
+        private IEnumerator CastSpell()
         {
-            isActive = true;
+            spawnBehavior = new IntervalSpawnBehavior();
+            activeContext = new SpellCastContext(transform, this, spellStats, SpellData);
+
+            yield return activeBehavior.Activate(activeContext, spawnBehavior);
         }
 
         protected virtual void SpellDeactivate()

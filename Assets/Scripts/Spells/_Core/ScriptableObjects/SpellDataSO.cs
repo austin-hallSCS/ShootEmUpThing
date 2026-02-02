@@ -19,7 +19,6 @@ namespace WizardGame.Spells
 
 
         [field: Header("Spawn Logic")]
-        [field: SerializeField] public SpawnBehaviorSO SpawnLogic { get; private set; }
 
         [field: Tooltip("How this spell spawns it's game objects")]
         [field: SerializeField] public TargetingStyle Targeting { get; private set; }
@@ -32,7 +31,7 @@ namespace WizardGame.Spells
 
 
         [field: Header("Combat Effects")]
-        [field: SerializeField] public ActiveBehaviorSO ActiveLogic { get; private set; }
+        [field: SerializeField] public ActiveBehaviorSO ActiveBehavior { get; private set; }
         [field: Tooltip("Effects applied to enemies from this spell.")]
         [field: SerializeField] public SpellEffectPayload Payload { get; private set; }
 

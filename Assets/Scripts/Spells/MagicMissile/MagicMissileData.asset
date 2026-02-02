@@ -17,9 +17,11 @@ MonoBehaviour:
     Each dart hits the nearest enemy." '
   <SpellIcon>k__BackingField: {fileID: 6705810157222835970, guid: 6c35cd05b4f1ad047babd3bb940e6088, type: 3}
   <SpellPrefab>k__BackingField: {fileID: 0}
+  <SpawnLogic>k__BackingField: {fileID: 0}
   <Targeting>k__BackingField: 0
   <SpawnDistanceOffset>k__BackingField: 0
   <ProjectileIntervalTime>k__BackingField: 0.25
+  <ActiveLogic>k__BackingField: {fileID: 0}
   <Payload>k__BackingField:
     DamageAmount: 0
     KnockbackAmount: 0

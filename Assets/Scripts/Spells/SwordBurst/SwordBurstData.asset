@@ -17,9 +17,11 @@ MonoBehaviour:
     that sweep around you."'
   <SpellIcon>k__BackingField: {fileID: 4827481158342945613, guid: 624a0bad9877c674f93d3592344f6a40, type: 3}
   <SpellPrefab>k__BackingField: {fileID: 0}
+  <SpawnLogic>k__BackingField: {fileID: 0}
   <Targeting>k__BackingField: 0
   <SpawnDistanceOffset>k__BackingField: 0
   <ProjectileIntervalTime>k__BackingField: 0.25
+  <ActiveLogic>k__BackingField: {fileID: 0}
   <Payload>k__BackingField:
     DamageAmount: 0
     KnockbackAmount: 0

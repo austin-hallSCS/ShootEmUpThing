@@ -14,9 +14,9 @@ namespace WizardGame.Spells
             swordPool = new List<GameObject>();
         }
 
-        protected override void SpellActivate()
+        protected override void CastSpell()
         {
-            base.SpellActivate();
+            base.CastSpell();
             ResetDuration();
             SpawnSwordFormation();
         }

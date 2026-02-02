@@ -1,11 +1,11 @@
+using System.Collections;
 using UnityEngine;
 
 namespace WizardGame.Spells
 {
     public abstract class ActiveBehaviorSO : ScriptableObject
     {
-        public abstract void Activate(SpellCastContext context);
-        public abstract void SpellActiveBehavior();
-        public abstract void Deactivate();
+        public abstract IEnumerator Activate(SpellCastContext context, ISpawnBehavior spawnBehavior);
+        public abstract void Deactivate(SpellCastContext context, ISpawnBehavior spawnBehavior);
     }
 }
