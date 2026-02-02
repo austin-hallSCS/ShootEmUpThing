@@ -7,8 +7,8 @@ namespace WizardGame.Spells
     public class SpellDatabaseSO : ScriptableObject
     {
         [Header("Spells")]
-        [SerializeField] private List<GameObject> allSpellPrefabs = new List<GameObject>();
+        [SerializeField] private List<SpellDataSO> allSpellPrefabs = new List<SpellDataSO>();
 
-        public IReadOnlyList<GameObject> AllSpellPrefabs => allSpellPrefabs;
+        public IReadOnlyList<SpellDataSO> AllSpellPrefabs => allSpellPrefabs;
     }
 }
