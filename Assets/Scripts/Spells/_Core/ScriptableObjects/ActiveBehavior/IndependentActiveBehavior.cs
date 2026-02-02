@@ -1,3 +1,5 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace WizardGame.Spells
@@ -5,13 +7,17 @@ namespace WizardGame.Spells
     [CreateAssetMenu(fileName = "IndependentActiveBehavior_Asset", menuName = "Spells/Active Behaviors/Independent")]
     public class IndependentActiveBehavior : ActiveBehaviorSO
     {
-        public override void Activate(SpellCastContext context, ISpawnBehavior spawnBehavior)
+        public override IEnumerator Activate(SpellCastContext context, ISpawnBehavior spawnBehavior)
         {
-            spawnBehavior.Execute(context);
+            // Have the controller start the spawn coroutine
+            context.Controller.StartCoroutine(spawnBehavior.Execute(context));
 
-            Deactivate();
+            // Deactivate once spell is over
+            Deactivate(context, spawnBehavior);
+
+            yield break;
         }
 
-        public override void Deactivate() { }
+        public override void Deactivate(SpellCastContext context, ISpawnBehavior spawnBehavior) { }
     }
 }
