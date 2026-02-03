@@ -22,9 +22,7 @@ namespace WizardGame.Spells
 
         //-- Behavior --
         private ActiveBehaviorSO activeBehavior;
-
-        //-- Spawning --
-        private ISpellEmitter spawnBehavior;
+        private ISpellEmitter spellEmitter;
 
         //-- Context --
         private SpellCastContext activeContext;
@@ -102,10 +100,10 @@ namespace WizardGame.Spells
 
         private IEnumerator CastSpell()
         {
-            spawnBehavior = new SpellEmitter();
+            spellEmitter = new SpellEmitter();
             activeContext = new SpellCastContext(transform, this, SpellStats, SpellData);
 
-            yield return activeBehavior.Activate(activeContext, spawnBehavior);
+            yield return activeBehavior.Activate(activeContext, spellEmitter);
         }
 
         protected virtual void SpellDeactivate()
