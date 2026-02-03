@@ -11,15 +11,15 @@ namespace WizardGame
     public class SpellManager : ManagerBase
     {
 
-        private List<GameObject> spellPool;
+        private List<SpellDataSO> spellPool;
 
         public SpellManager(GameManager manager) : base(manager)
         {
-            // Copy the spell database
-            spellPool = gameManager.AllSpellsDatabase.AllSpellPrefabs.ToList();
-
+            // Copy the database
+            spellPool = gameManager.AllSpellsDatabase.AllSpellsData.ToList();
             SubscribeToEvents();
         }
+
         protected override void SubscribeToEvents()
         {
             EventBus.OnSpellMaxLevel += RemoveSpellFromPool;
@@ -29,13 +29,13 @@ namespace WizardGame
             EventBus.OnSpellMaxLevel -= RemoveSpellFromPool;
         }
 
-        public List<GameObject> GetUpgradeOptions()
+        public List<SpellDataSO> GetUpgradeOptions()
         {
             // TODO: Add weight to spells based on rarity
 
             // Make new shuffle bag with all spells
-            ShuffleBag<GameObject> upgradeBag = new ShuffleBag<GameObject>(spellPool);
-            List<GameObject> choices = new List<GameObject>();
+            ShuffleBag<SpellDataSO> upgradeBag = new ShuffleBag<SpellDataSO>(spellPool);
+            List<SpellDataSO> choices = new List<SpellDataSO>();
 
             // Get 3 spells from the shuffle bag
             for (var i = 0; i < 3; i++)
@@ -49,8 +49,7 @@ namespace WizardGame
 
             foreach (var choice in choices)
             {
-                var data = choice.GetComponent<SpellController>().SpellData;
-                Debug.Log($"Choice: {data.SpellName}");
+                Debug.Log($"Choice: {choice.SpellName}");
             }
             return choices;
         }
@@ -94,12 +93,10 @@ namespace WizardGame
         {
             foreach (var spell in spellPool)
             {
-                SpellController controller = spell.GetComponent<SpellController>();
-
-                if (controller.SpellData == dataToFind)
+                if (spell == dataToFind)
                 {
                     spellPool.Remove(spell);
-                    Debug.Log($"Spell Removed: {controller.SpellData.SpellName}");
+                    Debug.Log($"Spell Removed: {spell.SpellName}");
                     break;
                 }
             }
