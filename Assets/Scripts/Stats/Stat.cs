@@ -120,15 +120,15 @@ namespace WizardGame.Stats
         {
             if (isIgnored) return;
 
-            Debug.Log($"Apply modifier to stat: {mod.GenerateDescription()}");
+            // Debug.Log($"Apply modifier to stat: {mod.GenerateDescription()}");
             CurrentValue = GetModifiedValue(mod);
-            Debug.Log($"{mod.ModType} new value: {CurrentValue}");
+            // Debug.Log($"{mod.ModType} new value: {CurrentValue}");
         }
 
         // Get the new Value after applying a modifier
         public float GetModifiedValue(StatModifier mod)
         {
-            Debug.Log($"---- GetModifiedValue {mod.StatType} ----");
+            // Debug.Log($"---- GetModifiedValue {mod.StatType} ----");
             // Ask the modifier "How big is the change?"
             float delta = mod.CalculateMagnitude(CurrentValue);
 

@@ -46,7 +46,6 @@ namespace WizardGame.Managers
             }
             else
             {
-                Debug.Log($"Equipping new spell: {spellData.SpellName}");
                 InstantiateNewSpell(spellData);
             }
         }
@@ -65,7 +64,7 @@ namespace WizardGame.Managers
 
             Debug.Log($"Added new spell: {newSpellController.name}");
         }
-        
+
         private SpellController BuildNewController(SpellDataSO spellData)
         {
             if (gameManager.PlayerController == null)
@@ -78,6 +77,7 @@ namespace WizardGame.Managers
 
             // Create new game object
             GameObject newObject = new GameObject(objectName, typeof(SpellController));
+            newObject.transform.position = new Vector3(0, 0, 0);
 
             // Initialize controller
             SpellController newController = newObject.GetComponent<SpellController>();

@@ -46,6 +46,7 @@ namespace WizardGame.Spells
         {
             transform.SetParent(player.transform);
 
+
             SpellData = data;
             ownerAbilities = player.PlayerAbilities;
             activeBehavior = SpellData.ActiveBehavior;
@@ -71,7 +72,7 @@ namespace WizardGame.Spells
 
         protected virtual void Start()
         {
-            // SpellDeactivate();
+            SpellDeactivate();
         }
 
         protected virtual void FixedUpdate()
@@ -93,13 +94,16 @@ namespace WizardGame.Spells
                 currentCoolDownTimeAt -= Time.deltaTime;
                 if (currentCoolDownTimeAt <= 0)
                 {
-                    CastSpell();
+                    StartCoroutine(CastSpell());
+
+                    SpellDeactivate();
                 }
             }
         }
 
         private IEnumerator CastSpell()
         {
+            Debug.Log("CastSpell called.");
             spellEmitter = new SpellEmitter();
             activeContext = new SpellCastContext(transform, this, SpellStats, SpellData);
 
