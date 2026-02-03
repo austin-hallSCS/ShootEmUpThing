@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using WizardGame.Player;
 using WizardGame.Stats;
 using WizardGame.Utils;
 
@@ -12,12 +13,8 @@ namespace WizardGame.Spells
         RandomCardinal,
         RadialBurst
     }
-    public abstract class SpellController : MonoBehaviour
+    public class SpellController : MonoBehaviour
     {
-        //-- Inspector Properties --
-        [Header("Identity/Data")]
-        [SerializeField] protected GameObject spellPrefab;
-
         //-- Stats and Abilities --
         public SpellDataSO SpellData { get; private set; }
 
@@ -47,10 +44,12 @@ namespace WizardGame.Spells
         #region Initialization
 
         // Initializes the spell with a reference to the caster's abilities.
-        public virtual void Initialize(SpellDataSO data, PlayerAbilities abilities)
+        public virtual void Initialize(SpellDataSO data, PlayerController player)
         {
+            transform.SetParent(player.transform);
+
             SpellData = data;
-            ownerAbilities = abilities;
+            ownerAbilities = player.PlayerAbilities;
             activeBehavior = SpellData.ActiveBehavior;
 
             // FIXME: Create static helper to hold references to Layers in order to save on memory
@@ -74,16 +73,12 @@ namespace WizardGame.Spells
 
         protected virtual void Start()
         {
-            SpellDeactivate();
+            // SpellDeactivate();
         }
 
         protected virtual void FixedUpdate()
         {
             CheckSpellActiveStatus();
-            if (isActive)
-            {
-                SpellActiveBehavior();
-            }
         }
 
         #endregion
@@ -118,8 +113,6 @@ namespace WizardGame.Spells
             isActive = false;
             ResetCoolDown();
         }
-
-        protected abstract void SpellActiveBehavior();
 
         protected Transform GetNearestEnemy()
         {

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using WizardGame.Spells;
 using WizardGame.Services;
+using WizardGame.Player;
 
 namespace WizardGame.Managers
 {
@@ -26,17 +27,11 @@ namespace WizardGame.Managers
             EventBus.OnLevelUpSelection -= ProcessLevelUp;
         }
 
-        public void ProcessLevelUp(GameObject spellPrefab)
+        public void ProcessLevelUp(SpellDataSO spellData)
         {
-            if (spellPrefab == null) return;
+            if (spellData == null) return;
 
-            SpellController prefabController = spellPrefab.GetComponent<SpellController>();
-            if (prefabController == null)
-            {
-                Debug.LogError($"Prefab {spellPrefab.name} is missing a SpellController!");
-            }
-
-            SpellController exsistingSpell = GetSpellInstance(prefabController.SpellData);
+            SpellController exsistingSpell = GetSpellInstance(spellData);
             if (exsistingSpell != null)
             {
                 Debug.Log($"Leveling up existing spell: {exsistingSpell.SpellData.SpellName}");
@@ -51,12 +46,12 @@ namespace WizardGame.Managers
             }
             else
             {
-                Debug.Log($"Equipping new spell: {prefabController.SpellData.SpellName}");
-                InstantiateNewSpell(spellPrefab);
+                Debug.Log($"Equipping new spell: {spellData.SpellName}");
+                InstantiateNewSpell(spellData);
             }
         }
 
-        private void InstantiateNewSpell(GameObject prefab)
+        private void InstantiateNewSpell(SpellDataSO spellData)
         {
             if (gameManager.PlayerController == null)
             {
@@ -64,15 +59,31 @@ namespace WizardGame.Managers
                 return;
             }
 
-            Transform playerTransform = gameManager.PlayerController.transform;
-            GameObject spellControllerObject = Object.Instantiate(prefab, playerTransform);
-            SpellController controller = spellControllerObject.GetComponent<SpellController>();
+            SpellController newSpellController = BuildNewController(spellData);
 
-            controller.Initialize(gameManager.PlayerController.PlayerAbilities);
+            equippedSpells.Add(newSpellController);
 
-            equippedSpells.Add(controller);
+            Debug.Log($"Added new spell: {newSpellController.name}");
+        }
+        
+        private SpellController BuildNewController(SpellDataSO spellData)
+        {
+            if (gameManager.PlayerController == null)
+            {
+                Debug.LogWarning("PlayerController is null on InventoryManager's GameManager");
+                return null;
+            }
+            PlayerController player = gameManager.PlayerController;
+            string objectName = $"{spellData.SpellName}Controller";
 
-            Debug.Log($"Added new spell: {spellControllerObject.name}");
+            // Create new game object
+            GameObject newObject = new GameObject(objectName, typeof(SpellController));
+
+            // Initialize controller
+            SpellController newController = newObject.GetComponent<SpellController>();
+            newController.Initialize(spellData, player);
+
+            return newController;
         }
 
         public SpellController GetSpellInstance(SpellDataSO dataToFind)

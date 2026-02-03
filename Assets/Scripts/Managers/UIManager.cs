@@ -2,12 +2,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using WizardGame.Utils;
 using WizardGame.Services;
+using WizardGame.Spells;
 
 namespace WizardGame.Managers
 {
     public class UIManager : ManagerBase
     {
-        private List<GameObject> currentUpgradeChoices;
+        private List<SpellDataSO> currentUpgradeChoices;
         private GameObject levelUpPanel;
 
         public UIManager(GameManager manager, GameObject panelUI) : base(manager)
@@ -52,10 +53,10 @@ namespace WizardGame.Managers
         {
             if (currentUpgradeChoices == null || slotIndex >= currentUpgradeChoices.Count) return;
 
-            GameObject selectedSpellPrefab = currentUpgradeChoices[slotIndex];
-            Debug.Log($"Player selected: {selectedSpellPrefab.name}");
+            SpellDataSO selectedSpell = currentUpgradeChoices[slotIndex];
+            Debug.Log($"Player selected: {selectedSpell.name}");
 
-            EventBus.PublishLevelUpSelection(selectedSpellPrefab);
+            EventBus.PublishLevelUpSelection(selectedSpell);
             EventBus.PublishGameResumed();
         }
     }

@@ -324,13 +324,12 @@ Transform:
   m_GameObject: {fileID: 5329385011336400309}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2, y: 4.49, z: 0}
+  m_LocalPosition: {x: -1.218, y: 3.841, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3461117203958012040}
   - {fileID: 6478424751986136413}
-  - {fileID: 360634722144401988}
   - {fileID: 3558914668674758601}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -350,6 +349,7 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: 5b00125e212f1b641b305fe1ea27fe5a, type: 2}
 --- !u!212 &7432109336035017636
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -395,6 +395,7 @@ SpriteRenderer:
   m_SortingLayerID: 931492279
   m_SortingLayer: 1
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_Sprite: {fileID: -467307283419413426, guid: 6e2dae2b688905c4280a746cd80c9705, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -404,7 +405,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 1
 --- !u!95 &273381120293038864
 Animator:
@@ -762,65 +762,3 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
---- !u!1001 &2230204047975887773
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 6346624846328058312}
-    m_Modifications:
-    - target: {fileID: 4600984504892560942, guid: 83b3e3a690817624a96f4094f40004e9, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4600984504892560942, guid: 83b3e3a690817624a96f4094f40004e9, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.29
-      objectReference: {fileID: 0}
-    - target: {fileID: 4600984504892560942, guid: 83b3e3a690817624a96f4094f40004e9, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4600984504892560942, guid: 83b3e3a690817624a96f4094f40004e9, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4600984504892560942, guid: 83b3e3a690817624a96f4094f40004e9, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4600984504892560942, guid: 83b3e3a690817624a96f4094f40004e9, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4600984504892560942, guid: 83b3e3a690817624a96f4094f40004e9, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4600984504892560942, guid: 83b3e3a690817624a96f4094f40004e9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4600984504892560942, guid: 83b3e3a690817624a96f4094f40004e9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4600984504892560942, guid: 83b3e3a690817624a96f4094f40004e9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8880885555233956194, guid: 83b3e3a690817624a96f4094f40004e9, type: 3}
-      propertyPath: m_Name
-      value: FireBallSpellController
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 83b3e3a690817624a96f4094f40004e9, type: 3}
---- !u!4 &360634722144401988 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2013810098852006361, guid: 83b3e3a690817624a96f4094f40004e9, type: 3}
-  m_PrefabInstance: {fileID: 2230204047975887773}
-  m_PrefabAsset: {fileID: 0}

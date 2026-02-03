@@ -22,7 +22,7 @@ namespace WizardGame.Services
 
         //-- Player/XP --
         public static event Action<int> OnPlayerLevelUp;
-        public static event Action<GameObject> OnLevelUpSelection;
+        public static event Action<SpellDataSO> OnLevelUpSelection;
         public static event Action<SpellDataSO> OnSpellMaxLevel;
 
         // -- Collectible --
@@ -43,7 +43,7 @@ namespace WizardGame.Services
 
         //-- Player/XP
         public static void PublishLevelUp(int newLevel) => OnPlayerLevelUp?.Invoke(newLevel);
-        public static void PublishLevelUpSelection(GameObject prefab) => OnLevelUpSelection?.Invoke(prefab);
+        public static void PublishLevelUpSelection(SpellDataSO spellData) => OnLevelUpSelection?.Invoke(spellData);
         public static void PublishSpellMaxLevel(SpellDataSO spellData) => OnSpellMaxLevel?.Invoke(spellData);
 
         //-- Spawning --

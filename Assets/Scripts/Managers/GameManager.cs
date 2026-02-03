@@ -68,7 +68,7 @@ namespace WizardGame.Managers
         public GameState CurrentGameState;
 
         //-- Temp --
-        public GameObject DefaultSpellPrefab;
+        public SpellDataSO DefaultSpell;
 
 
         public void Awake()
@@ -85,7 +85,7 @@ namespace WizardGame.Managers
         {
             if (PlayerController != null)
             {
-                AddStartingSpell(DefaultSpellPrefab);
+                AddStartingSpell(DefaultSpell);
             }
             else
             {
@@ -183,9 +183,9 @@ namespace WizardGame.Managers
         }
 
         // Temp for testing.
-        public void AddStartingSpell(GameObject spellPrefab)
+        public void AddStartingSpell(SpellDataSO spellData)
         {
-            inventoryManager.ProcessLevelUp(spellPrefab);
+            inventoryManager.ProcessLevelUp(spellData);
         }
 
         private void CheckForNextWave()

@@ -10,7 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d39ebc24f6be4274a9922816bb1d8549, type: 3}
-  m_Name: SpellDatabase
+  m_Name: SpellDataBase
   m_EditorClassIdentifier: Assembly-CSharp::WizardGame.Spells.SpellDatabaseSO
-  allSpellPrefabs:
-  - {fileID: 0}
+  allSpellsData:
+  - {fileID: 11400000, guid: 6ea4af61b7c687d46926942e7d87bc7c, type: 2}
+  - {fileID: 11400000, guid: 1332b1606377c1d4d83e8d490c1b4737, type: 2}
+  - {fileID: 11400000, guid: 5936b9eeb481e6d4e98db4c522a1b474, type: 2}

@@ -13,24 +13,20 @@ namespace WizardGame.UI
         [SerializeField] private LevelUpUIOption[] optionCards;
 
         // Called by UIManager on level up
-        public void UpdateUpgradeOptions(List<GameObject> spellPrefabs)
+        public void UpdateUpgradeOptions(List<SpellDataSO> spells)
         {
             for (int i = 0; i < optionCards.Length; i++)
             {
-                if (i < spellPrefabs.Count)
+                if (i < spells.Count)
                 {
-                    // Get the SpellController from the prefab
-                    SpellController spell = spellPrefabs[i].GetComponent<SpellController>();
-
-                    // Get the data
-                    SpellDataSO data = spell.SpellData;
+                    SpellDataSO currentSpell = spells[i];
 
                     // Get the modifier descriptions
                     // TODO: Figure out how to move this to a poco manager, to keep this class cleaner
-                    string description = GameManager.Instance.GetManager<SpellManager>().GetLevelUpDescriptions(data);
+                    string description = GameManager.Instance.GetManager<SpellManager>().GetLevelUpDescriptions(currentSpell);
 
                     // Update the UI card
-                    optionCards[i].Configure(data.SpellIcon, description);
+                    optionCards[i].Configure(currentSpell.SpellIcon, description);
 
                     // Ensure the button is visible
                     optionCards[i].gameObject.SetActive(true);
