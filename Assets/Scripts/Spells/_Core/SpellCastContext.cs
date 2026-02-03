@@ -21,6 +21,8 @@ namespace WizardGame.Spells
             Controller = controller;
             Stats = stats;
             Data = data;
+
+            //FIXME: Get Enemy layermask from static helper once it is created
         }
     }
 }

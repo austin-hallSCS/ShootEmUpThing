@@ -12,13 +12,15 @@ namespace WizardGame.Spells
             int count = (int)context.Stats.GetStat(Stats.StatType.Amount).CurrentValue;
             float delay = context.Data.ProjectileIntervalTime;
             GameObject prefab = context.Data.SpellPrefab;
-            Vector3 position = context.Caster.position;
-            Quaternion rotation = context.Caster.rotation;
+
+            TargetingStrategySO targeting = context.Data.TargetingStrategy;
 
             for (int i = 0; i < count; i++)
             {
+                SpawnTransform spawnInfo = targeting.GetSpawnTransform(context, i, count);
+
                 //TODO: Figure out targeting logic to pass in target and rotation
-                GameObject instance = PoolService.Spawn(prefab, position, rotation);
+                GameObject instance = PoolService.Spawn(prefab, spawnInfo.Position, spawnInfo.Rotation);
 
                 if (instance.TryGetComponent(out SpellGO spellGO))
                 {

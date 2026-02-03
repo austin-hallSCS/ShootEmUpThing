@@ -21,7 +21,7 @@ namespace WizardGame.Spells
         [field: Header("Spawn Logic")]
 
         [field: Tooltip("How this spell spawns it's game objects")]
-        [field: SerializeField] public TargetingStyle Targeting { get; private set; }
+        [field: SerializeField] public TargetingStrategySO TargetingStrategy { get; private set; }
 
         [field: Tooltip("How far from the player to spawn")]
         [field: SerializeField] public float SpawnDistanceOffset { get; private set; }

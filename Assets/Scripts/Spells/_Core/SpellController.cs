@@ -30,7 +30,7 @@ namespace WizardGame.Spells
         private SpellCastContext activeContext;
 
         //-- Worldspace --
-        private LayerMask whatIsEnemy;
+        public LayerMask WhatIsEnemy;
 
         // Status variables
         // TODO: Create TimerService to remove timing logic from individual controllers
@@ -53,7 +53,7 @@ namespace WizardGame.Spells
             activeBehavior = SpellData.ActiveBehavior;
 
             // FIXME: Create static helper to hold references to Layers in order to save on memory
-            whatIsEnemy = LayerMask.GetMask("Enemies");
+            WhatIsEnemy = LayerMask.GetMask("Enemies");
 
             InitStats();
         }
@@ -118,7 +118,7 @@ namespace WizardGame.Spells
         {
             Vector2 center = transform.position;
             float circleRadius = 50f;
-            Collider2D[] detectedEnemies = Physics2D.OverlapCircleAll(center, circleRadius, whatIsEnemy);
+            Collider2D[] detectedEnemies = Physics2D.OverlapCircleAll(center, circleRadius, WhatIsEnemy);
 
             float closestDistance = Mathf.Infinity;
             Transform nearestTarget = null;
