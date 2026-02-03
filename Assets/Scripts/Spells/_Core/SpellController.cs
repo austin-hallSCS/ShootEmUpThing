@@ -17,17 +17,14 @@ namespace WizardGame.Spells
     {
         //-- Stats and Abilities --
         public SpellDataSO SpellData { get; private set; }
-
-        // FIXME: Change spellStats to a field rather than 2 properties
-        protected SpellStats spellStats;
-        public SpellStats SpellStats => spellStats;
+        public SpellStats SpellStats { get; private set; }
         protected PlayerAbilities ownerAbilities;
 
         //-- Behavior --
         private ActiveBehaviorSO activeBehavior;
 
         //-- Spawning --
-        private ISpawnBehavior spawnBehavior;
+        private ISpellEmitter spawnBehavior;
 
         //-- Context --
         private SpellCastContext activeContext;
@@ -36,9 +33,12 @@ namespace WizardGame.Spells
         private LayerMask whatIsEnemy;
 
         // Status variables
+        // TODO: Create TimerService to remove timing logic from individual controllers
         protected float currentCoolDownTimeAt;
         protected float coolDownTime;
         protected float currentDurationTimeAt;
+
+        // TODO: Remove any isActive logic from SpellController. Activation should be handled by activeBehavior
         protected bool isActive;
 
         #region Initialization
@@ -64,7 +64,7 @@ namespace WizardGame.Spells
             {
                 Debug.LogError($"Spell Data not assigned on: {gameObject.name}");
             }
-            spellStats = new SpellStats(SpellData, ownerAbilities);
+            SpellStats = new SpellStats(SpellData, ownerAbilities);
         }
 
         #endregion
@@ -85,7 +85,7 @@ namespace WizardGame.Spells
 
         public virtual void LevelUp()
         {
-            spellStats.ApplyLevelUp();
+            SpellStats.ApplyLevelUp();
         }
 
         protected virtual void CheckSpellActiveStatus()
@@ -102,8 +102,8 @@ namespace WizardGame.Spells
 
         private IEnumerator CastSpell()
         {
-            spawnBehavior = new IntervalSpawnBehavior();
-            activeContext = new SpellCastContext(transform, this, spellStats, SpellData);
+            spawnBehavior = new SpellEmitter();
+            activeContext = new SpellCastContext(transform, this, SpellStats, SpellData);
 
             yield return activeBehavior.Activate(activeContext, spawnBehavior);
         }
@@ -142,8 +142,8 @@ namespace WizardGame.Spells
             return nearestTarget;
         }
 
-        protected virtual void ResetCoolDown() => currentCoolDownTimeAt = spellStats.GetStat(StatType.Cooldown).CurrentValue;
+        protected virtual void ResetCoolDown() => currentCoolDownTimeAt = SpellStats.GetStat(StatType.Cooldown).CurrentValue;
 
-        protected virtual void ResetDuration() => currentDurationTimeAt = spellStats.GetStat(StatType.Duration).CurrentValue;
+        protected virtual void ResetDuration() => currentDurationTimeAt = SpellStats.GetStat(StatType.Duration).CurrentValue;
     }
 }

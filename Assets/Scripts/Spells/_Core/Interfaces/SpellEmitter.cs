@@ -4,7 +4,7 @@ using WizardGame.Services;
 
 namespace WizardGame.Spells
 {
-    public class IntervalSpawnBehavior : ISpawnBehavior
+    public class SpellEmitter : ISpellEmitter
     {
         // Spawn game objects equal to the Amount stat, register them with the context
         public IEnumerator Execute(SpellCastContext context)
@@ -28,7 +28,11 @@ namespace WizardGame.Spells
                 // Track the spawned instance to be despawned later
                 context.SpawnedInstances.Add(instance);
 
-                yield return new WaitForSeconds(delay);
+                // Only delay if delay is greater than 0
+                if (delay > Mathf.Epsilon)
+                {
+                    yield return new WaitForSeconds(delay);
+                }
             }
         }
 

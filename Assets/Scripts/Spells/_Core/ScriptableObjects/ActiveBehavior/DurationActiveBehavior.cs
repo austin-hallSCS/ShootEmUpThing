@@ -11,7 +11,7 @@ namespace WizardGame.Spells
     [CreateAssetMenu(fileName = "DurationActiveBehavior_Asset", menuName = "Spells/Active Behaviors/Duration")]
     public class DurationActiveBehaviorSO : ActiveBehaviorSO
     {
-        public override IEnumerator Activate(SpellCastContext context, ISpawnBehavior spawnBehavior)
+        public override IEnumerator Activate(SpellCastContext context, ISpellEmitter spawnBehavior)
         {
             float duration = context.Stats.GetStat(StatType.Duration).CurrentValue;
 
@@ -25,7 +25,7 @@ namespace WizardGame.Spells
             Deactivate(context, spawnBehavior);
         }
 
-        public override void Deactivate(SpellCastContext context, ISpawnBehavior spawnBehavior)
+        public override void Deactivate(SpellCastContext context, ISpellEmitter spawnBehavior)
         {
             // Despawn all game objects within the context
             spawnBehavior.Despawn(context);

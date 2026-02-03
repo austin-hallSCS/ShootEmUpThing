@@ -10,5 +10,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 00c4ec121198e4a1f98c36a813a08109, type: 3}
-  m_Name: ProjectileActiveBehavior_Asset
+  m_Name: IndependentActiveBehavior_Asset
   m_EditorClassIdentifier: Assembly-CSharp::WizardGame.Spells.ProjectileActiveBehaviorSO

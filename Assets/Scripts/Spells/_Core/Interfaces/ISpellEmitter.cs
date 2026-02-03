@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace WizardGame.Spells
 {
-    public interface ISpawnBehavior
+    public interface ISpellEmitter
     {
         IEnumerator Execute(SpellCastContext context);
 
