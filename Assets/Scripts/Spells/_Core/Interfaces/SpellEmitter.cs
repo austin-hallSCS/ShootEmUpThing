@@ -19,7 +19,7 @@ namespace WizardGame.Spells
             {
                 SpawnTransform spawnInfo = targeting.GetSpawnTransform(context, i, count);
 
-                //TODO: Figure out targeting logic to pass in target and rotation
+                //TODO: Figure out how to apply spawn offset distance
                 GameObject instance = PoolService.Spawn(prefab, spawnInfo.Position, spawnInfo.Rotation);
 
                 if (instance.TryGetComponent(out SpellGO spellGO))
