@@ -18,7 +18,7 @@ MonoBehaviour:
   <SpellIcon>k__BackingField: {fileID: -663120914, guid: d9d9192d3befa4149a5dd478ef914c49, type: 3}
   <SpellPrefab>k__BackingField: {fileID: 7869993318420548649, guid: 23c51bed58404764c802a1f9e308c634, type: 3}
   <TargetingStrategy>k__BackingField: {fileID: 11400000, guid: 0112ae5da41c1be419d05a847945f959, type: 2}
-  <SpawnDistanceOffset>k__BackingField: 0.25
+  <SpawnDistanceOffset>k__BackingField: 5
   <ProjectileIntervalTime>k__BackingField: 0.02
   <ActiveBehavior>k__BackingField: {fileID: 11400000, guid: 13510db50057941e7b179641428a102d, type: 2}
   <Payload>k__BackingField:

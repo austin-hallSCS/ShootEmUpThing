@@ -69,15 +69,6 @@ namespace WizardGame.Spells
             circleCollider.offset = Vector2.zero;
         }
 
-        protected override void OnTriggerEnter2D(Collider2D other)
-        {
-            EnemyController enemy = other.GetComponent<EnemyController>();
-            if (inAir && enemy != null)
-            {
-                Explode();
-            }
-        }
-
         void OnTriggerStay2D(Collider2D other)
         {
             if (!inAir)

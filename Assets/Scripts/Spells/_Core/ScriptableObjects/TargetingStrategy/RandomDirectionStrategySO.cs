@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace WizardGame.Spells
 {
@@ -20,9 +21,17 @@ namespace WizardGame.Spells
 
             Quaternion randomRotation = Quaternion.Euler(0, 0, randomAngle);
 
+            // TODO: Fix this, doesn't work
+            // Apply spawn offset
+            Vector3 source = context.Caster.position;
+            float offset = context.Data.SpawnDistanceOffset;
+            Vector3 direction = randomRotation.eulerAngles;
+
+            Vector3 spawnPoint = source + (direction * offset);
+
             return new SpawnTransform
             {
-                Position = context.Caster.position,
+                Position = spawnPoint,
                 Rotation = context.Caster.rotation * randomRotation
             };
         }
