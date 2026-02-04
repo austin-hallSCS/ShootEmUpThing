@@ -10,12 +10,14 @@ namespace WizardGame.Spells
         private float currentAngle;
         private float radius;
 
-        public void Initialize(SpellDataSO data, SpellStats stats, Transform player, float startAngle)
+        public override void Initialize(SpellCastContext context)
         {
-            base.Initialize(data, stats);
+            base.Initialize(context);
 
-            centerPoint = player;
-            currentAngle = startAngle;
+            centerPoint = context.Caster;
+            currentAngle = transform.rotation.eulerAngles.z;
+
+            UpdateOrbitPosition();
         }
 
         private void Update()
@@ -24,18 +26,18 @@ namespace WizardGame.Spells
 
             radius = spellStats.GetStat(StatType.Area).CurrentValue;
 
-            Orbit();
-            RotateSelf();
-        }
-
-        private void Orbit()
-        {
             // Multiply speed stat value by 100 to make sure the sword spins fast enough
             float rotationSpeed = spellStats.GetStat(StatType.Speed).CurrentValue * 100;
 
             currentAngle += rotationSpeed * Time.deltaTime;
             currentAngle %= 360;
 
+            UpdateOrbitPosition();
+            RotateSelf();
+        }
+
+        private void UpdateOrbitPosition()
+        {
             float rad = currentAngle * Mathf.Deg2Rad;
 
             // Calculate offset from player

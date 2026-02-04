@@ -24,7 +24,7 @@ namespace WizardGame.Spells
 
                 if (instance.TryGetComponent(out SpellGO spellGO))
                 {
-                    spellGO.Initialize(context.Data, context.Stats);
+                    spellGO.Initialize(context);
                 }
 
                 // Track the spawned instance to be despawned later

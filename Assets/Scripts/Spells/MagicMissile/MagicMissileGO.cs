@@ -1,7 +1,7 @@
-using System;
 using UnityEngine;
 using WizardGame.Enemy;
 using WizardGame.Stats;
+using WizardGame.Utils;
 
 namespace WizardGame.Spells
 {
@@ -23,15 +23,15 @@ namespace WizardGame.Spells
         private float timeElapsed = 0f;
         private float flightDuration = 1.0f;
         private float t;
-        private float curveHeight;
 
         private bool isLaunched = false;
 
-        public void Initialize(SpellDataSO data, SpellStats stats, Transform targetTransform)
+        public override void Initialize(SpellCastContext context)
         {
-            base.Initialize(data, stats);
+            base.Initialize(context);
 
-            target = targetTransform;
+            target = context.TargetEnemy;
+            Debug.Log($"MagicMissile target: {target}");
 
             if (target != null) lastKnownTargetPos = target.position;
             else lastKnownTargetPos = transform.position + transform.forward * 5f;
@@ -89,7 +89,8 @@ namespace WizardGame.Spells
 
         protected override void Move()
         {
-            Vector3 nextPosition = BezierCalculation(startPoint, controlPoint, lastKnownTargetPos, t);
+            // Curvature calculation
+            Vector3 nextPosition = VectorUtils.BezierCalculation(startPoint, controlPoint, lastKnownTargetPos, t);
 
             Vector3 direction = (nextPosition - transform.position).normalized;
             if (direction != Vector3.zero)
@@ -101,18 +102,7 @@ namespace WizardGame.Spells
             transform.position = nextPosition;
         }
 
-        private Vector3 BezierCalculation(Vector3 p0, Vector3 p1, Vector3 p2, float t)
-        {
-            //-- BEZIER FORMULA --
-            // Position = (1-t)^2 * Start + 2(1-t)t * Control + t^2 * End
 
-            float u = 1 - t;
-            float tt = t * t;
-            float uu = u * u;
-
-            Vector3 p = (uu * p0) + (2 * u * t * p1) + (tt * p2);
-            return p;
-        }
 
         private void OnImpact()
         {

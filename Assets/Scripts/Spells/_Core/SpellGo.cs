@@ -14,10 +14,10 @@ namespace WizardGame.Spells
         protected float areaMultiplier = 1.0f;
 
         // TODO: Refactor to take in SpellCastContext instead of data and stats
-        public virtual void Initialize(SpellDataSO data, SpellStats stats)
+        public virtual void Initialize(SpellCastContext context)
         {
-            spellData = data;
-            spellStats = stats;
+            spellData = context.Data;
+            spellStats = context.Stats;
             CalculateStats();
         }
 
