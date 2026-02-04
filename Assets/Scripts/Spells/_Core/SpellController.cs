@@ -93,9 +93,8 @@ namespace WizardGame.Spells
                 currentCoolDownTimeAt -= Time.deltaTime;
                 if (currentCoolDownTimeAt <= 0)
                 {
+                    isActive = true;
                     StartCoroutine(CastSpell());
-
-                    SpellDeactivate();
                 }
             }
         }
@@ -107,6 +106,8 @@ namespace WizardGame.Spells
             activeContext = new SpellCastContext(transform, this, SpellStats, SpellData);
 
             yield return activeBehavior.Activate(activeContext, spellEmitter);
+
+            SpellDeactivate();
         }
 
         protected virtual void SpellDeactivate()

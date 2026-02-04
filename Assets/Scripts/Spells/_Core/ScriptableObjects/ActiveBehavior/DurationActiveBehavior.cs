@@ -11,24 +11,24 @@ namespace WizardGame.Spells
     [CreateAssetMenu(fileName = "DurationActiveBehavior_Asset", menuName = "Spells/Active Behaviors/Duration")]
     public class DurationActiveBehaviorSO : ActiveBehaviorSO
     {
-        public override IEnumerator Activate(SpellCastContext context, ISpellEmitter spawnBehavior)
+        public override IEnumerator Activate(SpellCastContext context, ISpellEmitter spellEmitter)
         {
             float duration = context.Stats.GetStat(StatType.Duration).CurrentValue;
 
             // Have the controller start the spawn coroutine
-            context.Controller.StartCoroutine(spawnBehavior.Execute(context));
+            context.Controller.StartCoroutine(spellEmitter.Execute(context));
 
             // Begin duration Countdown
             yield return new WaitForSeconds(duration);
 
             // Deactivate spell once duration ends
-            Deactivate(context, spawnBehavior);
+            Deactivate(context, spellEmitter);
         }
 
-        public override void Deactivate(SpellCastContext context, ISpellEmitter spawnBehavior)
+        public override void Deactivate(SpellCastContext context, ISpellEmitter spellEmitter)
         {
             // Despawn all game objects within the context
-            spawnBehavior.Despawn(context);
+            spellEmitter.Despawn(context);
         }
     }
 }
