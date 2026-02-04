@@ -7315,6 +7315,86 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2138b00558e6ab14aaddf42e6161cfb0, type: 3}
+--- !u!1001 &9128431075870470333
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3438248470623678743, guid: 3f756183a38f16c50bfe93fddb37ccee, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438248470623678743, guid: 3f756183a38f16c50bfe93fddb37ccee, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438248470623678743, guid: 3f756183a38f16c50bfe93fddb37ccee, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438248470623678743, guid: 3f756183a38f16c50bfe93fddb37ccee, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438248470623678743, guid: 3f756183a38f16c50bfe93fddb37ccee, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438248470623678743, guid: 3f756183a38f16c50bfe93fddb37ccee, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438248470623678743, guid: 3f756183a38f16c50bfe93fddb37ccee, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438248470623678743, guid: 3f756183a38f16c50bfe93fddb37ccee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438248470623678743, guid: 3f756183a38f16c50bfe93fddb37ccee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438248470623678743, guid: 3f756183a38f16c50bfe93fddb37ccee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4988845095362959556, guid: 3f756183a38f16c50bfe93fddb37ccee, type: 3}
+      propertyPath: m_Name
+      value: SpellController
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4988845095362959556, guid: 3f756183a38f16c50bfe93fddb37ccee, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9128431075870470335}
+  m_SourcePrefab: {fileID: 100100000, guid: 3f756183a38f16c50bfe93fddb37ccee, type: 3}
+--- !u!1 &9128431075870470334 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4988845095362959556, guid: 3f756183a38f16c50bfe93fddb37ccee, type: 3}
+  m_PrefabInstance: {fileID: 9128431075870470333}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &9128431075870470335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9128431075870470334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 238ec65bd038cb44b86e6110024ff1fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WizardGame.Spells.SpellController
+  WhatIsEnemy:
+    serializedVersion: 2
+    m_Bits: 2048
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -7337,3 +7417,4 @@ SceneRoots:
   - {fileID: 1363308903}
   - {fileID: 1012594519}
   - {fileID: 1414776997}
+  - {fileID: 9128431075870470333}
