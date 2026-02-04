@@ -113,6 +113,7 @@ namespace WizardGame.Managers
             // TODO: Add boss spawning logic here.
         }
 
+        // TODO: Move this to Utils, add logic to contain within a collider
         private Vector2 GetRandomSpawnPoint()
         {
             float roll = Random.value;
@@ -134,8 +135,9 @@ namespace WizardGame.Managers
             }
         }
 
+        //TODO: Move this to Utils
         // Uses cumulative probability to determine a random direction, weighted by the direction the player is moving
-        // Don't worry about the math too much. It makes my head hurt but it works.s
+        // Don't worry about the math too much. It makes my head hurt but it works
         private Direction GetDirectionWeighted()
         {
             float wUp = 1f;
