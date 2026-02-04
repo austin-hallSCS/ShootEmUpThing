@@ -16,11 +16,11 @@ MonoBehaviour:
   <Description>k__BackingField: '"You create three glowing darts of magical force.
     Each dart hits the nearest enemy." '
   <SpellIcon>k__BackingField: {fileID: 6705810157222835970, guid: 6c35cd05b4f1ad047babd3bb940e6088, type: 3}
-  <SpellPrefab>k__BackingField: {fileID: 0}
-  <TargetingStrategy>k__BackingField: {fileID: 0}
-  <SpawnDistanceOffset>k__BackingField: 0
+  <SpellPrefab>k__BackingField: {fileID: 2180399285232045364, guid: 2a23af2e49226c34fb6416ceeef55453, type: 3}
+  <TargetingStrategy>k__BackingField: {fileID: 11400000, guid: bc003849d474d604ba7bb85c4e180571, type: 2}
+  <SpawnDistanceOffset>k__BackingField: 0.25
   <ProjectileIntervalTime>k__BackingField: 0.25
-  <ActiveBehavior>k__BackingField: {fileID: 0}
+  <ActiveBehavior>k__BackingField: {fileID: 11400000, guid: 13510db50057941e7b179641428a102d, type: 2}
   <Payload>k__BackingField:
     DamageAmount: 0
     KnockbackAmount: 0
@@ -39,7 +39,7 @@ MonoBehaviour:
     cap: 50
     isCapChangeable: 0
     minValue: 0
-    baseValue: 50
+    baseValue: 10
   <AreaAmount>k__BackingField:
     isIgnored: 1
     cap: 3

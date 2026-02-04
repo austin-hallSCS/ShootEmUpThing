@@ -16,11 +16,11 @@ MonoBehaviour:
   <Description>k__BackingField: '"You create a momentary circle of spectral blades
     that sweep around you."'
   <SpellIcon>k__BackingField: {fileID: 4827481158342945613, guid: 624a0bad9877c674f93d3592344f6a40, type: 3}
-  <SpellPrefab>k__BackingField: {fileID: 0}
-  <TargetingStrategy>k__BackingField: {fileID: 0}
+  <SpellPrefab>k__BackingField: {fileID: 2180399285232045364, guid: 4d36becbb67f867498b6d9ce37f5205a, type: 3}
+  <TargetingStrategy>k__BackingField: {fileID: 11400000, guid: 788278f88b8323f41acd74e69a374822, type: 2}
   <SpawnDistanceOffset>k__BackingField: 0
   <ProjectileIntervalTime>k__BackingField: 0.25
-  <ActiveBehavior>k__BackingField: {fileID: 0}
+  <ActiveBehavior>k__BackingField: {fileID: 11400000, guid: 7fbf3126a39db1448b8e44cebcd73f45, type: 2}
   <Payload>k__BackingField:
     DamageAmount: 0
     KnockbackAmount: 0
