@@ -18,7 +18,7 @@ namespace WizardGame.Spells
 
             float randomAngle = Random.Range(minAngle, maxAngle);
 
-            Quaternion randomRotation = Quaternion.Euler(0, randomAngle, 0);
+            Quaternion randomRotation = Quaternion.Euler(0, 0, randomAngle);
 
             return new SpawnTransform
             {
