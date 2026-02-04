@@ -26,8 +26,12 @@ namespace WizardGame.Spells
             Vector3 source = context.Caster.position;
             float offset = context.Data.SpawnDistanceOffset;
             Vector3 direction = randomRotation.eulerAngles;
+            Debug.Log($"direction: {direction}");
 
-            Vector3 spawnPoint = source + (direction * offset);
+            Vector3 spawnPoint = source + (direction.normalized * offset);
+
+            Debug.Log($"offset: {direction * offset}");
+            Debug.Log($"spawnPoint: {spawnPoint}");
 
             return new SpawnTransform
             {
