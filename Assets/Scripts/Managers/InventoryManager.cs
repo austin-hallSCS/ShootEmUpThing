@@ -77,7 +77,6 @@ namespace WizardGame.Managers
 
             // Create new game object
             GameObject newObject = new GameObject(objectName, typeof(SpellController));
-            newObject.transform.position = new Vector3(0, 0, 0);
 
             // Initialize controller
             SpellController newController = newObject.GetComponent<SpellController>();

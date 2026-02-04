@@ -44,8 +44,7 @@ namespace WizardGame.Spells
         // Initializes the spell with a reference to the caster's abilities.
         public virtual void Initialize(SpellDataSO data, PlayerController player)
         {
-            transform.SetParent(player.transform);
-
+            transform.SetParent(player.transform, false);
 
             SpellData = data;
             ownerAbilities = player.PlayerAbilities;
