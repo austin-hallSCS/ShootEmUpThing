@@ -45,7 +45,7 @@ namespace WizardGame.Spells
         public virtual void Initialize(SpellDataSO data, PlayerController player)
         {
             transform.SetParent(player.transform, false);
-
+            transform.position += new Vector3(0, 0.5f, 0);
             SpellData = data;
             ownerAbilities = player.PlayerAbilities;
             activeBehavior = SpellData.ActiveBehavior;
