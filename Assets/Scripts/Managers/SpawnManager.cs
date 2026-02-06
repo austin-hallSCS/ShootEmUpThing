@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using WizardGame.Enemy;
 using WizardGame.Stages;
 using WizardGame.Utils;
 using WizardGame.Services;
@@ -16,13 +15,10 @@ namespace WizardGame.Managers
         private Coroutine spawnRoutine = null;
 
         private int currentEnemyCount;
-        private List<GameObject> despawnedEnemies;
 
         public SpawnManager(GameManager manager, StageDataSO data) : base(manager)
         {
             stageData = data;
-
-            despawnedEnemies = new List<GameObject>();
 
             SubscribeToEvents();
         }
@@ -30,7 +26,6 @@ namespace WizardGame.Managers
         protected override void SubscribeToEvents()
         {
             EventBus.OnNextWaveBegin += HandleNextWaveBegin;
-            EventBus.OnEnemyDied += HandleEnemyDied;
             EventBus.OnEnemyDespawn += HandleEnemyDespawn;
         }
 
@@ -77,27 +72,15 @@ namespace WizardGame.Managers
                 return;
             }
 
-            GameObject enemyToSpawn;
-
+            GameObject enemyToSpawn = enemyPrefabs.GetRandomItem();
             Vector2 nextSpawnPosition = GameManager.Instance.MainCamera.ViewportToWorldPoint(GetRandomSpawnPoint());
-
-            if (despawnedEnemies.Count > 0)
+            Pose spawnPose = new Pose
             {
-                int lastIndex = despawnedEnemies.Count - 1;
-                enemyToSpawn = despawnedEnemies[lastIndex];
+                position = nextSpawnPosition,
+                rotation = Quaternion.identity
+            };
 
-                despawnedEnemies.RemoveAt(lastIndex);
-
-                enemyToSpawn.transform.position = nextSpawnPosition;
-                enemyToSpawn.SetActive(true);
-
-                // TODO: Make dictionary pool to handle waves that have different types of enemies
-            }
-            else
-            {
-                enemyToSpawn = enemyPrefabs.GetRandomItem();
-                Object.Instantiate(enemyToSpawn, nextSpawnPosition, Quaternion.identity);
-            }
+            PoolService.Spawn(enemyToSpawn, spawnPose);
 
             currentEnemyCount++;
             // Debug.Log($"currentEnemyCount: {currentEnemyCount}");
@@ -188,17 +171,9 @@ namespace WizardGame.Managers
             StartSpawning();
         }
 
-        private void HandleEnemyDied(EnemyController enemy)
-        {
-            currentEnemyCount--;
-            // Debug.Log($"currentEnemyCount: {currentEnemyCount}");
-        }
-
         private void HandleEnemyDespawn(GameObject enemy)
         {
             currentEnemyCount--;
-            enemy.SetActive(false);
-            despawnedEnemies.Add(enemy);
         }
 
         #endregion
@@ -206,17 +181,12 @@ namespace WizardGame.Managers
         protected override void UnsubscribeFromEvents()
         {
             EventBus.OnNextWaveBegin -= HandleNextWaveBegin;
-            EventBus.OnEnemyDied -= HandleEnemyDied;
             EventBus.OnEnemyDespawn -= HandleEnemyDespawn;
         }
 
         protected override void OnTearDown()
         {
             PauseSpawning();
-
-            // Destroy all pool objects to clear memory fully
-            foreach (var enemy in despawnedEnemies) if (enemy) Object.Destroy(enemy);
-            despawnedEnemies.Clear();
         }
     }
 }

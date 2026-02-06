@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WizardGame.Enemy.EnemyDataSO
   <EnemyName>k__BackingField: Goblin
   <EnemySprite>k__BackingField: {fileID: 0}
+  <EnemyPrefab>k__BackingField: {fileID: 1244771692766243100, guid: ab508c292d7093146843d888bdea279c, type: 3}
   <Health>k__BackingField:
     isIgnored: 0
     cap: 30

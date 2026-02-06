@@ -9,6 +9,7 @@ namespace WizardGame.Enemy
         [field: Header("Identity")]
         [field: SerializeField] public string EnemyName { get; private set; }
         [field: SerializeField] public Sprite EnemySprite { get; private set; }
+        [field: SerializeField] public GameObject EnemyPrefab { get; private set; }
 
         [field: Header("Base Stats")]
         [field: SerializeField] public Stat Health { get; private set; }
@@ -19,7 +20,7 @@ namespace WizardGame.Enemy
 
         [field: Header("Rewards")]
         [field: SerializeField] public int RewardExperience { get; private set; }
-        
+
         private void OnValidate()
         {
             // Set StatTypes, so we don't have to do it in the inspector

@@ -5,6 +5,7 @@ using WizardGame.Player;
 using WizardGame.Spells;
 using WizardGame.Stages;
 using WizardGame.Services;
+using System.Runtime.CompilerServices;
 
 namespace WizardGame.Managers
 {
@@ -23,6 +24,9 @@ namespace WizardGame.Managers
 
         [field: Tooltip("The UI panel that appears when a player levels up.")]
         [SerializeField] private GameObject levelUpPanel;
+
+        [field: Tooltip("The floor game object")]
+        [SerializeField] private GameObject floor;
 
         [field: Space(10)]
         [field: Header("--- Game Data ---")]
@@ -43,6 +47,7 @@ namespace WizardGame.Managers
         private InventoryManager inventoryManager;
         private UIManager uiManager;
         private SpellManager spellManager;
+        private EnvironmentManager environmentManager;
         private Dictionary<Type, ManagerBase> pocoManagers = new Dictionary<Type, ManagerBase>();
 
         //-- Input --
@@ -74,7 +79,6 @@ namespace WizardGame.Managers
         public void Awake()
         {
             CreateInstance();
-            InitManagers();
             SubscribeToEvents();
 
             CurrentWave = 0;
@@ -107,8 +111,8 @@ namespace WizardGame.Managers
             if (Instance == null)
             {
                 Instance = this;
-
                 DontDestroyOnLoad(gameObject);
+                InitManagers();
             }
             else
             {
@@ -136,6 +140,9 @@ namespace WizardGame.Managers
 
             spellManager = new SpellManager(this);
             pocoManagers.Add(typeof(SpellManager), spellManager);
+
+            environmentManager = new EnvironmentManager(this, floor);
+            pocoManagers.Add(typeof(EnvironmentManager), environmentManager);
         }
 
         private void SubscribeToEvents()

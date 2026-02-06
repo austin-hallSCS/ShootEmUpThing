@@ -14,46 +14,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WizardGame.Enemy.EnemyDataSO
   <EnemyName>k__BackingField: Hobgoblin
   <EnemySprite>k__BackingField: {fileID: -4564423299386321571, guid: cff7feb2df06dd2448d794a941c6641a, type: 3}
+  <EnemyPrefab>k__BackingField: {fileID: 6255224902855350917, guid: 634e3399a2dc3bf4fb40ff642be9afe3, type: 3}
   <Health>k__BackingField:
-    statType: 9
-    isRounded: 0
-    increaseIsPositive: 1
     isIgnored: 0
     cap: 30
     isCapChangeable: 1
     minValue: 0
     baseValue: 30
   <DamageResistance>k__BackingField:
-    statType: 12
-    isRounded: 0
-    increaseIsPositive: 1
     isIgnored: 0
     cap: 50
     isCapChangeable: 0
     minValue: 0
     baseValue: 0
   <MovementSpeed>k__BackingField:
-    statType: 11
-    isRounded: 0
-    increaseIsPositive: 1
     isIgnored: 0
     cap: 5
     isCapChangeable: 0
     minValue: 0.5
     baseValue: 0.5
   <AttackDamage>k__BackingField:
-    statType: 1
-    isRounded: 0
-    increaseIsPositive: 0
     isIgnored: 0
     cap: 300
     isCapChangeable: 0
     minValue: 5
     baseValue: 25
   <AttackCooldown>k__BackingField:
-    statType: 4
-    isRounded: 0
-    increaseIsPositive: 0
     isIgnored: 0
     cap: 3
     isCapChangeable: 0

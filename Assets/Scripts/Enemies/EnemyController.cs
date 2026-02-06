@@ -121,12 +121,6 @@ namespace WizardGame.Enemy
                 Knockback(payload.KnockbackAmount, payload.SourcePosition);
             }
 
-            // TODO: Figure out knockback - need to pass source's position in
-            // if (payload.KnockbackAmount > 0)
-            // {
-            //     Knockback(payload.KnockbackAmount);
-            // }
-
             // Apply status effects
             Debug.Log($"Applying status effect {payload.StatusEffect} to {transform.name}");
             switch (payload.StatusEffect)
@@ -229,7 +223,8 @@ namespace WizardGame.Enemy
 
             EventBus.PublishEnemyDied(this);
 
-            Destroy(gameObject);
+            PoolService.Despawn(gameObject, enemyData.EnemyPrefab);
+            EventBus.PublishEnemyDespawn(gameObject);
         }
 
         void OnTriggerStay2D(Collider2D other)
