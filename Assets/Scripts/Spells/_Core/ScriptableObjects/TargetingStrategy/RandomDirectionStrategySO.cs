@@ -21,22 +21,9 @@ namespace WizardGame.Spells
 
             Quaternion randomRotation = Quaternion.Euler(0, 0, randomAngle);
 
-            Vector3 source = context.Caster.position;
-            float offset = context.Data.SpawnDistanceOffset;
-            float currentAngle = randomRotation.eulerAngles.z;
-            float rad = currentAngle * Mathf.Deg2Rad;
-
-            // Calculate offset from player
-            float x = Mathf.Cos(rad) * offset;
-            float y = Mathf.Sin(rad) * offset;
-
-            Debug.Log($"x: {x}, y: {y}");
-
-            Vector3 spawnPoint = source + new Vector3(x, y, 0);
-
             return new SpawnTransform
             {
-                Position = spawnPoint,
+                Position = context.Caster.position,
                 Rotation = context.Caster.rotation * randomRotation
             };
         }

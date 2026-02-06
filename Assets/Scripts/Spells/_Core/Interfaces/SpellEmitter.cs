@@ -1,6 +1,8 @@
 using System.Collections;
+using Unity.Mathematics;
 using UnityEngine;
 using WizardGame.Services;
+using WizardGame.Utils;
 
 namespace WizardGame.Spells
 {
@@ -18,9 +20,10 @@ namespace WizardGame.Spells
             for (int i = 0; i < count; i++)
             {
                 SpawnTransform spawnInfo = targeting.GetSpawnTransform(context, i, count);
+                Vector3 offsetSpawnPoint = VectorUtils.GetOffsetPosition(spawnInfo.Position, context.Data.SpawnDistanceOffset, spawnInfo.Rotation);
 
                 //TODO: Figure out how to apply spawn offset distance
-                GameObject instance = PoolService.Spawn(prefab, spawnInfo.Position, spawnInfo.Rotation);
+                GameObject instance = PoolService.Spawn(prefab, offsetSpawnPoint, spawnInfo.Rotation);
 
                 if (instance.TryGetComponent(out SpellGO spellGO))
                 {
