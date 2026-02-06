@@ -6,7 +6,7 @@ namespace WizardGame.Spells
     [CreateAssetMenu(fileName = "NearestEnemy_Asset", menuName = "Spells/Targeting/Nearest Enemy")]
     public class NearestEnemyStrategySO : TargetingStrategySO
     {
-        public override SpawnTransform GetSpawnTransform(SpellCastContext context, int index, int totalCount)
+        public override Pose GetPose(SpellCastContext context, int index, int totalCount)
         {
             // Get the nearest enemy if the context does not already have one
             if (context.TargetEnemy == null)
@@ -29,10 +29,10 @@ namespace WizardGame.Spells
                 }
             }
 
-            return new SpawnTransform
+            return new Pose
             {
-                Position = context.Caster.position,
-                Rotation = Quaternion.LookRotation(direction)
+                position = context.Caster.position,
+                rotation = Quaternion.LookRotation(direction)
             };
         }
     }

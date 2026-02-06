@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Rendering;
 
 namespace WizardGame.Spells
 {
@@ -10,7 +9,7 @@ namespace WizardGame.Spells
     [CreateAssetMenu(fileName = "RandomDirection_Asset", menuName = "Spells/Targeting/Random Direction")]
     public class RandomDirectionStrategy : TargetingStrategySO
     {
-        public override SpawnTransform GetSpawnTransform(SpellCastContext context, int index, int totalCount)
+        public override Pose GetPose(SpellCastContext context, int index, int totalCount)
         {
             float sliceSize = 360f / totalCount;
 
@@ -21,10 +20,10 @@ namespace WizardGame.Spells
 
             Quaternion randomRotation = Quaternion.Euler(0, 0, randomAngle);
 
-            return new SpawnTransform
+            return new Pose
             {
-                Position = context.Caster.position,
-                Rotation = context.Caster.rotation * randomRotation
+                position = context.Caster.position,
+                rotation = context.Caster.rotation * randomRotation
             };
         }
     }
