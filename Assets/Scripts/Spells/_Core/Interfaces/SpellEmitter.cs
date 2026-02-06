@@ -20,9 +20,9 @@ namespace WizardGame.Spells
             for (int i = 0; i < count; i++)
             {
                 Pose spawnInfo = targeting.GetPose(context, i, count);
-                Vector3 offsetSpawnPoint = VectorUtils.GetOffsetPosition(spawnInfo.position, context.Data.SpawnDistanceOffset, spawnInfo.rotation);
+                spawnInfo.position = VectorUtils.GetOffsetPosition(spawnInfo.position, context.Data.SpawnDistanceOffset, spawnInfo.rotation);
 
-                GameObject instance = PoolService.Spawn(prefab, offsetSpawnPoint, spawnInfo.rotation);
+                GameObject instance = PoolService.Spawn(prefab, spawnInfo);
 
                 if (instance.TryGetComponent(out SpellGO spellGO))
                 {

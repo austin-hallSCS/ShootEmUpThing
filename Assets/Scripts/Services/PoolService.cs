@@ -20,7 +20,7 @@ namespace WizardGame.Services
             }
         }
 
-        public static GameObject Spawn(GameObject prefab, Vector3 position, Quaternion rotation)
+        public static GameObject Spawn(GameObject prefab, Pose pose)
         {
             InitContainer();
 
@@ -47,14 +47,14 @@ namespace WizardGame.Services
                 if (instance != null)
                 {
                     instance.SetActive(true);
-                    instance.transform.position = position;
-                    instance.transform.rotation = rotation;
+                    instance.transform.position = pose.position;
+                    instance.transform.rotation = pose.rotation;
                     return instance;
                 }
             }
 
             // If queue is empty (or all null), create a new one
-            instance = Object.Instantiate(prefab, position, rotation);
+            instance = Object.Instantiate(prefab, pose.position, pose.rotation);
 
             // Rename the instance so we know it's a clone
             instance.name = prefab.name;
