@@ -109,6 +109,9 @@ namespace WizardGame.Enemy
         // Intakes a spell's Effect Payload and applies all effects
         public void ApplyEffect(SpellEffectPayload payload)
         {
+            // Active game object check
+            if (transform.gameObject.activeSelf == false) return;
+
             // Apply damage if present
             if (payload.DamageAmount > 0)
             {
