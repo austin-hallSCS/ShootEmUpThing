@@ -13,7 +13,6 @@ namespace WizardGame.Spells
 
         protected float areaMultiplier = 1.0f;
 
-        // TODO: Refactor to take in SpellCastContext instead of data and stats
         public virtual void Initialize(SpellCastContext context)
         {
             spellData = context.Data;
@@ -37,7 +36,7 @@ namespace WizardGame.Spells
 
         protected virtual void SendPayload(EnemyController other)
         {
-            if (other != null)
+            if (other.gameObject.activeInHierarchy != false)
             {
                 SpellEffectPayload payload = BuildPayload();
                 other.ApplyEffect(payload);

@@ -25,8 +25,6 @@ namespace WizardGame.Utils
             float x = Mathf.Cos(rad) * offset;
             float y = Mathf.Sin(rad) * offset;
 
-            Debug.Log($"x: {x}, y: {y}");
-
             return source + new Vector3(x, y, 0);
         }
 

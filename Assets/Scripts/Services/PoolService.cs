@@ -46,6 +46,7 @@ namespace WizardGame.Services
 
                 if (instance != null)
                 {
+                    // TODO: Figure out how to return game object to original parent if needed (SpawnContext struct?)
                     instance.SetActive(true);
                     instance.transform.position = pose.position;
                     instance.transform.rotation = pose.rotation;

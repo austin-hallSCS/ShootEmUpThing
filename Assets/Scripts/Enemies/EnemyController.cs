@@ -31,11 +31,11 @@ namespace WizardGame.Enemy
         void Awake()
         {
             GetComponentReferences();
-            InitStats();
         }
 
         void OnEnable()
         {
+            InitStats();
             DependencyLookups();
         }
 
@@ -101,7 +101,6 @@ namespace WizardGame.Enemy
                 if (sqrDistance >= (killDistance * killDistance))
                 {
                     EventBus.PublishEnemyDespawn(gameObject);
-                    Debug.Log("PublishEnemyDespawn called.");
                 }
             }
         }
@@ -163,13 +162,14 @@ namespace WizardGame.Enemy
 
                 rb.linearVelocity = Vector2.zero;
 
-                Debug.Log($"Knockback amount: {amount}");
                 rb.AddForce(pushDirection * amount, ForceMode2D.Impulse);
 
-                Debug.Log("Enemy Knockback was called.");
-
                 StopAllCoroutines();
-                StartCoroutine(ResetStun());
+                if (gameObject.activeSelf == true)
+                {
+                    StartCoroutine(ResetStun());
+                }
+
             }
         }
 
@@ -226,8 +226,8 @@ namespace WizardGame.Enemy
 
             EventBus.PublishEnemyDied(this);
 
-            PoolService.Despawn(gameObject, enemyData.EnemyPrefab);
             EventBus.PublishEnemyDespawn(gameObject);
+            PoolService.Despawn(gameObject, enemyData.EnemyPrefab);
         }
 
         void OnTriggerStay2D(Collider2D other)

@@ -31,7 +31,6 @@ namespace WizardGame.Spells
             base.Initialize(context);
 
             target = context.TargetEnemy;
-            Debug.Log($"MagicMissile target: {target}");
 
             if (target != null) lastKnownTargetPos = target.position;
             else lastKnownTargetPos = transform.position + transform.forward * 5f;

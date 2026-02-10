@@ -1,7 +1,4 @@
-using Unity.VisualScripting;
-using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 namespace WizardGame.Stats
 {

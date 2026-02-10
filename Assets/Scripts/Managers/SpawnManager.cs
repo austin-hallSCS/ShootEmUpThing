@@ -73,7 +73,7 @@ namespace WizardGame.Managers
             }
 
             GameObject enemyToSpawn = enemyPrefabs.GetRandomItem();
-            Vector2 nextSpawnPosition = GameManager.Instance.MainCamera.ViewportToWorldPoint(GetRandomSpawnPoint());
+            Vector2 nextSpawnPosition = GetNextSpawnPoint();
             Pose spawnPose = new Pose
             {
                 position = nextSpawnPosition,
@@ -94,6 +94,29 @@ namespace WizardGame.Managers
                 return;
             }
             // TODO: Add boss spawning logic here.
+        }
+
+        // TODO: Figure out how to abstract this, to avoid rewriting "attempts" logic
+        private Vector3 GetNextSpawnPoint()
+        {
+            bool valid = false;
+            int attempts = 0;
+            Vector2 nextSpawnPos;
+
+            while (attempts < 30)
+            {
+                nextSpawnPos = gameManager.MainCamera.ViewportToWorldPoint(GetRandomSpawnPoint());
+                valid = gameManager.GetManager<EnvironmentManager>().CheckForValidSpawnPoint(nextSpawnPos);
+
+                if (valid == true)
+                {
+                    return nextSpawnPos;
+                }
+                attempts++;
+            }
+
+            Debug.LogWarning("SpawnManager could not find valid spawnpoint within 30 attempts.");
+            return new Vector2(0, 0);
         }
 
         // TODO: Move this to Utils, add logic to contain within a collider
