@@ -48,10 +48,10 @@ MonoBehaviour:
     baseValue: 1
   <SpeedAmount>k__BackingField:
     isIgnored: 0
-    cap: 3
+    cap: 5
     isCapChangeable: 0
     minValue: 0.5
-    baseValue: 0.75
+    baseValue: 1
   <CooldownTime>k__BackingField:
     isIgnored: 0
     cap: 5

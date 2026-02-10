@@ -39,6 +39,11 @@ namespace WizardGame.Enemy
             DependencyLookups();
         }
 
+        void OnDisable()
+        {
+            StopAllCoroutines();
+        }
+
         void FixedUpdate()
         {
             Move();
@@ -176,6 +181,8 @@ namespace WizardGame.Enemy
         // --- Coroutines ---
         private IEnumerator ApplyBurn(float duration, float damageAmount)
         {
+            if (gameObject.activeSelf == true) yield break;
+
             float elapsedTime = 0f;
 
             while (elapsedTime < duration)
@@ -191,6 +198,8 @@ namespace WizardGame.Enemy
 
         private IEnumerator ApplyFreeze(float duration)
         {
+            if (gameObject.activeSelf == true) yield break;
+
             float baseSpeed = enemyStats.GetStat(StatType.MovementSpeed).BaseValue;
 
             enemyStats.GetStat(StatType.MovementSpeed).SetCurrentValue(0);
