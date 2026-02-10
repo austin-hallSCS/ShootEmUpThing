@@ -5,7 +5,6 @@ using WizardGame.Player;
 using WizardGame.Spells;
 using WizardGame.Stages;
 using WizardGame.Services;
-using System.Runtime.CompilerServices;
 
 namespace WizardGame.Managers
 {

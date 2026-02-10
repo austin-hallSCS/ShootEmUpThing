@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.Mathematics;
 using UnityEngine;
 using WizardGame.Services;
 using WizardGame.Utils;
